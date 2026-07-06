@@ -1,135 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agentic Flows — Infinity Reach Media</title>
-  <meta name="description" content="AI-powered agentic flows for small businesses — built on GoHighLevel, Slack, and Claude. AI Receptionist, Social Content Autopilot, Follow-Up & Reactivation, and a Slack command center." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agents That Work While You Don't | Infinity Reach Media</title>
+<meta name="description" content="Three AI agents that answer leads in seconds, protect your Google rating, and post your content for you. Built for small businesses by Infinity Reach Media.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --paper:#F7F4EF;
+  --pink:#E91E8C;
+  --purple:#7B2FBE;
+  --gold:#F0B429;
+  --blue:#1A4FBF;
+  --muted:rgba(247,244,239,.68);
+  --line:rgba(247,244,239,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2{font-family:'Playfair Display',serif;font-weight:800;line-height:1.08}
+h1{font-size:clamp(2.6rem,6.4vw,4.6rem)}
+h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:16px 34px;border-radius:999px;transition:transform .18s ease,box-shadow .18s ease}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn.pink{background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35)}
+.btn.pink:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(233,30,140,.5)}
+.btn.ghost{border:1.5px solid var(--line);color:var(--paper)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo em{color:var(--pink);font-style:normal}
+nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
+
+/* hero */
+.hero{padding:96px 0 64px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-220px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.4),transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-260px;left:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;max-width:880px;text-align:center}
+.hero p.sub{margin:26px auto 38px;max-width:620px;font-size:1.15rem;color:var(--muted)}
+.hero h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .micro{margin-top:18px;font-size:.9rem;color:var(--muted)}
+
+/* calculator */
+.calc{padding:30px 0 90px}
+.calc-card{position:relative;border:1px solid var(--line);border-radius:24px;padding:48px clamp(24px,5vw,64px);background:linear-gradient(160deg,rgba(123,47,190,.16),rgba(13,13,13,.4) 55%);}
+.calc-card .eyebrow{color:var(--pink)}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:34px;align-items:center}
+.slider-block{margin-bottom:30px}
+.slider-block label{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.slider-block label output{color:var(--gold);font-size:15px}
+input[type=range]{width:100%;appearance:none;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--pink) var(--fill,50%),rgba(247,244,239,.18) var(--fill,50%));outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold)}
+input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.leak{text-align:center;border-left:1px solid var(--line);padding-left:48px}
+.leak .num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,5vw,4rem);color:var(--gold)}
+.leak .cap{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.leak p{margin-top:18px;font-size:.95rem;color:var(--muted)}
+
+/* agents */
+.agents{padding:90px 0;border-top:1px solid var(--line)}
+.agents header{text-align:center;max-width:640px;margin:0 auto 56px}
+.agents header p{margin-top:16px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:rgba(247,244,239,.025);transition:transform .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-4px);border-color:rgba(240,180,41,.5)}
+.card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
+.card.c1 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
+.card.c2 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.c3 .tag{background:rgba(26,79,191,.2);color:#7fa4f5}
+.card.c4 .tag{background:rgba(123,47,190,.2);color:#b98af0}
+.card.c5 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;margin-bottom:10px}
+.card .price{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:var(--gold);margin-bottom:18px}
+.card .price span{font-weight:600;font-size:.8rem;color:var(--muted)}
+.card .meta{font-size:.9rem;color:var(--muted);margin-bottom:18px}
+.card .meta strong{color:var(--paper)}
+.card ul{list-style:none;margin-bottom:26px}
+.card li{padding-left:26px;position:relative;margin-bottom:12px;font-size:.95rem;color:var(--muted)}
+.card li::before{content:"✦";position:absolute;left:0;color:var(--pink);font-size:.8rem;top:3px}
+.card .btn{margin-top:auto;text-align:center}
+.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(240,180,41,.08),rgba(233,30,140,.06))}
+.bundle strong{font-family:'Playfair Display',serif;font-size:1.35rem}
+.bundle p{color:var(--muted);font-size:.95rem}
+
+/* how */
+.how{padding:90px 0;border-top:1px solid var(--line)}
+.how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px}
+.step .k{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:2.4rem;color:var(--pink)}
+.step h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.04em;margin:12px 0 10px}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* about */
+.about{padding:90px 0;border-top:1px solid var(--line)}
+.about .inner{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:center}
+.about .mark{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(3rem,6vw,4.4rem);line-height:1.05;background:linear-gradient(120deg,var(--pink),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.about p{color:var(--muted);margin-bottom:16px}
+
+/* faq */
+.faq{padding:90px 0;border-top:1px solid var(--line);max-width:760px;margin:0 auto}
+.faq h2{text-align:center;margin-bottom:44px}
+details{border-bottom:1px solid var(--line);padding:22px 4px}
+summary{cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"+";color:var(--gold);font-size:1.4rem;font-weight:400}
+details[open] summary::after{content:"–"}
+details p{margin-top:14px;color:var(--muted);font-size:.97rem}
+
+/* cta */
+.cta{padding:110px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,47,190,.28),transparent 70%);pointer-events:none}
+.cta .wrap{position:relative;z-index:1}
+.cta p{max-width:520px;margin:20px auto 36px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:880px){
+  .cards,.how .steps{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .leak{border-left:none;border-top:1px solid var(--line);padding:36px 0 0}
+  .about .inner{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="index.html"><img class="mark" src="images/logo-mark.png" alt="" /> Infinity Reach Media</a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="agentic-flows.html" class="active">Agentic Flows</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav-cta"><a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a></div>
-      <button class="nav-toggle" aria-label="Menu">☰</button>
-    </div>
-  </header>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/">Infinity <em>Reach</em> Media</a>
+    <a class="book" href="/book">Book a Call →</a>
+  </div>
+</nav>
 
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">AI Automation</span>
-      <h1>Your Business Deserves a <span class="grad">Jarvis</span></h1>
-      <p>AI-powered automation for local small businesses — built on GoHighLevel + Slack + Claude, and deployed in days. Capture every lead, follow up automatically, and run your business from one Slack channel.</p>
-      <div class="hero-actions" style="margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
-        <a href="#flows" class="btn btn-ghost">See the Flows</a>
-      </div>
-    </div>
-  </section>
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">AI Agents for Small Business</span>
+    <h1>Your leads go cold in minutes.<br><span class="shine">Your agent never does.</span></h1>
+    <p class="sub">Three done for you AI agents that answer every lead in seconds, protect your Google rating, and post your content while you run your business. You approve. They work.</p>
+    <a class="btn pink" href="/book">Book Your Free Demo Call</a>
+    <p class="micro">30 minutes. No pressure. See your agent working live on the call.</p>
+  </div>
+</section>
 
-  <!-- FLOWS -->
-  <section class="section" id="flows">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">What We Build</span>
-        <h2>Four Agentic Flows, Built Around Your Business</h2>
-        <p>Pick the flows you need, or run the full stack. Each one is custom-built to your brand and workflow.</p>
-      </div>
-      <div class="grid-4">
-        <div class="card">
-          <div class="icon">🤖</div>
-          <h3>AI Receptionist</h3>
-          <p>Answers inquiries 24/7, qualifies leads, and books appointments automatically — so you never miss a call again.</p>
-          <p class="meta"><strong>Best for:</strong> HVAC, roofing, plumbers, landscapers, salons<br><strong>Timeline:</strong> 5–7 business days</p>
-        </div>
-        <div class="card">
-          <div class="icon">✍️</div>
-          <h3>Social Content Autopilot</h3>
-          <p>Auto-generates 4 posts per week in your brand voice. You approve each one in Slack with a single click.</p>
-          <p class="meta"><strong>Best for:</strong> Restaurants, gyms, retail, local service businesses<br><strong>Timeline:</strong> 3–5 business days</p>
-        </div>
-        <div class="card">
-          <div class="icon">🔁</div>
-          <h3>Customer Follow-Up & Reactivation</h3>
-          <p>Follows up after every job, requests Google reviews, and re-engages cold contacts automatically.</p>
-          <p class="meta"><strong>Best for:</strong> Contractors, med spas, auto shops, pet services<br><strong>Timeline:</strong> 5–7 business days</p>
-        </div>
-        <div class="card">
-          <div class="icon">💬</div>
-          <h3>Slack Jarvis Command Center</h3>
-          <p>Type commands in Slack to pull lead data, draft review replies, and schedule posts. All your flows in one place.</p>
-          <p class="meta"><strong>Best for:</strong> Any owner who wants one place to run their business<br><strong>Timeline:</strong> 7–10 business days</p>
-        </div>
-      </div>
-      <p class="built-on">Built on <b>GoHighLevel</b> + <b>Slack</b> + <b>Claude AI</b></p>
-    </div>
-  </section>
-
-  <!-- DAY IN THE LIFE -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">A Day With Jarvis</span>
-        <h2>What Your #jarvis Slack Channel Looks Like Every Day</h2>
-        <p>Your business, working for you in the background — and reporting in where you already are.</p>
-      </div>
-      <div class="feed">
-        <div class="feed-row"><div class="feed-time">8:02am</div><div class="feed-msg"><strong>New lead: Mike T.</strong> (roofing inquiry) — called after hours, booked Thursday 10am</div></div>
-        <div class="feed-row"><div class="feed-time">9:15am</div><div class="feed-msg"><strong>Post ready for approval:</strong> "Spring tune-up special" — [Approve] [Edit]</div></div>
-        <div class="feed-row"><div class="feed-time">11:30am</div><div class="feed-msg"><strong>New Google review (5 stars)</strong> from Sarah K. — [Draft reply]</div></div>
-        <div class="feed-row"><div class="feed-time">2:00pm</div><div class="feed-msg">Owner types: "How many leads this week?" → <strong>Jarvis:</strong> "7 new leads, 4 booked, 3 need follow-up"</div></div>
-        <div class="feed-row"><div class="feed-time">3:45pm</div><div class="feed-msg"><strong>Reactivation hit:</strong> Dave M. replied to your 90-day check-in — ready to book</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FULL STACK / CTA -->
-  <section class="section">
-    <div class="container">
-      <div class="cta-band">
-        <span class="eyebrow">The Full Jarvis Stack</span>
-        <h2>Run All Four Flows Together</h2>
-        <p>Want the complete system — receptionist, content, follow-up, and your Slack command center working as one? Let's map it to your business on a quick call.</p>
-        <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a class="brand" href="index.html"><img class="mark" src="images/logo-mark.png" alt="" /> Infinity Reach Media</a>
-          <p>A full-service digital marketing agency helping brands extend their reach in the digital era.</p>
-          <div class="socials">
-            <a href="https://www.facebook.com/yvettika" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
-            <a href="https://www.instagram.com/boss.bae.yvette/" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
-            <a href="https://www.tiktok.com/@yvettejkahn" aria-label="TikTok" target="_blank" rel="noopener">TT</a>
+<section class="calc">
+  <div class="wrap">
+    <div class="calc-card">
+      <span class="eyebrow">The Leak Calculator</span>
+      <h2>How much are missed leads costing you?</h2>
+      <div class="calc-grid">
+        <div>
+          <div class="slider-block">
+            <label for="leads">Leads per month <output id="leadsOut">30</output></label>
+            <input type="range" id="leads" min="5" max="200" value="30" step="5">
+          </div>
+          <div class="slider-block">
+            <label for="sale">Average sale value <output id="saleOut">$250</output></label>
+            <input type="range" id="sale" min="50" max="5000" value="250" step="50">
+          </div>
+          <div class="slider-block">
+            <label for="missed">Leads you miss or answer late <output id="missedOut">40%</output></label>
+            <input type="range" id="missed" min="10" max="80" value="40" step="5">
           </div>
         </div>
-        <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="agentic-flows.html">Agentic Flows</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-        <div><h4>Services</h4><ul><li><a href="services.html">Social Media</a></li><li><a href="agentic-flows.html">Agentic Flows</a></li><li><a href="services.html">Advertising</a></li><li><a href="services.html">Email & SMS</a></li></ul></div>
-        <div><h4>Get in Touch</h4><ul><li><a href="mailto:yvette@infinityreachmedia.com">yvette@infinityreachmedia.com</a></li><li><a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book a Call</a></li></ul></div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Infinity Reach Media. All rights reserved.</span>
-        <span>Privacy Policy · Terms of Service</span>
+        <div class="leak">
+          <div class="num" id="leakNum">$3,000</div>
+          <div class="cap">Walking out the door every month</div>
+          <p>Businesses that respond within 5 minutes are up to 21x more likely to convert a lead. Your agent responds in seconds. Every time. Even at 9pm on a Sunday.</p>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
+<section class="agents" id="agents">
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">The Agent Suite</span>
+      <h2>Pick your agents. Mix and match.</h2>
+      <p>Each one takes over a job you know you should be doing but never have time for. Setup done for you in 7 to 10 days.</p>
+    </header>
+    <div class="cards">
+      <div class="card c1">
+        <span class="tag">Answers in Seconds</span>
+        <h3>Speed to Lead Agent</h3>
+        <div class="price">$497<span>/mo + $297 setup</span></div>
+        <ul>
+          <li>Replies to every form, DM, and missed call instantly</li>
+          <li>Drafts personalized follow ups for you to approve</li>
+          <li>3 touch nurture sequence so no lead slips away</li>
+          <li>Books appointments straight to your calendar</li>
+        </ul>
+        <a class="btn ghost" href="/book">See It Work Live</a>
+      </div>
+      <div class="card c2">
+        <span class="tag">Protects Your Rating</span>
+        <h3>Review Machine</h3>
+        <div class="price">$197<span>/mo + $297 setup</span></div>
+        <ul>
+          <li>Watches Google and Yelp around the clock</li>
+          <li>Recommends the right response to every review</li>
+          <li>Handles the angry ones with grace, you just tap approve</li>
+          <li>Asks your happiest customers for 5 star reviews</li>
+        </ul>
+        <a class="btn ghost" href="/book">See It Work Live</a>
+      </div>
+      <div class="card c3">
+        <span class="tag">Posts While You Sleep</span>
+        <h3>Content Engine</h3>
+        <div class="price">$497<span>/mo + $297 setup</span></div>
+        <ul>
+          <li>One photo or voice note from you per week</li>
+          <li>Turned into a month of posts, captions, and emails</li>
+          <li>Written in your voice, on your brand</li>
+          <li>Scheduled and published automatically</li>
+        </ul>
+        <a class="btn ghost" href="/book">See It Work Live</a>
+      </div>
+      <div class="card c4">
+        <span class="tag">Never Miss a Call</span>
+        <h3>AI Receptionist</h3>
+        <p class="meta"><strong>Best for:</strong> HVAC, roofing, plumbers, landscapers, salons<br><strong>Timeline:</strong> 5–7 business days</p>
+        <ul>
+          <li>Answers inquiries 24/7 and qualifies every lead</li>
+          <li>Books appointments straight to your calendar automatically</li>
+          <li>Trained on your voice, your services, your pricing</li>
+        </ul>
+        <a class="btn ghost" href="/book">See It Work Live</a>
+      </div>
+      <div class="card c5">
+        <span class="tag">Run It From Slack</span>
+        <h3>Slack Jarvis Command Center</h3>
+        <p class="meta"><strong>Best for:</strong> Any owner who wants one place to run their business<br><strong>Timeline:</strong> 7–10 business days</p>
+        <ul>
+          <li>Type commands in Slack to pull lead data on demand</li>
+          <li>Draft review replies and schedule posts without switching apps</li>
+          <li>All your agents reporting to one channel</li>
+        </ul>
+        <a class="btn ghost" href="/book">See It Work Live</a>
+      </div>
+    </div>
+    <div class="bundle">
+      <div>
+        <strong>The Full Suite: $997/mo</strong>
+        <p>All three agents plus one setup fee waived. Save $194 every single month.</p>
+      </div>
+      <a class="btn pink" href="/book">Claim the Bundle</a>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <span class="eyebrow">How It Works</span>
+    <h2>Live in 7 days. Seriously.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="k">One</div>
+        <h4>We Talk</h4>
+        <p>A 30 minute call where I learn your business, your voice, and where you're leaking money. You'll see an agent working live before we hang up.</p>
+      </div>
+      <div class="step">
+        <div class="k">Two</div>
+        <h4>We Build</h4>
+        <p>My team connects your agent to your phone, forms, socials, and calendar. You do nothing except approve the brand voice. Done in a week.</p>
+      </div>
+      <div class="step">
+        <div class="k">Three</div>
+        <h4>You Approve, It Works</h4>
+        <p>Your agent drafts, recommends, and acts. You stay in control with one tap approvals. Cancel anytime, though nobody does once they see the leads coming in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="inner">
+      <div class="mark">Built by someone who actually does this.</div>
+      <div>
+        <p>Hi, I'm Yvette Kahn, founder of Infinity Reach Media in Orange County. I've spent years building AI powered marketing systems for real businesses: salons, coaches, consultants, and service providers.</p>
+        <p>These aren't theory. These are the exact systems I run for my own clients every single day, packaged so your business can plug them in without hiring anyone or learning anything technical.</p>
+        <p>You keep doing what you're great at. Your agents handle the rest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <span class="eyebrow" style="display:block;text-align:center;margin-bottom:14px">Questions</span>
+  <h2>The stuff everyone asks</h2>
+  <details>
+    <summary>Will it sound like a robot?</summary>
+    <p>No. During setup we train your agent on your voice, your services, and your way of talking to customers. Most customers never realize they weren't texting the owner.</p>
+  </details>
+  <details>
+    <summary>What if it says something wrong?</summary>
+    <p>You choose the control level. Drafts wait for your approval. Recommendations wait for your tap. Only low risk actions like posting scheduled content run on their own, and you set those rules upfront.</p>
+  </details>
+  <details>
+    <summary>Do I need any tech skills?</summary>
+    <p>Zero. Setup is fully done for you. If you can tap approve on your phone, you can run your agents.</p>
+  </details>
+  <details>
+    <summary>What kind of businesses does this work for?</summary>
+    <p>Any business that lives on leads and reputation. Salons, med spas, contractors, realtors, gyms, clinics, restaurants, coaches. If customers call, message, or Google you, this works.</p>
+  </details>
+  <details>
+    <summary>Is there a contract?</summary>
+    <p>Month to month. I keep clients because the agents keep working, not because a contract traps you.</p>
+  </details>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Stop losing leads you already paid for.</h2>
+    <p>Book a free 30 minute call. I'll show you your agent working live and exactly how much money it will recover for you.</p>
+    <a class="btn pink" href="/book">Book Your Free Demo Call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Infinity Reach Media · Orange County, CA · <a href="/book">Book a call</a></p>
+  </div>
+</footer>
+
+<script>
+const leads=document.getElementById('leads'),sale=document.getElementById('sale'),missed=document.getElementById('missed');
+const leadsOut=document.getElementById('leadsOut'),saleOut=document.getElementById('saleOut'),missedOut=document.getElementById('missedOut'),leakNum=document.getElementById('leakNum');
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+function paint(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--fill',p+'%')}
+function calc(){
+  leadsOut.textContent=leads.value;
+  saleOut.textContent=fmt(sale.value);
+  missedOut.textContent=missed.value+'%';
+  const loss=leads.value*sale.value*(missed.value/100)*0.25;
+  leakNum.textContent=fmt(loss)+"+";
+  [leads,sale,missed].forEach(paint);
+}
+[leads,sale,missed].forEach(el=>el.addEventListener('input',calc));
+calc();
+</script>
 </body>
 </html>

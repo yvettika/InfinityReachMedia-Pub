@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Booked | Infinity Reach Media</title>
+<meta name="description" content="Your demo call is confirmed. Here's how to get the most out of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --paper:#F7F4EF;
+  --pink:#E91E8C;
+  --purple:#7B2FBE;
+  --gold:#F0B429;
+  --muted:rgba(247,244,239,.68);
+  --line:rgba(247,244,239,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.2rem,5.5vw,3.6rem);line-height:1.08;margin:16px 0 20px}
+h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{background:rgba(13,13,13,.86);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1080px}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo em{color:var(--pink);font-style:normal}
+.page{padding:90px 0 100px;position:relative;overflow:hidden;text-align:center}
+.page::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.32),transparent 65%);pointer-events:none}
+.page .wrap{position:relative;z-index:1}
+.check{width:74px;height:74px;border-radius:50%;margin:0 auto 26px;display:flex;align-items:center;justify-content:center;background:linear-gradient(120deg,var(--pink),var(--purple));font-size:2rem;box-shadow:0 12px 40px rgba(233,30,140,.4)}
+.sub{color:var(--muted);max-width:520px;margin:0 auto 50px}
+.prep{text-align:left;border:1px solid var(--line);border-radius:20px;padding:36px;background:rgba(247,244,239,.03);margin-bottom:44px}
+.prep h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:22px}
+.prep ol{list-style:none;counter-reset:step}
+.prep li{counter-increment:step;padding-left:52px;position:relative;margin-bottom:22px}
+.prep li:last-child{margin-bottom:0}
+.prep li::before{content:counter(step);position:absolute;left:0;top:2px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.prep li strong{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:4px}
+.prep li span{color:var(--muted);font-size:.95rem}
+.social{border-top:1px solid var(--line);padding-top:40px}
+.social p{color:var(--muted);margin-bottom:20px;font-size:.97rem}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;letter-spacing:.04em;text-decoration:none;padding:14px 30px;border-radius:999px;border:1.5px solid var(--line);color:var(--paper);transition:border-color .18s ease,color .18s ease;margin:0 6px 12px}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/">Infinity <em>Reach</em> Media</a>
+  </div>
+</nav>
+
+<section class="page">
+  <div class="wrap">
+    <div class="check">✓</div>
+    <span class="eyebrow">Step 2 of 2 Complete</span>
+    <h1>You're booked. <span class="shine">Smart move.</span></h1>
+    <p class="sub">Check your inbox for the calendar invite. Now do these three things before we talk so you get the absolute most out of your 30 minutes.</p>
+
+    <div class="prep">
+      <h3>Before your call</h3>
+      <ol>
+        <li>
+          <strong>Know your two numbers</strong>
+          <span>Roughly how many leads you get per month and what an average customer is worth. Rough guesses are fine. We'll run your leak math live.</span>
+        </li>
+        <li>
+          <strong>Think about your slowest reply</strong>
+          <span>Remember the last lead you answered a day late or never answered at all. That's exactly the moment your agent will take over.</span>
+        </li>
+        <li>
+          <strong>Show up somewhere quiet</strong>
+          <span>You'll be watching a live agent respond to a lead in real time. You want to actually see this one.</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="social">
+      <p>Want to see what I build before we meet? Come say hi.</p>
+      <a class="btn" href="https://instagram.com/boss.bae.yvette" target="_blank" rel="noopener">Follow on Instagram</a>
+      <a class="btn" href="https://skool.com/theaiadvantagecommunity" target="_blank" rel="noopener">Join the Community</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Infinity Reach Media · Orange County, CA</p>
+  </div>
+</footer>
+
+</body>
+</html>

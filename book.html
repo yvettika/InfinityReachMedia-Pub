@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Free Demo Call | Infinity Reach Media</title>
+<meta name="description" content="Book a free 30 minute demo call and watch your AI agent work live before you decide anything.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --paper:#F7F4EF;
+  --pink:#E91E8C;
+  --purple:#7B2FBE;
+  --gold:#F0B429;
+  --muted:rgba(247,244,239,.68);
+  --line:rgba(247,244,239,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1}
+nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo em{color:var(--pink);font-style:normal}
+nav a.back{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
+.page{padding:70px 0 90px;position:relative;overflow:hidden}
+.page::before{content:"";position:absolute;top:-200px;right:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.35),transparent 65%);pointer-events:none}
+.grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;position:relative;z-index:1;align-items:start}
+.side p.sub{margin:22px 0 30px;color:var(--muted)}
+.expect{border:1px solid var(--line);border-radius:18px;padding:28px;background:rgba(247,244,239,.03)}
+.expect h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:18px}
+.expect ul{list-style:none}
+.expect li{padding-left:28px;position:relative;margin-bottom:14px;font-size:.97rem;color:var(--muted)}
+.expect li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem;top:3px}
+.trust{margin-top:24px;font-size:.88rem;color:var(--muted)}
+.calwrap{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;min-height:720px}
+.calendly-inline-widget{min-width:280px;height:720px}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/">Infinity <em>Reach</em> Media</a>
+    <a class="back" href="/agentic-flows">← Back to Agents</a>
+  </div>
+</nav>
+
+<section class="page">
+  <div class="wrap">
+    <div class="grid">
+      <div class="side">
+        <span class="eyebrow">Step 1 of 2</span>
+        <h1>Grab your spot. Watch your agent work live.</h1>
+        <p class="sub">Pick any time that works. The call is 30 minutes, it's free, and you'll leave knowing exactly how much money an agent would recover for your business, whether you hire me or not.</p>
+        <div class="expect">
+          <h3>What happens on this call</h3>
+          <ul>
+            <li>I look at how leads currently reach your business</li>
+            <li>You watch a live agent respond to a lead in real time</li>
+            <li>We run your real numbers through the leak math</li>
+            <li>If it's a fit, I show you the 7 day setup plan. If not, you leave with free fixes anyway</li>
+          </ul>
+        </div>
+        <p class="trust">No contracts. No pressure. Month to month if you join. I only take on businesses I know I can get results for.</p>
+      </div>
+      <div class="calwrap">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/yvettekahn/30min?hide_gdpr_banner=1&primary_color=e91e8c"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+window.addEventListener("message", function(e){
+  if(e.data && e.data.event === "calendly.event_scheduled"){
+    window.location.href = "/thanks";
+  }
+});
+</script>
+</body>
+</html>
