@@ -26,8 +26,9 @@ h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.2rem,5
 h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 nav{background:rgba(13,13,13,.86);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1080px}
-.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
 .logo em{color:var(--pink);font-style:normal}
+.logo .mark{width:36px;height:36px;object-fit:contain;display:block}
 .page{padding:90px 0 100px;position:relative;overflow:hidden;text-align:center}
 .page::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.32),transparent 65%);pointer-events:none}
 .page .wrap{position:relative;z-index:1}
@@ -54,7 +55,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="/">Infinity <em>Reach</em> Media</a>
+    <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="" /> Infinity <em>Reach</em> Media</a>
   </div>
 </nav>
 

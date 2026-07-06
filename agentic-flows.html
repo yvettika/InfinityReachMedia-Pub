@@ -37,8 +37,9 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem)}
 /* nav */
 nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
 .logo em{color:var(--pink);font-style:normal}
+.logo .mark{width:36px;height:36px;object-fit:contain;display:block}
 nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
 
 /* hero */
@@ -138,7 +139,7 @@ footer a{color:var(--gold);text-decoration:none}
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="/">Infinity <em>Reach</em> Media</a>
+    <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="" /> Infinity <em>Reach</em> Media</a>
     <a class="book" href="/book">Book a Call →</a>
   </div>
 </nav>
