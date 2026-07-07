@@ -14,20 +14,11 @@ document.querySelectorAll('.faq-q').forEach((q) => {
 });
 
 // ===================================================================
-// Contact form → GoHighLevel (GHL) Inbound Webhook
-// -------------------------------------------------------------------
-// SETUP (one time, in your GHL account):
-//   1. Go to Automation → Workflows → Create Workflow.
-//   2. Add the trigger "Inbound Webhook" and copy the webhook URL it gives you.
-//   3. Paste that URL between the quotes below (replace the placeholder).
-//   4. In the workflow, add an action "Create/Update Contact" and map the
-//      incoming fields (first_name, last_name, email, phone, company_name,
-//      service, message) to the matching contact fields.
-//   5. Optionally add "Send Internal Notification" so you get an email/SMS
-//      for every new lead.
-// Until a real URL is pasted, the form runs in demo mode (no data is sent).
+// Contact form → Speed to Lead Agent
+// Every submission is captured, gets an instant acknowledgment email, and
+// an AI-drafted follow-up is posted to Slack for approval.
 // ===================================================================
-const GHL_WEBHOOK_URL = "PASTE_YOUR_GHL_INBOUND_WEBHOOK_URL_HERE";
+const AGENT_LEAD_URL = "https://speed-to-lead-agent-two.vercel.app/api/lead";
 
 const form = document.querySelector('#contact-form');
 if (form) {
@@ -36,18 +27,24 @@ if (form) {
     const note = form.querySelector('.form-note');
     const submitBtn = form.querySelector('button[type="submit"]');
 
-    // Collect form fields into a plain object
-    const data = Object.fromEntries(new FormData(form).entries());
-    data.source = 'Website Contact Form';
-    data.page = window.location.href;
+    const raw = Object.fromEntries(new FormData(form).entries());
 
-    // Demo mode if the webhook URL hasn't been set yet
-    if (!GHL_WEBHOOK_URL || GHL_WEBHOOK_URL.startsWith('PASTE_')) {
-      note.textContent = "Demo mode — add your GHL webhook URL in js/main.js to start receiving leads.";
-      note.style.color = 'var(--color-accent-2)';
-      form.reset();
-      return;
-    }
+    // Bots fill the hidden honeypot; humans never do.
+    if (raw.company_website) { form.reset(); return; }
+
+    const fullName = [raw.first_name, raw.last_name].filter(Boolean).join(' ');
+    const parts = [];
+    if (raw.company_name) parts.push(`Business: ${raw.company_name}.`);
+    if (raw.service) parts.push(`Interested in: ${raw.service}.`);
+    if (raw.message) parts.push(raw.message);
+    const payload = {
+      name: fullName,
+      email: raw.email,
+      phone: raw.phone || '',
+      source: 'Website Contact Form',
+      message: parts.join(' ') || 'No message provided.',
+      company_website: '', // honeypot passthrough
+    };
 
     submitBtn.disabled = true;
     const original = submitBtn.textContent;
@@ -55,15 +52,14 @@ if (form) {
     note.textContent = '';
 
     try {
-      await fetch(GHL_WEBHOOK_URL, {
+      const res = await fetch(AGENT_LEAD_URL, {
         method: 'POST',
-        mode: 'no-cors', // GHL webhook returns no CORS headers; fire-and-forget
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
-      // In no-cors mode the response is opaque, so a completed request (no
-      // network error) is treated as a successful submission.
-      note.textContent = "Thanks! We've received your message and will reply within one business day.";
+      const json = await res.json();
+      if (!res.ok || !json.ok) throw new Error(json.error || 'Request failed');
+      note.textContent = "Thanks! Check your inbox — we just sent you a confirmation and will follow up shortly.";
       note.style.color = 'var(--color-accent-2)';
       form.reset();
     } catch (err) {
