@@ -160,27 +160,27 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="calc">
   <div class="wrap">
     <div class="calc-card">
-      <span class="eyebrow">The Leak Calculator</span>
-      <h2>How much are missed leads costing you?</h2>
+      <span class="eyebrow">The Upside Calculator</span>
+      <h2>What would more customers be worth to you?</h2>
       <div class="calc-grid">
         <div>
           <div class="slider-block">
-            <label for="leads">Leads per month <output id="leadsOut">30</output></label>
-            <input type="range" id="leads" min="5" max="200" value="30" step="5">
+            <label for="newcust">New customers per month <output id="newcustOut">10</output></label>
+            <input type="range" id="newcust" min="2" max="50" value="10" step="1">
           </div>
           <div class="slider-block">
             <label for="sale">Average sale value <output id="saleOut">$250</output></label>
             <input type="range" id="sale" min="50" max="5000" value="250" step="50">
           </div>
           <div class="slider-block">
-            <label for="missed">Leads you miss or answer late <output id="missedOut">40%</output></label>
-            <input type="range" id="missed" min="10" max="80" value="40" step="5">
+            <label for="repeat">Times they buy per year <output id="repeatOut">2</output></label>
+            <input type="range" id="repeat" min="1" max="12" value="2" step="1">
           </div>
         </div>
         <div class="leak">
-          <div class="num" id="leakNum">$3,000</div>
-          <div class="cap">Walking out the door every month</div>
-          <p>Businesses that respond within 5 minutes are up to 21x more likely to convert a lead. Your agent responds in seconds. Every time. Even at 9pm on a Sunday.</p>
+          <div class="num" id="leakNum">$60,000</div>
+          <div class="cap">In new revenue your agents could book this year</div>
+          <p>Ten new customers a month doesn't take a miracle. It takes an agent that finds them, follows up in seconds, and books them while you run your business.</p>
         </div>
       </div>
     </div>
@@ -365,19 +365,19 @@ footer a{color:var(--gold);text-decoration:none}
 </footer>
 
 <script>
-const leads=document.getElementById('leads'),sale=document.getElementById('sale'),missed=document.getElementById('missed');
-const leadsOut=document.getElementById('leadsOut'),saleOut=document.getElementById('saleOut'),missedOut=document.getElementById('missedOut'),leakNum=document.getElementById('leakNum');
+const newcust=document.getElementById('newcust'),sale=document.getElementById('sale'),repeat=document.getElementById('repeat');
+const newcustOut=document.getElementById('newcustOut'),saleOut=document.getElementById('saleOut'),repeatOut=document.getElementById('repeatOut'),leakNum=document.getElementById('leakNum');
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
 function paint(el){const p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--fill',p+'%')}
 function calc(){
-  leadsOut.textContent=leads.value;
+  newcustOut.textContent=newcust.value;
   saleOut.textContent=fmt(sale.value);
-  missedOut.textContent=missed.value+'%';
-  const loss=leads.value*sale.value*(missed.value/100)*0.25;
-  leakNum.textContent=fmt(loss)+"+";
-  [leads,sale,missed].forEach(paint);
+  repeatOut.textContent=repeat.value;
+  const upside=newcust.value*12*sale.value*repeat.value;
+  leakNum.textContent=fmt(upside)+"+";
+  [newcust,sale,repeat].forEach(paint);
 }
-[leads,sale,missed].forEach(el=>el.addEventListener('input',calc));
+[newcust,sale,repeat].forEach(el=>el.addEventListener('input',calc));
 calc();
 </script>
 </body>
