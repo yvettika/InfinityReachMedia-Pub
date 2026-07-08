@@ -4,18 +4,21 @@
    =================================================================== */
 
 :root {
-  /* Brand palette — matched to the Infinity Reach Media logo */
-  --color-bg: #14146b;          /* deep royal navy (logo background) */
-  --color-surface: #1c1c7d;     /* card / section surface */
-  --color-surface-2: #28289a;   /* lighter surface */
-  --color-text: #f0f1fb;        /* primary text */
-  --color-muted: #aab0e0;       /* secondary text */
-  --color-accent: #e6188f;      /* primary accent (logo magenta/pink) */
-  --color-accent-2: #2aa9e0;    /* secondary accent (logo blue) */
-  --color-border: rgba(255, 255, 255, 0.1);
+  /* Brand palette — matched to the agentic-flows / book / thanks pages */
+  --color-bg: #0D0D0D;          /* ink */
+  --color-surface: #161513;     /* card / section surface */
+  --color-surface-2: #211f1c;   /* lighter surface */
+  --color-text: #F7F4EF;        /* paper */
+  --color-muted: rgba(247, 244, 239, 0.68);
+  --color-accent: #E91E8C;      /* pink */
+  --color-accent-2: #F0B429;    /* gold */
+  --color-purple: #7B2FBE;      /* purple, used in gradients/blooms */
+  --color-border: rgba(247, 244, 239, 0.14);
 
   /* Typography */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-display: "Montserrat", sans-serif;
 
   /* Layout */
   --maxw: 1140px;
@@ -39,6 +42,8 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08; }
+
 .container {
   width: 100%;
   max-width: var(--maxw);
@@ -51,17 +56,19 @@ img { max-width: 100%; display: block; }
   display: inline-block;
   padding: 14px 28px;
   border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
   cursor: pointer;
   border: 1px solid transparent;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .btn-primary {
-  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
+  background: linear-gradient(100deg, var(--color-accent), var(--color-purple));
   color: #ffffff;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(230, 24, 143, 0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(233, 30, 140, 0.4); }
 .btn-ghost {
   background: transparent;
   border-color: var(--color-border);
@@ -74,7 +81,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(11, 16, 32, 0.8);
+  background: rgba(13, 13, 13, 0.86);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -84,7 +91,8 @@ img { max-width: 100%; display: block; }
   justify-content: space-between;
   height: 72px;
 }
-.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; }
+.brand em { color: var(--color-accent); font-style: normal; }
 .brand .mark {
   width: 40px; height: 40px; object-fit: contain; display: block;
 }
@@ -99,13 +107,13 @@ img { max-width: 100%; display: block; }
 .hero::before {
   content: ""; position: absolute; inset: 0;
   background:
-    radial-gradient(600px 300px at 50% -10%, rgba(91, 140, 255, 0.25), transparent 70%),
-    radial-gradient(500px 250px at 80% 20%, rgba(34, 211, 238, 0.12), transparent 70%);
+    radial-gradient(600px 300px at 50% -10%, rgba(123, 47, 190, 0.35), transparent 70%),
+    radial-gradient(500px 250px at 80% 20%, rgba(233, 30, 140, 0.16), transparent 70%);
   pointer-events: none;
 }
 .hero .container { position: relative; }
 .eyebrow {
-  display: inline-block; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+  display: inline-block; font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--color-accent-2); font-weight: 700; margin-bottom: 18px;
 }
 .hero h1 {
@@ -142,7 +150,7 @@ img { max-width: 100%; display: block; }
   background: var(--color-surface); border: 1px solid var(--color-border);
   border-radius: var(--radius); padding: 30px; transition: transform 0.18s ease, border-color 0.18s ease;
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(91, 140, 255, 0.5); }
+.card:hover { transform: translateY(-4px); border-color: rgba(240, 180, 41, 0.5); }
 .card .icon {
   width: 50px; height: 50px; border-radius: 12px; display: grid; place-items: center;
   background: var(--color-surface-2); font-size: 1.5rem; margin-bottom: 18px;
@@ -207,7 +215,7 @@ a.card { display: block; }
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: linear-gradient(120deg, rgba(91,140,255,0.15), rgba(34,211,238,0.1));
+  background: linear-gradient(120deg, rgba(123,47,190,0.18), rgba(233,30,140,0.1));
   border: 1px solid var(--color-border); border-radius: 24px; padding: 56px; text-align: center;
 }
 .cta-band h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 14px; }
@@ -249,7 +257,7 @@ a.card { display: block; }
 /* ---------- Page hero (interior pages) ---------- */
 .page-hero { padding: 80px 0 40px; text-align: center; position: relative; }
 .page-hero::before { content: ""; position: absolute; inset: 0;
-  background: radial-gradient(500px 250px at 50% -20%, rgba(91,140,255,0.2), transparent 70%); pointer-events: none; }
+  background: radial-gradient(500px 250px at 50% -20%, rgba(123,47,190,0.3), transparent 70%); pointer-events: none; }
 .page-hero .container { position: relative; }
 .page-hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.02em; margin-bottom: 14px; }
 .page-hero p { color: var(--color-muted); max-width: 56ch; margin: 0 auto; font-size: 1.08rem; }
