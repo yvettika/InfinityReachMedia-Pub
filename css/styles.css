@@ -89,6 +89,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; }
@@ -266,6 +267,9 @@ a.card { display: block; }
 @media (max-width: 880px) {
   .nav-links, .nav-cta .btn-ghost { display: none; }
   .nav-toggle { display: block; }
+  .nav-cta .btn-primary { padding: 10px 18px; font-size: 0.78rem; white-space: nowrap; flex-shrink: 0; }
+  .brand { font-size: 0.95rem; gap: 8px; flex-shrink: 0; white-space: nowrap; }
+  .brand .mark { width: 30px; height: 30px; }
   .nav-links.open {
     display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0;
     background: var(--color-bg); border-bottom: 1px solid var(--color-border); padding: 20px 24px; gap: 18px;
@@ -278,6 +282,11 @@ a.card { display: block; }
   .cta-band { padding: 40px 24px; }
 }
 @media (max-width: 480px) {
+  .site-header .container { padding: 0 16px; }
+  .nav { gap: 8px; }
+  .brand { font-size: 0.85rem; gap: 6px; }
+  .brand .mark { width: 26px; height: 26px; }
+  .nav-cta .btn-primary { padding: 8px 14px; font-size: 0.72rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { justify-content: center; text-align: center; }
 }
