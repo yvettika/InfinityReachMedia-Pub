@@ -50,6 +50,19 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 .hero p.sub{margin:26px auto 38px;max-width:620px;font-size:1.15rem;color:var(--muted)}
 .hero h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .micro{margin-top:18px;font-size:.9rem;color:var(--muted)}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+/* live demo */
+.demo{padding:20px 0 90px}
+.demo-card{position:relative;border:1px solid var(--line);border-radius:24px;padding:44px clamp(24px,5vw,56px);background:linear-gradient(160deg,rgba(26,79,191,.16),rgba(13,13,13,.4) 55%)}
+.demo-card .eyebrow{color:var(--gold)}
+.demo-card h2{margin:10px 0 16px}
+.demo-card .lead{max-width:640px;color:var(--muted);font-size:1.08rem}
+.demo-note{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;font-size:.86rem;color:var(--muted)}
+.demo-note b{color:var(--paper);font-weight:700}
+.demo-frame-wrap{margin-top:30px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0D0D0D;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.demo-frame-wrap iframe{display:block;width:100%;height:640px;border:0}
+@media(max-width:600px){.demo-frame-wrap iframe{height:560px}}
 
 /* calculator */
 .calc{padding:30px 0 90px}
@@ -152,8 +165,25 @@ footer a{color:var(--gold);text-decoration:none}
     <span class="eyebrow">AI Agents for Small Business</span>
     <h1>Tools don't grow your business.<br><span class="shine">Customers do.</span></h1>
     <p class="sub">Done for you AI agents that go get new customers, bring old ones back, and turn every lead into booked revenue. You approve. They earn.</p>
-    <a class="btn pink" href="/book">Book Your Free Demo Call</a>
-    <p class="micro">30 minutes. No pressure. See your agent working live on the call.</p>
+    <div class="cta-row">
+      <a class="btn pink" href="/book">Book Your Free Demo Call</a>
+      <a class="btn ghost" href="#demo">Try the Live Demo ↓</a>
+    </div>
+    <p class="micro">30 minutes. No pressure. Or talk to a real agent right now, no signup.</p>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="demo-card">
+      <span class="eyebrow">Live Demo · No Signup</span>
+      <h2>Don't take my word for it. Talk to one.</h2>
+      <p class="lead">Below is a real agent, running live right now for a sample business — Summit &amp; Vale Home Services. Talk to it like you're their customer: tell it your AC died, ask what a repair costs, try to book a visit, or try to stump it. This is the same engine that would answer for <em>your</em> business, in your voice.</p>
+      <span class="demo-note"><b>Set up as an HVAC company for the demo.</b> Yours would sound like you.</span>
+      <div class="demo-frame-wrap">
+        <iframe src="https://agent-router-theta.vercel.app/?tenant=summit-vale" title="Live AI agent demo — Summit &amp; Vale Home Services" loading="lazy" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -205,7 +235,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Every lead gets an instant reply and a booking link, powered by the Speed to Lead engine</li>
           <li>Reports revenue in, dollars out — you always know your return</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c7 maker">
         <span class="tag">Fastest ROI</span>
@@ -217,7 +247,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Books appointments from people who already know and trust you</li>
           <li>New revenue with zero ad spend, usually within the first week</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c1">
         <span class="tag">Answers in Seconds</span>
@@ -229,7 +259,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>3 touch nurture sequence so no sale slips away</li>
           <li>Books appointments straight to your calendar</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c2">
         <span class="tag">Protects Your Rating</span>
@@ -241,7 +271,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Handles the angry ones with grace, you just tap approve</li>
           <li>Asks your happiest customers for reviews that sell for you</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c3">
         <span class="tag">Posts While You Sleep</span>
@@ -253,7 +283,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Written in your voice, always ending with a reason to book</li>
           <li>Scheduled and published automatically</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c4">
         <span class="tag">Never Miss a Call</span>
@@ -264,7 +294,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Answers inquiries 24/7, qualifies every lead, books your calendar</li>
           <li>Trained on your voice, your services, your pricing</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
       <div class="card c5">
         <span class="tag">Run It From Slack</span>
@@ -275,7 +305,7 @@ footer a{color:var(--gold);text-decoration:none}
           <li>Type commands in Slack to pull lead data, draft replies, and schedule posts</li>
           <li>All your agents reporting their wins to one channel</li>
         </ul>
-        <a class="btn ghost" href="/book">See It Work Live</a>
+        <a class="btn ghost" href="#demo">See It Work Live</a>
       </div>
     </div>
     <div class="bundle">
