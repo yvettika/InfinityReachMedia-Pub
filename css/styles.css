@@ -146,6 +146,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 
 /* ---------- Service cards ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-t { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+@media (max-width: 760px) { .grid-t { grid-template-columns: 1fr; } }
 .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
 .card {
   background: var(--color-surface); border: 1px solid var(--color-border);
