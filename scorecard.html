@@ -71,6 +71,29 @@ input:focus{outline:none;border-color:var(--gold)}
 .gap .fix{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,var(--pink),var(--purple));padding:5px 11px;border-radius:999px;white-space:nowrap;margin-top:2px}
 .gap .g-txt b{display:block;font-weight:500}
 .gap .g-txt span{color:var(--muted);font-size:.92rem}
+.roadmap{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+.roadmap>h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.rm-loading{color:var(--muted);display:flex;align-items:center;gap:10px}
+.rm-loading .dot{width:10px;height:10px;border-radius:50%;background:var(--pink);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.rm-head{font-family:'Playfair Display',serif;font-weight:800;font-size:1.35rem;line-height:1.15;margin-bottom:10px}
+.rm-sit{color:var(--muted);margin-bottom:20px}
+.rm-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);margin:0 0 8px}
+.rm-constraints{list-style:none;margin:0 0 22px;padding:0}
+.rm-constraints li{padding:8px 0 8px 22px;position:relative;color:var(--paper)}
+.rm-constraints li::before{content:"→";position:absolute;left:0;color:var(--gold)}
+.rm-phase{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;background:rgba(247,244,239,.03)}
+.rm-phase .lbl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.rm-phase .theme{font-weight:700;font-size:1.05rem;margin:3px 0 10px}
+.rm-agents{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.rm-agents span{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.03em;color:#fff;background:linear-gradient(100deg,var(--pink),var(--purple));padding:4px 10px;border-radius:999px}
+.rm-phase .why{color:var(--muted);font-size:.95rem;margin:0}
+.rm-upside{border-left:3px solid var(--gold);padding:12px 0 12px 16px;margin:20px 0 0;color:var(--paper)}
+.rm-first{margin-top:16px;padding:14px 18px;border-radius:12px;background:linear-gradient(100deg,rgba(233,30,140,.14),rgba(123,47,190,.12))}
+.rm-first b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.upside-link{text-align:center;margin-top:24px;font-size:.98rem}
+.upside-link span{color:var(--muted);display:block;margin-bottom:4px}
+.upside-link a{color:var(--gold);font-weight:700;text-decoration:none}
 .result-cta{text-align:center;margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
 .result-cta p{color:var(--muted);margin-bottom:18px}
 footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
@@ -136,9 +159,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
         <h3>Your 3 biggest revenue leaks — and what closes them</h3>
         <div id="gapList"></div>
       </div>
+
+      <div class="roadmap" id="roadmap">
+        <h3>Your custom 90-day roadmap</h3>
+        <div id="roadmapBody"><p class="rm-loading"><span class="dot"></span>Building your custom roadmap from your answers…</p></div>
+      </div>
+
+      <div class="upside-link" id="upsideLink">
+        <span>Curious what closing these gaps is worth?</span>
+        <a href="/agentic-flows#calc">Run the numbers on the Upside Calculator →</a>
+      </div>
+
       <div class="result-cta">
-        <p>Want this turned into a step-by-step plan for <em>your</em> business? On a free 30-minute AI Growth Audit, we build your custom roadmap — no pressure, no obligation.</p>
-        <a class="btn pink" href="/book">Book my free AI Growth Audit →</a>
+        <p>Want us to build this roadmap <em>for</em> you? On a free 30-minute call, we turn it into a done-for-you plan — no pressure, no obligation.</p>
+        <a class="btn pink" href="/book">Book my free strategy call →</a>
       </div>
     </div>
   </div>
@@ -148,6 +182,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
 
 <script>
 const AGENT_LEAD_URL="https://speed-to-lead-agent-two.vercel.app/api/lead";
+const ROADMAP_URL="https://customer-acquisition-agent.vercel.app/api/roadmap";
 // Each statement maps to the agent that closes that gap. Rated 1 (not happening)
 // to 5 (fully dialed in). Low answers surface the gap AND name the fix.
 const Q=[
@@ -235,7 +270,34 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
 
   document.getElementById('gate').style.display='none';
   const r=document.getElementById('result');r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'start'});
+
+  // Generate the custom 90-day roadmap from all 15 answers (async — the score
+  // is already on screen; the roadmap fills in a few seconds later).
+  buildRoadmap(name,biz,pct);
 });
+
+async function buildRoadmap(name,biz,pct){
+  const body=document.getElementById('roadmapBody');
+  const payload={businessName:biz||name,scorePct:pct,answers:answers.map((score,i)=>({statement:Q[i].s,fix:Q[i].fix,score}))};
+  try{
+    const res=await fetch(ROADMAP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const j=await res.json();
+    if(!res.ok||!j.ok)throw new Error(j.error||'failed');
+    const m=j.roadmap;
+    const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+    body.innerHTML=
+      `<div class="rm-head">${esc(m.headline)}</div>`+
+      `<p class="rm-sit">${esc(m.situation)}</p>`+
+      (m.constraints&&m.constraints.length?`<p class="rm-sub">What's capping your growth</p><ul class="rm-constraints">${m.constraints.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'')+
+      `<p class="rm-sub">Your 90-day sequence</p>`+
+      (m.phases||[]).map(p=>`<div class="rm-phase"><div class="lbl">${esc(p.label)}</div><div class="theme">${esc(p.theme)}</div><div class="rm-agents">${(p.agents||[]).map(a=>`<span>${esc(a)}</span>`).join('')}</div><p class="why">${esc(p.why)}</p></div>`).join('')+
+      (m.upside?`<p class="rm-upside">${esc(m.upside)}</p>`:'')+
+      (m.firstStep?`<div class="rm-first"><b>Start here</b>${esc(m.firstStep)}</div>`:'');
+  }catch(e){
+    // If generation hiccups, don't leave a dead spinner — point them to the call.
+    body.innerHTML=`<p style="color:var(--muted)">Your full roadmap is ready to build with you live — <a href="/book" style="color:var(--gold);font-weight:700">book your free strategy call →</a></p>`;
+  }
+}
 </script>
 </body>
 </html>
