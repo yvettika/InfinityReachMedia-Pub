@@ -37,6 +37,11 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
 .logo em{color:var(--pink);font-style:normal}.logo .mark{width:36px;height:36px;object-fit:contain}
 nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
+@media(max-width:540px){
+  .logo{font-size:.92rem;gap:7px}
+  .logo .mark{width:27px;height:27px}
+  nav a.book{font-size:11px;letter-spacing:.02em;max-width:96px;text-align:right;line-height:1.35}
+}
 .hero{padding:64px 0 20px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.34),transparent 65%);pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
@@ -188,18 +193,18 @@ const ROADMAP_URL="https://customer-acquisition-agent.vercel.app/api/roadmap";
 const Q=[
   {s:"New leads hear back within a minute — automatically, day or night.",fix:"Speed to Lead",why:"Leads go cold in minutes. An agent that replies in seconds books the ones you're losing now."},
   {s:"Every inquiry — call, form, DM, walk-in — gets captured and followed up.",fix:"Lead Capture",why:"The leads that slip through the cracks never show in your revenue. Capture all of them."},
-  {s:"New leads get followed up with more than once, without me remembering to.",fix:"Speed to Lead",why:"Most sales need 5+ touches. Automatic multi-step follow-up stops the drop-off."},
-  {s:"We regularly re-engage old leads and past customers who went quiet.",fix:"Database Reactivation",why:"You're sitting on a list of people who already know you. Reactivation turns it into booked jobs."},
+  {s:"If a lead doesn't reply, they hear from us again automatically — I don't have to remember.",fix:"Speed to Lead",why:"Most sales take 5+ touches. Automatic follow-up stops the drop-off."},
+  {s:"We regularly reach back out to old leads and past customers who went quiet.",fix:"Database Reactivation",why:"You're sitting on a list of people who already know you. Reactivation turns it into booked jobs."},
   {s:"Booked appointments actually show up — reminders go out automatically.",fix:"Show-Rate",why:"A no-show is lost revenue you already earned. Automatic reminders defend every booking."},
-  {s:"Past customers get brought back for repeat business on a schedule.",fix:"Retention / Rebook",why:"Repeat customers are your highest margin. A rebook system brings them back on time."},
+  {s:"We have a system that brings past customers back for repeat business.",fix:"Retention / Rebook",why:"Repeat customers are your highest margin. A rebook system brings them back on time."},
   {s:"Happy customers are consistently asked for referrals.",fix:"Referral Engine",why:"Referrals are your cheapest lead — most businesses never systematically ask."},
   {s:"We steadily collect new 5-star reviews and reply to them.",fix:"Review Machine",why:"Reviews decide who gets the click. A steady stream lifts every other channel."},
   {s:"We post consistently, in our own voice, without it eating our time.",fix:"Content Engine",why:"Consistency wins — done-for-you content keeps you visible without the hours."},
   {s:"Inquiries that come in after hours still get answered.",fix:"AI Receptionist",why:"After-hours calls become booked jobs instead of voicemails your competitor answers."},
-  {s:"I know my real numbers — response time, show rate, conversion — not guesses.",fix:"Tracking",why:"You can't fix a leak you can't see. Tracking every stage is free money."},
+  {s:"I know my real numbers — how fast we reply, who shows up, and what turns into money.",fix:"Tracking",why:"You can't fix a leak you can't see. Tracking every stage is free money."},
   {s:"Our follow-up keeps running even when we're slammed or on vacation.",fix:"The Suite",why:"Your revenue shouldn't depend on your energy. Agents run the plays every day."},
   {s:"We have a predictable, repeatable way to bring in new customers.",fix:"Customer Acquisition",why:"Hope isn't a pipeline. A repeatable acquisition system makes growth predictable."},
-  {s:"I'm not drowning in manual marketing and admin work.",fix:"Automation",why:"The hours you spend on admin are hours you're not growing. Automate the busywork."},
+  {s:"Marketing and admin busywork isn't eating my week.",fix:"Automation",why:"The hours you spend on admin are hours you're not growing. Automate the busywork."},
   {s:"I'm confident we're not leaving revenue on the table.",fix:"AI Growth Audit",why:"If you're not sure, there's a gap — and that's exactly what the audit finds."}
 ];
 const answers=new Array(Q.length).fill(0);
