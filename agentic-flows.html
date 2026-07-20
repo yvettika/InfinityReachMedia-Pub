@@ -144,6 +144,17 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .bundle p{color:var(--muted);font-size:.95rem}
 
 /* how */
+/* tracking / leak map */
+.track{padding:90px 0;border-top:1px solid var(--line)}
+.track .lede{max-width:640px;color:var(--muted);margin-top:18px}
+.track-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:46px}
+.track-item{border:1px solid var(--line);border-radius:16px;padding:20px;background:linear-gradient(160deg,rgba(26,79,191,.12),rgba(13,13,13,.35) 60%)}
+.track-item .step-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;color:var(--gold)}
+.track-item .stage{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin:6px 0 10px}
+.track-item .metric{font-size:.92rem;color:var(--muted);line-height:1.5}
+.track-note{margin-top:34px;padding:22px 26px;border-left:3px solid var(--gold);background:rgba(247,244,239,.03)}
+.track-note p{margin:0;color:var(--muted)}
+.track-note b{color:var(--paper)}
 .how{padding:90px 0;border-top:1px solid var(--line)}
 .how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px}
 .step .k{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:2.4rem;color:var(--pink)}
@@ -350,6 +361,29 @@ footer a{color:var(--gold);text-decoration:none}
         <p>Acquisition and reactivation bringing money in, the full suite making sure none of it leaks out. Ask about system pricing on your call.</p>
       </div>
       <a class="btn pink" href="/book">Claim the System</a>
+    </div>
+  </div>
+</section>
+
+<section class="track" id="track">
+  <div class="wrap">
+    <span class="eyebrow">The Part Nobody Else Shows You</span>
+    <h2>You can't fix a leak you can't see.</h2>
+    <p class="lede">Most business owners are guessing. They know roughly how many leads come in and roughly how many turn into money — and everything in between is a black box. Your agents measure every step, so the leak stops being a mystery and starts being a number you can fix.</p>
+
+    <div class="track-grid">
+      <div class="track-item"><div class="step-n">STEP 01</div><div class="stage">Lead arrives</div><p class="metric">Where it came from, what they asked for, and the exact second it landed.</p></div>
+      <div class="track-item"><div class="step-n">STEP 02</div><div class="stage">First response</div><p class="metric">How fast you actually replied — measured in seconds, not "pretty quick."</p></div>
+      <div class="track-item"><div class="step-n">STEP 03</div><div class="stage">Follow-up</div><p class="metric">Every touch sent, and which one finally got a reply.</p></div>
+      <div class="track-item"><div class="step-n">STEP 04</div><div class="stage">Booked</div><p class="metric">How many conversations became appointments on the calendar.</p></div>
+      <div class="track-item"><div class="step-n">STEP 05</div><div class="stage">Showed up</div><p class="metric">Your real show rate — booked is not the same as held.</p></div>
+      <div class="track-item"><div class="step-n">STEP 06</div><div class="stage">Won</div><p class="metric">Which leads turned into revenue, and what that revenue was worth.</p></div>
+      <div class="track-item"><div class="step-n">STEP 07</div><div class="stage">Reviewed</div><p class="metric">Who was asked for a review, and who actually left one.</p></div>
+      <div class="track-item"><div class="step-n">STEP 08</div><div class="stage">Referred</div><p class="metric">Which happy customers sent you the next one.</p></div>
+    </div>
+
+    <div class="track-note">
+      <p><b>This is the difference between marketing and guessing.</b> When you can see that leads stall at step two, or that half your booked jobs never show, you stop throwing money at more leads and start fixing the step that's actually costing you. You see all of it in your own dashboard — not a report we email you once a month.</p>
     </div>
   </div>
 </section>
