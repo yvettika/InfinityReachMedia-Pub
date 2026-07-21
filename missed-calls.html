@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missed-Call Money Calculator — What Unanswered Calls Cost You | Infinity Reach Media</title>
+<meta name="description" content="HVAC, roofing and plumbing owners: see in 60 seconds what your missed calls are costing you every month. Then watch an AI agent catch them, live.">
+<link rel="canonical" href="https://infinityreachmedia.com/missed-calls">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="What are your missed calls actually costing you?">
+<meta property="og:description" content="60 seconds, your own numbers. See the revenue walking to the next contractor on Google — then see the fix, live.">
+<meta property="og:url" content="https://infinityreachmedia.com/missed-calls">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0D0D0D;--paper:#F7F4EF;--pink:#E91E8C;--purple:#7B2FBE;--gold:#F0B429;--muted:rgba(247,244,239,.68);--line:rgba(247,244,239,.14)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2{font-family:'Playfair Display',serif;font-weight:800;line-height:1.08}
+h1{font-size:clamp(2rem,5.2vw,3.1rem)}
+h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:15px 32px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35);transition:transform .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1040px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--paper);text-decoration:none}
+.logo em{color:var(--pink);font-style:normal}.logo .mark{width:34px;height:34px;object-fit:contain}
+nav a.bk{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
+.hero{padding:56px 0 8px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.32),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero p.sub{margin:20px auto 0;max-width:560px;color:var(--muted);font-size:1.1rem}
+.stat-strip{margin:26px auto 0;max-width:560px;border:1px solid rgba(240,180,41,.35);border-radius:16px;padding:16px 20px;background:rgba(240,180,41,.07);font-size:.98rem}
+.stat-strip b{color:var(--gold)}
+section.calc{padding:34px 0 70px}
+.card{border:1px solid var(--line);border-radius:22px;padding:32px clamp(20px,4vw,38px);background:rgba(247,244,239,.03)}
+.f{margin-bottom:26px}
+.f label{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;margin-bottom:4px}
+.f .hint{font-size:13px;color:var(--muted);margin-bottom:12px}
+.row{display:flex;align-items:center;gap:16px}
+input[type=range]{flex:1;accent-color:var(--pink);height:6px}
+.val{font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;min-width:104px;text-align:right;font-variant-numeric:tabular-nums}
+.result{margin-top:30px;padding-top:28px;border-top:1px solid var(--line);text-align:center}
+.result .lbl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.big{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,9vw,4.2rem);line-height:1;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+.per{color:var(--muted);font-size:.95rem}
+.yr{margin-top:18px;font-size:1.05rem}
+.yr b{color:var(--gold);font-variant-numeric:tabular-nums}
+.cta-box{margin-top:30px;padding:28px 24px;border-radius:18px;background:linear-gradient(160deg,rgba(233,30,140,.14),rgba(123,47,190,.10));text-align:center}
+.cta-box h2{font-size:1.5rem;margin-bottom:10px}
+.cta-box p{color:var(--muted);max-width:460px;margin:0 auto 20px}
+.note{font-size:12.5px;color:var(--muted);margin-top:18px;text-align:center;line-height:1.6}
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="Infinity Reach Media logo"> Infinity <em>Reach</em> Media</a>
+    <a class="bk" href="/book">Book a demo →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Free · 60 Seconds · No Signup</span>
+    <h1>What is every missed call <span class="shine">actually costing you?</span></h1>
+    <p class="sub">Move three sliders with your real numbers. You'll see the revenue walking straight to the next contractor on Google.</p>
+    <div class="stat-strip">Industry research puts unanswered calls to small home-service businesses at roughly <b>62%</b>. When you're on a roof or under a sink, that call doesn't wait — it dials the next guy.</div>
+  </div>
+</header>
+
+<section class="calc">
+  <div class="wrap">
+    <div class="card">
+      <div class="f">
+        <label for="calls">Calls you miss in a typical week</label>
+        <div class="hint">Voicemails, after-hours, and the ones that ring out while you're on a job.</div>
+        <div class="row"><input type="range" id="calls" min="1" max="60" value="12" step="1"><span class="val" id="callsV">12</span></div>
+      </div>
+      <div class="f">
+        <label for="job">Average job value</label>
+        <div class="hint">Your typical ticket — repair, install, service call, whatever's normal for you.</div>
+        <div class="row"><input type="range" id="job" min="100" max="15000" value="750" step="50"><span class="val" id="jobV">$750</span></div>
+      </div>
+      <div class="f">
+        <label for="close">Of the callers you actually reach, how many book?</label>
+        <div class="hint">Most owner-operators land somewhere between 30% and 60%.</div>
+        <div class="row"><input type="range" id="close" min="5" max="90" value="40" step="5"><span class="val" id="closeV">40%</span></div>
+      </div>
+
+      <div class="result">
+        <div class="lbl">You're leaving roughly</div>
+        <div class="big" id="perMonth">$0</div>
+        <div class="per">on the table every month</div>
+        <div class="yr">That's <b id="perYear">$0</b> a year — from calls that already wanted to hire you.</div>
+      </div>
+
+      <div class="cta-box">
+        <h2>Want to watch an agent catch those calls?</h2>
+        <p>On a 10-minute call I'll show you a live AI receptionist answering and booking a job — using your business, not a canned video. Even if you never hire me, you'll see exactly where jobs are slipping.</p>
+        <a class="btn" href="/book">Show me it working, live →</a>
+      </div>
+
+      <p class="note">This is an estimate built from the numbers you entered — not a promise of results. Your real figures depend on your market, your close rate, and how fast anyone follows up.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 Infinity Reach Media · Orange County, CA · <a href="/agentic-flows">See the agents</a> · <a href="/scorecard">Take the scorecard</a></div></footer>
+
+<script>
+var money = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+function recalc() {
+  var calls = +document.getElementById('calls').value;
+  var job = +document.getElementById('job').value;
+  var close = +document.getElementById('close').value / 100;
+  document.getElementById('callsV').textContent = calls;
+  document.getElementById('jobV').textContent = money(job);
+  document.getElementById('closeV').textContent = Math.round(close * 100) + '%';
+  // Missed calls a month (52 weeks / 12) x what a reached caller is worth.
+  var perMonth = calls * (52 / 12) * job * close;
+  document.getElementById('perMonth').textContent = money(perMonth);
+  document.getElementById('perYear').textContent = money(perMonth * 12);
+}
+['calls', 'job', 'close'].forEach(function (id) {
+  document.getElementById(id).addEventListener('input', recalc);
+});
+recalc();
+</script>
+</body>
+</html>
