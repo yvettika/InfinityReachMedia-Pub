@@ -1,0 +1,51 @@
+/* ==========================================================================
+   lp.css — shared layer for paid-traffic landing pages (hvac / salon / insurance)
+   Relies on each page's own :root vars: --ink --paper --cta --line --muted
+   Keeps the pages visually distinct while sharing form + CTA + legal furniture.
+   ========================================================================== */
+
+/* ---------- Inline lead capture ---------- */
+/* paper, not white — these sections often sit between two white ones */
+.lp-capture{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.lp-capture .wrap{max-width:760px}
+.lp-form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;margin-top:32px;text-align:left;box-shadow:0 18px 40px rgba(11,11,15,.06)}
+.lp-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lp-field{margin-bottom:14px}
+.lp-field label{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.lp-field input{width:100%;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+.lp-field input:focus{outline:2px solid var(--cta);outline-offset:1px;border-color:transparent}
+.lp-consent{display:flex;gap:10px;align-items:flex-start;margin:6px 0 18px;font-size:.78rem;color:var(--muted);line-height:1.5}
+.lp-consent input{margin-top:3px;width:16px;height:16px;flex:0 0 16px;accent-color:var(--cta)}
+.lp-consent a{color:var(--cta);font-weight:700}
+.lp-form .btn{width:100%;text-align:center;border:none;cursor:pointer;font-size:.85rem}
+.lp-alt{text-align:center;font-size:.85rem;color:var(--muted);margin-top:16px}
+.lp-alt a{color:var(--cta);font-weight:700}
+.lp-err{display:none;background:rgba(233,30,140,.08);border:1px solid rgba(233,30,140,.35);border-radius:10px;padding:11px 14px;font-size:.85rem;color:var(--ink);margin-bottom:14px}
+.lp-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lp-done{display:none;text-align:center;padding:14px 0}
+.lp-done b{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:10px}
+.lp-done p{color:var(--muted);margin-bottom:22px}
+
+/* ---------- Source citations ---------- */
+.src{font-size:.72rem;color:var(--muted);line-height:1.6}
+.src a{color:inherit;text-decoration:underline}
+sup.cite{font-size:.62em;vertical-align:super;font-weight:700}
+
+/* ---------- Landing page footer ---------- */
+.lp-legal{margin-top:12px;font-size:.8rem;line-height:1.9}
+.lp-legal a{color:rgba(255,255,255,.72);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+.lp-legal a:hover{color:#fff}
+.lp-legal .sep{opacity:.4;padding:0 8px}
+
+/* ---------- Mobile sticky CTA ---------- */
+.lp-sticky{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(11,11,15,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.14)}
+.lp-sticky a{flex:1;text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:none;padding:13px 10px;border-radius:999px}
+.lp-sticky .s-primary{background:var(--cta);color:#fff}
+.lp-sticky .s-ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff}
+@media (max-width:820px){
+  .lp-row{grid-template-columns:1fr}
+  .lp-sticky.on{display:flex}
+  body.has-sticky{padding-bottom:74px}
+}
