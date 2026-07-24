@@ -82,7 +82,8 @@
     scorecard_click: 'Lead',
     scorecard_complete: 'CompleteRegistration',
     demo_click:      'ViewContent',
-    community_click: 'ViewContent'
+    community_click: 'ViewContent',
+    video_start:     'ViewContent'
   };
 
   function track(event, params) {

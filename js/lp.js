@@ -107,7 +107,43 @@
     setTimeout(function () { if (!done) { io.disconnect(); el.textContent = fmt(target); done = true; } }, 4000);
   });
 
-  /* ---------- 3. Mobile sticky CTA ---------- */
+  /* ---------- 3. VSL click-to-play ----------
+     Nothing loads until the poster is clicked, so an embedded VSL costs the
+     page zero bytes for visitors who never press play. Self-hosted video also
+     reports quarter-progress; Vimeo/YouTube would need their own SDKs for that,
+     so embeds report the start only. */
+  Array.prototype.forEach.call(document.querySelectorAll('.vsl-frame[data-embed]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var spec = btn.getAttribute('data-embed');
+      var i    = spec.indexOf(':');
+      var type = spec.slice(0, i), id = spec.slice(i + 1);
+      if (!id || id === 'VIDEO_ID') return;              // slot not filled in yet
+      track('video_start', { video_id: id, video_host: type });
+
+      var el;
+      if (type === 'file') {
+        el = document.createElement('video');
+        el.src = id; el.controls = true; el.autoplay = true; el.playsInline = true;
+        var seen = {};
+        el.addEventListener('timeupdate', function () {
+          if (!el.duration) return;
+          var pct = Math.floor((el.currentTime / el.duration) * 4) * 25;   // 0/25/50/75
+          if (pct > 0 && !seen[pct]) { seen[pct] = 1; track('video_progress', { percent: pct, video_id: id }); }
+        });
+        el.addEventListener('ended', function () { track('video_complete', { video_id: id }); });
+      } else {
+        el = document.createElement('iframe');
+        el.allow = 'autoplay; fullscreen; picture-in-picture';
+        el.allowFullscreen = true;
+        el.src = type === 'vimeo'
+          ? 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0'
+          : 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      }
+      btn.replaceWith(el);
+    }, { once: true });
+  });
+
+  /* ---------- 4. Mobile sticky CTA ---------- */
   var hero = document.querySelector('.hero');
   if (hero && !window.matchMedia('(min-width:821px)').matches) {
     var bar = document.createElement('div');
