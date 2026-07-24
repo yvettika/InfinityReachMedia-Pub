@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="/images/logo-mark.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The AI Growth Scorecard — Find Your Revenue Gaps | Infinity Reach Media</title>
-<meta name="description" content="A free 2-minute scorecard for small business owners. Answer 15 questions and see exactly where your business is leaking revenue — and which AI agent closes each gap.">
+<title>The Revenue Leak Calculator — Find Your Biggest Gaps | Infinity Reach Media</title>
+<meta name="description" content="A free 2-minute tool for small business owners. Answer one quick question at a time and see exactly how much revenue is leaking out of your business — and get a custom 90-day roadmap to fix it.">
 <link rel="canonical" href="https://infinityreachmedia.com/scorecard">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Infinity Reach Media">
-<meta property="og:title" content="The AI Growth Scorecard — Find Your Revenue Gaps">
-<meta property="og:description" content="Answer 15 questions in 2 minutes and see exactly where your business is leaking revenue, and how to close each gap.">
+<meta property="og:title" content="The Revenue Leak Calculator — Find Your Biggest Gaps">
+<meta property="og:description" content="See exactly how much revenue is slipping out of your business, and get a custom 90-day roadmap to close every gap.">
 <meta property="og:url" content="https://infinityreachmedia.com/scorecard">
 <meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,6 +30,7 @@ h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-back
 .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:15px 32px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
 .btn.pink{background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35)}
 .btn.pink:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(233,30,140,.5)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--paper)}
 .btn:disabled{opacity:.55;cursor:wait;transform:none}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -50,21 +51,27 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 .prog{position:sticky;top:68px;z-index:40;height:4px;background:rgba(247,244,239,.08)}
 .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .3s ease}
 section.quiz{padding:34px 0 80px}
-.q{border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:16px;background:rgba(247,244,239,.03)}
-.q .n{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
-.q .stmt{font-size:1.12rem;font-weight:500;margin-bottom:16px}
-.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.scale button{font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.1rem;color:var(--paper);background:rgba(247,244,239,.05);border:1px solid var(--line);border-radius:12px;padding:14px 0;cursor:pointer;transition:all .14s ease}
-.scale button:hover{border-color:var(--gold)}
-.scale button.on{background:linear-gradient(100deg,var(--pink),var(--purple));border-color:transparent;color:#fff}
-.scale-ends{display:flex;justify-content:space-between;margin-top:8px;font-size:.78rem;color:var(--muted)}
-.gate,.result{display:none}
 .card{border:1px solid var(--line);border-radius:20px;padding:34px;background:rgba(247,244,239,.03);margin-top:10px}
 .card h2{font-size:1.7rem;margin-bottom:8px}
 label{display:block;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
-input{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:rgba(13,13,13,.6);color:var(--paper);font-size:16px;font-family:'DM Sans',sans-serif}
-input:focus{outline:none;border-color:var(--gold)}
+input,select{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:rgba(13,13,13,.6);color:var(--paper);font-size:16px;font-family:'DM Sans',sans-serif}
+select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23F7F4EF' opacity='.5' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:38px}
+input:focus,select:focus{outline:none;border-color:var(--gold)}
+.inrow{position:relative}
+.inrow .pfx{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none}
+.inrow .sfx{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none}
+.inrow input.pfx-on{padding-left:30px}
+.inrow input.sfx-on{padding-right:34px}
 .err{color:#ff8a8a;font-size:.9rem;margin-top:10px;display:none}
+.qn{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
+.qhint{color:var(--muted);font-size:.92rem;margin-top:-2px;margin-bottom:2px}
+.steprow{display:flex;justify-content:space-between;align-items:center;margin-top:26px}
+.backlink{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;padding:8px 4px}
+.backlink:hover{color:var(--paper)}
+.backlink.hidden{visibility:hidden}
+.fade{animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.gate,.result,.wizard{display:none}
 .score-ring{text-align:center;margin:6px 0 22px}
 .score-ring .pct{font-family:'Playfair Display',serif;font-weight:800;font-size:4.4rem;line-height:1;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .score-ring .of{color:var(--muted);font-size:.95rem;letter-spacing:.04em}
@@ -76,6 +83,7 @@ input:focus{outline:none;border-color:var(--gold)}
 .gap .fix{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,var(--pink),var(--purple));padding:5px 11px;border-radius:999px;white-space:nowrap;margin-top:2px}
 .gap .g-txt b{display:block;font-weight:500}
 .gap .g-txt span{color:var(--muted);font-size:.92rem}
+.gap .g-val{margin-left:auto;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold);white-space:nowrap;padding-top:2px}
 .roadmap{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
 .roadmap>h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
 .rm-loading{color:var(--muted);display:flex;align-items:center;gap:10px}
@@ -120,24 +128,35 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
   <div class="wrap">
     <span class="eyebrow">Free · 2 Minutes · No Signup to Start</span>
     <h1>How much revenue is your business <span class="shine">leaking?</span></h1>
-    <p class="sub">Answer 15 quick questions and get your AI Growth Scorecard — a clear picture of where you're losing customers, and exactly which system closes each gap.</p>
-    <p class="micro">Most business owners are shocked by their score. That's the opportunity.</p>
+    <p class="sub">Answer one quick question at a time and get your custom Revenue Leak Report — exactly where you're losing customers, and a 90-day roadmap for closing every gap.</p>
+    <p class="micro">Most business owners are shocked by the number. That's the opportunity.</p>
   </div>
 </header>
 
 <section class="quiz">
   <div class="wrap">
-    <div id="questions"></div>
 
-    <div style="text-align:center;margin-top:10px">
-      <button class="btn pink" id="seeBtn" type="button">See my scorecard →</button>
-      <p class="err" id="quizErr" style="text-align:center">Answer every question to see your score — you're on <b id="answered">0</b> of 15.</p>
+    <!-- intro -->
+    <div class="card fade" id="intro">
+      <h2>Ready?</h2>
+      <p style="color:var(--muted);margin:8px 0 22px">10 quick questions, one at a time. Round numbers are fine — this is about the shape of your business, not exact accounting.</p>
+      <button class="btn pink" id="startBtn" type="button">Start →</button>
+    </div>
+
+    <!-- wizard -->
+    <div class="card wizard" id="wizard">
+      <div id="stepBody"></div>
+      <p class="err" id="stepErr">Please enter a value to continue.</p>
+      <div class="steprow">
+        <button class="backlink" id="backBtn" type="button">← Back</button>
+        <button class="btn pink" id="nextBtn" type="button">Next →</button>
+      </div>
     </div>
 
     <!-- lead gate -->
     <div class="gate card" id="gate">
       <span class="eyebrow" style="color:var(--pink)">Almost there</span>
-      <h2>Where should we send your scorecard?</h2>
+      <h2>Where should we send your report?</h2>
       <p style="color:var(--muted);margin-top:6px">We'll show your results now and email you the breakdown so you have it to act on.</p>
       <label for="name">Your name</label>
       <input id="name" placeholder="Jane Smith" autocomplete="name">
@@ -156,12 +175,12 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
     <div class="result card" id="result">
       <div class="score-ring">
         <div class="pct" id="pct">0%</div>
-        <div class="of">your AI Growth Score</div>
+        <div class="of">of your revenue potential captured</div>
       </div>
       <div class="tier" id="tierHead"></div>
       <p class="tier-note" id="tierNote"></p>
       <div class="gaps">
-        <h3>Your 3 biggest revenue leaks — and what closes them</h3>
+        <h3>Your biggest revenue leaks — and what closes them</h3>
         <div id="gapList"></div>
       </div>
 
@@ -180,6 +199,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
         <a class="btn pink" href="/book">Book my free strategy call →</a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -188,56 +208,118 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
 <script>
 const AGENT_LEAD_URL="https://speed-to-lead-agent-two.vercel.app/api/lead";
 const ROADMAP_URL="https://customer-acquisition-agent.vercel.app/api/roadmap";
-// Each statement maps to the agent that closes that gap. Rated 1 (not happening)
-// to 5 (fully dialed in). Low answers surface the gap AND name the fix.
-const Q=[
-  {s:"New leads hear back within a minute — automatically, day or night.",fix:"Speed to Lead",why:"Leads go cold in minutes. An agent that replies in seconds books the ones you're losing now."},
-  {s:"Every inquiry — call, form, DM, walk-in — gets captured and followed up.",fix:"Lead Capture",why:"The leads that slip through the cracks never show in your revenue. Capture all of them."},
-  {s:"If a lead doesn't reply, they hear from us again automatically — I don't have to remember.",fix:"Speed to Lead",why:"Most sales take 5+ touches. Automatic follow-up stops the drop-off."},
-  {s:"We regularly reach back out to old leads and past customers who went quiet.",fix:"Database Reactivation",why:"You're sitting on a list of people who already know you. Reactivation turns it into booked jobs."},
-  {s:"Booked appointments actually show up — reminders go out automatically.",fix:"Show-Rate",why:"A no-show is lost revenue you already earned. Automatic reminders defend every booking."},
-  {s:"We have a system that brings past customers back for repeat business.",fix:"Retention / Rebook",why:"Repeat customers are your highest margin. A rebook system brings them back on time."},
-  {s:"Happy customers are consistently asked for referrals.",fix:"Referral Engine",why:"Referrals are your cheapest lead — most businesses never systematically ask."},
-  {s:"We steadily collect new 5-star reviews and reply to them.",fix:"Review Machine",why:"Reviews decide who gets the click. A steady stream lifts every other channel."},
-  {s:"We post consistently, in our own voice, without it eating our time.",fix:"Content Engine",why:"Consistency wins — done-for-you content keeps you visible without the hours."},
-  {s:"Inquiries that come in after hours still get answered.",fix:"AI Receptionist",why:"After-hours calls become booked jobs instead of voicemails your competitor answers."},
-  {s:"I know my real numbers — how fast we reply, who shows up, and what turns into money.",fix:"Tracking",why:"You can't fix a leak you can't see. Tracking every stage is free money."},
-  {s:"Our follow-up keeps running even when we're slammed or on vacation.",fix:"The Suite",why:"Your revenue shouldn't depend on your energy. Agents run the plays every day."},
-  {s:"We have a predictable, repeatable way to bring in new customers.",fix:"Customer Acquisition",why:"Hope isn't a pipeline. A repeatable acquisition system makes growth predictable."},
-  {s:"Marketing and admin busywork isn't eating my week.",fix:"Automation",why:"The hours you spend on admin are hours you're not growing. Automate the busywork."},
-  {s:"I'm confident we're not leaving revenue on the table.",fix:"AI Growth Audit",why:"If you're not sure, there's a gap — and that's exactly what the audit finds."}
-];
-const answers=new Array(Q.length).fill(0);
-const qEl=document.getElementById('questions');
-Q.forEach((item,i)=>{
-  const d=document.createElement('div');d.className='q';
-  d.innerHTML=`<div class="n">Question ${i+1} of ${Q.length}</div><div class="stmt">${item.s}</div>
-    <div class="scale" data-i="${i}">${[1,2,3,4,5].map(v=>`<button type="button" data-v="${v}">${v}</button>`).join('')}</div>
-    <div class="scale-ends"><span>Not happening</span><span>Fully dialed in</span></div>`;
-  qEl.appendChild(d);
-});
-let count=0;
-document.querySelectorAll('.scale').forEach(row=>{
-  const i=+row.dataset.i;
-  row.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
-    if(answers[i]===0)count++;
-    answers[i]=+b.dataset.v;
-    row.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');
-    document.getElementById('answered').textContent=count;
-    document.getElementById('prog').style.width=(count/Q.length*100)+'%';
-    document.getElementById('quizErr').style.display='none';
-  }));
-});
 
-document.getElementById('seeBtn').addEventListener('click',()=>{
-  if(count<Q.length){document.getElementById('quizErr').style.display='block';
-    document.getElementById('quizErr').scrollIntoView({block:'center'});return;}
-  document.querySelector('.quiz #seeBtn').style.display='none';
-  document.getElementById('quizErr').style.display='none';
+/* ---------- one question per screen ---------- */
+const STEPS=[
+  {id:'avgValue',qn:'Question 1 of 10',stmt:"What's a new customer worth to you?",hint:'First sale or lifetime value — your call.',type:'money',ph:'1500'},
+  {id:'leads',qn:'Question 2 of 10',stmt:'How many new leads or inquiries do you get a month?',hint:'Calls, form fills, DMs, walk-ins — everyone who reaches out.',type:'number',ph:'100'},
+  {id:'closeRate',qn:'Question 3 of 10',stmt:'Roughly what % of those become paying customers?',hint:'Leave blank for a typical estimate (~20%).',type:'percent',ph:'20',optional:true},
+  {id:'missedCallPct',qn:'Question 4 of 10',stmt:'What % of your inbound calls go unanswered?',hint:'Voicemail, after hours, busy line. Leave blank for a typical estimate (~25%).',type:'percent',ph:'25',optional:true},
+  {id:'responseTime',qn:'Question 5 of 10',stmt:'How fast do you follow up with a new lead?',type:'select',options:[['0','Within 5 minutes'],['1','Within an hour'],['2','Same day'],['3','Next day or longer']],dflt:'1'},
+  {id:'noShowPct',qn:'Question 6 of 10',stmt:'What % of booked appointments no-show or cancel?',hint:'Leave blank for a typical estimate (~20%).',type:'percent',ph:'20',optional:true},
+  {id:'followUps',qn:'Question 7 of 10',stmt:'How many times do you follow up before giving up on a lead?',type:'select',options:[['0','5 or more'],['1','3–4 times'],['2','1–2 times'],['3','Rarely follow up']],dflt:'2'},
+  {id:'reactivation',qn:'Question 8 of 10',stmt:'Do you regularly win back past customers?',type:'select',options:[['0','Yes, we have a system'],['1','No — they just go quiet']],dflt:'1'},
+  {id:'reviews',qn:'Question 9 of 10',stmt:'Are you actively collecting reviews?',type:'select',options:[['0','Yes, consistently'],['1','Sometimes'],['2','Rarely or never']],dflt:'1'},
+  {id:'adSpend',qn:'Question 10 of 10',stmt:'What do you spend on marketing / ads per month?',hint:'Leave blank if none.',type:'money',ph:'2000',optional:true},
+];
+const state={};
+let step=0;
+
+function fieldHTML(s){
+  if(s.type==='select'){
+    return `<label for="f_${s.id}">Answer</label>
+      <select id="f_${s.id}">${s.options.map(([v,l])=>`<option value="${v}"${v===s.dflt?' selected':''}>${l}</option>`).join('')}</select>`;
+  }
+  const pfx = s.type==='money' ? `<span class="pfx">$</span>` : '';
+  const sfx = s.type==='percent' ? `<span class="sfx">%</span>` : '';
+  const cls = (s.type==='money'?'pfx-on ':'')+(s.type==='percent'?'sfx-on ':'');
+  return `<label for="f_${s.id}">Your answer${s.optional?' (optional)':''}</label>
+    <div class="inrow">${pfx}<input class="${cls}" type="number" min="0" id="f_${s.id}" placeholder="${s.ph||''}">${sfx}</div>`;
+}
+function renderStep(){
+  const s=STEPS[step];
+  document.getElementById('stepBody').innerHTML=`<div class="fade"><div class="qn">${s.qn}</div>
+    <div style="font-size:1.15rem;font-weight:500;margin-bottom:${s.hint?'4px':'16px'}">${s.stmt}</div>
+    ${s.hint?`<div class="qhint" style="margin-bottom:16px">${s.hint}</div>`:''}
+    ${fieldHTML(s)}</div>`;
+  const el=document.getElementById(`f_${s.id}`);
+  if(state[s.id]!==undefined) el.value=state[s.id];
+  document.getElementById('prog').style.width=((step+1)/STEPS.length*100)+'%';
+  document.getElementById('backBtn').classList.toggle('hidden',step===0);
+  document.getElementById('nextBtn').textContent = step===STEPS.length-1 ? 'See my results →' : 'Next →';
+  document.getElementById('stepErr').style.display='none';
+  setTimeout(()=>el.focus(),50);
+}
+function saveStep(){
+  const s=STEPS[step];
+  const el=document.getElementById(`f_${s.id}`);
+  state[s.id]=el.value;
+}
+function goStart(){
+  document.getElementById('intro').style.display='none';
+  document.getElementById('wizard').style.display='block';
+  step=0; renderStep();
+}
+document.getElementById('startBtn').addEventListener('click',goStart);
+document.getElementById('backBtn').addEventListener('click',()=>{ saveStep(); if(step>0){step--;renderStep();} });
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  const s=STEPS[step];
+  saveStep();
+  if(!s.optional && s.type!=='select' && (state[s.id]===''||state[s.id]===undefined)){
+    document.getElementById('stepErr').style.display='block';return;
+  }
+  if(step<STEPS.length-1){step++;renderStep();return;}
+  document.getElementById('wizard').style.display='none';
   const g=document.getElementById('gate');g.style.display='block';g.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
+/* ---------- leak math (ported from the standalone Revenue Leak Calculator) ---------- */
+const N=id=>{const v=parseFloat(state[id]);return isNaN(v)||v<0?0:v;};
+const pctOr=(id,d)=>{const v=parseFloat(state[id]);return isNaN(v)||v<0?d:Math.min(v,100);};
+
+const LEAKS=[
+  {key:'missed', label:'Missed & unanswered calls', fix:'AI Receptionist',
+   statement:'After-hours and missed calls still get answered — nothing goes to voicemail.',
+   recover:(b)=> b.L*0.6*(pctOr('missedCallPct',25)/100)*b.C*b.V*0.8,
+   score:()=>{const p=pctOr('missedCallPct',25);return p<=5?5:p<=15?4:p<=30?3:p<=50?2:1;}},
+  {key:'speed', label:'Slow lead response', fix:'Speed to Lead',
+   statement:'New leads hear back within a minute — automatically, day or night.',
+   recover:(b)=> b.base*[0,.08,.18,.30][+state.responseTime||1]*b.V*0.7,
+   score:()=>[5,4,2,1][+state.responseTime||1]},
+  {key:'noshow', label:'No-shows & cancellations', fix:'Show-Rate',
+   statement:'Booked appointments actually show up — reminders go out automatically.',
+   recover:(b)=> b.base*(pctOr('noShowPct',20)/100)*b.V*0.55,
+   score:()=>{const p=pctOr('noShowPct',20);return p<=5?5:p<=15?4:p<=25?3:p<=40?2:1;}},
+  {key:'nurture', label:'Leads that never get worked', fix:'Speed to Lead',
+   statement:'If a lead doesn’t reply, they hear from us again automatically — nobody has to remember.',
+   recover:(b)=> b.unclosed*[0,.015,.03,.05][+state.followUps||2]*b.V,
+   score:()=>[5,4,2,1][+state.followUps||2]},
+  {key:'reactivate', label:'Past customers never brought back', fix:'Database Reactivation',
+   statement:'We regularly reach back out to old leads and past customers who went quiet.',
+   recover:(b)=> (+state.reactivation===1 ? b.base*0.12*b.V : 0),
+   score:()=>+state.reactivation===0?5:2},
+  {key:'reviews', label:'Weak reviews & reputation', fix:'Review Machine',
+   statement:'We steadily collect new 5-star reviews and reply to them.',
+   recover:(b)=> b.base*[0,.04,.08][+state.reviews||1]*b.V,
+   score:()=>[5,3,1][+state.reviews||1]},
+];
+
+function compute(){
+  const V=N('avgValue')||1000, L=N('leads')||0;
+  const C=state.closeRate!==undefined && state.closeRate!=='' ? Math.min(N('closeRate'),100)/100 : 0.20;
+  const base=L*C, unclosed=L*(1-C);
+  const b={V,L,C,base,unclosed};
+  const items=LEAKS.map(k=>({...k, monthly:Math.max(0,k.recover(b)||0)}));
+  const monthlyRev=base*V;
+  const monthlyRecover=items.reduce((a,i)=>a+i.monthly,0);
+  const currentAnnual=monthlyRev*12, annualRecover=monthlyRecover*12, potentialAnnual=currentAnnual+annualRecover;
+  const pct=potentialAnnual>0?Math.round(currentAnnual/potentialAnnual*100):100;
+  const opps=items.filter(i=>i.monthly>1).sort((a,b2)=>b2.monthly-a.monthly);
+  return {currentAnnual,potentialAnnual,annualRecover,pct,opps,items};
+}
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* ---------- lead capture + results (mirrors the original scorecard flow) ---------- */
 document.getElementById('revealBtn').addEventListener('click',async()=>{
   const name=document.getElementById('name').value.trim();
   const email=document.getElementById('email').value.trim();
@@ -247,43 +329,36 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
   if(!name||!email||!/.+@.+\..+/.test(email)){err.textContent='Please add your name and a valid email.';err.style.display='block';return;}
   err.style.display='none';
 
-  const total=answers.reduce((a,b)=>a+b,0);
-  const pct=Math.round(total/(Q.length*5)*100);
-  // three weakest areas, deduped by fix so the result names three DIFFERENT
-  // systems (more compelling than the same agent listed twice)
-  const ranked=answers.map((v,i)=>({v,i})).sort((a,b)=>a.v-b.v||a.i-b.i);
-  const seen=new Set(),weak=[];
-  for(const x of ranked){const f=Q[x.i].fix;if(seen.has(f))continue;seen.add(f);weak.push(Q[x.i]);if(weak.length===3)break;}
+  const r=compute();
 
-  // Fire the lead into the Speed to Lead pipeline in the background — don't make
-  // the prospect wait on the drafting/email round-trip to see their score.
-  const msg=`AI Growth Scorecard — Score ${pct}%. Business: ${biz||'n/a'}. Top gaps: ${weak.map(w=>w.fix).join(', ')}.`;
+  const msg=`Revenue Leak Calculator — Capturing ${r.pct}% of potential. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.`;
   fetch(AGENT_LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name,email,phone:'',source:'AI Growth Scorecard',message:msg,company_website:''})}).catch(()=>{});
+    body:JSON.stringify({name,email,phone:'',source:'Revenue Leak Calculator',message:msg,company_website:''})}).catch(()=>{});
 
   let head,note;
-  if(pct<45){head="Big gaps — bigger upside.";note="You're leaving real revenue on the table across several systems. The good news: these are the fastest, highest-return things to fix — most can be running in about a week.";}
-  else if(pct<65){head="Solid base, clear leaks.";note="You've got a real foundation, but a few systems are quietly costing you customers. Close these gaps and the same traffic turns into noticeably more booked revenue.";}
-  else if(pct<85){head="Ahead of the pack.";note="You're running tighter than most businesses your size. A handful of targeted fixes turn a strong operation into a compounding one.";}
+  if(r.pct<45){head="Big gaps — bigger upside.";note="You're leaving real revenue on the table across several systems. The good news: these are the fastest, highest-return things to fix — most can be running in about a week.";}
+  else if(r.pct<65){head="Solid base, clear leaks.";note="You've got a real foundation, but a few systems are quietly costing you customers. Close these gaps and the same traffic turns into noticeably more booked revenue.";}
+  else if(r.pct<85){head="Ahead of the pack.";note="You're running tighter than most businesses your size. A handful of targeted fixes turn a strong operation into a compounding one.";}
   else{head="Dialed in.";note="You're operating at a high level. The remaining gains are marginal — but at your volume, even small leaks are worth sealing.";}
 
-  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('pct').textContent=r.pct+'%';
   document.getElementById('tierHead').textContent=head;
   document.getElementById('tierNote').textContent=note;
-  document.getElementById('gapList').innerHTML=weak.map(w=>
-    `<div class="gap"><span class="fix">${w.fix}</span><div class="g-txt"><b>${w.s}</b><span>${w.why}</span></div></div>`).join('');
+  document.getElementById('gapList').innerHTML=r.opps.map(o=>
+    `<div class="gap"><span class="fix">${o.fix}</span><div class="g-txt"><b>${o.label}</b><span>${o.statement}</span></div><div class="g-val">${fmt(o.monthly*12)}/yr</div></div>`).join('');
 
   document.getElementById('gate').style.display='none';
-  const r=document.getElementById('result');r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'start'});
+  const res=document.getElementById('result');res.style.display='block';res.scrollIntoView({behavior:'smooth',block:'start'});
 
-  // Generate the custom 90-day roadmap from all 15 answers (async — the score
-  // is already on screen; the roadmap fills in a few seconds later).
-  buildRoadmap(name,biz,pct);
+  buildRoadmap(name,biz,r);
 });
 
-async function buildRoadmap(name,biz,pct){
+async function buildRoadmap(name,biz,r){
   const body=document.getElementById('roadmapBody');
-  const payload={businessName:biz||name,scorePct:pct,answers:answers.map((score,i)=>({statement:Q[i].s,fix:Q[i].fix,score}))};
+  const answers=LEAKS.map(k=>({statement:k.statement,fix:k.fix,score:k.score()}));
+  // Reuse the same capture-rate % shown in the score ring, so the number in the
+  // roadmap narrative always matches what the user just saw on screen.
+  const payload={businessName:biz||name,scorePct:r.pct,answers};
   try{
     const res=await fetch(ROADMAP_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     const j=await res.json();
@@ -299,7 +374,6 @@ async function buildRoadmap(name,biz,pct){
       (m.upside?`<p class="rm-upside">${esc(m.upside)}</p>`:'')+
       (m.firstStep?`<div class="rm-first"><b>Start here</b>${esc(m.firstStep)}</div>`:'');
   }catch(e){
-    // If generation hiccups, don't leave a dead spinner — point them to the call.
     body.innerHTML=`<p style="color:var(--muted)">Your full roadmap is ready to build with you live — <a href="/book" style="color:var(--gold);font-weight:700">book your free strategy call →</a></p>`;
   }
 }
