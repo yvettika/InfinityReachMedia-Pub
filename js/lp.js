@@ -1,10 +1,10 @@
 /* ==========================================================================
    lp.js — shared behavior for paid-traffic landing pages
-   1. track()      : one call fans out to GA4 / Meta Pixel / GTM if loaded
-   2. lead form    : posts to the existing Speed-to-Lead endpoint
+   1. lead form    : posts to the existing Speed-to-Lead endpoint
+   2. count-up     : the money stat, with a guaranteed-correct fallback
    3. sticky CTA   : mobile-only bar after the hero scrolls away
-   Every piece degrades to a no-op when its dependency is absent, so this file
-   is safe to ship before the ad pixels are installed.
+   Pixel setup and CTA-click attribution live in analytics.js, which loads on
+   every page; this file only fires events through window.irmTrack.
    ========================================================================== */
 (function () {
   'use strict';
@@ -12,32 +12,15 @@
   var LEAD_URL = 'https://speed-to-lead-agent-two.vercel.app/api/lead';
   var CALENDLY = 'https://calendly.com/yvettekahn/30min';
 
-  /* ---------- 1. Tracking ---------- */
-  // Meta's standard event names differ from GA4's; map ours onto both.
-  var META_EVENT = { generate_lead: 'Lead', schedule_click: 'Schedule', scorecard_click: 'Lead', demo_click: 'ViewContent' };
   var SOURCE_LABEL = { hvac: 'HVAC Landing Page', salon: 'Salon Landing Page', insurance: 'Insurance Landing Page' };
 
+  // analytics.js owns irmTrack; fall back to a no-op so the form still works
+  // if that file ever fails to load.
   function track(event, params) {
-    params = params || {};
-    params.page_vertical = document.body.getAttribute('data-vertical') || 'general';
-    try { if (typeof window.gtag === 'function') window.gtag('event', event, params); } catch (e) {}
-    try { if (typeof window.fbq === 'function') window.fbq('track', META_EVENT[event] || 'CustomEvent', params); } catch (e) {}
-    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: event }, params)); } catch (e) {}
+    if (typeof window.irmTrack === 'function') window.irmTrack(event, params);
   }
-  window.irmTrack = track;
 
-  /* Attribute CTA clicks without hand-wiring every link. */
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a) return;
-    var href = a.getAttribute('href') || '';
-    var label = (a.textContent || '').trim().slice(0, 60);
-    if (href.indexOf('calendly.com') > -1) track('schedule_click', { cta_text: label });
-    else if (href.indexOf('/scorecard') > -1) track('scorecard_click', { cta_text: label });
-    else if (href.indexOf('/agentic-flows') > -1) track('demo_click', { cta_text: label });
-  }, true);
-
-  /* ---------- 2. Lead form ---------- */
+  /* ---------- 1. Lead form ---------- */
   var form = document.getElementById('lpForm');
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -83,7 +66,7 @@
     });
   }
 
-  /* ---------- 3. Count-up money stat ----------
+  /* ---------- 2. Count-up money stat ----------
      The final figure is what ships in the HTML, so no-JS, an old browser, or an
      IntersectionObserver that never fires all still show the real number. The
      animation is a progressive enhancement that can only ever run on top of it. */
@@ -119,7 +102,7 @@
     setTimeout(function () { if (!done) { io.disconnect(); el.textContent = fmt(target); done = true; } }, 4000);
   });
 
-  /* ---------- 4. Mobile sticky CTA ---------- */
+  /* ---------- 3. Mobile sticky CTA ---------- */
   var hero = document.querySelector('.hero');
   if (hero && !window.matchMedia('(min-width:821px)').matches) {
     var bar = document.createElement('div');

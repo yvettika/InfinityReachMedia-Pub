@@ -112,6 +112,7 @@ input:focus,select:focus{outline:none;border-color:var(--gold)}
 footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<script src="/js/analytics.js" defer></script>
 </head>
 <body>
 
@@ -334,6 +335,10 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
   const msg=`Revenue Leak Calculator — Capturing ${r.pct}% of potential. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.`;
   fetch(AGENT_LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name,email,phone:'',source:'Revenue Leak Calculator',message:msg,company_website:''})}).catch(()=>{});
+
+  if(typeof window.irmTrack==='function'){
+    window.irmTrack('scorecard_complete',{score_pct:r.pct,recoverable_annual:Math.round(r.annualRecover)});
+  }
 
   let head,note;
   if(r.pct<45){head="Big gaps — bigger upside.";note="You're leaving real revenue on the table across several systems. The good news: these are the fastest, highest-return things to fix — most can be running in about a week.";}

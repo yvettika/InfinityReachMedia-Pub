@@ -59,6 +59,10 @@ if (form) {
       });
       const json = await res.json();
       if (!res.ok || !json.ok) throw new Error(json.error || 'Request failed');
+      // Only count a conversion once the lead actually landed.
+      if (typeof window.irmTrack === 'function') {
+        window.irmTrack('generate_lead', { form_location: 'contact_page', service: raw.service || '' });
+      }
       note.textContent = "Thanks! Check your inbox — we just sent you a confirmation and will follow up shortly.";
       note.style.color = 'var(--color-accent-2)';
       form.reset();
