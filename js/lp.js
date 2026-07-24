@@ -12,7 +12,12 @@
   var LEAD_URL = 'https://speed-to-lead-agent-two.vercel.app/api/lead';
   var CALENDLY = 'https://calendly.com/yvettekahn/30min';
 
-  var SOURCE_LABEL = { hvac: 'HVAC Landing Page', salon: 'Salon Landing Page', insurance: 'Insurance Landing Page' };
+  var SOURCE_LABEL = {
+    hvac:      'HVAC Landing Page',
+    salon:     'Salon Landing Page',
+    insurance: 'Insurance Landing Page',
+    smallbiz:  'Small Business Landing Page'
+  };
 
   // analytics.js owns irmTrack; fall back to a no-op so the form still works
   // if that file ever fails to load.

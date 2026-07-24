@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<title>AI Agents for Small Business | The Four Leaks | Infinity Reach Media</title>
+<meta name="description" content="Every local business leaks revenue in the same four places: the missed call, the slow lead, the no-show, and the dead customer list. Our AI agents close all four. Live in 7 days.">
+<link rel="canonical" href="https://infinityreachmedia.com/small-business">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="You don't have a traffic problem. You have a follow up problem.">
+<meta property="og:description" content="The missed call, the slow lead, the no-show, the dead list. Four leaks every local business has. We build the AI agents that close all four.">
+<meta property="og:url" content="https://infinityreachmedia.com/small-business">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/lp.css">
+<script src="/js/analytics.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"AI Agents for Small Business","serviceType":"AI lead response, appointment reminders, customer reactivation and review generation for local businesses","provider":{"@type":"ProfessionalService","name":"Infinity Reach Media","url":"https://infinityreachmedia.com/","email":"yvette@infinityreachmedia.com","address":{"@type":"PostalAddress","addressRegion":"CA","addressCountry":"US"}},"areaServed":{"@type":"State","name":"California"},"url":"https://infinityreachmedia.com/small-business"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does this work for my industry?","acceptedAnswer":{"@type":"Answer","text":"If customers call, message, or book appointments with you, yes. The four leaks are the same whether you run a clinic, a gym, a law office, or a repair shop. What changes is the wording, and that gets built around your services, your prices, and your voice."}},
+{"@type":"Question","name":"Will the AI say something weird to my customers?","acceptedAnswer":{"@type":"Answer","text":"No. You approve every send with one tap until you trust it fully. The agent is trained on your business and hands anything complex straight to a human."}},
+{"@type":"Question","name":"Do I have to replace my current software?","acceptedAnswer":{"@type":"Answer","text":"No. The agents connect to the calendar, booking system, and CRM you already use. They are the front desk that gets people into the system you already have."}},
+{"@type":"Question","name":"How fast is setup?","acceptedAnswer":{"@type":"Answer","text":"Seven days from signup to live. We build it, connect your calendar and customer list, and test everything with you before it touches a real customer."}}]}
+</script>
+<style>
+  :root{
+    --ink:#0B0B0F;
+    --paper:#FCFAF6;
+    --accent:#0F9B8E;   /* teal: the general/small-business page */
+    --accent-lt:#4FD1C5;
+    --cta:#E91E8C;      /* brand pink */
+    --deep:#7B2FBE;     /* brand purple */
+    --gold:#F0B429;
+    --muted:#5C5A55;
+    --line:rgba(11,11,15,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+  img{max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+  h1,h2{font-family:'Playfair Display',serif;line-height:1.12}
+  .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:16px 30px;border-radius:999px;transition:transform .15s ease, box-shadow .15s ease}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .btn-pink{background:var(--cta);color:#fff;box-shadow:0 10px 24px rgba(233,30,140,.32)}
+  .btn-pink:hover{transform:translateY(-2px)}
+  .btn-ghost{border:2px solid rgba(255,255,255,.4);color:#fff}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{transform:translateY(-2px)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,15,.92);backdrop-filter:blur(8px)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
+  .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
+  .logo em{color:var(--gold)}
+  .nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border:1.5px solid var(--gold);border-radius:999px;padding:9px 18px}
+  .nav-cta:hover{background:var(--gold);color:var(--ink)}
+
+  .hero{background:var(--ink);color:#fff;padding:88px 0 72px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-180px;top:-120px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle, rgba(15,155,142,.32), transparent 65%)}
+  .hero .eyebrow{color:var(--accent-lt)}
+  .hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);margin:18px 0 20px;max-width:17ch}
+  .hero h1 span{color:var(--accent-lt);font-style:italic}
+  .hero p.lead{font-size:1.13rem;color:rgba(255,255,255,.78);max-width:56ch;margin-bottom:14px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14);margin-top:64px;border-radius:14px;overflow:hidden}
+  .stat{background:rgba(255,255,255,.05);padding:20px 16px;text-align:center}
+  .stat b{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--accent-lt)}
+  .stat span{font-size:.78rem;color:rgba(255,255,255,.65)}
+
+  .leak{background:linear-gradient(120deg,var(--accent),var(--deep));color:#fff;padding:64px 0;text-align:center}
+  .leak .eyebrow{color:rgba(255,255,255,.85)}
+  .leak-num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,7vw,4.6rem);font-variant-numeric:tabular-nums;margin:10px 0 6px}
+  .leak p{max-width:58ch;margin:0 auto 26px;color:rgba(255,255,255,.9)}
+  .leak small{display:block;margin-top:14px;font-size:.75rem;color:rgba(255,255,255,.6)}
+  .leak small a{color:inherit}
+
+  section.block{padding:88px 0}
+  .center{text-align:center}
+  h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:14px 0 18px}
+  .sub{color:var(--muted);max-width:60ch;margin:0 auto}
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:52px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;text-align:left;position:relative}
+  .card::before{content:"";position:absolute;top:0;left:28px;width:44px;height:4px;border-radius:0 0 4px 4px;background:var(--accent)}
+  .card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .card h3{font-family:'Playfair Display',serif;font-size:1.35rem;margin:10px 0 10px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .card .pain{font-weight:700;color:var(--ink);margin-bottom:8px;font-size:.95rem}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+
+  .math{background:var(--ink);color:#fff}
+  .math-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:44px}
+  .math ul{list-style:none}
+  .math li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:16px;font-size:.98rem}
+  .math li b{color:var(--accent-lt);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .math .verdict{background:rgba(15,155,142,.15);border:1px solid rgba(79,209,197,.4);border-radius:16px;padding:30px}
+  .math .verdict p{color:rgba(255,255,255,.85)}
+  .math .verdict b{font-family:'Playfair Display',serif;font-size:1.6rem;display:block;margin-bottom:8px;color:var(--accent-lt)}
+
+  .demo-band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .demo-in{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+  .demo-in .btn{margin-top:10px}
+  .phone{background:var(--ink);border-radius:22px;padding:22px;color:#fff;font-size:.85rem;box-shadow:0 24px 48px rgba(11,11,15,.18)}
+  .bubble{border-radius:14px;padding:12px 14px;margin-bottom:10px;max-width:88%}
+  .them{background:rgba(255,255,255,.1)}
+  .us{background:var(--accent-lt);color:var(--ink);margin-left:auto;font-weight:500}
+  .time{font-size:.66rem;color:rgba(255,255,255,.45);text-align:center;margin:8px 0}
+
+  .score{background:linear-gradient(120deg,#131318,#0d2e2b)}
+  .score,.score .sub{color:#fff}
+  .score .sub{color:rgba(255,255,255,.75)}
+  .score .eyebrow{color:var(--gold)}
+
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:12px}
+  summary{font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"+";font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--cta)}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:12px;color:var(--muted);font-size:.95rem}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:36px 0;font-size:.85rem;text-align:center}
+  footer .logo{font-size:1rem}
+
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .btn:hover{transform:none} }
+  @media (max-width:820px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .grid4,.grid3{grid-template-columns:1fr}
+    .math-grid,.demo-in{grid-template-columns:1fr}
+    section.block{padding:64px 0}
+  }
+</style>
+</head>
+<body data-vertical="smallbiz">
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">AI Agents for Small Business</div>
+    <h1>You don't have a traffic problem. <span>You have a follow up problem.</span></h1>
+    <p class="lead">Most local businesses don't lose customers to a better competitor. They lose them to a faster one. The call that rang out at 4:58. The quote request that sat overnight. The appointment nobody confirmed. The customer list nobody has touched in a year. We build the AI agents that close all four leaks. You approve every send.</p>
+    <p style="font-size:.95rem;color:var(--accent-lt);font-weight:500;margin-bottom:34px">Built and run by Yvette Kahn out of Orange County. You work with the founder, not an account rep.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
+      <a class="btn btn-ghost" href="#get-started">Get the Walkthrough</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>60 sec</b><span>Lead response, day or night</span></div>
+      <div class="stat"><b>7 days</b><span>From signup to live</span></div>
+      <div class="stat"><b>24/7</b><span>Agents on shift</span></div>
+      <div class="stat"><b>1 tap</b><span>You approve every send</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="leak" aria-label="Speed to lead statistic">
+  <div class="wrap">
+    <div class="eyebrow">Why speed is the whole game</div>
+    <div class="leak-num">78%</div>
+    <p>Buyers purchase from whoever responds first. Not the cheapest, not the best reviewed. The first. Every hour a lead sits is an hour your competitor is answering them, and most small businesses are measuring their response time in hours, not seconds.</p>
+    <a class="btn btn-dark" href="/scorecard">Find My Revenue Leaks →</a>
+    <small>Free · 2 minutes · No signup to start · Source: Lead Connect, cited in industry speed-to-lead research.</small>
+  </div>
+</section>
+
+<section class="block center">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--accent)">The Four Leaks</div>
+    <h2>Every local business leaks money in the same four places</h2>
+    <p class="sub">It doesn't matter whether you run a clinic, a gym, a law office, a repair shop, or a studio. The leaks are identical. Only the wording changes.</p>
+    <div class="grid4">
+      <div class="card">
+        <span class="tag">Leak 01 · The missed call</span>
+        <h3>Nobody picked up</h3>
+        <p class="pain">The leak: you were with a customer, it was after hours, or it was lunch. The phone rang out, and they called the next name on the list.</p>
+        <p>An agent answers every call and message the moment it lands, day or night. It captures who they are and what they need, and books them if it can.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Leak 02 · The slow lead</span>
+        <h3>You replied the next morning</h3>
+        <p class="pain">The leak: a form fill or DM at 8 PM that you saw at 9 AM. By then they'd already messaged three of your competitors.</p>
+        <p>The Speed to Lead agent replies in 60 seconds, asks the questions you'd ask, and puts qualified people straight on your calendar.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Leak 03 · The no show</span>
+        <h3>Booked isn't the same as showed</h3>
+        <p class="pain">The leak: the appointment was on the books, nobody confirmed it, and the slot sat empty. You paid for that lead twice.</p>
+        <p>Automatic confirmations and reminders go out at the right moments, and cancellations get backfilled from your waitlist instead of vanishing.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Leak 04 · The dead list</span>
+        <h3>Your best customers forgot you exist</h3>
+        <p class="pain">The leak: hundreds of past customers who liked your work and simply drifted. No reminder, no reason to come back.</p>
+        <p>The Reactivation agent runs campaigns to the list you already own. Revenue from people who already trust you, at nearly zero acquisition cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block math">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--accent-lt)">The math is simple</div>
+    <h2>The cheapest customer is the one you already had</h2>
+    <div class="math-grid">
+      <ul>
+        <li>Buyers who purchase from whoever responds first <b>78%<sup class="cite">1</sup></b></li>
+        <li>Better odds of qualifying a lead at 5 min vs 30 min <b>21×<sup class="cite">2</sup></b></li>
+        <li>Time it takes our agent to respond <b>60 sec</b></li>
+        <li>Cost to reach someone already on your list <b>Near zero</b></li>
+        <li>Time from signup to live <b>7 days</b></li>
+      </ul>
+      <div class="verdict">
+        <b>You don't need more leads.</b>
+        <p>You need the ones already calling, messaging, and sitting in your customer list to actually turn into booked work. Fix that first and every ad dollar you spend afterward works harder, because the bucket finally holds water.</p>
+      </div>
+    </div>
+    <p class="src" style="color:rgba(255,255,255,.5);margin-top:30px">1. Lead Connect, cited in industry speed-to-lead research. 2. Oldroyd et al., <a href="https://www.leadresponsemanagement.org/lrm_study/" rel="nofollow noopener" target="_blank">Lead Response Management Study</a> (MIT / InsideSales.com), 15,000+ leads across six companies. Your scorecard runs the numbers on your own business.</p>
+  </div>
+</section>
+
+<section class="block demo-band" id="demo">
+  <div class="wrap demo-in">
+    <div>
+      <div class="eyebrow" style="color:var(--cta)">What it looks like</div>
+      <h2>An enquiry at 9 PM, booked before you wake up</h2>
+      <p class="sub" style="margin:0 0 8px">That's the difference between a lead and a customer: about four minutes. The agent answers in your voice, handles the obvious questions, and only pulls you in when it genuinely needs you.</p>
+      <a class="btn btn-pink" href="#get-started">See the Full Walkthrough ↓</a>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="time">Sun 9:04 PM</div>
+      <div class="bubble them">Hi, are you taking new customers? And roughly what do you charge?</div>
+      <div class="time">Sun 9:04 PM · 41 seconds later</div>
+      <div class="bubble us">We are! Pricing depends on what you need, so the quickest way is a short visit where we can quote it properly. I have Tuesday 10:00 or Wednesday 2:30 — which suits?</div>
+      <div class="bubble them">Tuesday 10 works.</div>
+      <div class="bubble us">Booked for Tuesday at 10:00. Confirmation on its way, and I'll send a reminder the day before. 👍</div>
+    </div>
+  </div>
+</section>
+
+<section class="block lp-capture" id="get-started">
+  <div class="wrap center">
+    <div class="eyebrow" style="color:var(--cta)">Start here</div>
+    <h2>Get the 60 second walkthrough</h2>
+    <p class="sub">Tell us where to send it. You'll get a short walkthrough of the agents running on a business like yours, plus the exact 7 day build plan. No pitch deck, no obligation.</p>
+
+    <form class="lp-form" id="lpForm" novalidate>
+      <div class="lp-err" id="lpErr" role="alert"></div>
+      <div class="lp-row">
+        <div class="lp-field"><label for="lp_name">Your name</label><input id="lp_name" type="text" autocomplete="name" required></div>
+        <div class="lp-field"><label for="lp_biz">Business</label><input id="lp_biz" type="text" autocomplete="organization"></div>
+      </div>
+      <div class="lp-row">
+        <div class="lp-field"><label for="lp_email">Email</label><input id="lp_email" type="email" autocomplete="email" required></div>
+        <div class="lp-field"><label for="lp_phone">Mobile (optional)</label><input id="lp_phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="lp-hp" aria-hidden="true"><label for="lp_hp">Leave this blank</label><input id="lp_hp" type="text" tabindex="-1" autocomplete="off"></div>
+      <label class="lp-consent" for="lp_consent">
+        <input type="checkbox" id="lp_consent">
+        <span>If I give my mobile number, I agree to receive texts from Infinity Reach Media about my inquiry. Message and data rates may apply, message frequency varies, reply STOP to opt out. Consent is not a condition of purchase. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+      </label>
+      <button class="btn btn-pink" type="submit">Send Me the Walkthrough</button>
+      <p class="lp-alt">Would rather just talk? <a href="https://calendly.com/yvettekahn/30min">Book a free 30 minute call →</a></p>
+    </form>
+
+    <div class="lp-done" id="lpDone" tabindex="-1">
+      <b>Got it. Check your inbox.</b>
+      <p>The walkthrough is on its way. If you want to move faster, grab a time and we'll show you the agents running live.</p>
+      <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
+    </div>
+  </div>
+</section>
+
+<section class="block center" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--cta)">Our triple guarantee</div>
+    <h2>We put our name on all three. In writing.</h2>
+    <div class="grid3">
+      <div class="card">
+        <span class="tag">Guarantee 01 · Live in 7</span>
+        <h3>Built and live in 7 days</h3>
+        <p>Your agents are built, tested, and live in 7 days or your setup fee is refunded in full. No excuses, no extensions, no fine print.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Guarantee 02 · The 60 Second Promise</span>
+        <h3>Every lead answered in 60 seconds</h3>
+        <p>We track response time 24/7. If your agent's average ever exceeds 60 seconds in a month, that month is free.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Guarantee 03 · Leak Closed</span>
+        <h3>10 booked appointments in 90 days</h3>
+        <p>If the Reactivation Agent doesn't book at least 10 appointments from your existing customer list in the first 90 days, we work free until it does.</p>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:34px">We can guarantee all three because we've built to that standard from day one. Full conditions in our <a href="/terms" style="color:var(--cta);font-weight:700">Terms of Service</a>.</p>
+  </div>
+</section>
+
+<section class="block score center">
+  <div class="wrap">
+    <div class="eyebrow">Free · 2 minutes · No signup to start</div>
+    <h2>How much revenue is your business leaking?</h2>
+    <p class="sub">Answer one quick question at a time and get your custom Revenue Leak Report. Exactly which of the four leaks is costing you most, and a 90 day roadmap for closing every gap.</p>
+    <p style="margin-top:30px"><a class="btn btn-pink" href="/scorecard">Find My Revenue Leaks →</a></p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap" style="max-width:760px">
+    <div class="center">
+      <div class="eyebrow" style="color:var(--accent)">Common questions</div>
+      <h2 style="margin-bottom:36px">Straight answers</h2>
+    </div>
+    <details>
+      <summary>Does this work for my industry?</summary>
+      <p>If customers call, message, or book appointments with you, yes. The four leaks are the same whether you run a clinic, a gym, a law office, or a repair shop. What changes is the wording, and that gets built around your services, your prices, and your voice.</p>
+    </details>
+    <details>
+      <summary>Will the AI say something weird to my customers?</summary>
+      <p>No. You approve every send with one tap until you trust it fully. The agent is trained on your business, sticks to what you've told it, and hands anything complex straight to a human.</p>
+    </details>
+    <details>
+      <summary>Do I have to replace my current software?</summary>
+      <p>No. The agents connect to the calendar, booking system, and CRM you already use. They're the front desk that gets people into the system you already have, at 9 PM, on a Sunday, whenever they reach out.</p>
+    </details>
+    <details>
+      <summary>How fast is setup?</summary>
+      <p>Seven days from signup to live. We build it, connect your calendar and customer list, and test everything with you before it touches a real customer.</p>
+    </details>
+  </div>
+</section>
+
+<section class="block math center" style="padding-top:72px;padding-bottom:72px">
+  <div class="wrap">
+    <h2>Someone is trying to reach you right now. Who's answering?</h2>
+    <p class="sub" style="color:rgba(255,255,255,.75);margin-bottom:32px">Book a free call. We'll look at your numbers, show you the agents live, and map exactly which of the four leaks is costing you most.</p>
+    <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <p style="margin-top:10px">© 2026 Infinity Reach Media · Orange County, CA · <a href="mailto:yvette@infinityreachmedia.com" style="color:inherit">yvette@infinityreachmedia.com</a></p>
+    <p class="lp-legal"><a href="/privacy">Privacy Policy</a><span class="sep">·</span><a href="/terms">Terms of Service</a><span class="sep">·</span><a href="/about">About</a><span class="sep">·</span><a href="/contact">Contact</a><span class="sep">·</span><a href="https://www.skool.com/theaiadvantagecommunity/about" target="_blank" rel="noopener">Free Community</a></p>
+  </div>
+</footer>
+
+<script src="/js/lp.js" defer></script>
+
+</body>
+</html>
