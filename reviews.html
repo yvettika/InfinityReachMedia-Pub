@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<title>Client Reviews &amp; Testimonials | Infinity Reach Media</title>
+<meta name="description" content="Hear directly from the founders, brokers, and coaches Infinity Reach Media has worked with — in their own words, on video.">
+<link rel="canonical" href="https://infinityreachmedia.com/reviews">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="Client Reviews &amp; Testimonials | Infinity Reach Media">
+<meta property="og:description" content="Hear directly from the founders, brokers, and coaches we've worked with — in their own words, on video.">
+<meta property="og:url" content="https://infinityreachmedia.com/reviews">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0B0F;
+    --paper:#FCFAF6;
+    --cta:#E91E8C;
+    --deep:#7B2FBE;
+    --gold:#F0B429;
+    --blue:#1A4FBF;
+    --muted:#5C5A55;
+    --line:rgba(11,11,15,.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+  h1,h2{font-family:'Playfair Display',serif;line-height:1.12}
+  .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:16px 30px;border-radius:999px;transition:transform .15s ease}
+  .btn-pink{background:var(--cta);color:#fff;box-shadow:0 10px 24px rgba(233,30,140,.32)}
+  .btn-pink:hover{transform:translateY(-2px)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,15,.92);backdrop-filter:blur(8px)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
+  .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
+  .logo em{color:var(--gold)}
+  .nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border:1.5px solid var(--gold);border-radius:999px;padding:9px 18px}
+  .nav-cta:hover{background:var(--gold);color:var(--ink)}
+
+  header.hero{background:var(--ink);color:#fff;padding:72px 0 56px;text-align:center}
+  header.hero .eyebrow{color:var(--gold)}
+  header.hero h1{font-size:clamp(2rem,4.8vw,3.2rem);margin:16px 0 14px}
+  header.hero p{color:rgba(255,255,255,.72);max-width:56ch;margin:0 auto;font-size:1.05rem}
+
+  main{padding:64px 0 80px}
+  .rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .rv-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .rv-video{position:relative;aspect-ratio:16/9;background:var(--ink);cursor:pointer;border:none;padding:0;width:100%;display:block}
+  .rv-video img{width:100%;height:100%;object-fit:cover;opacity:.82}
+  .rv-video .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .rv-video .play span{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:0;box-shadow:0 8px 20px rgba(0,0,0,.35);transition:transform .15s}
+  .rv-video .play span::after{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent var(--ink);margin-left:4px}
+  .rv-video:hover .play span{transform:scale(1.08)}
+  .rv-video iframe,.rv-video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .rv-who{padding:16px 18px}
+  .rv-who b{display:block;font-family:'Playfair Display',serif;font-size:1.05rem}
+  .rv-who span{font-size:.85rem;color:var(--muted)}
+  .rv-quote{font-size:.88rem;color:var(--ink);margin-bottom:10px;line-height:1.55}
+  .rv-featured .rv-quote{font-size:1rem;margin-bottom:16px}
+  .rv-featured{grid-column:1/-1;display:grid;grid-template-columns:1.1fr .9fr;gap:0}
+  .rv-featured .rv-video{aspect-ratio:auto;height:100%;min-height:320px}
+  .rv-featured .rv-who{display:flex;flex-direction:column;justify-content:center;padding:32px}
+  .rv-featured .rv-who .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cta);margin-bottom:10px}
+  .rv-featured .rv-who b{font-size:1.4rem;margin-bottom:6px}
+
+  .cta-band{background:var(--ink);color:#fff;padding:64px 0;text-align:center}
+  .cta-band h2{margin-bottom:14px}
+  .cta-band p{color:rgba(255,255,255,.72);margin-bottom:26px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:36px 0;font-size:.85rem;text-align:center}
+  footer .logo{font-size:1rem}
+  .lp-legal{margin-top:12px;font-size:.8rem;line-height:1.9}
+  .lp-legal a{color:rgba(255,255,255,.72);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.22)}
+  .lp-legal a:hover{color:#fff}
+  .lp-legal .sep{opacity:.4;padding:0 8px}
+
+  @media (max-width:900px){
+    .rv-grid{grid-template-columns:repeat(2,1fr)}
+    .rv-featured{grid-template-columns:1fr}
+  }
+  @media (max-width:600px){
+    .rv-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Client Stories</div>
+    <h1>Real people. Real results.</h1>
+    <p>Founders, brokers, and coaches Infinity Reach Media has worked with, in their own words. Press play.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="rv-grid">
+
+      <div class="rv-card rv-featured">
+        <button class="rv-video" data-embed="file:/videos/claire-adamou-testimonial.mp4" aria-label="Play video testimonial from Claire Adamou">
+          <img src="/images/claire-adamou-poster.jpg" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who">
+          <span class="tag">Featured</span>
+          <p class="rv-quote">"Working with Infinity Reach Media has been an absolute dream. I'm not the most tech-savvy person, and I hit roadblocks many, many times working on my funnel myself, but working with Yvette and her team made it so easy. I'd highly recommend anybody looking for a funnel to work with Yvette. Guaranteed amazing service and a great result."</p>
+          <b>Claire Adamou</b>
+          <span>Transformational Coach, author of "Life After Divorce"</span>
+        </div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:493410559" aria-label="Play video testimonial from Emily Haruko Leebs">
+          <img src="https://i.vimeocdn.com/video/1022521537-6d8db90b835f5318fc28accc2fa5b20b5036bd85d6e511de756801ba6175d315-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who">
+          <p class="rv-quote">"Tech is not my strong suit, and I'm so grateful I said yes to Yvette and the done-for-you program. Her customer service is top-notch, an amazing cheerleader and believer in what I'm up to."</p>
+          <b>Emily Haruko Leebs</b><span>Transformational Life Guide &amp; Business Coach</span>
+        </div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:493406769" aria-label="Play video testimonial from Cathy S.">
+          <img src="https://i.vimeocdn.com/video/1022521020-4cd18be1bea8ebf4815c391aa47b9ab150036db872c426c45618b694a20e7737-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who">
+          <p class="rv-quote">"Yvette and her team designed and delivered my entire lead-generation funnel. They turned it over in five to seven days, really quick. I am so, so happy."</p>
+          <b>Cathy S.</b><span>Insurance Broker &amp; Consultant</span>
+        </div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:504444841" aria-label="Play video testimonial from Christian B.">
+          <img src="https://i.vimeocdn.com/video/1043862481-bed47c3f301307324d364f488ab67d776be323c225a9cab71af9b006c8d1a94a-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who">
+          <p class="rv-quote">"My social media engagement has really taken off. It's an innovative funnel process for generating engagement and converting it into leads."</p>
+          <b>Christian B.</b><span>Insurance Broker</span>
+        </div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:558350996" aria-label="Play video testimonial from Frank B.">
+          <img src="https://i.vimeocdn.com/video/1153972989-cbfbcd2fbb24536604735af1fa7a0801a4b95e162bf01bd1f2b1e610b1da3646-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who"><b>Frank B.</b><span>Entrepreneur &amp; Broker</span></div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:559238193" aria-label="Play video testimonial from Denise S.">
+          <img src="https://i.vimeocdn.com/video/1155745802-f9efae7e444a85c6a379bab218920a2cac86f46908c695ef1ebba227483ec19d-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who"><b>Denise S.</b><span>Insurance Agent &amp; Entrepreneur</span></div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="youtube:Dnq6_foh-HA" aria-label="Play video testimonial from Leroy Carlton">
+          <img src="https://img.youtube.com/vi/Dnq6_foh-HA/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who"><b>Leroy Carlton</b><span>Broker &amp; Consultant</span></div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:1150731833" aria-label="Play video testimonial from Destiny K.">
+          <img src="https://i.vimeocdn.com/video/2101675215-032f6171b5195479ba77009e07760d51fd3fc4fe73b79925c6c171533c68c9b8-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who"><b>Destiny K.</b><span>Entrepreneur &amp; Broker</span></div>
+      </div>
+
+      <div class="rv-card">
+        <button class="rv-video" data-embed="vimeo:1150732217" aria-label="Play video testimonial from Laurene S.">
+          <img src="https://i.vimeocdn.com/video/2101675763-966dd421dd745ab50ec84ea85fe1cc7414d6a6b953449fb739675d25669ae5a1-d_640?region=us" alt="" loading="lazy">
+          <span class="play"><span></span></span>
+        </button>
+        <div class="rv-who"><b>Laurene S.</b><span>Insurance Agent &amp; Entrepreneur</span></div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Want to be the next story?</h2>
+    <p>Book a free call and we'll show you the agents live.</p>
+    <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="https://infinityreachmedia.com/" style="text-decoration:none">Infinity <em>Reach</em> Media</a>
+    <p style="margin-top:10px">© 2026 Infinity Reach Media · Orange County, CA · <a href="mailto:yvette@infinityreachmedia.com" style="color:inherit">yvette@infinityreachmedia.com</a></p>
+    <p class="lp-legal"><a href="/privacy">Privacy Policy</a><span class="sep">·</span><a href="/terms">Terms of Service</a><span class="sep">·</span><a href="/about">About</a><span class="sep">·</span><a href="/contact">Contact</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.rv-video[data-embed]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var spec = btn.getAttribute('data-embed');
+      var type = spec.slice(0, spec.indexOf(':'));
+      var id = spec.slice(spec.indexOf(':') + 1);
+      var el;
+      if (type === 'file') {
+        el = document.createElement('video');
+        el.src = id; el.controls = true; el.autoplay = true; el.playsInline = true;
+      } else {
+        el = document.createElement('iframe');
+        el.allow = 'autoplay; fullscreen; picture-in-picture';
+        el.allowFullscreen = true;
+        el.src = type === 'vimeo'
+          ? 'https://player.vimeo.com/video/' + id + '?autoplay=1&title=0&byline=0&portrait=0'
+          : 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      }
+      btn.replaceWith(el);
+    }, { once: true });
+  });
+})();
+</script>
+
+</body>
+</html>
