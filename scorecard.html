@@ -75,6 +75,8 @@ input:focus,select:focus{outline:none;border-color:var(--gold)}
 .score-ring{text-align:center;margin:6px 0 22px}
 .score-ring .pct{font-family:'Playfair Display',serif;font-weight:800;font-size:4.4rem;line-height:1;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .score-ring .of{color:var(--muted);font-size:.95rem;letter-spacing:.04em}
+.score-ring .score-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.score-ring .band{display:inline-block;margin-top:14px;padding:7px 20px;border-radius:999px;border:1px solid rgba(240,180,41,.4);background:rgba(240,180,41,.09);font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
 .tier{font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;text-align:center;margin-bottom:10px}
 .tier-note{text-align:center;color:var(--muted);max-width:560px;margin:0 auto 26px}
 .gaps h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
@@ -175,8 +177,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
     <!-- result -->
     <div class="result card" id="result">
       <div class="score-ring">
-        <div class="pct" id="pct">0%</div>
-        <div class="of">of your revenue potential captured</div>
+        <div class="score-label">Your Revenue Leak Score™</div>
+        <div class="pct" id="pct">0</div>
+        <div class="of">out of 100 — the share of reachable revenue you're capturing</div>
+        <div class="band" id="scoreBand"></div>
       </div>
       <div class="tier" id="tierHead"></div>
       <p class="tier-note" id="tierNote"></p>
@@ -332,7 +336,7 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
 
   const r=compute();
 
-  const msg=`Revenue Leak Calculator — Capturing ${r.pct}% of potential. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.`;
+  const msg=`Revenue Leak Score: ${r.pct}/100. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.`;
   fetch(AGENT_LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name,email,phone:'',source:'Revenue Leak Calculator',message:msg,company_website:''})}).catch(()=>{});
 
@@ -340,13 +344,19 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
     window.irmTrack('scorecard_complete',{score_pct:r.pct,recoverable_annual:Math.round(r.annualRecover)});
   }
 
-  let head,note;
-  if(r.pct<45){head="Big gaps — bigger upside.";note="You're leaving real revenue on the table across several systems. The good news: these are the fastest, highest-return things to fix — most can be running in about a week.";}
-  else if(r.pct<65){head="Solid base, clear leaks.";note="You've got a real foundation, but a few systems are quietly costing you customers. Close these gaps and the same traffic turns into noticeably more booked revenue.";}
-  else if(r.pct<85){head="Ahead of the pack.";note="You're running tighter than most businesses your size. A handful of targeted fixes turn a strong operation into a compounding one.";}
-  else{head="Dialed in.";note="You're operating at a high level. The remaining gains are marginal — but at your volume, even small leaks are worth sealing.";}
+  // Revenue Leak Score™ bands — see REVENUE-LEAK-SCORE-METHODOLOGY.md v1.0.
+  // The Score is capture efficiency: current revenue as a % of realistic
+  // potential from the same demand. Bands must stay in sync with the standard.
+  let band,head,note;
+  if(r.pct<40){band="Critical";head="Most of your reachable revenue is leaking.";note="The majority of what your demand could produce is being lost after the lead arrives — not before it. That's the fixable kind of problem, and it's usually the fastest money in the business to recover.";}
+  else if(r.pct<60){band="Heavy loss";head="You're losing a large share of what you already generate.";note="Several systems are quietly costing you customers you already paid to attract. These are the highest-return fixes available to you — most can be running in about a week.";}
+  else if(r.pct<75){band="Leaking";head="Real foundation, named gaps.";note="You've built something that works, but a few specific systems are letting customers slip. Close those and the same traffic turns into noticeably more booked revenue.";}
+  else if(r.pct<90){band="Minor seepage";head="Tighter than most businesses your size.";note="You're running ahead of the pack. One or two targeted fixes turn a strong operation into a compounding one.";}
+  else{band="Sealed";head="You're at the practical ceiling.";note="Your capture systems are working. Remaining gains are marginal — at this point, growth comes from generating more demand, not from plugging leaks.";}
 
-  document.getElementById('pct').textContent=r.pct+'%';
+  document.getElementById('pct').textContent=r.pct;
+  var bandEl=document.getElementById('scoreBand');
+  if(bandEl) bandEl.textContent=band;
   document.getElementById('tierHead').textContent=head;
   document.getElementById('tierNote').textContent=note;
   document.getElementById('gapList').innerHTML=r.opps.map(o=>
