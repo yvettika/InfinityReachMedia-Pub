@@ -32,6 +32,10 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: var(--font-sans);
+  /* 17px matches every standalone page (agent suite, pilot, scorecard,
+     missed-calls). Without this the main pages fell back to the 16px browser
+     default and read noticeably smaller than the rest of the site. */
+  font-size: 17px;
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
@@ -151,10 +155,10 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   border: 1px solid rgba(240,180,41,.32); border-radius: 20px; padding: 30px 28px;
   background: rgba(240,180,41,.05); }
 .guarantee { text-align: center; }
-.guarantee .g-num { font-size: 1.28rem; line-height: 1.25; font-weight: 800;
-  font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 6px; }
-.guarantee .g-label { color: var(--color-muted); font-size: 0.88rem; line-height: 1.5; }
-.guarantee-note { text-align: center; margin-top: 16px; font-size: 0.85rem; }
+.guarantee .g-num { font-size: 1.62rem; line-height: 1.22; font-weight: 800;
+  font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 9px; }
+.guarantee .g-label { color: var(--color-muted); font-size: 1rem; line-height: 1.55; }
+.guarantee-note { text-align: center; margin-top: 18px; font-size: 0.95rem; }
 @media (max-width: 860px) {
   .guarantees { grid-template-columns: 1fr; gap: 26px; padding: 26px 22px; }
 }
@@ -164,14 +168,14 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .price-card { border: 1px solid var(--color-line); border-radius: 20px; padding: 30px 26px;
   background: rgba(247,244,239,.03); display: flex; flex-direction: column; }
 .price-card.featured { border-color: rgba(240,180,41,.5); background: linear-gradient(160deg, rgba(233,30,140,.10), rgba(123,47,190,.08)); }
-.price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px;
+.price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-2); }
-.price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.3rem;
-  line-height: 1.1; margin: 10px 0 2px; }
-.price-card .per { color: var(--color-muted); font-size: .9rem; margin-bottom: 16px; }
-.price-card ul { list-style: none; padding: 0; margin: 0 0 22px; }
-.price-card li { position: relative; padding-left: 24px; margin-bottom: 10px; font-size: .94rem; color: var(--color-muted); }
-.price-card li::before { content: "✦"; position: absolute; left: 0; color: var(--color-accent-2); font-size: .78rem; top: 3px; }
+.price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.45rem;
+  line-height: 1.12; margin: 12px 0 4px; }
+.price-card .per { color: var(--color-muted); font-size: 1rem; margin-bottom: 18px; }
+.price-card ul { list-style: none; padding: 0; margin: 0 0 24px; }
+.price-card li { position: relative; padding-left: 25px; margin-bottom: 11px; font-size: 1.02rem; color: var(--color-muted); }
+.price-card li::before { content: "✦"; position: absolute; left: 0; color: var(--color-accent-2); font-size: .82rem; top: 4px; }
 .price-card .btn { margin-top: auto; }
 @media (max-width: 860px) { .pricing { grid-template-columns: 1fr; } }
 
