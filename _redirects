@@ -1,6 +1,10 @@
 # Netlify redirects
 # The free reactivation pilot was replaced by The First 10 (paid entry offer,
 # guaranteed outcome). Anything already shared pointing at /pilot lands on the
-# live offer instead of a dead page.
-/pilot        /first-10   301
-/pilot.html   /first-10   301
+# live offer instead of the retired page.
+#
+# The trailing "!" is required: without it Netlify serves the existing
+# pilot.html and ignores the rule. The file is kept on disk (and in git) but is
+# unreachable while these rules are in place.
+/pilot        /first-10   301!
+/pilot.html   /first-10   301!
