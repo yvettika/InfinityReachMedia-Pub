@@ -1,0 +1,6 @@
+# Netlify redirects
+# The free reactivation pilot was replaced by The First 10 (paid entry offer,
+# guaranteed outcome). Anything already shared pointing at /pilot lands on the
+# live offer instead of a dead page.
+/pilot        /first-10   301
+/pilot.html   /first-10   301
