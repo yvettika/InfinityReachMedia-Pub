@@ -121,15 +121,18 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   display: inline-block; font-family: var(--font-display); font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--color-accent-2); font-weight: 700; margin-bottom: 18px;
 }
+/* Matches the agent suite hero: larger scale, no narrow ch cap. The old
+   max-width:14ch forced any real headline into cramped stacked lines. */
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.1; letter-spacing: -0.03em;
-  font-weight: 800; max-width: 14ch; margin: 0 auto 22px;
+  font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1.08; letter-spacing: -0.02em;
+  font-weight: 800; max-width: 940px; margin: 0 auto 24px;
 }
 .hero h1 .grad {
   background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.hero p.lead { color: var(--color-muted); font-size: 1.15rem; max-width: 56ch; margin: 0 auto 34px; }
+.hero p.lead { color: var(--color-muted); font-size: 1.15rem; line-height: 1.65; max-width: 640px; margin: 0 auto 30px; }
+.hero .micro { margin-top: 18px; font-size: 0.92rem; color: var(--color-muted); }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- Section helpers ---------- */
