@@ -144,6 +144,37 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .stat .label { color: var(--color-muted); font-size: 0.95rem; }
 
+/* ---------- Guarantee band ---------- */
+/* Separate from .stats — these carry a full sentence, so the headline size is
+   tuned for phrases, not the 2-3 character figures .stat .num was built for. */
+.guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  border: 1px solid rgba(240,180,41,.32); border-radius: 20px; padding: 30px 28px;
+  background: rgba(240,180,41,.05); }
+.guarantee { text-align: center; }
+.guarantee .g-num { font-size: 1.28rem; line-height: 1.25; font-weight: 800;
+  font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 6px; }
+.guarantee .g-label { color: var(--color-muted); font-size: 0.88rem; line-height: 1.5; }
+.guarantee-note { text-align: center; margin-top: 16px; font-size: 0.85rem; }
+@media (max-width: 860px) {
+  .guarantees { grid-template-columns: 1fr; gap: 26px; padding: 26px 22px; }
+}
+
+/* ---------- Pricing ---------- */
+.pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.price-card { border: 1px solid var(--color-line); border-radius: 20px; padding: 30px 26px;
+  background: rgba(247,244,239,.03); display: flex; flex-direction: column; }
+.price-card.featured { border-color: rgba(240,180,41,.5); background: linear-gradient(160deg, rgba(233,30,140,.10), rgba(123,47,190,.08)); }
+.price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-2); }
+.price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.3rem;
+  line-height: 1.1; margin: 10px 0 2px; }
+.price-card .per { color: var(--color-muted); font-size: .9rem; margin-bottom: 16px; }
+.price-card ul { list-style: none; padding: 0; margin: 0 0 22px; }
+.price-card li { position: relative; padding-left: 24px; margin-bottom: 10px; font-size: .94rem; color: var(--color-muted); }
+.price-card li::before { content: "✦"; position: absolute; left: 0; color: var(--color-accent-2); font-size: .78rem; top: 3px; }
+.price-card .btn { margin-top: auto; }
+@media (max-width: 860px) { .pricing { grid-template-columns: 1fr; } }
+
 /* ---------- Service cards ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .grid-t { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
