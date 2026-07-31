@@ -157,16 +157,58 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
   border: 1px solid rgba(240,180,41,.32); border-radius: 20px; padding: 30px 28px;
   background: rgba(240,180,41,.05); }
-.guarantee { text-align: center; }
+/* Column layout so the three "conditions" triggers line up along the bottom
+   even though the promises above them run different lengths. */
+.guarantee { text-align: center; display: flex; flex-direction: column; }
 .guarantee .g-num { font-size: 1.62rem; line-height: 1.22; font-weight: 800;
   font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 9px; }
 .guarantee .g-label { color: var(--color-muted); font-size: 1rem; line-height: 1.55; }
-/* The conditions, printed on the page. Deliberately readable, not fine print —
-   same size class as body copy, just visually subordinate to the promise. */
-.guarantee .g-terms { margin-top: 12px; padding-top: 12px; text-align: left;
-  border-top: 1px solid rgba(240,180,41,.22);
-  color: var(--color-muted); font-size: 0.9rem; line-height: 1.6; }
-.guarantee .g-terms strong { color: var(--color-accent-2); font-weight: 700; }
+/* Conditions popover. Opens on hover for mouse users and on focus for keyboard
+   and touch (tapping the button focuses it) — never hover-only, or it would be
+   unreachable on a phone. */
+.g-detail { position: relative; margin: auto auto 0; padding-top: 14px; }
+.g-trigger { background: none; border: 0; padding: 0; cursor: help;
+  font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 700; color: var(--color-accent-2);
+  border-bottom: 1px dashed rgba(240,180,41,.55); }
+.g-trigger::after { content: " ⌄"; letter-spacing: 0; }
+.g-trigger:hover, .g-trigger:focus-visible { color: var(--color-text); border-bottom-color: var(--color-text); }
+.g-pop {
+  position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px);
+  width: max(260px, 100%); max-width: 320px; z-index: 20;
+  background: var(--color-surface-2); color: var(--color-muted);
+  border: 1px solid rgba(240,180,41,.38); border-radius: 14px;
+  padding: 14px 16px; text-align: left; font-size: 0.88rem; line-height: 1.6;
+  box-shadow: var(--shadow);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+}
+/* The arrow. Sits on the popover, points down at the trigger. */
+.g-pop::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 8px solid transparent; border-top-color: var(--color-surface-2); }
+.g-detail:hover .g-pop, .g-detail:focus-within .g-pop {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+/* Edge cards would clip against the band; nudge their popovers inward. */
+.guarantee:first-child .g-pop { left: 0; transform: translateX(0) translateY(4px); }
+.guarantee:first-child .g-detail:hover .g-pop,
+.guarantee:first-child .g-detail:focus-within .g-pop { transform: translateX(0) translateY(0); }
+.guarantee:first-child .g-pop::after { left: 60px; }
+.guarantee:last-child .g-pop { left: auto; right: 0; transform: translateX(0) translateY(4px); }
+.guarantee:last-child .g-detail:hover .g-pop,
+.guarantee:last-child .g-detail:focus-within .g-pop { transform: translateX(0) translateY(0); }
+.guarantee:last-child .g-pop::after { left: auto; right: 60px; }
+@media (prefers-reduced-motion: reduce) { .g-pop { transition: none; } }
+/* Single column on phones — the first/last-child nudges above would shove the
+   popover flush against the screen edge, so recentre it there. */
+@media (max-width: 860px) {
+  .guarantee .g-pop, .guarantee:first-child .g-pop, .guarantee:last-child .g-pop {
+    left: 50%; right: auto; transform: translateX(-50%) translateY(4px); max-width: min(320px, 86vw); }
+  .guarantee .g-detail:hover .g-pop, .guarantee .g-detail:focus-within .g-pop {
+    transform: translateX(-50%) translateY(0); }
+  .guarantee .g-pop::after, .guarantee:first-child .g-pop::after, .guarantee:last-child .g-pop::after {
+    left: 50%; right: auto; }
+}
 .guarantee-note { text-align: center; margin-top: 18px; font-size: 0.95rem; }
 @media (max-width: 860px) {
   .guarantees { grid-template-columns: 1fr; gap: 26px; padding: 26px 22px; }
