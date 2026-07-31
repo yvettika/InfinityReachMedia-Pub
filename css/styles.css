@@ -161,6 +161,12 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .guarantee .g-num { font-size: 1.62rem; line-height: 1.22; font-weight: 800;
   font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 9px; }
 .guarantee .g-label { color: var(--color-muted); font-size: 1rem; line-height: 1.55; }
+/* The conditions, printed on the page. Deliberately readable, not fine print —
+   same size class as body copy, just visually subordinate to the promise. */
+.guarantee .g-terms { margin-top: 12px; padding-top: 12px; text-align: left;
+  border-top: 1px solid rgba(240,180,41,.22);
+  color: var(--color-muted); font-size: 0.9rem; line-height: 1.6; }
+.guarantee .g-terms strong { color: var(--color-accent-2); font-weight: 700; }
 .guarantee-note { text-align: center; margin-top: 18px; font-size: 0.95rem; }
 @media (max-width: 860px) {
   .guarantees { grid-template-columns: 1fr; gap: 26px; padding: 26px 22px; }
