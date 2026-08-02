@@ -63,6 +63,13 @@ input:focus,select:focus{outline:none;border-color:var(--gold)}
 .inrow input.pfx-on{padding-left:30px}
 .inrow input.sfx-on{padding-right:34px}
 .err{color:#ff8a8a;font-size:.9rem;margin-top:10px;display:none}
+.sliderow{margin-top:6px}
+.sliderow .sv{display:block;font-family:'Playfair Display',serif;font-weight:800;font-size:2.1rem;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:rgba(247,244,239,.12);outline:none;margin:14px 0 4px;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(100deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 14px rgba(233,30,140,.5)}
+input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:linear-gradient(100deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 14px rgba(233,30,140,.5)}
+input[type=range]:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 .qn{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
 .qhint{color:var(--muted);font-size:.92rem;margin-top:-2px;margin-bottom:2px}
 .steprow{display:flex;justify-content:space-between;align-items:center;margin-top:26px}
@@ -231,30 +238,34 @@ const ROADMAP_URL="https://customer-acquisition-agent.vercel.app/api/roadmap";
 
 /* ---------- one question per screen ---------- */
 const STEPS=[
-  {id:'avgValue',qn:'Question 1 of 10',stmt:"What's a new customer worth to you?",hint:'First sale or lifetime value — your call.',type:'money',ph:'1500'},
-  {id:'leads',qn:'Question 2 of 10',stmt:'How many new leads or inquiries do you get a month?',hint:'Calls, form fills, DMs, walk-ins — everyone who reaches out.',type:'number',ph:'100'},
-  {id:'closeRate',qn:'Question 3 of 10',stmt:'Roughly what % of those become paying customers?',hint:'Leave blank for a typical estimate (~20%).',type:'percent',ph:'20',optional:true},
-  {id:'missedCallPct',qn:'Question 4 of 10',stmt:'What % of your inbound calls go unanswered?',hint:'Voicemail, after hours, busy line. Leave blank for a typical estimate (~25%).',type:'percent',ph:'25',optional:true},
+  {id:'avgValue',qn:'Question 1 of 10',stmt:"What's a new customer worth to you?",hint:'First sale or lifetime value — your call. Drag to adjust.',type:'range',fmt:'money',min:50,max:10000,step:50,dflt:1500},
+  {id:'leads',qn:'Question 2 of 10',stmt:'How many new leads or inquiries do you get a month?',hint:'Calls, form fills, DMs, walk-ins — everyone who reaches out.',type:'range',fmt:'num',min:5,max:500,step:5,dflt:100},
+  {id:'closeRate',qn:'Question 3 of 10',stmt:'Roughly what % of those become paying customers?',hint:'Typical is around 20% — adjust if you know your number.',type:'range',fmt:'pct',min:1,max:80,step:1,dflt:20},
+  {id:'missedCallPct',qn:'Question 4 of 10',stmt:'What % of your inbound calls go unanswered?',hint:'Voicemail, after hours, busy line. The industry average is around 25%.',type:'range',fmt:'pct',min:0,max:60,step:1,dflt:25},
   {id:'responseTime',qn:'Question 5 of 10',stmt:'How fast do you follow up with a new lead?',type:'select',options:[['0','Within 5 minutes'],['1','Within an hour'],['2','Same day'],['3','Next day or longer']],dflt:'1'},
-  {id:'noShowPct',qn:'Question 6 of 10',stmt:'What % of booked appointments no-show or cancel?',hint:'Leave blank for a typical estimate (~20%).',type:'percent',ph:'20',optional:true},
+  {id:'noShowPct',qn:'Question 6 of 10',stmt:'What % of booked appointments no-show or cancel?',hint:'The typical rate is around 20%.',type:'range',fmt:'pct',min:0,max:50,step:1,dflt:20},
   {id:'followUps',qn:'Question 7 of 10',stmt:'How many times do you follow up before giving up on a lead?',type:'select',options:[['0','5 or more'],['1','3–4 times'],['2','1–2 times'],['3','Rarely follow up']],dflt:'2'},
   {id:'reactivation',qn:'Question 8 of 10',stmt:'Do you regularly win back past customers?',type:'select',options:[['0','Yes, we have a system'],['1','No — they just go quiet']],dflt:'1'},
   {id:'reviews',qn:'Question 9 of 10',stmt:'Are you actively collecting reviews?',type:'select',options:[['0','Yes, consistently'],['1','Sometimes'],['2','Rarely or never']],dflt:'1'},
-  {id:'adSpend',qn:'Question 10 of 10',stmt:'What do you spend on marketing / ads per month?',hint:'Leave blank if none.',type:'money',ph:'2000',optional:true},
+  {id:'adSpend',qn:'Question 10 of 10',stmt:'What do you spend on marketing / ads per month?',hint:'Ads, agencies, lead vendors — leave at $0 if none.',type:'range',fmt:'money',min:0,max:20000,step:250,dflt:0},
 ];
 const state={};
 let step=0;
 
+const RFMT={money:v=>'$'+(+v).toLocaleString('en-US'),pct:v=>v+'%',num:v=>(+v).toLocaleString('en-US')};
 function fieldHTML(s){
   if(s.type==='select'){
     return `<label for="f_${s.id}">Answer</label>
       <select id="f_${s.id}">${s.options.map(([v,l])=>`<option value="${v}"${v===s.dflt?' selected':''}>${l}</option>`).join('')}</select>`;
   }
-  const pfx = s.type==='money' ? `<span class="pfx">$</span>` : '';
-  const sfx = s.type==='percent' ? `<span class="sfx">%</span>` : '';
-  const cls = (s.type==='money'?'pfx-on ':'')+(s.type==='percent'?'sfx-on ':'');
-  return `<label for="f_${s.id}">Your answer${s.optional?' (optional)':''}</label>
-    <div class="inrow">${pfx}<input class="${cls}" type="number" min="0" id="f_${s.id}" placeholder="${s.ph||''}">${sfx}</div>`;
+  return `<div class="sliderow">
+    <output class="sv" id="f_${s.id}_out" for="f_${s.id}"></output>
+    <input type="range" id="f_${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${s.dflt}" data-fmt="${s.fmt}">
+  </div>`;
+}
+function syncSliderOut(id,fmt){
+  const el=document.getElementById(id), out=document.getElementById(id+'_out');
+  if(el&&out) out.textContent=(RFMT[fmt]||RFMT.num)(el.value);
 }
 function renderStep(){
   const s=STEPS[step];
@@ -264,6 +275,10 @@ function renderStep(){
     ${fieldHTML(s)}</div>`;
   const el=document.getElementById(`f_${s.id}`);
   if(state[s.id]!==undefined) el.value=state[s.id];
+  if(s.type==='range'){
+    syncSliderOut(`f_${s.id}`,s.fmt);
+    el.addEventListener('input',()=>syncSliderOut(`f_${s.id}`,s.fmt));
+  }
   document.getElementById('prog').style.width=((step+1)/STEPS.length*100)+'%';
   document.getElementById('backBtn').classList.toggle('hidden',step===0);
   document.getElementById('nextBtn').textContent = step===STEPS.length-1 ? 'See my results →' : 'Next →';
@@ -285,9 +300,6 @@ document.getElementById('backBtn').addEventListener('click',()=>{ saveStep(); if
 document.getElementById('nextBtn').addEventListener('click',()=>{
   const s=STEPS[step];
   saveStep();
-  if(!s.optional && s.type!=='select' && (state[s.id]===''||state[s.id]===undefined)){
-    document.getElementById('stepErr').style.display='block';return;
-  }
   if(step<STEPS.length-1){step++;renderStep();return;}
   document.getElementById('wizard').style.display='none';
   const g=document.getElementById('gate');g.style.display='block';g.scrollIntoView({behavior:'smooth',block:'center'});
