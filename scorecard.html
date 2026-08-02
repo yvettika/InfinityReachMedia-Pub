@@ -109,6 +109,19 @@ input:focus,select:focus{outline:none;border-color:var(--gold)}
 .upside-link{text-align:center;margin-top:24px;font-size:.98rem}
 .upside-link span{color:var(--muted);display:block;margin-bottom:4px}
 .upside-link a{color:var(--gold);font-weight:700;text-decoration:none}
+.roi{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+.roi>h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.roi .roi-head{font-family:'Playfair Display',serif;font-weight:800;font-size:1.35rem;line-height:1.15;margin-bottom:6px}
+.roi .roi-sub{color:var(--muted);font-size:.95rem;margin-bottom:18px}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.roi-grid .box{border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center;background:rgba(247,244,239,.03)}
+.roi-grid .box .v{font-family:'Playfair Display',serif;font-weight:800;font-size:1.45rem;line-height:1.1}
+.roi-grid .box .k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+.roi-grid .box.ret{border-color:rgba(240,180,41,.4)}
+.roi-grid .box.ret .v{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.roi .payback{color:var(--muted);font-size:.95rem;background:rgba(247,244,239,.04);border-radius:12px;padding:13px 16px}
+.roi .payback b{color:var(--paper)}
+@media(max-width:560px){.roi-grid{grid-template-columns:1fr}}
 .result-cta{text-align:center;margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
 .result-cta p{color:var(--muted);margin-bottom:18px}
 footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
@@ -198,6 +211,8 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-si
         <span>Curious what closing these gaps is worth?</span>
         <a href="/agentic-flows#calc">Run the numbers on the Upside Calculator →</a>
       </div>
+
+      <div class="roi" id="roiBlock" style="display:none"></div>
 
       <div class="result-cta">
         <p>Want us to build this roadmap <em>for</em> you? On a free 30-minute call, we turn it into a done-for-you plan — no pressure, no obligation.</p>
@@ -320,9 +335,21 @@ function compute(){
   const currentAnnual=monthlyRev*12, annualRecover=monthlyRecover*12, potentialAnnual=currentAnnual+annualRecover;
   const pct=potentialAnnual>0?Math.round(currentAnnual/potentialAnnual*100):100;
   const opps=items.filter(i=>i.monthly>1).sort((a,b2)=>b2.monthly-a.monthly);
-  return {currentAnnual,potentialAnnual,annualRecover,pct,opps,items};
+
+  // Investment anchor (kept in sync with the standalone Revenue Leak Calculator):
+  // floor scales with business size, ceiling fixed; only shown when the leak
+  // clears 2x the floor so small businesses never see a sub-1x multiple.
+  let tier=0;
+  if(monthlyRev>=50000||L>=150)tier=2; else if(monthlyRev>=10000||L>=40)tier=1;
+  const feeLow=[2500,3000,3500][tier], feeHigh=4000;
+  const roi=monthlyRecover>=feeLow*2?{feeLow,feeHigh,
+    multLow:monthlyRecover/feeHigh, multHigh:monthlyRecover/feeLow,
+    paybackWeeks:Math.max(1,Math.ceil(feeLow/(monthlyRecover/4.33)))}:null;
+
+  return {currentAnnual,potentialAnnual,annualRecover,monthlyRecover,pct,opps,items,tier,roi};
 }
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+const fmtMult=n=>(Math.round(n*10)/10).toLocaleString('en-US');
 
 /* ---------- lead capture + results (mirrors the original scorecard flow) ---------- */
 document.getElementById('revealBtn').addEventListener('click',async()=>{
@@ -336,7 +363,8 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
 
   const r=compute();
 
-  const msg=`Revenue Leak Score: ${r.pct}/100. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.`;
+  const roiMsg=r.roi?` ROI shown: ${fmt(r.monthlyRecover)}/mo vs from ${fmt(r.roi.feeLow)}/mo (${fmtMult(r.roi.multLow)}-${fmtMult(r.roi.multHigh)}x, payback wk ${r.roi.paybackWeeks}).`:'';
+  const msg=`Revenue Leak Score: ${r.pct}/100. Recoverable: ${fmt(r.annualRecover)}/yr. Business: ${biz||'n/a'}. Top leaks: ${r.opps.slice(0,3).map(o=>o.label).join(', ')}.${roiMsg}`;
   fetch(AGENT_LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name,email,phone:'',source:'Revenue Leak Calculator',message:msg,company_website:''})}).catch(()=>{});
 
@@ -361,6 +389,20 @@ document.getElementById('revealBtn').addEventListener('click',async()=>{
   document.getElementById('tierNote').textContent=note;
   document.getElementById('gapList').innerHTML=r.opps.map(o=>
     `<div class="gap"><span class="fix">${o.fix}</span><div class="g-txt"><b>${o.label}</b><span>${o.statement}</span></div><div class="g-val">${fmt(o.monthly*12)}/yr</div></div>`).join('');
+
+  const roiEl=document.getElementById('roiBlock');
+  if(r.roi){
+    roiEl.innerHTML=`<h3>The math on fixing it</h3>
+      <div class="roi-head">What plugging these leaks costs — and returns.</div>
+      <p class="roi-sub">Based on your numbers, a done-for-you agent suite sized to your business:</p>
+      <div class="roi-grid">
+        <div class="box"><div class="v">${fmt(r.monthlyRecover)}</div><div class="k">Recovered / month</div></div>
+        <div class="box"><div class="v">from ${fmt(r.roi.feeLow)}</div><div class="k">Investment / month</div></div>
+        <div class="box ret"><div class="v">${fmtMult(r.roi.multLow)}–${fmtMult(r.roi.multHigh)}×</div><div class="k">Return on every dollar</div></div>
+      </div>
+      <div class="payback">At that recovery rate, the system pays for itself in about <b>${r.roi.paybackWeeks===1?'the first week':'week '+r.roi.paybackWeeks}</b> — every month after that is margin you were already earning and losing. Exact pricing depends on which leaks we plug — that's what the call is for.</div>`;
+    roiEl.style.display='block';
+  } else { roiEl.style.display='none'; }
 
   document.getElementById('gate').style.display='none';
   const res=document.getElementById('result');res.style.display='block';res.scrollIntoView({behavior:'smooth',block:'start'});
