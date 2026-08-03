@@ -16,7 +16,8 @@
     hvac:      'HVAC Landing Page',
     salon:     'Salon Landing Page',
     insurance: 'Insurance Landing Page',
-    smallbiz:  'Small Business Landing Page'
+    smallbiz:  'Small Business Landing Page',
+    coach:     'Coach Landing Page'
   };
 
   // analytics.js owns irmTrack; fall back to a no-op so the form still works
