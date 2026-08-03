@@ -105,6 +105,24 @@
   .math .verdict p{color:rgba(255,255,255,.85)}
   .math .verdict b{font-family:'Playfair Display',serif;font-size:1.6rem;display:block;margin-bottom:8px;color:var(--accent-lt)}
 
+  /* Calculator. Sliders reuse the site's range styling from /agentic-flows so
+     the two calculators feel like the same tool. */
+  .calc-grid{align-items:start}
+  .slider-block{margin-bottom:30px}
+  .slider-block label{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:12px}
+  .slider-block label output{color:var(--gold);font-size:16px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .slider-block .hint{color:rgba(255,255,255,.45);font-size:.82rem;margin-top:9px}
+  input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:6px;border-radius:99px;
+    background:linear-gradient(90deg,var(--cta) var(--fill,20%),rgba(255,255,255,.18) var(--fill,20%));outline:none;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold);cursor:grab}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold);cursor:grab}
+  input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+  .calc-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .calc-num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.4rem,5.6vw,3.4rem);line-height:1.05;font-variant-numeric:tabular-nums;
+    background:linear-gradient(95deg,var(--cta),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 10px}
+  .calc-year{color:rgba(255,255,255,.8);font-size:.98rem;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .calc-year b{font-family:inherit;font-size:inherit;display:inline;margin:0;color:var(--gold)}
+
   .demo-band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .demo-in{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
   .demo-in .btn{margin-top:10px}
@@ -220,24 +238,44 @@
   </div>
 </section>
 
-<section class="block math">
+<!-- Coach leak calculator. Loss framing, deliberately conservative: one
+     disclosed slip rate (25%), no hidden multipliers, and the formula is
+     printed under the sliders. A number someone can't reconstruct is a number
+     they don't believe. -->
+<section class="block math" id="calc">
   <div class="wrap">
     <div class="eyebrow" style="color:var(--accent-lt)">The math of a high-ticket practice</div>
-    <h2>One recovered enrollment pays for the year</h2>
-    <div class="math-grid">
-      <ul>
-        <li>What a single high-ticket client is worth <b>Thousands</b></li>
-        <li>Inquiries that go to whoever replies first <b>Most of them</b></li>
-        <li>Discovery calls lost to no-shows <b>A slot you can't resell</b></li>
-        <li>People on your list who said "not right now" <b>Still warm</b></li>
-        <li>Time it takes our agent to reply <b>60 sec</b></li>
-      </ul>
+    <h2>Drag three sliders. See what the gap is costing you.</h2>
+    <p class="sub" style="color:rgba(255,255,255,.72)">No signup, nothing sent anywhere — this runs in your browser and we never see it.</p>
+    <div class="math-grid calc-grid">
+      <div>
+        <div class="slider-block">
+          <label for="cInq">Inquiries a month <output id="cInqOut">20</output></label>
+          <input type="range" id="cInq" min="5" max="100" value="20" step="5">
+          <p class="hint">DMs, form fills, comments — everyone who raises a hand.</p>
+        </div>
+        <div class="slider-block">
+          <label for="cPrice">Your program price <output id="cPriceOut">$5,000</output></label>
+          <input type="range" id="cPrice" min="1000" max="30000" value="5000" step="500">
+          <p class="hint">What one client pays you, start to finish.</p>
+        </div>
+        <div class="slider-block">
+          <label for="cClose">Close rate on calls you hold <output id="cCloseOut">25%</output></label>
+          <input type="range" id="cClose" min="5" max="60" value="25" step="5">
+          <p class="hint">Of the discovery calls that actually happen, how many enroll.</p>
+        </div>
+      </div>
       <div class="verdict">
-        <b>You don't need a bigger audience.</b>
-        <p>You need the people already raising their hand to land on your calendar and actually show up. If the agents recover one enrollment you'd otherwise have lost, they've paid for themselves several times over. Everything after that is revenue you were leaking quietly.</p>
+        <div class="calc-label">Leaking every month</div>
+        <!-- Placeholders match the slider defaults so the block is correct even
+             in the instant before the script runs (and if it never does). -->
+        <div class="calc-num" id="cLeak" aria-live="polite">$6,250</div>
+        <div class="calc-year">That's <b id="cYear">$75,000</b> a year — <span id="cClients">15</span> clients you already earned and lost anyway.</div>
+        <p>You don't need a bigger audience. You need the people already raising their hand to land on your calendar and actually show up.</p>
+        <p style="margin-top:14px"><a href="https://infinityreachmedia.com/scorecard" style="color:var(--gold);font-weight:700">Now get your real number — 2-minute Scorecard →</a></p>
       </div>
     </div>
-    <p class="src" style="color:rgba(255,255,255,.5);margin-top:30px">Deliberately unnumbered — your program price and close rate are yours, not an industry average. The scorecard runs this on your real figures in two minutes.</p>
+    <p class="src" style="color:rgba(255,255,255,.5);margin-top:30px"><b style="color:rgba(255,255,255,.75)">The formula, in the open:</b> inquiries × 25% × your close rate × your price. The 25% is the share that slips away — late replies, discovery-call no-shows, and "not right now" with no follow-up. It's deliberately conservative; plenty of practices leak more, and a few leak less. The scorecard measures yours instead of assuming.</p>
   </div>
 </section>
 
@@ -404,6 +442,50 @@
 
 <!-- Illustrative figure (3 × $12,000) counts up via [data-countup] in lp.js -->
 <script src="/js/lp.js" defer></script>
+
+<!-- Coach leak calculator. Everything stays in the browser; nothing is posted.
+     SLIP is the one assumption and it's printed on the page under the sliders —
+     if you change it here, change it there too. -->
+<script>
+(function () {
+  var SLIP = 0.25;
+  var inq = document.getElementById('cInq'),
+      price = document.getElementById('cPrice'),
+      close = document.getElementById('cClose');
+  if (!inq || !price || !close) return;
+
+  var money = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+
+  function fill(el) {
+    var pct = (el.value - el.min) / (el.max - el.min) * 100;
+    el.style.setProperty('--fill', pct + '%');
+  }
+
+  function render() {
+    var n = +inq.value, p = +price.value, c = +close.value / 100;
+    var lostClients = n * SLIP * c;          // clients slipping away each month
+    var monthly = lostClients * p;
+
+    document.getElementById('cInqOut').textContent = n;
+    document.getElementById('cPriceOut').textContent = money(p);
+    document.getElementById('cCloseOut').textContent = close.value + '%';
+    document.getElementById('cLeak').textContent = money(monthly);
+    document.getElementById('cYear').textContent = money(monthly * 12);
+    // Round the client count for readability, but never round a real fraction
+    // down to "0 clients" while a dollar figure is showing above it.
+    var yearly = lostClients * 12;
+    document.getElementById('cClients').textContent = yearly < 1 ? '<1' : Math.round(yearly);
+
+    [inq, price, close].forEach(fill);
+  }
+
+  [inq, price, close].forEach(function (el) {
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+  render();
+})();
+</script>
 
 </body>
 </html>
