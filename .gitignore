@@ -1,1 +1,13 @@
 .vercel
+
+# Generated prospect briefs. These contain research on named businesses and
+# must never land in a public repo — keep them local or in the CRM.
+briefs/
+intel/briefs/
+
+# Private playbook — objection handling, industry priors and testimonial
+# routing. This repo is public; only the .example siblings are committed.
+# See intel/lib/playbook.js.
+intel/data/objection-rules.js
+intel/data/industries.json
+intel/data/proof.json

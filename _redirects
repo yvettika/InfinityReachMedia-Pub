@@ -8,3 +8,13 @@
 # unreachable while these rules are in place.
 /pilot        /first-10   301!
 /pilot.html   /first-10   301!
+
+# /intel is internal tooling, not site content. The publish directory is the
+# repo root, so without these rules the sales playbook, the scoring priors and
+# the objection handling would all be fetchable on the live domain.
+#
+# Note this only covers Netlify. It does NOT make the directory private on
+# GitHub — the repo is public, so anything committed here is readable there
+# regardless of these rules.
+/intel        /404.html   404!
+/intel/*      /404.html   404!

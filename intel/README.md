@@ -1,0 +1,229 @@
+# Prospect Intel — pre-call briefs
+
+Point it at a prospect's domain. It reads what is public, estimates their
+Revenue Leak Score from the outside, and writes the brief a rep reads in the
+five minutes before the call: what to say, what to ask, what to lead with,
+what objections are coming, and what to close on.
+
+```bash
+node intel/intel.js baxterheatingair.com --industry hvac
+node intel/intel.js --batch prospects.txt --industry hvac --out briefs/
+```
+
+Zero dependencies. Node 18+. Nothing to install.
+
+---
+
+## The one rule everything else serves
+
+Every fact in a brief is tagged with how we know it:
+
+| Basis | Means | What a rep does with it |
+|---|---|---|
+| **observed** | We saw it directly and can show the receipt | Say it out loud |
+| **inferred** | A signal implies it | Say it as a hypothesis, confirm on the call |
+| **assumed** | Industry prior, nothing more | Never assert. Ask. |
+
+An assumption read aloud as a fact is how you lose a call in the first minute —
+the prospect knows their own business, and you have just proved you don't. The
+brief prints assumed values under a heading that literally says **Do not say**,
+and phrases every gap as *"I couldn't find…"* rather than *"you don't have…"*,
+because absence of evidence is a weaker claim and reps should make the weaker
+one.
+
+If a brief ever shows revenue, employee count, ad spend, or review-response
+rate as *observed*, something is fabricating data. Those are not obtainable
+this way. See "What this deliberately doesn't do".
+
+---
+
+## How it works
+
+```
+collect.js   fetch homepage + a few likely pages, honour robots.txt
+   ↓
+detect.js    fingerprint what's on the page — pure functions, no model, no network
+   ↓
+places.js    optional: Google review count + velocity (needs an API key)
+   ↓
+model.js     signals → the ten scorecard inputs → Revenue Leak Score
+   ↓
+brief.js     the page a rep actually reads
+```
+
+There is no LLM anywhere in this pipeline. Everything here is deterministic, so
+the same prospect scored twice a week apart moves only because the *business*
+moved. That is a requirement, not a preference: when a prospect asks "why is
+this a 55?", the answer has to be the same every time you ask it.
+
+An LLM belongs in exactly two places, and neither is built yet — extracting an
+owner's name from an About page, and drafting the outreach message. Both are
+narrow, both are constrained to text we already fetched, and both are additions
+to this pipeline rather than replacements for any part of it.
+
+## What it computes
+
+The same **Revenue Leak Score** as `/scorecard`, using the same six leak
+formulas, ported verbatim from `scorecard.html`. A pre-call estimate and the
+prospect's own scorecard result can disagree because the inputs differ — never
+because the arithmetic does. **If the scorecard math changes, change
+`intel/lib/model.js` in the same commit.** A test asserts they match.
+
+### The property that makes this work
+
+Every leak term is linear in lead volume (`L`) and customer value (`V`), and so
+is current revenue. They cancel in the ratio. So:
+
+- **The score does not depend on `L` or `V` at all.** We can compute it
+  correctly without knowing how many leads they get or what a customer is
+  worth — which is exactly what we can't know before the call.
+- **Only the dollar figures need them.** Until the prospect supplies both,
+  dollars are shown per 100 monthly leads and the brief says so.
+
+Lead with the score. It is defensible before they tell you anything.
+
+### Discovery questions are ranked by sensitivity
+
+For every input we didn't observe, the model re-runs itself across that input's
+plausible range and measures how far the answer moves. Questions are ordered by
+that, not by convention — ask the one where being wrong costs the most.
+
+Inputs are split by what their answer actually changes:
+
+- **Diagnostic** — moves the score. These are the discovery questions.
+- **Scaling** — `leads` and `avgValue`, which multiply every dollar figure but
+  cancel out of the score. Still must be asked before quoting a number, but
+  they belong in their own bucket. Ranking them by dollar swing would park them
+  permanently at the top of the list ahead of questions that change the
+  diagnosis, which is backwards.
+
+The split is computed empirically (`scoreSwing === 0`), not hardcoded, so a
+future input lands in the right bucket on its own.
+
+## What it detects
+
+From the page source: chat widgets, online booking, CRM and email platforms, ad
+pixels, analytics, call tracking, review tooling, site platform, social
+profiles, phone numbers, forms, structured data, and copy claims (24/7,
+financing, memberships, "text us", hiring — including whether the open roles
+are front-office).
+
+Roughly 60 vendor fingerprints across those classes, each carrying the exact
+source snippet that matched. That snippet is the receipt.
+
+## Google Places (optional)
+
+```bash
+export GOOGLE_PLACES_API_KEY=...
+```
+
+Adds review count, rating, and a velocity estimate from the five most recent
+reviews. Without it the system still runs — review volume just moves from
+"say this" to "ask this".
+
+Two things to know before building further on it:
+
+1. **Places exposes no owner-response field.** Review-response rate is a real
+   buying signal but it is not automatically observable. The Business Profile
+   API needs the business to grant access, which a prospect obviously has not.
+   We route it to the call as a question rather than pretending to measure it.
+2. **Places terms allow storing place IDs indefinitely, not other content.**
+   Every record carries `cachedAt` so a retention job can expire the rest.
+   Don't build a permanent local mirror of Places content.
+
+A Places result is only accepted when the listing's website matches the domain
+we researched. A near-miss is worse than nothing — it puts another business's
+review count in front of a rep who is about to quote it out loud.
+
+## What this deliberately doesn't do
+
+- **No LinkedIn, Instagram, or Facebook scraping.** Their terms forbid it and
+  LinkedIn enforces. Meta's Ad Library API is public and legitimate and is the
+  right way to add "are they running ads" — that's a good next addition.
+- **No revenue or employee-count estimates.** Nobody has real revenue figures
+  for a private local business; vendors who show one are showing you a model
+  output. Size is inferred from observable proxies or asked on the call.
+- **No 0–100 "AI opportunity score" per product.** Instead each agent gets its
+  actual *share of recoverable revenue*, which is arithmetic on the leak table
+  and can be defended line by line. A per-product 0–100 would be invented
+  precision.
+- **No contact scraping.** This tool researches businesses, not people. Adding
+  email discovery means verification, suppression lists, CAN-SPAM compliance,
+  and sending infrastructure — a separate build with separate obligations.
+
+## Collection etiquette
+
+Identifies itself in the User-Agent with a contact address, honours
+`robots.txt` Disallow rules, waits between requests to the same host, caps
+itself at five pages per prospect, and reads only public pages. Failures are
+recorded rather than swallowed: "we couldn't check" and "we checked and it
+wasn't there" are different claims on a sales call.
+
+## Setup — the playbook is private
+
+**This repo is public.** The engine is fine to publish; the playbook is not.
+Three files hold the parts a competitor would actually want, and they are
+gitignored:
+
+| Private (gitignored) | Committed placeholder |
+|---|---|
+| `data/objection-rules.js` | `data/objection-rules.example.js` |
+| `data/industries.json` | `data/industries.example.json` |
+| `data/proof.json` | `data/proof.example.json` |
+
+`lib/playbook.js` prefers the real file and falls back to the `.example`
+sibling, so a fresh clone still runs and the tests still pass — on placeholder
+content. Any brief generated that way is stamped with a warning at the top,
+because a placeholder brief looks exactly as authoritative as a real one and
+someone will otherwise read example testimonials onto a live call.
+
+On a new machine:
+
+```bash
+cd intel/data
+cp objection-rules.example.js objection-rules.js
+cp industries.example.json     industries.json
+cp proof.example.json          proof.json
+# then fill them in
+```
+
+The seam falls at rules-vs-engine rather than at whole files: the objection
+*matching logic* stays in `lib/objections.js`, in git, so a fix to it reaches
+every machine. Only the rules themselves are private.
+
+## Tuning
+
+- `data/industries.json` — priors per vertical. Every value is a placeholder
+  until closed-won data replaces it. `customersPerReview` is the weakest number
+  in the system and drives the lead-volume inference; treat it as a guess.
+- `data/proof.json` — testimonials. **Nothing in this file may be invented or
+  paraphrased into a stronger claim than the client made.** A test asserts
+  every quote in a rendered brief appears here verbatim.
+- `data/objection-rules.js` — signal-triggered objection rules.
+
+## Tests
+
+```bash
+node intel/test/run-tests.js     # 43 tests, no network needed
+```
+
+They run the real collector over real HTTP against a local fixture server —
+fetch, robots, detection, model, brief — because the bugs worth catching in
+this system live in the seams. They also verify the private playbook files stay gitignored. They cover robots compliance, the scale
+invariance above, exact parity with the scorecard formulas, the
+diagnostic/scaling split, and that no brief can cite a testimonial that isn't
+in `proof.json`.
+
+## Not built yet
+
+In the order I'd build them:
+
+1. **Snapshot + diff.** Store each run, re-run weekly, alert on change. "They
+   just posted a CSR job" is a far better outreach trigger than any static
+   score. This is the highest-value remaining piece and it's just a diff over a
+   table.
+2. **Meta Ad Library API** — public and free, answers "are they running ads"
+   properly instead of inferring it from a pixel.
+3. **LLM extraction** for owner and decision-maker names from About pages,
+   constrained to fetched text, with the source URL attached.
+4. **CRM write-back** to GoHighLevel so the brief lands on the contact record.

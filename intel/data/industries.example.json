@@ -1,0 +1,56 @@
+{
+  "_note": "PLACEHOLDER priors. Copy to industries.json (gitignored) and replace with your own, tuned from closed-won data. The round numbers below are illustrative defaults, not researched benchmarks — they exist so a fresh clone runs and the tests pass. Every value here is an assumption the brief prints as an assumption and never as a fact.",
+  "_fields": {
+    "avgValue": "Dollar value of one new customer (first job, not lifetime).",
+    "closeRate": "Share of inbound leads that become paying customers.",
+    "missedCallPct": "Share of inbound calls that go unanswered, before any fix.",
+    "noShowPct": "Share of booked appointments that no-show or cancel.",
+    "customersPerReview": "How many served customers produce one public review. Used to back into lead volume from review velocity — the weakest inference in the system.",
+    "seasonality": "Free text the rep can use for timing.",
+    "afterHoursMatters": "Whether after-hours coverage is a real buying trigger in this vertical."
+  },
+
+  "hvac": {
+    "label": "HVAC / home services",
+    "avgValue": 1000,
+    "closeRate": 0.25,
+    "missedCallPct": 25,
+    "noShowPct": 15,
+    "customersPerReview": 25,
+    "seasonality": "Replace with the real seasonal pattern for this vertical.",
+    "afterHoursMatters": true
+  },
+
+  "insurance": {
+    "label": "Insurance broker / agency",
+    "avgValue": 1000,
+    "closeRate": 0.20,
+    "missedCallPct": 20,
+    "noShowPct": 20,
+    "customersPerReview": 40,
+    "seasonality": "Replace with the real seasonal pattern for this vertical.",
+    "afterHoursMatters": false
+  },
+
+  "salon": {
+    "label": "Salon / spa / personal care",
+    "avgValue": 250,
+    "closeRate": 0.40,
+    "missedCallPct": 30,
+    "noShowPct": 20,
+    "customersPerReview": 30,
+    "seasonality": "Replace with the real seasonal pattern for this vertical.",
+    "afterHoursMatters": true
+  },
+
+  "default": {
+    "label": "Small business (general)",
+    "avgValue": 1000,
+    "closeRate": 0.20,
+    "missedCallPct": 25,
+    "noShowPct": 20,
+    "customersPerReview": 30,
+    "seasonality": "Unknown — ask.",
+    "afterHoursMatters": true
+  }
+}

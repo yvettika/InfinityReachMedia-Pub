@@ -1,0 +1,53 @@
+{
+  "_note": "PLACEHOLDER proof. Copy to proof.json (gitignored) and replace with testimonials you actually hold in writing. Nothing in the real file may be invented, or paraphrased into a stronger claim than the client made — a test asserts every quote rendered into a brief appears in this file verbatim. The entries below are illustrative and must not be quoted on a live call.",
+
+  "testimonials": [
+    {
+      "id": "example-one",
+      "name": "Example Client",
+      "role": "Owner, Example Services Co.",
+      "quote": "Placeholder testimonial — replace this with a real one before using any brief on a live call.",
+      "bestFor": ["default", "not-technical"]
+    },
+    {
+      "id": "example-two",
+      "name": "Second Example",
+      "role": "Operator, Example Trade Co.",
+      "quote": "Second placeholder testimonial — replace before use.",
+      "bestFor": ["default", "already-doing-marketing", "tried-it-themselves"]
+    }
+  ],
+
+  "offers": {
+    "first10": {
+      "name": "Entry offer",
+      "promise": "A bounded, guaranteed first result from assets the client already owns.",
+      "bestWhen": "Reactivation is a top-two leak, or the prospect needs a small provable win first.",
+      "url": "/first-10"
+    },
+    "singleAgent": {
+      "name": "Single agent, month to month",
+      "promise": "Run the one agent that closes their biggest leak.",
+      "bestWhen": "One leak clearly dominates.",
+      "url": "/agentic-flows"
+    },
+    "suite": {
+      "name": "Full suite",
+      "promise": "The complete set of acquisition and retention agents.",
+      "bestWhen": "Three or more leaks are live at once.",
+      "url": "/agentic-flows"
+    },
+    "scorecard": {
+      "name": "Self-serve scorecard",
+      "promise": "The prospect answers ten questions and produces their own score.",
+      "bestWhen": "They dispute our estimate or will not share numbers yet.",
+      "url": "/scorecard"
+    }
+  },
+
+  "constraints": {
+    "capacity": "State your real capacity limit here, if you have one. Do not use it as false scarcity.",
+    "terms": "State your real contract terms here.",
+    "setup": "State your real setup timeline here."
+  }
+}
