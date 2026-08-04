@@ -1,16 +1,54 @@
 # Prospect Intel — pre-call briefs
 
-Point it at a prospect's domain. It reads what is public, estimates their
-Revenue Leak Score from the outside, and writes the brief a rep reads in the
-five minutes before the call: what to say, what to ask, what to lead with,
-what objections are coming, and what to close on.
+Finds local businesses worth calling, reads what is public about each one,
+estimates their Revenue Leak Score from the outside, and writes the brief a rep
+reads in the five minutes before the call: what to say, what to ask, what to
+lead with, what objections are coming, and what to close on.
 
 ```bash
-node intel/intel.js baxterheatingair.com --industry hvac
-node intel/intel.js --batch prospects.txt --industry hvac --out briefs/
+# 1. find them
+node intel/discover.js --area orange-county --niches core --dry-run   # cost first
+node intel/discover.js --area orange-county --niches core
+
+# 2. research them
+node intel/intel.js --batch prospects/prospects.txt --out briefs/
+
+# 3. one prospect, on demand
+node intel/intel.js baxterheating.com --industry hvac
 ```
 
 Zero dependencies. Node 18+. Nothing to install.
+
+## Discovery
+
+Sweeps Google Places across business categories and cities, then filters to
+companies that are actually sellable to. Deliberately niche-agnostic: the leak
+model does not care whether a business fixes furnaces or teeth, only whether a
+missed call costs them money and whether anything on their site catches a lead
+after hours. `data/niches.json` is therefore just "appointment-driven local
+service business" — 24 categories — and the Revenue Leak Score does the real
+ranking afterwards.
+
+What it filters out, all counted and reported at the end of a run:
+
+- directory sites and national franchises (Yelp, Angi, Roto-Rooter, State Farm…)
+- businesses with no website — there is nothing to research
+- permanently closed listings
+- under 10 reviews (too new to have the problem) and over 1500 (usually a
+  regional player with staff, or a franchise the filters missed)
+- **multiple storefronts of the same company** — one prospect per business, not
+  one per location
+
+`--dry-run` prints the query plan and count before spending anything. Every
+query is a billed Places request, so a full core sweep of Orange County is
+about 540 of them. The sweep uses a reduced field mask (no reviews) to stay on
+the cheaper tier; reviews get fetched later, only for prospects worth
+researching. Cheap wide sweep, expensive narrow follow-up.
+
+Repeat runs skip what they already found. `prospects/seen-places.json` stores
+place IDs only — the one Places field that may be kept indefinitely — and when
+a company is kept, every storefront sharing its domain is marked seen too, so
+the next sweep cannot resurface it through a second location.
 
 ---
 
@@ -40,6 +78,8 @@ this way. See "What this deliberately doesn't do".
 ## How it works
 
 ```
+discover.js  Places sweep by category + city → filtered candidate list
+   ↓
 collect.js   fetch homepage + a few likely pages, honour robots.txt
    ↓
 detect.js    fingerprint what's on the page — pure functions, no model, no network
@@ -204,7 +244,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/run-tests.js     # 43 tests, no network needed
+node intel/test/all.js           # 58 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —
@@ -218,12 +258,15 @@ in `proof.json`.
 
 In the order I'd build them:
 
-1. **Snapshot + diff.** Store each run, re-run weekly, alert on change. "They
+1. **Contact discovery.** Places gives the business, website and phone — not a
+   person or an inbox. Role addresses off their own contact page (`info@`,
+   `office@`) are free, legal, and for a 12-truck contractor often reach the
+   same person a paid enrichment record would.
+2. **Snapshot + diff.** Store each run, re-run weekly, alert on change. "They
    just posted a CSR job" is a far better outreach trigger than any static
-   score. This is the highest-value remaining piece and it's just a diff over a
-   table.
-2. **Meta Ad Library API** — public and free, answers "are they running ads"
+   score. This is just a diff over a table.
+3. **Meta Ad Library API** — public and free, answers "are they running ads"
    properly instead of inferring it from a pixel.
-3. **LLM extraction** for owner and decision-maker names from About pages,
+4. **LLM extraction** for owner and decision-maker names from About pages,
    constrained to fetched text, with the source URL attached.
-4. **CRM write-back** to GoHighLevel so the brief lands on the contact record.
+5. **CRM write-back** to GoHighLevel so the brief lands on the contact record.

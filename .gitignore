@@ -11,3 +11,7 @@ intel/briefs/
 intel/data/objection-rules.js
 intel/data/industries.json
 intel/data/proof.json
+
+# Discovery output — prospect lists and the place-ID dedupe store.
+prospects/
+intel/prospects/

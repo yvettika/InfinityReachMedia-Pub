@@ -23,9 +23,22 @@
  *      mirror of Places content.
  */
 
-const ENDPOINT = 'https://places.googleapis.com/v1/places:searchText';
+// Read at call time, not module load, so tests can point it at a local mock
+// after requiring. Never set PLACES_ENDPOINT to anything but Google in
+// production.
+const endpoint = () => process.env.PLACES_ENDPOINT || 'https://places.googleapis.com/v1/places:searchText';
 
-const FIELD_MASK = [
+/**
+ * Two field masks, because Places bills by what you ask for.
+ *
+ * Discovery sweeps hundreds of businesses and only needs enough to decide
+ * whether one is worth researching — no reviews, which is what pushes a
+ * request into the pricier SKU. Enrichment then asks for reviews on the much
+ * smaller set that survived. Cheap wide sweep, expensive narrow follow-up.
+ *
+ * Check current Places pricing before running at volume; the tiers move.
+ */
+const DISCOVERY_FIELDS = [
   'places.id',
   'places.displayName',
   'places.formattedAddress',
@@ -35,10 +48,54 @@ const FIELD_MASK = [
   'places.nationalPhoneNumber',
   'places.businessStatus',
   'places.primaryTypeDisplayName',
+].join(',');
+
+const FIELD_MASK = [
+  DISCOVERY_FIELDS,
   'places.regularOpeningHours.openNow',
   'places.regularOpeningHours.weekdayDescriptions',
   'places.reviews',
 ].join(',');
+
+/**
+ * Raw text search against Places, with paging.
+ * Returns up to `max` place objects (Places caps a paged run at 60).
+ */
+async function searchText(textQuery, { key, fieldMask, max = 20, timeoutMs = 15000 } = {}) {
+  const apiKey = key || process.env.GOOGLE_PLACES_API_KEY;
+  if (!apiKey) throw new Error('GOOGLE_PLACES_API_KEY is not set');
+
+  const out = [];
+  let pageToken = null;
+
+  while (out.length < max) {
+    const body = { textQuery, maxResultCount: Math.min(20, max - out.length) };
+    if (pageToken) body.pageToken = pageToken;
+
+    const res = await fetch(endpoint(), {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'X-Goog-Api-Key': apiKey,
+        'X-Goog-FieldMask': (fieldMask || DISCOVERY_FIELDS) + ',nextPageToken',
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      throw new Error(`Places HTTP ${res.status}${detail ? ` — ${detail.slice(0, 200)}` : ''}`);
+    }
+
+    const data = await res.json();
+    out.push(...(data.places || []));
+    pageToken = data.nextPageToken || null;
+    if (!pageToken || !(data.places || []).length) break;
+  }
+
+  return out.slice(0, max);
+}
 
 /**
  * Estimate review velocity from the handful of recent reviews Places returns.
@@ -71,7 +128,7 @@ async function fetchPlaces(domain, siteTitle, opts = {}) {
   // business name and the domain disambiguates chains with common names.
   const query = [siteTitle, domain].filter(Boolean).join(' ').slice(0, 200);
 
-  const res = await fetch(ENDPOINT, {
+  const res = await fetch(endpoint(), {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -127,4 +184,4 @@ async function fetchPlaces(domain, siteTitle, opts = {}) {
   };
 }
 
-module.exports = { fetchPlaces };
+module.exports = { fetchPlaces, searchText, sameDomain, DISCOVERY_FIELDS, FIELD_MASK };

@@ -1,0 +1,93 @@
+{
+  "_note": "Discovery targets. These are all appointment-driven local service businesses, which is the shape the leak model actually fits: a missed call is lost revenue, a no-show is lost revenue, and nobody is following up. `industry` maps each to the priors in industries.json. `tier` lets you run a tight sweep (core) or a wide one (all).",
+  "_fields": {
+    "queries": "Text queries sent to Google Places. Each is combined with the --area you pass on the CLI.",
+    "industry": "Which prior set in industries.json to score this with.",
+    "tier": "core = strongest fit for the leak model, wide = still fits, run when you want volume."
+  },
+
+  "niches": [
+    { "key": "hvac", "label": "HVAC", "industry": "hvac", "tier": "core",
+      "queries": ["HVAC contractor", "air conditioning repair", "heating and cooling company"] },
+
+    { "key": "plumbing", "label": "Plumbing", "industry": "hvac", "tier": "core",
+      "queries": ["plumber", "plumbing company", "emergency plumbing service"] },
+
+    { "key": "electrical", "label": "Electrical", "industry": "hvac", "tier": "core",
+      "queries": ["electrician", "electrical contractor"] },
+
+    { "key": "roofing", "label": "Roofing", "industry": "hvac", "tier": "core",
+      "queries": ["roofing contractor", "roof repair company"] },
+
+    { "key": "garage-door", "label": "Garage doors", "industry": "hvac", "tier": "core",
+      "queries": ["garage door repair", "garage door company"] },
+
+    { "key": "pest-control", "label": "Pest control", "industry": "hvac", "tier": "core",
+      "queries": ["pest control service", "exterminator"] },
+
+    { "key": "pool-service", "label": "Pool service", "industry": "hvac", "tier": "wide",
+      "queries": ["pool cleaning service", "pool repair company"] },
+
+    { "key": "landscaping", "label": "Landscaping", "industry": "hvac", "tier": "wide",
+      "queries": ["landscaping company", "lawn care service"] },
+
+    { "key": "solar", "label": "Solar", "industry": "hvac", "tier": "wide",
+      "queries": ["solar installation company", "solar panel contractor"] },
+
+    { "key": "flooring", "label": "Flooring", "industry": "hvac", "tier": "wide",
+      "queries": ["flooring contractor", "carpet and flooring store"] },
+
+    { "key": "general-contractor", "label": "General contracting / remodel", "industry": "hvac", "tier": "wide",
+      "queries": ["general contractor", "home remodeling company", "kitchen and bath remodeling"] },
+
+    { "key": "restoration", "label": "Water / fire restoration", "industry": "hvac", "tier": "wide",
+      "queries": ["water damage restoration", "fire and flood restoration company"] },
+
+    { "key": "insurance", "label": "Insurance agency", "industry": "insurance", "tier": "core",
+      "queries": ["insurance agency", "insurance broker", "medicare insurance agent"] },
+
+    { "key": "salon", "label": "Hair salon", "industry": "salon", "tier": "core",
+      "queries": ["hair salon", "beauty salon"] },
+
+    { "key": "medspa", "label": "Med spa / aesthetics", "industry": "salon", "tier": "core",
+      "queries": ["med spa", "medical aesthetics clinic", "botox clinic"] },
+
+    { "key": "nail-salon", "label": "Nail salon", "industry": "salon", "tier": "wide",
+      "queries": ["nail salon"] },
+
+    { "key": "dental", "label": "Dental", "industry": "default", "tier": "core",
+      "queries": ["dentist", "dental office", "orthodontist"] },
+
+    { "key": "chiropractic", "label": "Chiropractic", "industry": "default", "tier": "core",
+      "queries": ["chiropractor", "chiropractic clinic"] },
+
+    { "key": "physical-therapy", "label": "Physical therapy", "industry": "default", "tier": "wide",
+      "queries": ["physical therapy clinic"] },
+
+    { "key": "veterinary", "label": "Veterinary", "industry": "default", "tier": "wide",
+      "queries": ["veterinary clinic", "animal hospital"] },
+
+    { "key": "auto-repair", "label": "Auto repair", "industry": "default", "tier": "wide",
+      "queries": ["auto repair shop", "collision repair center"] },
+
+    { "key": "law", "label": "Law firm", "industry": "default", "tier": "wide",
+      "queries": ["personal injury lawyer", "family law attorney", "estate planning attorney"] },
+
+    { "key": "cleaning", "label": "Cleaning service", "industry": "default", "tier": "wide",
+      "queries": ["house cleaning service", "commercial cleaning company"] },
+
+    { "key": "moving", "label": "Moving company", "industry": "default", "tier": "wide",
+      "queries": ["moving company"] }
+  ],
+
+  "areas": {
+    "_note": "Sub-areas to sweep. Places caps a paged text search at 60 results, so covering a county means querying its cities rather than the county name — one 'HVAC in Orange County' query returns 60 businesses and stops, while 20 city queries return far more of the real market.",
+    "orange-county": [
+      "Anaheim, CA", "Santa Ana, CA", "Irvine, CA", "Huntington Beach, CA",
+      "Garden Grove, CA", "Orange, CA", "Fullerton, CA", "Costa Mesa, CA",
+      "Mission Viejo, CA", "Westminster, CA", "Newport Beach, CA", "Buena Park, CA",
+      "Lake Forest, CA", "Tustin, CA", "Yorba Linda, CA", "San Clemente, CA",
+      "Laguna Niguel, CA", "Fountain Valley, CA", "Placentia, CA", "Rancho Santa Margarita, CA"
+    ]
+  }
+}
