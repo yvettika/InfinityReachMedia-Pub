@@ -67,7 +67,7 @@ if (form) {
       note.style.color = 'var(--color-accent-2)';
       form.reset();
     } catch (err) {
-      note.textContent = "Something went wrong. Please email yvette@infinityreachmedia.com directly.";
+      note.textContent = "Something went wrong. Please email info@infinityreachmedia.com directly.";
       note.style.color = 'var(--color-accent)';
     } finally {
       submitBtn.disabled = false;
