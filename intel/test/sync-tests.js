@@ -20,8 +20,8 @@ function test(name, fn) {
   catch (err) { failed++; console.log(`FAIL  ${name}\n      ${err.message}`); }
 }
 
-const { HEADER, COLUMNS, toProspect, toRow, mergeRows } = require('../lib/rows');
-const { colLetter } = require('../sync');
+const { HEADER, COLUMNS, toProspect, fromRow, headerIndex, mergeRows } = require('../lib/rows');
+const { colLetter } = require('../lib/state');
 
 const prospect = (domain, over = {}) => ({
   domain, name: `${domain} Inc`, niche: 'hvac', city: 'Orange, CA',
@@ -54,10 +54,53 @@ const prospect = (domain, over = {}) => ({
     });
 
     test('an unresearched prospect still produces a valid row', () => {
-      const row = toRow(toProspect({ domain: 'y.com', name: 'Y', niche: 'salon' }));
+      const m = mergeRows([], [toProspect({ domain: 'y.com', name: 'Y', niche: 'salon' })]);
+      const row = m.values[1];
       assert.strictEqual(row.length, HEADER.length);
       assert.strictEqual(row[0], 'y.com');
       assert.strictEqual(row[HEADER.indexOf('Score')], '');
+    });
+
+    test('a row survives the round trip through the sheet and back', () => {
+      // The sheet is the state store now, so read-back fidelity is load-
+      // bearing: what fromRow returns is what the next run knows.
+      const p = prospect('roundtrip.com', {
+        placeId: 'p_1 p_2', researchedAt: '2026-08-01T00:00:00.000Z', syncState: 'synced',
+      });
+      const m = mergeRows([], [p]);
+      const back = fromRow(m.values[1], headerIndex(m.header));
+      assert.strictEqual(back.domain, 'roundtrip.com');
+      assert.strictEqual(back.score, 55);
+      assert.strictEqual(back.recoverableAnnual, 348998, 'dollar formatting broke the number');
+      assert.strictEqual(back.placeId, 'p_1 p_2');
+      assert.strictEqual(back.researchedAt, '2026-08-01T00:00:00.000Z');
+      assert.strictEqual(back.syncState, 'synced');
+      assert.strictEqual(back.status, 'Not contacted');
+    });
+
+    test('columns the user adds to the sheet survive a sync', () => {
+      const first = mergeRows([], [prospect('a.com')]);
+      // She adds her own column and fills it in…
+      first.header.push('My Column');
+      first.values[0].push('My Column');
+      first.values[1].push('her data');
+      // …and the next sync keeps both the column and the value.
+      const second = mergeRows(first.values, [prospect('a.com', { score: 40 })]);
+      const mi = second.header.indexOf('My Column');
+      assert.ok(mi >= 0, 'user column was dropped');
+      assert.strictEqual(second.values[1][mi], 'her data', 'user data was destroyed');
+      assert.strictEqual(second.values[1][second.header.indexOf('Score')], 40);
+    });
+
+    test('a blank value never erases a known one', () => {
+      const first = mergeRows([], [prospect('a.com')]);
+      // Research failed today: the prospect comes through with no score.
+      const second = mergeRows(first.values, [prospect('a.com', {
+        score: null, band: null, recoverableAnnual: null, topLeak: null, leadAgent: null,
+      })]);
+      assert.strictEqual(second.values[1][second.header.indexOf('Score')], 55,
+        'a failed research pass erased yesterday\'s score');
+      assert.strictEqual(second.values[1][second.header.indexOf('Band')], 'Heavy loss');
     });
   }
 
@@ -144,6 +187,14 @@ const prospect = (domain, over = {}) => ({
           res.end(JSON.stringify(obj));
         };
 
+        if (url.pathname === '/opportunities/pipelines') {
+          return send(200, { pipelines: [
+            { id: 'pipe_course', name: 'AI Advantage Pipeline 1',
+              stages: [{ id: 's1', name: 'New Lead' }, { id: 's2', name: 'Contacted' }] },
+            { id: 'pipe_outbound', name: 'Outbound Prospecting',
+              stages: [{ id: 'st_new', name: 'New Lead' }, { id: 'st_c', name: 'Contacted' }] },
+          ] });
+        }
         if (url.pathname === '/contacts/upsert') {
           const key = json.website || json.email || json.phone;
           const isNew = !state.contacts.has(key);
@@ -219,7 +270,153 @@ const prospect = (domain, over = {}) => ({
       process.env.GHL_API_KEY = saved;
     });
 
+    console.log('\npipeline resolution by name — because GHL has no create-pipeline API');
+    {
+      delete process.env.GHL_PIPELINE_ID;
+      delete process.env.GHL_STAGE_ID;
+
+      const byName = await ghl.resolvePipeline({ pipelineName: 'Outbound Prospecting' });
+      test('resolves pipeline and default "New Lead" stage by name', () => {
+        assert.strictEqual(byName.pipelineId, 'pipe_outbound');
+        assert.strictEqual(byName.stageId, 'st_new');
+        assert.strictEqual(byName.resolvedBy, 'name');
+      });
+
+      const caseWashed = await ghl.resolvePipeline({ pipelineName: '  outbound prospecting ' });
+      test('name matching ignores case and whitespace', () => {
+        assert.strictEqual(caseWashed.pipelineId, 'pipe_outbound');
+      });
+
+      let missingErr = null;
+      try { await ghl.resolvePipeline({ pipelineName: 'Nonexistent Pipeline' }); }
+      catch (err) { missingErr = err; }
+      test('a missing pipeline names what it found and says the UI is the fix', () => {
+        assert.ok(missingErr, 'no error thrown');
+        assert.match(missingErr.message, /No GHL pipeline named "Nonexistent Pipeline"/);
+        assert.match(missingErr.message, /Outbound Prospecting/, 'did not list what exists');
+        assert.match(missingErr.message, /created in the GHL UI/);
+      });
+
+      let missingStage = null;
+      try { await ghl.resolvePipeline({ pipelineName: 'Outbound Prospecting', stageName: 'Imaginary' }); }
+      catch (err) { missingStage = err; }
+      test('a missing stage lists the stages that do exist', () => {
+        assert.ok(missingStage, 'no error thrown');
+        assert.match(missingStage.message, /New Lead, Contacted/);
+      });
+
+      const byId = await ghl.resolvePipeline({ pipelineId: 'pipe_x', stageId: 'st_x' });
+      test('explicit ID resolution short-circuits the lookup', () => {
+        assert.strictEqual(byId.pipelineId, 'pipe_x');
+        assert.strictEqual(byId.resolvedBy, 'id');
+      });
+    }
+
     server.close();
+  }
+
+  console.log('\nsheet as state store — end to end against a mock Sheets API');
+  {
+    const crypto = require('crypto');
+    const fs = require('fs');
+    const os = require('os');
+    const path = require('path');
+
+    // A real RSA key so the JWT signing path runs for real.
+    const { privateKey } = crypto.generateKeyPairSync('rsa', {
+      modulusLength: 2048,
+      privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+      publicKeyEncoding: { type: 'spki', format: 'pem' },
+    });
+
+    const grid = { values: [] }; // the "spreadsheet"
+    let tokenRequests = 0;
+
+    const mock = http.createServer((req, res) => {
+      let body = '';
+      req.on('data', c => (body += c));
+      req.on('end', () => {
+        const url = new URL(req.url, 'http://x');
+        const send = (code, obj) => {
+          res.writeHead(code, { 'content-type': 'application/json' });
+          res.end(JSON.stringify(obj));
+        };
+        if (url.pathname === '/token') {
+          tokenRequests++;
+          return send(200, { access_token: 'tok_test', expires_in: 3600 });
+        }
+        if (req.method === 'GET' && /\/values\//.test(url.pathname)) {
+          return send(200, { values: grid.values });
+        }
+        if (req.method === 'PUT' && /\/values\//.test(url.pathname)) {
+          grid.values = JSON.parse(body).values;
+          return send(200, { updatedRange: 'ok' });
+        }
+        send(404, {});
+      });
+    });
+    await new Promise(r => mock.listen(0, '127.0.0.1', r));
+    const base = `http://127.0.0.1:${mock.address().port}`;
+    process.env.SHEETS_ENDPOINT = `${base}/sheets`;
+
+    const keyFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'intel-sa-')), 'key.json');
+    fs.writeFileSync(keyFile, JSON.stringify({
+      client_email: 'sync@test.iam.gserviceaccount.com',
+      private_key: privateKey,
+      token_uri: `${base}/token`,
+    }));
+
+    const { SheetState } = require('../lib/state');
+    const { resetTokenCache } = require('../lib/sheets');
+    resetTokenCache();
+
+    const store = new SheetState({ sheetId: 'sheet_test', credentialsFile: keyFile });
+
+    const empty = await store.load();
+    test('an empty sheet loads as empty state, not an error', () => {
+      assert.strictEqual(empty.prospects.length, 0);
+      assert.strictEqual(empty.placeIds.size, 0);
+    });
+
+    await store.save([
+      prospect('first.com', { placeId: 'p_a p_b', researchedAt: '2026-08-01T00:00:00.000Z' }),
+      prospect('second.com', { placeId: 'p_c' }),
+    ]);
+    test('save writes header plus one row per prospect', () => {
+      assert.strictEqual(grid.values.length, 3);
+      assert.deepStrictEqual(grid.values[0], HEADER);
+    });
+
+    resetTokenCache(); // simulate a brand-new machine: no token, no local files
+    const store2 = new SheetState({ sheetId: 'sheet_test', credentialsFile: keyFile });
+    const reloaded = await store2.load();
+    test('a fresh process recovers full state from the sheet alone', () => {
+      assert.strictEqual(reloaded.prospects.length, 2);
+      assert.ok(reloaded.byDomain.has('first.com'));
+      // Place IDs — including multi-storefront siblings — survive the trip,
+      // which is what keeps discovery from re-buying the same businesses.
+      assert.ok(reloaded.placeIds.has('p_a'));
+      assert.ok(reloaded.placeIds.has('p_b'));
+      assert.ok(reloaded.placeIds.has('p_c'));
+      assert.strictEqual(reloaded.byDomain.get('first.com').researchedAt, '2026-08-01T00:00:00.000Z');
+    });
+
+    const statusIdx = grid.values[0].indexOf('Status');
+    grid.values[1][statusIdx] = 'Booked';
+    const store3 = new SheetState({ sheetId: 'sheet_test', credentialsFile: keyFile });
+    await store3.load();
+    await store3.save([prospect('first.com', { score: 40, band: 'Critical' })]);
+    test('the human\'s Status survives a full cloud round trip', () => {
+      assert.strictEqual(grid.values[1][statusIdx], 'Booked');
+      assert.strictEqual(grid.values[1][grid.values[0].indexOf('Score')], 40);
+    });
+
+    test('token exchange ran the real signing path', () => {
+      assert.ok(tokenRequests >= 1, 'token endpoint never called');
+    });
+
+    mock.server?.close?.();
+    mock.close();
   }
 
   console.log(`\n${passed} passed, ${failed} failed\n`);

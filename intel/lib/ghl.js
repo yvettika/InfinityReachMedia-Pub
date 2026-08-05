@@ -92,6 +92,55 @@ async function upsertContact(prospect, opts = {}) {
   };
 }
 
+/**
+ * Resolve a pipeline and stage by NAME.
+ *
+ * GoHighLevel has no API for creating a pipeline — not in the connector and
+ * not in their public v2 REST API. Pipelines are made in the UI. So rather
+ * than making someone copy two opaque IDs out of a URL bar and into env vars,
+ * this looks them up by the names you can read on screen. Create the pipeline,
+ * set the names, and the sync finds it on the next run.
+ *
+ * Explicit GHL_PIPELINE_ID / GHL_STAGE_ID still win if they are set.
+ */
+async function resolvePipeline(opts = {}) {
+  const { apiKey, locationId } = requireConfig(opts);
+
+  const explicitPipeline = opts.pipelineId || process.env.GHL_PIPELINE_ID;
+  const explicitStage = opts.stageId || process.env.GHL_STAGE_ID;
+  if (explicitPipeline && explicitStage) {
+    return { pipelineId: explicitPipeline, stageId: explicitStage, resolvedBy: 'id' };
+  }
+
+  const wantPipeline = opts.pipelineName || process.env.GHL_PIPELINE_NAME;
+  const wantStage = opts.stageName || process.env.GHL_STAGE_NAME || 'New Lead';
+  if (!wantPipeline) {
+    throw new Error('Set GHL_PIPELINE_NAME (or GHL_PIPELINE_ID and GHL_STAGE_ID)');
+  }
+
+  const res = await call('/opportunities/pipelines', { apiKey, query: { locationId } });
+  const pipelines = res?.pipelines || [];
+  const norm = s => String(s || '').trim().toLowerCase();
+
+  const pipeline = pipelines.find(p => norm(p.name) === norm(wantPipeline));
+  if (!pipeline) {
+    throw new Error(
+      `No GHL pipeline named "${wantPipeline}". Found: ${pipelines.map(p => p.name).join(', ') || 'none'}. ` +
+      `Pipelines can only be created in the GHL UI.`
+    );
+  }
+
+  const stage = (pipeline.stages || []).find(s => norm(s.name) === norm(wantStage));
+  if (!stage) {
+    throw new Error(
+      `Pipeline "${pipeline.name}" has no stage named "${wantStage}". ` +
+      `Stages: ${(pipeline.stages || []).map(s => s.name).join(', ') || 'none'}`
+    );
+  }
+
+  return { pipelineId: pipeline.id, stageId: stage.id, resolvedBy: 'name', pipelineName: pipeline.name, stageName: stage.name };
+}
+
 /** Find an existing opportunity for this contact so a re-run doesn't duplicate it. */
 async function findOpportunity(contactId, opts = {}) {
   const { apiKey, locationId } = requireConfig(opts);
@@ -109,11 +158,10 @@ async function findOpportunity(contactId, opts = {}) {
  */
 async function ensureOpportunity(contactId, prospect, opts = {}) {
   const { apiKey, locationId } = requireConfig(opts);
-  const pipelineId = opts.pipelineId || process.env.GHL_PIPELINE_ID;
-  const stageId = opts.stageId || process.env.GHL_STAGE_ID;
-  if (!pipelineId || !stageId) {
-    throw new Error('GHL_PIPELINE_ID and GHL_STAGE_ID must be set to create opportunities');
-  }
+  // Resolution is cached on opts by the caller loop so a 200-prospect run
+  // resolves names once, not 200 times.
+  if (!opts._resolved) opts._resolved = await resolvePipeline(opts);
+  const { pipelineId, stageId } = opts._resolved;
 
   const existing = await findOpportunity(contactId, opts);
   if (existing) return { id: existing.id, created: false };
@@ -149,4 +197,4 @@ async function syncProspect(prospect, opts = {}) {
   return { domain: prospect.domain, contact, opportunity };
 }
 
-module.exports = { upsertContact, ensureOpportunity, findOpportunity, syncProspect, requireConfig };
+module.exports = { upsertContact, ensureOpportunity, findOpportunity, syncProspect, resolvePipeline, requireConfig };

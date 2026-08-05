@@ -61,6 +61,19 @@ Finds new prospects, researches the ones not researched yet, re-researches
 anything older than 30 days, then writes the Google Sheet and pushes into
 GoHighLevel.
 
+**The sheet is the state store.** There is no local database: a run reads the
+sheet, works out what is new and what has gone stale (three machine columns —
+Place ID, Researched, Sync State — carry the bookkeeping), does the work, and
+writes the sheet back. Nothing persists on the machine between runs, so the job
+can execute anywhere — a laptop today, GitHub Actions tomorrow, both taking
+turns — and a fresh process recovers everything from the sheet alone. With no
+sheet configured it falls back to a local `prospects.json` with the same
+interface, so it still works offline.
+
+Merging is by header *name*, not column position: columns you add to the sheet
+survive a sync, reordering is safe, and a blank value never erases a known one
+— a failed research pass leaves yesterday's score in place.
+
 **Safe to run twice.** Every write is keyed on the prospect's domain:
 
 - the sheet merges by domain, so a re-run updates a row instead of adding one
@@ -75,7 +88,18 @@ GoHighLevel.
 Prospects land in GHL tagged `outbound-prospect`, `niche-<x>` and
 `leak-band-<x>`, with an opportunity in the configured stage. The deal's
 monetary value is the **prospect's** estimated recoverable revenue — the number
-the whole call is built around — not a guess at our fee.
+the whole call is built around — not a guess at our fee. Only researched
+prospects are pushed; an unresearched row has no score and would land in the
+CRM as noise.
+
+**The pipeline is resolved by name.** GHL has no API for creating pipelines —
+not in the connector, not in their public v2 REST API; they are made in the UI.
+So instead of copying opaque IDs out of a URL bar, set `GHL_PIPELINE_NAME`
+(and optionally `GHL_STAGE_NAME`, default "New Lead") and the sync looks the
+IDs up at runtime. Create the pipeline once in the UI and the next run finds
+it. Until it exists, the run degrades to contacts-only and says so, rather
+than failing — and the error message lists the pipelines that *do* exist.
+Explicit `GHL_PIPELINE_ID`/`GHL_STAGE_ID` still win when set.
 
 ### Why the REST APIs and not the connectors
 
@@ -95,8 +119,8 @@ export GOOGLE_SERVICE_ACCOUNT_JSON=/path/to/key.json
 export PROSPECT_SHEET_ID=...                  # the spreadsheet
 export GHL_API_KEY=...                        # Private Integration token
 export GHL_LOCATION_ID=...
-export GHL_PIPELINE_ID=...                    # which pipeline
-export GHL_STAGE_ID=...                       # the "New Lead" stage
+export GHL_PIPELINE_NAME="Outbound Prospecting"   # looked up at runtime
+export GHL_STAGE_NAME="New Lead"                  # default if unset
 ```
 
 Anything unset is skipped with a message rather than failing the run, so the
@@ -104,25 +128,26 @@ sheet half works before the CRM half is configured. The service account needs
 no broad permissions: create it in Google Cloud, then share the one spreadsheet
 with its email address as an Editor. That share is the entire grant.
 
-### Running it every day
+### Running it every day — in the cloud
 
-`sync.js` is an ordinary command, so any scheduler works. On a Mac that is
-launchd or cron:
+`.github/workflows/prospect-sync.yml` runs the whole job daily on GitHub
+Actions: tests first, then discovery, research, sheet write and CRM push.
+Because the sheet carries all the state, the runner needs nothing from the
+previous day and writes nothing to the repo — which is exactly right for a
+public repo that must never contain prospect data.
+
+Setup is six repository secrets (Settings → Secrets and variables → Actions):
+`GOOGLE_PLACES_API_KEY`, `GOOGLE_SERVICE_ACCOUNT_KEY` (the key file's full JSON
+body), `PROSPECT_SHEET_ID`, `GHL_API_KEY`, `GHL_LOCATION_ID`, and optionally
+`INTEL_INDUSTRIES_JSON` (the private priors — without it the committed
+placeholder priors are used, which shifts dollar estimates but not observed
+signals). The workflow can also be fired by hand from the Actions tab.
+
+Locally it is the same command on any scheduler:
 
 ```
 0 7 * * *  cd /path/to/InfinityReachMedia-Pub && /usr/bin/node intel/sync.js --discover --area orange-county >> ~/prospect-sync.log 2>&1
 ```
-
-State lives in `prospects/` — which businesses have been seen, which have been
-researched, and when. Keep it. Without it a run still produces correct output
-(the sheet merge and CRM upsert both dedupe on their own) but it re-discovers
-and re-researches everything from scratch every day, which costs Places
-requests for no benefit.
-
-That is also what makes a stateless cloud runner (GitHub Actions and similar)
-awkward: `prospects/` cannot be committed to this repo, because it names real
-businesses and the repo is public. Running it where the state can persist is
-the simple answer.
 
 ---
 
@@ -318,7 +343,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 76 tests, no network or API key needed
+node intel/test/all.js           # 89 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

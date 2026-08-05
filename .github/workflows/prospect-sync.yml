@@ -1,0 +1,74 @@
+# Daily prospect sync — discovery, research, sheet, CRM.
+#
+# Runs entirely stateless: the Google Sheet is the state store, so this job
+# needs nothing from previous runs and writes nothing back to the repo. That
+# matters twice over — the repo is public, and prospect data (real business
+# names and scores) must never land in it.
+#
+# Every credential lives in GitHub Actions secrets (Settings → Secrets and
+# variables → Actions):
+#
+#   GOOGLE_PLACES_API_KEY        Places key (discovery + review enrichment)
+#   GOOGLE_SERVICE_ACCOUNT_KEY   the service account key file, full JSON body
+#   PROSPECT_SHEET_ID            the spreadsheet ID
+#   GHL_API_KEY                  GHL Private Integration token
+#   GHL_LOCATION_ID              GHL location
+#   INTEL_INDUSTRIES_JSON        optional: the private industries.json body.
+#                                Without it the committed .example priors are
+#                                used, which shifts dollar estimates a little
+#                                but not the observed signals.
+#
+# The pipeline is resolved by NAME at runtime (GHL has no create-pipeline
+# API): create "Outbound Prospecting" with a "New Lead" stage once in the GHL
+# UI and the next run finds it. Until it exists, the job degrades to
+# contacts-only and says so in the log rather than failing.
+
+name: prospect-sync
+
+on:
+  schedule:
+    # 14:00 UTC = 7:00 AM Pacific during PDT. Cron here is UTC year-round, so
+    # during PST this fires at 6:00 AM — early either way, never late.
+    - cron: '0 14 * * *'
+  workflow_dispatch: {}   # run it by hand from the Actions tab
+
+concurrency:
+  group: prospect-sync
+  cancel-in-progress: false   # never kill a run that is mid-write to the CRM
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Fail fast on a broken commit before touching any live system.
+      - name: Tests
+        run: node intel/test/all.js
+
+      - name: Private priors (optional)
+        if: ${{ env.INTEL_INDUSTRIES_JSON != '' }}
+        run: printf '%s' "$INTEL_INDUSTRIES_JSON" > intel/data/industries.json
+        env:
+          INTEL_INDUSTRIES_JSON: ${{ secrets.INTEL_INDUSTRIES_JSON }}
+
+      - name: Service account key
+        run: printf '%s' "$GOOGLE_SERVICE_ACCOUNT_KEY" > /tmp/sa-key.json
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+
+      - name: Sync
+        run: node intel/sync.js --discover --area orange-county --niches core --limit 25
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: /tmp/sa-key.json
+          PROSPECT_SHEET_ID: ${{ secrets.PROSPECT_SHEET_ID }}
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+          GHL_PIPELINE_NAME: Outbound Prospecting
+          GHL_STAGE_NAME: New Lead

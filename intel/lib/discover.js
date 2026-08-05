@@ -115,7 +115,9 @@ async function discover(opts = {}) {
   const cfg = { ...DEFAULTS, ...opts };
   const niches = resolveNiches(cfg.niches);
   const areas = resolveAreas(cfg.area);
-  const seen = loadSeen(cfg.seenFile);
+  // `seenPlaceIds` is how the sheet-backed state store passes dedupe info in;
+  // `seenFile` is the local-file path. Either works, neither is required.
+  const seen = cfg.seenPlaceIds instanceof Set ? new Set(cfg.seenPlaceIds) : loadSeen(cfg.seenFile);
   const report = msg => cfg.onProgress && cfg.onProgress(msg);
 
   const byPlaceId = new Map();
@@ -198,6 +200,9 @@ async function discover(opts = {}) {
       keptDomains.add(domain);
       candidates.push({
         placeId,
+        // Every storefront of this company, so the state store can mark the
+        // whole company seen rather than just the one we picked.
+        placeIds: (placeIdsByDomain.get(domain) || [placeId]).join(' '),
         domain,
         name: p.displayName?.text || domain,
         website: p.websiteUri,
