@@ -42,7 +42,7 @@ const { toProspect } = require('./lib/rows');
 const { createState } = require('./lib/state');
 const ghl = require('./lib/ghl');
 const slack = require('./lib/slack');
-const { composeSequence } = require('./lib/outreach');
+const { composeSequence, verifySignatureImage, IMAGE } = require('./lib/outreach');
 
 const USAGE = `
 Daily sync — find, research, and push prospects (sheet-backed, stateless)
@@ -157,6 +157,16 @@ async function main() {
   log(`\n${work.size} prospects · ${needs.length} need research` +
       (todo.length < needs.length ? ` · doing ${todo.length} this run` : ''));
 
+  // Preflight the signature image once, before composing anything with it.
+  let imageVerdict = { ok: false, checked: false };
+  if (IMAGE().url) {
+    imageVerdict = await verifySignatureImage();
+    log(imageVerdict.ok
+      ? `Signature image: ok${imageVerdict.warn ? ' — ' + imageVerdict.warn : ''}`
+      : `Signature image: DROPPED — ${imageVerdict.reason}`);
+    if (!imageVerdict.ok) failures.push(`signature image: ${imageVerdict.reason}`);
+  }
+
   let researched = 0, failed = 0;
   for (const p of todo) {
     try {
@@ -185,7 +195,10 @@ async function main() {
       // Compose the outreach draft here, while the full record is in hand —
       // the sheet only carries the summary, and the email needs the receipts.
       try {
-        const seq = composeSequence(record, a, p);
+        const seq = composeSequence(record, a, p, {
+          imageVerified: IMAGE().url ? imageVerdict.ok : undefined,
+          imageReason: imageVerdict.reason,
+        });
         p.outreachSubject = seq.steps[0].subject;
         p.outreachBody = seq.steps[0].body;
         p.outreachBodyHtml = seq.steps[0].html;

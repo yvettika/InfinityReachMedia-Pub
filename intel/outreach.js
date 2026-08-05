@@ -12,7 +12,7 @@
 
 const { collect } = require('./lib/collect');
 const { analyze, INDUSTRIES } = require('./lib/model');
-const { composeSequence } = require('./lib/outreach');
+const { composeSequence, verifySignatureImage, IMAGE } = require('./lib/outreach');
 const { toProspect } = require('./lib/rows');
 
 const USAGE = `
@@ -20,8 +20,29 @@ Preview outreach for one prospect
 
   node intel/outreach.js <domain> [--industry <key>]
 
-  --industry   ${Object.keys(INDUSTRIES).filter(k => !k.startsWith('_')).join(' | ')}
+  --industry     ${Object.keys(INDUSTRIES).filter(k => !k.startsWith('_')).join(' | ')}
+  --check-image  verify OUTREACH_SIGNATURE_IMAGE_URL resolves, then exit
 `;
+
+async function checkImage() {
+  const cfg = IMAGE();
+  if (!cfg.url) {
+    console.error('OUTREACH_SIGNATURE_IMAGE_URL is not set — no image would be used.');
+    process.exit(2);
+  }
+  console.log(`Checking ${cfg.url} …`);
+  const v = await verifySignatureImage();
+  if (v.ok) {
+    console.log(`  ok — ${v.type}${v.bytes ? `, ${Math.round(v.bytes / 1024)}KB` : ''}`);
+    if (v.warn) console.log(`  warning: ${v.warn}`);
+    console.log(`  alt text: "${cfg.alt}"`);
+    console.log(`  width: ${cfg.width}px · on steps: ${cfg.steps.join(', ')}`);
+  } else {
+    console.error(`  FAILED — ${v.reason}`);
+    console.error('  Emails would be composed without the image rather than with a broken one.');
+    process.exit(1);
+  }
+}
 
 async function main() {
   const args = process.argv.slice(2);
@@ -33,8 +54,10 @@ async function main() {
   let domain = null, industry = 'default';
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--industry') industry = args[++i];
+    else if (args[i] === '--check-image') { await checkImage(); return; }
     else domain = args[i];
   }
+  if (!domain) { console.log(USAGE); process.exit(2); }
 
   const record = await collect(domain, { placesKey: process.env.GOOGLE_PLACES_API_KEY });
   if (!record.signals) {

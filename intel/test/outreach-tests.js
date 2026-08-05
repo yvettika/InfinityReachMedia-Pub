@@ -13,7 +13,9 @@
  */
 
 const assert = require('assert');
-const { composeSequence, openingObservation, toHtml } = require('../lib/outreach');
+const http = require('http');
+const { composeSequence, openingObservation, toHtml,
+        verifySignatureImage, resetImageCheck } = require('../lib/outreach');
 
 let passed = 0, failed = 0;
 function test(name, fn) {
@@ -314,6 +316,90 @@ const analysis = (over = {}) => ({
     });
 
     clearImageEnv();
+  }
+
+  console.log('\nimage preflight — a broken URL must never ship');
+  {
+    const srv = http.createServer((req, res) => {
+      if (req.url === '/good.jpg') {
+        res.writeHead(200, { 'content-type': 'image/jpeg', 'content-length': '48000' });
+        return res.end('x'.repeat(48000));
+      }
+      if (req.url === '/huge.gif') {
+        res.writeHead(200, { 'content-type': 'image/gif', 'content-length': '3000000' });
+        return res.end('x');
+      }
+      if (req.url === '/page.html') {
+        res.writeHead(200, { 'content-type': 'text/html' });
+        return res.end('<html>not an image</html>');
+      }
+      res.writeHead(404, { 'content-type': 'text/plain' });
+      res.end('nope');
+    });
+    await new Promise(r => srv.listen(0, '127.0.0.1', r));
+    const base = `http://127.0.0.1:${srv.address().port}`;
+
+    resetImageCheck();
+    const good = await verifySignatureImage(base + '/good.jpg');
+    test('a real image passes and reports its size', () => {
+      assert.strictEqual(good.ok, true);
+      assert.match(good.type, /image\/jpeg/);
+      assert.strictEqual(good.bytes, 48000);
+      assert.ok(!good.warn);
+    });
+
+    resetImageCheck();
+    const missing = await verifySignatureImage(base + '/nope.jpg');
+    test('a missing file fails with a readable reason', () => {
+      assert.strictEqual(missing.ok, false);
+      assert.match(missing.reason, /HTTP 404/);
+    });
+
+    resetImageCheck();
+    const notImage = await verifySignatureImage(base + '/page.html');
+    test('a URL that serves HTML is rejected — a typo pointing at a page', () => {
+      assert.strictEqual(notImage.ok, false);
+      assert.match(notImage.reason, /not an image/);
+    });
+
+    resetImageCheck();
+    const huge = await verifySignatureImage(base + '/huge.gif');
+    test('a heavy image passes but warns', () => {
+      assert.strictEqual(huge.ok, true);
+      assert.match(huge.warn, /heavy/);
+    });
+
+    test('a failed preflight drops the image instead of shipping it broken', () => {
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = base + '/nope.jpg';
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' },
+        { imageVerified: false, imageReason: 'HTTP 404 — the file is not there' });
+      for (const step of seq.steps) {
+        assert.strictEqual(step.hasImage, false, `step ${step.n} still carries a broken image`);
+        assert.ok(!/<img/.test(step.html));
+      }
+      assert.ok(seq.notes.some(n => /dropped/i.test(n) && /404/.test(n)));
+      assert.strictEqual(seq.canSend, true, 'a bad image should not block the whole send');
+      delete process.env.OUTREACH_SIGNATURE_IMAGE_URL;
+    });
+
+    let hits = 0;
+    const counting = http.createServer((req, res) => {
+      hits++;
+      res.writeHead(200, { 'content-type': 'image/png', 'content-length': '100' });
+      res.end('x');
+    });
+    await new Promise(r => counting.listen(0, '127.0.0.1', r));
+    resetImageCheck();
+    const url = `http://127.0.0.1:${counting.address().port}/a.png`;
+    await verifySignatureImage(url);
+    await verifySignatureImage(url);
+    await verifySignatureImage(url);
+    test('repeat checks of the same URL hit the network once', () => {
+      assert.strictEqual(hits, 1, `fetched ${hits} times — would be once per prospect`);
+    });
+    counting.close();
+    srv.close();
+    resetImageCheck();
   }
 
   console.log('\nopener priority');

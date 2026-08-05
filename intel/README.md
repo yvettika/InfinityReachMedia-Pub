@@ -225,6 +225,17 @@ What the renderer guarantees, all tested:
 - the unsubscribe merge token survives HTML escaping (a test asserts it,
   because escaping it would silently break compliance on every send)
 
+**The URL is preflighted once per run.** A typo, a file that was never
+deployed, or a rename would otherwise put a grey broken-image box in every
+email in the campaign — and it is invisible to whoever set the config, because
+their own client has it cached. If the URL does not return an actual image, the
+image is dropped and the emails send plain, with a note explaining why. Check it
+yourself before trusting it:
+
+```bash
+node intel/outreach.js --check-image
+```
+
 The image must be hosted at a public URL, not embedded — base64 inflates the
 message and is itself a spam signal. Your site already serves `/images/`
 publicly, so dropping a file there and pointing at it works. **Animated GIFs:
@@ -494,7 +505,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 151 tests, no network or API key needed
+node intel/test/all.js           # 158 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

@@ -124,6 +124,13 @@ channel-bound and is the entire integration.
 `https://infinityreachmedia.com/images/<name>`. Add a repository **variable**
 (not a secret — it is a public URL) `OUTREACH_SIGNATURE_IMAGE_URL`.
 
+Verify it before trusting it:
+```
+node intel/outreach.js --check-image
+```
+Every run preflights the URL anyway and drops the image rather than shipping a
+broken one, but checking once yourself is faster than reading a log.
+
 It stays off the first email on purpose: a first touch from a domain with no
 history is under maximum scrutiny, an image raises the image-to-text ratio, and
 Outlook blocks remote images by default — so the first impression becomes a grey

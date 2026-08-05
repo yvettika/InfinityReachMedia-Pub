@@ -60,6 +60,50 @@ const IMAGE = () => {
   };
 };
 
+/**
+ * Preflight the signature image before it goes anywhere near a send.
+ *
+ * A wrong URL — a typo, a file that was never deployed, a rename — puts a grey
+ * broken-image box in every email in the campaign. That is strictly worse than
+ * sending no image at all, and it is invisible to whoever wrote the config
+ * because their own client caches it. So the URL is fetched once per run and
+ * the image is dropped if it does not resolve to an actual image.
+ *
+ * Cached at module level: a 200-prospect run checks once.
+ */
+let imageCheck = null;
+
+async function verifySignatureImage(url, { timeoutMs = 8000 } = {}) {
+  const target = url || IMAGE().url;
+  if (!target) return { ok: false, reason: 'no image configured', checked: false };
+  if (imageCheck && imageCheck.url === target) return imageCheck.result;
+
+  let result;
+  try {
+    const res = await fetch(target, { method: 'GET', signal: AbortSignal.timeout(timeoutMs) });
+    const type = res.headers.get('content-type') || '';
+    if (!res.ok) {
+      result = { ok: false, checked: true, reason: `HTTP ${res.status} — the file is not there` };
+    } else if (!/^image\//i.test(type)) {
+      result = { ok: false, checked: true, reason: `served as "${type}", not an image` };
+    } else {
+      const bytes = Number(res.headers.get('content-length')) || null;
+      result = { ok: true, checked: true, type, bytes };
+      // Not fatal, but a 3MB GIF is a spam signal and a bad phone experience.
+      if (bytes && bytes > 1_500_000) {
+        result.warn = `${Math.round(bytes / 1024)}KB is heavy for an email image`;
+      }
+    }
+  } catch (err) {
+    result = { ok: false, checked: true, reason: `could not be fetched (${err.message})` };
+  }
+
+  imageCheck = { url: target, result };
+  return result;
+}
+
+function resetImageCheck() { imageCheck = null; }
+
 const SENDER = () => ({
   name: process.env.OUTREACH_FROM_NAME || 'Yvette Kahn',
   company: process.env.OUTREACH_COMPANY || 'Infinity Reach Media',
@@ -211,7 +255,7 @@ function toHtml(text, { image = null } = {}) {
  * @param {object} prospect  the flat prospect record (name, niche, city…)
  * @returns {{ steps: Array, blockers: string[], notes: string[], evidence: string[], canSend: boolean }}
  */
-function composeSequence(record, analysis, prospect = {}) {
+function composeSequence(record, analysis, prospect = {}, opts = {}) {
   const sender = SENDER();
   // blockers stop a send (compliance, missing data). notes are things a
   // reviewer should know that are not reasons to hold the email.
@@ -305,6 +349,17 @@ function composeSequence(record, analysis, prospect = {}) {
   ].join('\n');
 
   const image = IMAGE();
+
+  // `imageVerified === false` means the preflight ran and the URL is bad. Drop
+  // the image rather than shipping a broken box; a plain email is fine.
+  if (image.url && opts.imageVerified === false) {
+    notes.push(
+      `Signature image dropped — ${opts.imageReason || 'the URL did not resolve to an image'}. ` +
+      'The emails still send, without it.'
+    );
+    image.url = null;
+  }
+
   if (image.url && image.steps.includes(1)) {
     notes.push(
       'Signature image is enabled on step 1. That is the riskiest touch to put ' +
@@ -352,4 +407,4 @@ function composeSequence(record, analysis, prospect = {}) {
   };
 }
 
-module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, IMAGE, footer, toHtml, callToAction, asSentence };
+module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, IMAGE, footer, toHtml, callToAction, asSentence, verifySignatureImage, resetImageCheck };
