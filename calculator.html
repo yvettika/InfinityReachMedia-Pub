@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Leak Calculator — What's Your Business Losing? | Infinity Reach Media</title>
+<meta name="description" content="A free, interactive calculator that shows business owners exactly how much revenue is leaking out of their business to fixable gaps — missed calls, slow follow-up, no-shows, unworked leads — and how much is recoverable.">
+<link rel="canonical" href="https://infinityreachmedia.com/calculator">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0D0D0D">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="Revenue Leak Calculator — What's Your Business Losing?">
+<meta property="og:description" content="See exactly how much revenue is slipping out of your business to missed calls, slow follow-up, no-shows, and unworked leads — and what's recoverable.">
+<meta property="og:url" content="https://infinityreachmedia.com/calculator">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Revenue Leak Calculator","url":"https://infinityreachmedia.com/calculator","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Infinity Reach Media"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0D0D0D;--paper:#F7F4EF;--pink:#E91E8C;--purple:#7B2FBE;--gold:#F0B429;
+    --muted:rgba(247,244,239,.68);--line:rgba(247,244,239,.14);
+    --panel:rgba(247,244,239,.03);--panel2:rgba(247,244,239,.06);--radius:22px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(600px 400px at 85% -5%, rgba(233,30,140,.14), transparent 60%),
+               radial-gradient(600px 420px at 8% 108%, rgba(123,47,190,.12), transparent 60%);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  nav .navwrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1040px;margin:0 auto;padding:0 22px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--paper);text-decoration:none}
+  .logo em{color:var(--pink);font-style:normal}.logo .mark{width:34px;height:34px;object-fit:contain}
+  nav a.bk{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
+  .wrap{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 22px 80px}
+  .eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2rem,5.2vw,3.1rem);line-height:1.08;margin:18px 0 16px}
+  h1 em{font-style:normal;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #intro{padding-top:56px}
+  .lede{color:var(--muted);font-size:1.1rem;max-width:56ch;margin-bottom:28px}
+  .lede b{color:var(--paper)}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;border:none;cursor:pointer;text-decoration:none;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;
+    padding:15px 32px;border-radius:999px;box-shadow:0 10px 34px rgba(233,30,140,.35);transition:transform .18s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--paper);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--muted)}
+  .btn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
+
+  .hero-points{display:grid;gap:10px;margin:26px 0 34px}
+  .hero-points div{display:flex;gap:10px;align-items:baseline;color:var(--muted);font-size:15px}
+  .hero-points div::before{content:"—";color:var(--gold);font-weight:700}
+
+  /* wizard */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:32px clamp(20px,4vw,38px);margin-top:26px}
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .progress .bar{flex:1;height:4px;background:var(--panel2);border-radius:4px;overflow:hidden}
+  .progress .bar i{display:block;height:100%;background:linear-gradient(95deg,var(--pink),var(--gold));width:0;transition:width .3s ease}
+  .progress .label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .step-kicker{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  h2{font-family:'Playfair Display',serif;font-weight:800;font-size:1.6rem;line-height:1.15;margin-bottom:6px}
+  .step-sub{color:var(--muted);font-size:15px;margin-bottom:22px}
+
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;margin-bottom:7px}
+  .field .hint{font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:0;color:var(--muted);font-size:13px;display:block;margin-top:2px;text-transform:none}
+  input[type=text],input[type=email],input[type=number],select{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+    color:var(--paper);font-size:16px;font-family:'DM Sans',sans-serif;padding:13px 14px;outline:none;transition:border-color .15s}
+  select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239a9aa3' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:38px}
+  input:focus,select:focus{border-color:var(--pink)}
+  input::placeholder{color:rgba(247,244,239,.35)}
+  input[type=number]{-moz-appearance:textfield}
+  input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+  /* sliders */
+  .slider-block{margin-bottom:24px}
+  .slider-block .toprow{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+  .slider-block .toprow label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;margin:0}
+  .slider-block output{font-family:'Playfair Display',serif;font-weight:800;color:var(--paper);font-size:1.35rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .slider-block .hint{font-weight:400;color:var(--muted);font-size:13px;display:block;margin-top:2px}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:rgba(247,244,239,.12);outline:none;margin:14px 0 2px;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(120deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 12px rgba(233,30,140,.45)}
+  input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:linear-gradient(120deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 12px rgba(233,30,140,.45)}
+  input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .navrow{display:flex;justify-content:space-between;align-items:center;margin-top:26px}
+  .back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;font-family:'DM Sans',sans-serif;padding:8px 4px}
+  .back:hover{color:var(--paper)}
+
+  /* results */
+  .tierchip{display:inline-block;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.35);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+  .bignum{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,9vw,4.2rem);line-height:1;font-variant-numeric:tabular-nums;
+    background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .bignum-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:8px 0 26px}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px}
+  .compare .box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .compare .box .v{font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;font-variant-numeric:tabular-nums}
+  .compare .box .k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+  .compare .box.pot{border-color:rgba(240,180,41,.4)}
+  .compare .box.pot .v{color:var(--gold)}
+  .meter{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden;margin:16px 0 6px}
+  .meter i{display:block;height:100%;background:linear-gradient(95deg,var(--pink),var(--gold));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+  .meter-label{font-size:12.5px;color:var(--muted);margin-bottom:26px}
+  .meter-label b{color:var(--gold)}
+  .profitline{font-size:14px;color:var(--muted);background:var(--panel2);border-radius:12px;padding:13px 16px;margin-bottom:30px}
+  .profitline b{color:var(--paper)}
+  h3{font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem;margin:26px 0 4px}
+  .opps-sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .opp{display:flex;gap:14px;align-items:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px}
+  .opp .rank{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--pink);font-size:15px;padding-top:1px}
+  .opp .body{flex:1}
+  .opp .body b{font-size:15px;display:block}
+  .opp .body p{font-size:13.5px;color:var(--muted);margin-top:3px}
+  .opp .val{font-family:'Playfair Display',serif;font-weight:800;color:var(--gold);font-size:1.05rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+  details{margin:26px 0;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--muted)}
+  details p{font-size:13.5px;color:var(--muted);margin-top:10px}
+  /* ROI block */
+  .roi{background:var(--panel);border:1px solid rgba(240,180,41,.35);border-radius:var(--radius);padding:32px clamp(20px,4vw,38px);margin-top:30px}
+  .roi .kicker{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .roi h3{margin:0 0 4px}
+  .roi .roi-sub{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .roi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+  .roi-grid .box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .roi-grid .box .v{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;font-variant-numeric:tabular-nums}
+  .roi-grid .box .k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .roi-grid .box.ret{border-color:rgba(240,180,41,.4)}
+  .roi-grid .box.ret .v{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .payback{font-size:14px;color:var(--muted);background:var(--panel2);border-radius:12px;padding:13px 16px;margin-bottom:22px}
+  .payback b{color:var(--gold)}
+  .roi .btnrow{text-align:center}
+  .roi .fine{font-size:12px;color:rgba(247,244,239,.45);margin-top:14px;text-align:center}
+  @media(max-width:520px){.roi-grid{grid-template-columns:1fr}}
+  .cta-block{background:linear-gradient(160deg,rgba(233,30,140,.14),rgba(123,47,190,.10));border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:30px;text-align:center}
+  .cta-block h3{margin-top:0}
+  .cta-block p{color:var(--muted);font-size:14.5px;max-width:46ch;margin:8px auto 20px}
+  .disclaimer{font-size:12.5px;color:rgba(247,244,239,.45);margin-top:30px;line-height:1.6}
+  footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+  footer a{color:var(--gold)}
+  .hidden{display:none}
+  .fade{animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .err{color:var(--pink);font-size:13px;margin-top:8px;display:none}
+  @media(max-width:520px){
+    .compare{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<script src="/js/analytics.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="navwrap">
+    <a class="logo" href="/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo"> Infinity <em>Reach</em> Media</a>
+    <a class="bk" href="/book">Book a demo →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <section id="intro" class="fade">
+    <span class="eyebrow">Free · 2 Minutes · All Four Leaks</span>
+    <h1>How much revenue is <em>leaking</em> out of your business?</h1>
+    <p class="lede">Most businesses quietly lose <b>20–40% of their potential revenue</b> to fixable gaps — missed calls, slow follow-up, no-shows, and leads that never get worked. Answer a few quick questions and see exactly how much you're leaving on the table, and how much of it is recoverable.</p>
+    <div class="hero-points">
+      <div>Takes about 2 minutes — round numbers are fine</div>
+      <div>Built on real conversion and response-time benchmarks</div>
+      <div>Get a ranked breakdown of your biggest revenue leaks</div>
+    </div>
+    <button class="btn" onclick="go(1)">Calculate what I'm losing →</button>
+  </section>
+
+  <!-- WIZARD -->
+  <section id="wizard" class="hidden">
+    <div class="card">
+      <div class="progress">
+        <div class="bar"><i id="progbar"></i></div>
+        <div class="label" id="proglabel">Step 1 of 4</div>
+      </div>
+      <div id="steps"></div>
+      <div class="navrow">
+        <button class="back" id="backbtn" onclick="back()">← Back</button>
+        <button class="btn" id="nextbtn" onclick="next()">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL GATE -->
+  <section id="gate" class="hidden">
+    <div class="card fade">
+      <div class="step-kicker">Almost there</div>
+      <h2>Your numbers are ready.</h2>
+      <p class="step-sub">Tell us where to send your breakdown and you'll see your full revenue-leak report on the next screen.</p>
+      <div class="field"><label>Your name</label><input type="text" id="lead_name" placeholder="Alex Rivera"></div>
+      <div class="field"><label>Business name</label><input type="text" id="lead_artist" placeholder="e.g. Rivera Consulting"></div>
+      <div class="field"><label>Email</label><input type="email" id="lead_email" placeholder="you@email.com"></div>
+      <p class="err" id="gate_err">Please enter your name and a valid email.</p>
+      <div class="navrow">
+        <button class="back" onclick="go(STEPS.length)">← Back</button>
+        <button class="btn" id="revealbtn" onclick="submitLead()">Show me what I'm losing →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden"></section>
+
+</div>
+
+<footer><div>© 2026 Infinity Reach Media · Orange County, CA · <a href="/agentic-flows">See the agents</a> · <a href="/scorecard">Take the scorecard</a></div></footer>
+
+<script>
+/* ---------- config ---------- */
+const LEAD_API = 'https://revenue-leak-calculator-three.vercel.app/api/lead';
+const TIER_NAMES = ['Emerging Business','Growing Business','Established Business'];
+
+/* Each leak maps to a fixable problem (and an Infinity Reach Media solution).
+   recover(base) returns the estimated MONTHLY dollars recoverable by fixing it.
+   base = { V:avg customer value, L:monthly leads, C:close rate 0-1,
+            baseCustomers:L*C, unclosed:L*(1-C) } */
+const LEAKS = [
+  {id:'missed', label:'Missed & unanswered calls', fix:'A 24/7 AI receptionist answers every call so no lead ever hits voicemail.',
+   recover:(b,v)=> (b.L*0.6*(pct(v.missedCallPct,25)/100)) * b.C * b.V * 0.8},
+  {id:'speed', label:'Slow lead response', fix:'Instant lead response (speed-to-lead) — the first business to reply wins the deal.',
+   recover:(b,v)=> b.baseCustomers * ({0:0,1:0.08,2:0.18,3:0.30}[+v.responseTime||0]) * b.V * 0.7},
+  {id:'noshow', label:'No-shows & cancellations', fix:'Automated reminders and confirmations that cut no-shows dramatically.',
+   recover:(b,v)=> b.baseCustomers * (pct(v.noShowPct,20)/100) * b.V * 0.55},
+  {id:'nurture', label:'Leads that never get worked', fix:'A follow-up sequence that works every lead until they buy or say stop.',
+   recover:(b,v)=> b.unclosed * ({0:0,1:0.015,2:0.03,3:0.05}[+v.followUps||0]) * b.V},
+  {id:'reactivate', label:'Past customers never brought back', fix:'A win-back campaign to your past customers — revenue you already earned once.',
+   recover:(b,v)=> (+v.reactivation===1 ? b.baseCustomers * 0.12 * b.V : 0)},
+  {id:'reviews', label:'Weak reviews & reputation', fix:'An automated review engine that turns happy customers into 5-star proof.',
+   recover:(b,v)=> b.baseCustomers * ({0:0,1:0.04,2:0.08}[+v.reviews||0]) * b.V},
+];
+function pct(x, dflt){ const n = parseFloat(x); return isNaN(n)||n<0 ? dflt : Math.min(n,100); }
+
+/* slider field builder: live-updating value pill, formatted per kind */
+function sl(id, label, hint, min, max, step, val, kind){
+  return `<div class="slider-block">
+    <div class="toprow"><label for="${id}">${label}</label><output id="${id}_out" for="${id}"></output></div>
+    ${hint?`<span class="hint">${hint}</span>`:''}
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}" data-fmt="${kind}">
+  </div>`;
+}
+
+/* wizard steps */
+const STEPS = [
+  {kicker:'Step 1 · Your numbers', title:'The basics', sub:'Rough numbers are fine — this is about the shape of your business, not exact accounting. Drag the sliders.',
+   html:
+    sl('avgValue','Average value of a new customer','First sale or lifetime value — your call. What is one new customer worth to you?',50,10000,50,1500,'money')+
+    sl('leads','New leads / inquiries per month','Calls, form fills, DMs, walk-ins — everyone who reaches out',5,500,5,100,'num')+
+    sl('closeRate','Current close rate','Of those leads, roughly what % become paying customers?',1,80,1,20,'pct')},
+  {kicker:'Step 2 · Speed & capture', title:'The front door', sub:'Most lost revenue never even makes it to a real conversation.',
+   html:
+    sl('missedCallPct','% of inbound calls that go unanswered','Voicemail, after hours, on another line, busy. The industry average is around 25%.',0,60,1,25,'pct')+`
+    <div class="field"><label>How fast do you follow up with a new lead?
+      <select id="responseTime">
+        <option value="0">Within 5 minutes</option>
+        <option value="1" selected>Within an hour</option>
+        <option value="2">Same day</option>
+        <option value="3">Next day or longer</option>
+      </select></label></div>`},
+  {kicker:'Step 3 · Conversion & retention', title:'The back door', sub:'The leads you do reach still leak out here.',
+   html:
+    sl('noShowPct','% of booked appointments that no-show or cancel','The typical rate is around 20%.',0,50,1,20,'pct')+`
+    <div class="field"><label>How many times do you follow up before giving up on a lead?
+      <select id="followUps">
+        <option value="0">5 or more</option>
+        <option value="1">3–4 times</option>
+        <option value="2" selected>1–2 times</option>
+        <option value="3">Rarely follow up</option>
+      </select></label></div>
+    <div class="field"><label>Do you regularly win back past customers?
+      <select id="reactivation">
+        <option value="0">Yes, we have a system</option>
+        <option value="1" selected>No — they just go quiet</option>
+      </select></label></div>
+    <div class="field"><label>Are you actively collecting reviews?
+      <select id="reviews">
+        <option value="0">Yes, consistently</option>
+        <option value="1" selected>Sometimes</option>
+        <option value="2">Rarely or never</option>
+      </select></label></div>`},
+  {kicker:'Step 4 · Marketing', title:'What you spend to get leads', sub:'Optional — lets us show what these leaks cost you on top of your ad spend.',
+   html:
+    sl('adSpend','Monthly marketing / advertising spend','Ads, agencies, lead vendors — leave at $0 if none',0,20000,250,0,'money')},
+];
+
+/* ---------- state & rendering ---------- */
+let cur = 0;
+const state = {};
+
+const stepsEl = document.getElementById('steps');
+const FMTS = { money: v=>'$'+(+v).toLocaleString('en-US'), pct: v=>v+'%', num: v=>(+v).toLocaleString('en-US') };
+function syncOut(inp){
+  const out = document.getElementById(inp.id+'_out');
+  if(out) out.textContent = (FMTS[inp.dataset.fmt]||FMTS.num)(inp.value);
+}
+stepsEl.addEventListener('input', e=>{ if(e.target.type==='range') syncOut(e.target); });
+function renderStep(i){
+  const s = STEPS[i-1];
+  stepsEl.innerHTML = `<div class="fade"><div class="step-kicker">${s.kicker}</div><h2>${s.title}</h2><p class="step-sub">${s.sub}</p>${s.html}</div>`;
+  document.querySelectorAll('#steps input, #steps select').forEach(inp=>{ if(state[inp.id] !== undefined) inp.value = state[inp.id]; });
+  document.querySelectorAll('#steps input[type=range]').forEach(syncOut);
+  document.getElementById('progbar').style.width = (i/STEPS.length*100)+'%';
+  document.getElementById('proglabel').textContent = `Step ${i} of ${STEPS.length}`;
+  document.getElementById('backbtn').style.visibility = i===1 ? 'hidden' : 'visible';
+  document.getElementById('nextbtn').textContent = i===STEPS.length ? 'See my results →' : 'Next →';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function saveStep(){ document.querySelectorAll('#steps input, #steps select').forEach(inp=>{ state[inp.id] = inp.value; }); }
+function show(id){ ['intro','wizard','gate','results'].forEach(x=>document.getElementById(x).classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
+function go(i){ cur = i; if(i===0){show('intro');return;} if(i<=STEPS.length){show('wizard');renderStep(i);return;} if(i===STEPS.length+1){show('gate');window.scrollTo({top:0});return;} }
+function next(){ saveStep(); go(cur+1); }
+function back(){ saveStep(); go(cur-1); }
+
+/* ---------- math ---------- */
+const N = id => { const v = parseFloat(state[id]); return isNaN(v)||v<0 ? 0 : v; };
+const has = id => state[id] !== undefined && state[id] !== '';
+
+function compute(){
+  const V = N('avgValue') || 1000;
+  const L = N('leads') || 0;
+  const C = has('closeRate') ? Math.min(N('closeRate'),100)/100 : 0.20;
+  const baseCustomers = L * C;
+  const b = { V, L, C, baseCustomers, unclosed: L*(1-C) };
+
+  // tier by current monthly revenue (label only)
+  const monthlyRev = baseCustomers * V;
+  let tier = 0;
+  if(monthlyRev >= 50000 || L >= 150) tier = 2;
+  else if(monthlyRev >= 10000 || L >= 40) tier = 1;
+
+  const items = LEAKS.map(k => {
+    const amt = Math.max(0, k.recover(b, state) || 0);
+    return { label:k.label, fix:k.fix, monthly:amt };
+  });
+
+  const monthlyRecover = items.reduce((a,i)=>a+i.monthly,0);
+  const currentAnnual = monthlyRev * 12;
+  const annualRecover = monthlyRecover * 12;
+  const potentialAnnual = currentAnnual + annualRecover;
+  const spend = N('adSpend');
+  const opps = items.filter(i=>i.monthly>1).sort((a,b)=>b.monthly-a.monthly);
+
+  // investment anchor: floor scales with tier ("price the leak"), ceiling fixed
+  const FLOORS = [2500, 3000, 3500];
+  const feeLow = FLOORS[tier], feeHigh = 4000;
+  const roi = monthlyRecover >= feeLow * 2 ? {
+    feeLow, feeHigh,
+    multLow: monthlyRecover / feeHigh,
+    multHigh: monthlyRecover / feeLow,
+    paybackWeeks: Math.max(1, Math.ceil(feeLow / (monthlyRecover / 4.33)))
+  } : null;
+
+  return { tier, currentAnnual, potentialAnnual, annualRecover, monthlyRecover, spend, opps, roi,
+           extraCustomers: V>0 ? monthlyRecover / V : 0 };
+}
+
+const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+const fmtMult = n => (Math.round(n*10)/10).toLocaleString('en-US');
+
+/* ---------- lead + results ---------- */
+async function submitLead(){
+  const name = document.getElementById('lead_name').value.trim();
+  const artist = document.getElementById('lead_artist').value.trim();
+  const email = document.getElementById('lead_email').value.trim();
+  const ok = name && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  document.getElementById('gate_err').style.display = ok ? 'none' : 'block';
+  if(!ok) return;
+  const btn = document.getElementById('revealbtn');
+  btn.disabled = true; btn.textContent = 'Crunching your numbers…';
+  const r = compute();
+  try{
+    await fetch(LEAD_API, {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, artist, email, tier:TIER_NAMES[r.tier], answers: state,
+        summary:{currentAnnual:Math.round(r.currentAnnual), potentialAnnual:Math.round(r.potentialAnnual),
+                 gap:Math.round(r.annualRecover), topOpportunities:r.opps.map(o=>`${o.label}: ${fmt(o.monthly*12)}/yr`),
+                 roiShown: r.roi ? `${fmt(r.monthlyRecover)}/mo recoverable vs from ${fmt(r.roi.feeLow)}/mo → ${fmtMult(r.roi.multLow)}–${fmtMult(r.roi.multHigh)}x, payback wk ${r.roi.paybackWeeks}` : 'not shown (leak below threshold)'}})});
+  }catch(e){}
+  renderResults(r, name.split(' ')[0]);
+}
+
+function renderResults(r, firstName){
+  const el = document.getElementById('results');
+  const pct = r.potentialAnnual>0 ? Math.round(r.currentAnnual/r.potentialAnnual*100) : 100;
+  el.innerHTML = `<div class="fade">
+    <div class="card">
+      <div class="tierchip">${TIER_NAMES[r.tier]}</div>
+      <h2>${firstName ? firstName + ', h' : 'H'}ere's what's slipping through the cracks.</h2>
+      <p class="step-sub">Based on your numbers and standard conversion benchmarks:</p>
+      <div class="bignum" id="gapnum">$0</div>
+      <div class="bignum-label">Recoverable revenue leaking out, per year</div>
+      <div class="compare">
+        <div class="box"><div class="v">${fmt(r.currentAnnual)}</div><div class="k">Current annual revenue</div></div>
+        <div class="box pot"><div class="v">${fmt(r.potentialAnnual)}</div><div class="k">With the leaks fixed</div></div>
+      </div>
+      <div class="meter"><i id="meterbar"></i></div>
+      <div class="meter-label">You're capturing <b id="pct">–</b> of the revenue your current traffic could produce.</div>
+      ${r.spend>0?`<div class="profitline">You spend <b>${fmt(r.spend)}/mo</b> to generate leads — plugging these leaks is like adding <b>${Math.round(r.extraCustomers*10)/10} more customers a month</b> from traffic you're already paying for.</div>`:''}
+      <h3>Your biggest revenue leaks</h3>
+      <p class="opps-sub">Ranked by what each one is costing you per year:</p>
+      ${r.opps.map((o,i)=>`<div class="opp"><div class="rank">${i+1}</div><div class="body"><b>${o.label}</b><p>${o.fix}</p></div><div class="val">${fmt(o.monthly*12)}/yr</div></div>`).join('')}
+      <details><summary>How these numbers are calculated</summary>
+        <p>Estimates combine the numbers you entered with conservative industry benchmarks — average unanswered-call rates, speed-to-lead conversion research, typical no-show rates, and follow-up drop-off. Each leak is discounted to a realistic recovery rate (we assume you fix most, not all, of it). Where you left a field blank, we used a standard benchmark. These are directional planning figures, not a guarantee.</p>
+      </details>
+    </div>
+    ${r.roi ? `
+    <div class="roi">
+      <div class="kicker">The math on fixing it</div>
+      <h3>What plugging these leaks costs — and returns.</h3>
+      <p class="roi-sub">Based on your numbers, a done-for-you system sized to a ${TIER_NAMES[r.tier].toLowerCase()}:</p>
+      <div class="roi-grid">
+        <div class="box"><div class="v">${fmt(r.monthlyRecover)}</div><div class="k">Recovered / month</div></div>
+        <div class="box"><div class="v">from ${fmt(r.roi.feeLow)}</div><div class="k">Investment / month</div></div>
+        <div class="box ret"><div class="v">${fmtMult(r.roi.multLow)}–${fmtMult(r.roi.multHigh)}×</div><div class="k">Return on every dollar</div></div>
+      </div>
+      <div class="payback">At that recovery rate, the system pays for itself in about <b>${r.roi.paybackWeeks === 1 ? 'the first week' : 'week ' + r.roi.paybackWeeks}</b> — every month after that is margin you were already earning and losing.</div>
+      <div class="btnrow"><a class="btn" href="/book">Book my leak-fix call →</a></div>
+      <p class="fine">Exact pricing depends on which leaks we plug — that's what the call is for. No pressure, no obligation.</p>
+    </div>
+    <div class="cta-block">
+      <h3>Every one of these leaks is fixable.</h3>
+      <p>Missed calls, slow follow-up, no-shows, dead leads, silent past customers — Infinity Reach Media builds the systems that plug each one and put that revenue back in your pocket.</p>
+      <a class="btn ghost" href="/agentic-flows">See how the systems work →</a>
+    </div>` : `
+    <div class="cta-block">
+      <h3>The good news: every one of these is fixable.</h3>
+      <p>Missed calls, slow follow-up, no-shows, dead leads, silent past customers — Infinity Reach Media builds the systems that plug each of these leaks and put that revenue back in your pocket.</p>
+      <a class="btn" href="/book">Show me how to fix this →</a>
+    </div>`}
+    <p class="disclaimer">These figures are directional estimates based on self-reported inputs and industry benchmarks, provided for planning and educational purposes. They are not a guarantee, promise, or projection of income or results. Actual outcomes depend on your market, offer, and execution.</p>
+  </div>`;
+  show('results');
+  window.scrollTo({top:0});
+  const target = Math.max(r.annualRecover,0), dur = 1400, t0 = performance.now();
+  const gapEl = document.getElementById('gapnum');
+  (function tick(t){ const p = Math.min((t-t0)/dur,1), e = 1-Math.pow(1-p,3);
+    gapEl.textContent = fmt(target*e); if(p<1) requestAnimationFrame(tick); })(t0);
+  setTimeout(()=>{ document.getElementById('meterbar').style.width = Math.max(pct,2)+'%';
+    document.getElementById('pct').textContent = pct+'%'; },150);
+}
+</script>
+</body>
+</html>
