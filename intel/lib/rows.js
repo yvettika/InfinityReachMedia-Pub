@@ -37,6 +37,9 @@ const COLUMNS = [
   { key: 'notes',       header: 'Owner Notes',     from: () => '',              humanOwned: true },
   { key: 'firstSeen',   header: 'First Seen',      from: p => p.firstSeen || today(), preserve: true },
   { key: 'lastUpdated', header: 'Last Updated',    from: () => today() },
+  // Human-owned: the sync writes "drafted" once, then a person moves it to
+  // approved / sent / replied. Approval is the one step that is not automated.
+  { key: 'outreach',    header: 'Outreach',        from: p => p.outreachBody ? 'drafted' : '', humanOwned: true },
 
   // --- state columns: the replacement for prospects/*.json ----------------
   // Place IDs are the one Places field storable indefinitely under their
@@ -75,6 +78,9 @@ function toProspect(candidate = {}, analysis = null) {
     firstSeen: candidate.firstSeen || null,
     researchedAt: candidate.researchedAt || null,
     syncState: candidate.syncState || '',
+    outreachSubject: candidate.outreachSubject || null,
+    outreachBody: candidate.outreachBody || null,
+    outreachEvidence: candidate.outreachEvidence || null,
     score: null, band: null, recoverableAnnual: null, topLeak: null, leadAgent: null,
     // Populated once contact discovery exists; the CRM push falls back to
     // phone as the identifier until then.
@@ -131,6 +137,7 @@ function fromRow(row, idx) {
     placeId: get('Place ID') || '',
     researchedAt: get('Researched') || null,
     syncState: get('Sync State') || '',
+    outreach: get('Outreach') || '',
   };
 }
 

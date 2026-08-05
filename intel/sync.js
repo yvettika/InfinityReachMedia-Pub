@@ -42,6 +42,7 @@ const { toProspect } = require('./lib/rows');
 const { createState } = require('./lib/state');
 const ghl = require('./lib/ghl');
 const slack = require('./lib/slack');
+const { composeSequence } = require('./lib/outreach');
 
 const USAGE = `
 Daily sync — find, research, and push prospects (sheet-backed, stateless)
@@ -101,6 +102,8 @@ async function main() {
   const newThisRun = [];
   const researchedThisRun = [];
   const failures = [];
+  // Deduped: one missing postal address is one problem, not one per prospect.
+  const outreachBlockers = new Set();
 
   // ---- 1. discovery -------------------------------------------------------
   if (o.doDiscover) {
@@ -160,6 +163,18 @@ async function main() {
         topLeak: fresh.topLeak, leadAgent: fresh.leadAgent,
         syncState: 'researched',
       });
+      // Compose the outreach draft here, while the full record is in hand —
+      // the sheet only carries the summary, and the email needs the receipts.
+      try {
+        const seq = composeSequence(record, a, p);
+        p.outreachSubject = seq.steps[0].subject;
+        p.outreachBody = seq.steps[0].body;
+        p.outreachEvidence = seq.evidence.join('\n');
+        if (seq.blockers.length) outreachBlockers.add(seq.blockers[0]);
+      } catch (err) {
+        log(`  ! ${p.domain} — outreach draft failed: ${err.message}`);
+      }
+
       researched++;
       researchedThisRun.push(p);
       log(`  ✓ ${p.domain} — ${p.score}/100 ${p.band}`);
@@ -239,6 +254,11 @@ async function main() {
         if (ghlFailed) process.exitCode = 1;
       }
     }
+  }
+
+  for (const b of outreachBlockers) {
+    log(`Outreach: ${b}`);
+    failures.push(`outreach: ${b}`);
   }
 
   // ---- 5. Slack digest ----------------------------------------------------

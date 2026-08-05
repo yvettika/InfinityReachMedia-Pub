@@ -22,7 +22,7 @@
 #                                but not the observed signals.
 #
 # The pipeline is resolved by NAME at runtime (GHL has no create-pipeline
-# API): create "Outbound Prospecting" with a "New Lead" stage once in the GHL
+# API): create "Infinity Reach Media" with a "New Lead" stage once in the GHL
 # UI and the next run finds it. Until it exists, the job degrades to
 # contacts-only and says so in the log rather than failing.
 
@@ -73,6 +73,6 @@ jobs:
           PROSPECT_SHEET_ID: ${{ secrets.PROSPECT_SHEET_ID }}
           GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
           GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
-          GHL_PIPELINE_NAME: Outbound Prospecting
+          GHL_PIPELINE_NAME: Infinity Reach Media
           GHL_STAGE_NAME: New Lead
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

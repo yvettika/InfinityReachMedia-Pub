@@ -112,6 +112,58 @@ it. Until it exists, the run degrades to contacts-only and says so, rather
 than failing — and the error message lists the pipelines that *do* exist.
 Explicit `GHL_PIPELINE_ID`/`GHL_STAGE_ID` still win when set.
 
+## Email outreach
+
+```bash
+node intel/outreach.js baxterheating.com --industry hvac   # read the words first
+```
+
+`sync.js` composes a three-step sequence for every researched prospect and
+writes step 1 onto the GHL contact as **Outreach Subject** / **Outreach Body**
+/ **Outreach Evidence**, tagged `outreach-draft`. Nothing sends. The sync never
+applies `outreach-ready` — approval is the one step that is not automated, and
+the site promises exactly that: *"You approve the list first."*
+
+The composer follows the same rule as the brief: **only observed facts get
+asserted**. It opens from `observedFacts()` — the receipts-carrying list — and
+if there is nothing verified to open with, it opens with a question rather than
+inventing one. Specific things it will not do:
+
+- assert an absence ("you don't have a chatbot") — tested against
+- quote a dollar figure off the per-100-leads placeholder. When lead volume was
+  never observed, that number describes a hypothetical business, so step 2 asks
+  for their number instead of quoting one.
+- use a review count too small to be flattering as an opener
+- end with "we recently helped another HVAC company…" boilerplate
+
+`blockers` stop a send (no postal address, no email address). `notes` are for
+the reviewer and do not hold the email.
+
+Deliberately not an LLM. A template seeded with real observations beats a model
+asked to be clever about a business it cannot see, and every sentence traces to
+a fetch. When an LLM does go in, it belongs here — rewriting a line whose facts
+are already fixed — not choosing what to claim.
+
+### Where this lives in GHL
+
+| What | Where in GHL |
+|---|---|
+| The draft | Contact record → Custom Fields → Outreach Subject / Body / Evidence |
+| The trigger | Contact tag `outreach-draft` (by sync) → `outreach-ready` (by you) |
+| The sequence | Automation → Workflows |
+| The template | Marketing → Emails → Templates — one template rendering `{{contact.outreach_body}}` |
+| Replies | Conversations |
+| Sending domain | Settings → Email Services |
+| Footer address | Settings → Business Profile |
+
+One template, not one per prospect: the personalisation lives in the contact
+field, so the workflow sends `{{contact.outreach_subject}}` /
+`{{contact.outreach_body}}` and every prospect gets their own words.
+
+**Do not send cold from `infinityreachmedia.com`.** That domain carries client
+work and the GHL sending reputation. Add a separate domain under Settings →
+Email Services and warm it for three to four weeks before real volume.
+
 ### Why the REST APIs and not the connectors
 
 Two capabilities the MCP connectors don't have, which decided the design:
@@ -130,7 +182,7 @@ export GOOGLE_SERVICE_ACCOUNT_JSON=/path/to/key.json
 export PROSPECT_SHEET_ID=...                  # the spreadsheet
 export GHL_API_KEY=...                        # Private Integration token
 export GHL_LOCATION_ID=...
-export GHL_PIPELINE_NAME="Outbound Prospecting"   # looked up at runtime
+export GHL_PIPELINE_NAME="Infinity Reach Media"   # looked up at runtime
 export GHL_STAGE_NAME="New Lead"                  # default if unset
 export SLACK_WEBHOOK_URL=...                      # optional: digest channel
 ```
@@ -355,7 +407,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 99 tests, no network or API key needed
+node intel/test/all.js           # 116 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

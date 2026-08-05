@@ -74,6 +74,14 @@ const CUSTOM_FIELDS = [
   { name: 'Top Leak', dataType: 'TEXT', value: p => p.topLeak },
   { name: 'Lead Agent', dataType: 'TEXT', value: p => p.leadAgent },
   { name: 'Prospect Niche', dataType: 'TEXT', value: p => p.niche },
+
+  // The outreach draft lives on the contact so a GHL workflow can send it with
+  // a merge tag. One template that renders {{contact.outreach_body}} beats a
+  // template per prospect, and it means a human can read and edit the exact
+  // words in the CRM before anything goes out.
+  { name: 'Outreach Subject', dataType: 'TEXT', value: p => p.outreachSubject },
+  { name: 'Outreach Body', dataType: 'LARGE_TEXT', value: p => p.outreachBody },
+  { name: 'Outreach Evidence', dataType: 'LARGE_TEXT', value: p => p.outreachEvidence },
 ];
 
 /**
@@ -126,6 +134,11 @@ async function upsertContact(prospect, opts = {}) {
       'outbound-prospect',
       `niche-${prospect.niche}`,
       `leak-band-${String(prospect.band || 'unknown').toLowerCase().replace(/\s+/g, '-')}`,
+      // The workflow trigger. `outreach-draft` means a draft exists and is
+      // waiting for a human; `outreach-ready` is applied by a person after
+      // approving, and that is the tag the sending workflow listens for.
+      // The sync never applies `outreach-ready` — approval is not automatable.
+      ...(prospect.outreachBody ? ['outreach-draft'] : []),
     ],
   };
   if (prospect.email) body.email = prospect.email;
