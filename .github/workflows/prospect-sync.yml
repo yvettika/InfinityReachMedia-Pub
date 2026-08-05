@@ -13,6 +13,9 @@
 #   PROSPECT_SHEET_ID            the spreadsheet ID
 #   GHL_API_KEY                  GHL Private Integration token
 #   GHL_LOCATION_ID              GHL location
+#   OUTREACH_POSTAL_ADDRESS      PO box / virtual office for the CAN-SPAM
+#                                footer. Without it drafts compose but are
+#                                blocked from sending.
 #   SLACK_WEBHOOK_URL            optional: Slack Incoming Webhook — posts a
 #                                digest of new leads to the channel it's bound
 #                                to. Without it, Slack is skipped silently.
@@ -76,3 +79,12 @@ jobs:
           GHL_PIPELINE_NAME: Infinity Reach Media
           GHL_STAGE_NAME: New Lead
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Outreach. Without OUTREACH_POSTAL_ADDRESS every draft is blocked on
+          # CAN-SPAM, so the run still works but nothing becomes sendable.
+          OUTREACH_POSTAL_ADDRESS: ${{ secrets.OUTREACH_POSTAL_ADDRESS }}
+          OUTREACH_FROM_NAME: Yvette Kahn
+          OUTREACH_COMPANY: Infinity Reach Media
+          OUTREACH_BOOKING_URL: https://infinityreachmedia.com/book
+          # Public URL, not a secret. Unset = no image on any step.
+          OUTREACH_SIGNATURE_IMAGE_URL: ${{ vars.OUTREACH_SIGNATURE_IMAGE_URL }}
+          OUTREACH_SIGNATURE_IMAGE_ALT: Yvette Kahn, Infinity Reach Media
