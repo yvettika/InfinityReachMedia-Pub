@@ -26,6 +26,40 @@ const { observedFacts } = require('./brief');
  * first; one-click unsubscribe on every message."
  */
 
+/**
+ * Signature image / GIF.
+ *
+ * Off for step 1 by default, and that default is the important part. In cold
+ * email a first touch from a domain with no sending history is already under
+ * scrutiny; an embedded image raises the image-to-text ratio, adds a remote
+ * fetch, and many clients (Outlook especially) block remote images outright —
+ * so the recipient's first impression of you becomes a grey broken-image box.
+ * Plain-looking first touches also just read as a person writing, which is the
+ * whole angle here.
+ *
+ * By step 2 they have seen your name once and the risk profile changes, which
+ * is why the default is steps 2 and 3. Override with OUTREACH_IMAGE_STEPS if
+ * you want to test otherwise — testing it is reasonable, defaulting to it is
+ * not.
+ *
+ * A note on GIFs specifically: Outlook renders only the first frame, so any
+ * animated GIF has to make sense as a still image. And keep it small — a
+ * 3MB GIF is both a spam signal and a bad experience on a phone.
+ */
+const IMAGE = () => {
+  const url = process.env.OUTREACH_SIGNATURE_IMAGE_URL || null;
+  const steps = (process.env.OUTREACH_IMAGE_STEPS || '2,3')
+    .split(',').map(s => Number(s.trim())).filter(Number.isFinite);
+  return {
+    url,
+    alt: process.env.OUTREACH_SIGNATURE_IMAGE_ALT ||
+      `${process.env.OUTREACH_FROM_NAME || 'Yvette Kahn'}, ${process.env.OUTREACH_COMPANY || 'Infinity Reach Media'}`,
+    width: Number(process.env.OUTREACH_SIGNATURE_IMAGE_WIDTH || 120),
+    steps,
+    linkUrl: process.env.OUTREACH_SIGNATURE_IMAGE_LINK || null,
+  };
+};
+
 const SENDER = () => ({
   name: process.env.OUTREACH_FROM_NAME || 'Yvette Kahn',
   company: process.env.OUTREACH_COMPANY || 'Infinity Reach Media',
@@ -107,13 +141,57 @@ function footer(sender, { includeUnsubscribe = true } = {}) {
   return lines.join('\n');
 }
 
+const escapeHtml = s => String(s)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;');
+
+/**
+ * Plain text → HTML, keeping it deliberately plain.
+ *
+ * No layout tables, no branded header, no button. A cold email that looks like
+ * a newsletter gets read as one. The only markup is what's needed for links,
+ * line breaks, and the optional signature image.
+ */
+function toHtml(text, { image = null } = {}) {
+  const linkify = str => str.replace(
+    /(https?:\/\/[^\s<]+[^\s<.,;:)])/g,
+    url => `<a href="${escapeHtml(url)}" style="color:#0b62d0">${escapeHtml(url)}</a>`
+  );
+
+  // Escape first, then restore the two things that must stay live: the
+  // unsubscribe merge token and any URLs.
+  const body = linkify(escapeHtml(text))
+    .replace(/\{\{\s*unsubscribe_link\s*\}\}/g,
+      '<a href="{{unsubscribe_link}}" style="color:#0b62d0">unsubscribe here</a>')
+    .replace(/\n/g, '<br>\n');
+
+  let imageHtml = '';
+  if (image && image.url) {
+    // width/height as attributes, not just CSS: when a client blocks the
+    // image, a sized box with alt text degrades far better than a giant
+    // placeholder shoving the signature around.
+    const img =
+      `<img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.alt)}" ` +
+      `width="${image.width}" style="width:${image.width}px;max-width:100%;` +
+      `border-radius:6px;display:block;margin-top:12px" />`;
+    imageHtml = image.linkUrl
+      ? `\n<a href="${escapeHtml(image.linkUrl)}">${img}</a>`
+      : `\n${img}`;
+  }
+
+  return (
+    `<div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;` +
+    `font-size:15px;line-height:1.5;color:#222">\n${body}${imageHtml}\n</div>`
+  );
+}
+
 /**
  * Compose the sequence.
  *
  * @param {object} record    collector output (needed for the observed facts)
  * @param {object} analysis  model output
  * @param {object} prospect  the flat prospect record (name, niche, city…)
- * @returns {{ steps: Array, blockers: string[], evidence: string[], canSend: boolean }}
+ * @returns {{ steps: Array, blockers: string[], notes: string[], evidence: string[], canSend: boolean }}
  */
 function composeSequence(record, analysis, prospect = {}) {
   const sender = SENDER();
@@ -208,6 +286,15 @@ function composeSequence(record, analysis, prospect = {}) {
     footer(sender),
   ].join('\n');
 
+  const image = IMAGE();
+  if (image.url && image.steps.includes(1)) {
+    notes.push(
+      'Signature image is enabled on step 1. That is the riskiest touch to put ' +
+      'an image on — no sending history, and blocked images render as a grey box. ' +
+      'Worth A/B testing, not worth assuming.'
+    );
+  }
+
   const steps = [
     {
       n: 1,
@@ -229,7 +316,10 @@ function composeSequence(record, analysis, prospect = {}) {
       subject: `Closing the file on this`,
       body: step3Body,
     },
-  ];
+  ].map(step => {
+    const withImage = !!image.url && image.steps.includes(step.n);
+    return { ...step, hasImage: withImage, html: toHtml(step.body, { image: withImage ? image : null }) };
+  });
 
   return {
     steps,
@@ -244,4 +334,4 @@ function composeSequence(record, analysis, prospect = {}) {
   };
 }
 
-module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, footer };
+module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, IMAGE, footer, toHtml };

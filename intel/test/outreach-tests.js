@@ -13,7 +13,7 @@
  */
 
 const assert = require('assert');
-const { composeSequence, openingObservation } = require('../lib/outreach');
+const { composeSequence, openingObservation, toHtml } = require('../lib/outreach');
 
 let passed = 0, failed = 0;
 function test(name, fn) {
@@ -196,6 +196,96 @@ const analysis = (over = {}) => ({
       assert.ok(seq.evidence.length > 0);
       assert.ok(seq.evidence.some(e => /Google Places|Meta Pixel/.test(e)));
     });
+  }
+
+  console.log('\nsignature image / GIF');
+  {
+    const IMG = 'https://infinityreachmedia.com/images/yvette.gif';
+    const clearImageEnv = () => {
+      delete process.env.OUTREACH_SIGNATURE_IMAGE_URL;
+      delete process.env.OUTREACH_IMAGE_STEPS;
+      delete process.env.OUTREACH_SIGNATURE_IMAGE_LINK;
+      delete process.env.OUTREACH_SIGNATURE_IMAGE_ALT;
+    };
+
+    test('no image configured → clean HTML, no <img> anywhere', () => {
+      clearImageEnv();
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      for (const step of seq.steps) {
+        assert.strictEqual(step.hasImage, false);
+        assert.ok(!/<img/.test(step.html), `step ${step.n} has an image it should not`);
+      }
+    });
+
+    test('by default the image is off for step 1 and on for 2 and 3', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      assert.strictEqual(seq.steps[0].hasImage, false, 'step 1 carries an image by default');
+      assert.strictEqual(seq.steps[1].hasImage, true);
+      assert.strictEqual(seq.steps[2].hasImage, true);
+      assert.match(seq.steps[1].html, /<img src="https:\/\/infinityreachmedia\.com\/images\/yvette\.gif"/);
+    });
+
+    test('enabling it on step 1 is allowed but flagged', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      process.env.OUTREACH_IMAGE_STEPS = '1,2,3';
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      assert.strictEqual(seq.steps[0].hasImage, true, 'override was ignored');
+      assert.ok(seq.notes.some(n => /step 1/i.test(n)), 'no warning about step 1');
+      assert.strictEqual(seq.canSend, true, 'a warning should not block the send');
+    });
+
+    test('the image degrades when a client blocks it — alt text and a fixed width', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      process.env.OUTREACH_SIGNATURE_IMAGE_ALT = 'Yvette Kahn, Infinity Reach Media';
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      const html = seq.steps[1].html;
+      assert.match(html, /alt="Yvette Kahn, Infinity Reach Media"/, 'no alt text for blocked images');
+      assert.match(html, /width="120"/, 'no width attribute — blocked images will shove the layout');
+      assert.match(html, /max-width:100%/, 'not responsive on a phone');
+    });
+
+    test('a plain-text body always exists alongside the HTML', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      for (const step of seq.steps) {
+        assert.ok(step.body && step.body.length > 100, `step ${step.n} has no text part`);
+        assert.ok(!/<img|<div/.test(step.body), `step ${step.n} text part contains markup`);
+      }
+    });
+
+    test('the email is never image-only — text carries the message', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      const html = seq.steps[1].html;
+      const textLen = html.replace(/<[^>]+>/g, '').trim().length;
+      assert.ok(textLen > 300, `only ${textLen} chars of text around the image — reads as an image-only send`);
+    });
+
+    test('the image can be made clickable', () => {
+      clearImageEnv();
+      process.env.OUTREACH_SIGNATURE_IMAGE_URL = IMG;
+      process.env.OUTREACH_SIGNATURE_IMAGE_LINK = 'https://infinityreachmedia.com/book';
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      assert.match(seq.steps[1].html, /<a href="https:\/\/infinityreachmedia\.com\/book"><img/);
+    });
+
+    test('HTML conversion escapes content but keeps links and unsubscribe live', () => {
+      const html = toHtml('Hi <script>alert(1)</script> & "co"\nSee https://example.com/x\n{{unsubscribe_link}}');
+      assert.ok(!/<script>/.test(html), 'script tag survived escaping');
+      assert.match(html, /&lt;script&gt;/);
+      assert.match(html, /&amp;/);
+      assert.match(html, /<a href="https:\/\/example\.com\/x"/, 'URL was not linkified');
+      assert.match(html, /href="\{\{unsubscribe_link\}\}"/, 'unsubscribe token was destroyed');
+      assert.match(html, /<br>/);
+    });
+
+    clearImageEnv();
   }
 
   console.log('\nopener priority');

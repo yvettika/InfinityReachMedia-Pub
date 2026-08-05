@@ -57,6 +57,11 @@ async function main() {
     console.log('\nNo verified facts — the opener falls back to a question.');
   }
 
+  if (seq.notes.length) {
+    console.log('\nNotes:');
+    for (const n of seq.notes) console.log(`  · ${n}`);
+  }
+
   if (seq.blockers.length) {
     console.log('\nBlockers (nothing can send until these clear):');
     for (const b of seq.blockers) console.log(`  ! ${b}`);
@@ -66,6 +71,7 @@ async function main() {
     console.log(`\n${'-'.repeat(72)}`);
     console.log(`STEP ${step.n}${step.sendAfterDays ? ` — day ${step.sendAfterDays}` : ' — immediately'}`);
     console.log(`Subject: ${step.subject}`);
+    console.log(`Image:   ${step.hasImage ? 'yes — signature image attached' : 'no'}`);
     console.log('-'.repeat(72));
     console.log(step.body);
   }

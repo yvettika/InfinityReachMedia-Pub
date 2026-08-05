@@ -80,6 +80,7 @@ function toProspect(candidate = {}, analysis = null) {
     syncState: candidate.syncState || '',
     outreachSubject: candidate.outreachSubject || null,
     outreachBody: candidate.outreachBody || null,
+    outreachBodyHtml: candidate.outreachBodyHtml || null,
     outreachEvidence: candidate.outreachEvidence || null,
     score: null, band: null, recoverableAnnual: null, topLeak: null, leadAgent: null,
     // Populated once contact discovery exists; the CRM push falls back to

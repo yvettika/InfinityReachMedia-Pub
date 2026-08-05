@@ -169,6 +169,7 @@ async function main() {
         const seq = composeSequence(record, a, p);
         p.outreachSubject = seq.steps[0].subject;
         p.outreachBody = seq.steps[0].body;
+        p.outreachBodyHtml = seq.steps[0].html;
         p.outreachEvidence = seq.evidence.join('\n');
         if (seq.blockers.length) outreachBlockers.add(seq.blockers[0]);
       } catch (err) {

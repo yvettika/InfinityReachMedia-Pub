@@ -81,6 +81,7 @@ const CUSTOM_FIELDS = [
   // words in the CRM before anything goes out.
   { name: 'Outreach Subject', dataType: 'TEXT', value: p => p.outreachSubject },
   { name: 'Outreach Body', dataType: 'LARGE_TEXT', value: p => p.outreachBody },
+  { name: 'Outreach Body HTML', dataType: 'LARGE_TEXT', value: p => p.outreachBodyHtml },
   { name: 'Outreach Evidence', dataType: 'LARGE_TEXT', value: p => p.outreachEvidence },
 ];
 

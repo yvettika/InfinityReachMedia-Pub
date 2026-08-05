@@ -144,14 +144,49 @@ asked to be clever about a business it cannot see, and every sentence traces to
 a fetch. When an LLM does go in, it belongs here — rewriting a line whose facts
 are already fixed — not choosing what to claim.
 
+### A photo or GIF of yourself
+
+Supported, and off for step 1 by default — that default is the point.
+
+```bash
+export OUTREACH_SIGNATURE_IMAGE_URL=https://infinityreachmedia.com/images/yvette.gif
+export OUTREACH_SIGNATURE_IMAGE_ALT="Yvette Kahn, Infinity Reach Media"
+export OUTREACH_SIGNATURE_IMAGE_WIDTH=120        # default
+export OUTREACH_IMAGE_STEPS=2,3                  # default — 1,2,3 to override
+export OUTREACH_SIGNATURE_IMAGE_LINK=https://infinityreachmedia.com/book  # optional
+```
+
+A first touch from a domain with no sending history is already under scrutiny.
+An embedded image raises the image-to-text ratio, adds a remote fetch, and many
+clients — Outlook especially — block remote images outright, so the recipient's
+first impression becomes a grey broken-image box. By step 2 they have seen the
+name once and the risk profile changes. Enabling it on step 1 is allowed and
+adds a note to the draft rather than silently going along with it.
+
+What the renderer guarantees, all tested:
+
+- a plain-text part always exists alongside the HTML, with no markup in it
+- `alt` text and a `width` attribute, so a blocked image degrades to a sized
+  box with your name in it instead of shoving the signature around
+- `max-width:100%` so it does not blow out a phone
+- never image-only — the text carries the message on its own
+- the unsubscribe merge token survives HTML escaping (a test asserts it,
+  because escaping it would silently break compliance on every send)
+
+The image must be hosted at a public URL, not embedded — base64 inflates the
+message and is itself a spam signal. Your site already serves `/images/`
+publicly, so dropping a file there and pointing at it works. **Animated GIFs:
+Outlook renders only the first frame**, so any animation has to make sense as a
+still, and keep the file small.
+
 ### Where this lives in GHL
 
 | What | Where in GHL |
 |---|---|
-| The draft | Contact record → Custom Fields → Outreach Subject / Body / Evidence |
+| The draft | Contact record → Custom Fields → Outreach Subject / Body / Body HTML / Evidence |
 | The trigger | Contact tag `outreach-draft` (by sync) → `outreach-ready` (by you) |
 | The sequence | Automation → Workflows |
-| The template | Marketing → Emails → Templates — one template rendering `{{contact.outreach_body}}` |
+| The template | Marketing → Emails → Templates — one template rendering `{{contact.outreach_body_html}}` |
 | Replies | Conversations |
 | Sending domain | Settings → Email Services |
 | Footer address | Settings → Business Profile |
@@ -407,7 +442,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 116 tests, no network or API key needed
+node intel/test/all.js           # 124 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —
