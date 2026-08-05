@@ -201,17 +201,19 @@ async function collect(input, options = {}) {
   // Contact discovery runs over the same pages we already downloaded — the
   // /contact page is in `combined`, which is exactly where the address lives.
   // No extra requests.
-  // `contactDomain` lets a caller state the brand domain explicitly when the
-  // site is served from somewhere else — a staging host, an agency's server, or
-  // a fixture. Defaults to the domain we fetched.
-  record.emailCandidates = extractEmails(combined, opts.contactDomain || record.domain);
+  // The brand's own domain, which is not always the host we fetched — a
+  // staging box, an agency's server, a redirect, a fixture. Both the contact
+  // extractor and the Places website match test "does this belong to them?",
+  // so they must agree on what "them" means.
+  record.brandDomain = opts.contactDomain || record.domain;
+  record.emailCandidates = extractEmails(combined, record.brandDomain);
   record.email = pickBest(record.emailCandidates);
 
   // Google Places is optional. Without a key the system still works; it just
   // has to ask about review volume on the call instead of knowing it.
   if (opts.placesKey) {
     try {
-      record.places = await fetchPlaces(record.domain, allSignals.title, opts);
+      record.places = await fetchPlaces(record.brandDomain, allSignals.title, opts);
     } catch (err) {
       record.errors.push(`Places lookup failed: ${err.message}`);
     }

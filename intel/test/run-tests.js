@@ -120,6 +120,14 @@ async function research(fixture, industry, extra = {}) {
       assert.strictEqual(neglected.record.email.verified, null);
     });
 
+    test('the brand domain drives both contact matching and Places matching', () => {
+      // These both answer "does this belong to the prospect?", so they have to
+      // agree on what the prospect's domain is. They did not, once: Places was
+      // handed the fetch host, silently failed its website check, and every
+      // email lost its opening line while the score still used the review data.
+      assert.strictEqual(neglected.record.brandDomain, 'baxterheatingair.com');
+    });
+
     test('an address on an unrelated domain is not adopted', () => {
       // Same fixture, but without telling collect the brand domain: the
       // addresses now look like somebody else's and must be dropped.
