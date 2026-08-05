@@ -50,6 +50,80 @@ place IDs only — the one Places field that may be kept indefinitely — and wh
 a company is kept, every storefront sharing its domain is marked seen too, so
 the next sweep cannot resurface it through a second location.
 
+## Daily sync — spreadsheet and CRM
+
+```bash
+node intel/sync.js --dry-run                                  # see what it would do
+node intel/sync.js --discover --area orange-county            # the full daily job
+```
+
+Finds new prospects, researches the ones not researched yet, re-researches
+anything older than 30 days, then writes the Google Sheet and pushes into
+GoHighLevel.
+
+**Safe to run twice.** Every write is keyed on the prospect's domain:
+
+- the sheet merges by domain, so a re-run updates a row instead of adding one
+- **Status and Owner Notes are never overwritten** — they belong to whoever is
+  working the list. A daily job that reset "Booked" to "Not contacted" would be
+  worse than no automation.
+- First Seen survives every update; Last Updated moves
+- rows you added by hand are left alone
+- the CRM upserts the contact and reuses an existing opportunity rather than
+  creating a second one
+
+Prospects land in GHL tagged `outbound-prospect`, `niche-<x>` and
+`leak-band-<x>`, with an opportunity in the configured stage. The deal's
+monetary value is the **prospect's** estimated recoverable revenue — the number
+the whole call is built around — not a guess at our fee.
+
+### Why the REST APIs and not the connectors
+
+Two capabilities the MCP connectors don't have, which decided the design:
+
+- **Google Sheets** — Drive can create a file and read it, but there is no
+  append or update. Daily row updates need the Sheets API.
+- **GoHighLevel** — the connector exposes `update-opportunity` but no *create*.
+  Putting a prospect "under New Leads" means creating one, so this uses the GHL
+  REST API with a Private Integration token.
+
+### Configuration
+
+```bash
+export GOOGLE_PLACES_API_KEY=...              # discovery + review data
+export GOOGLE_SERVICE_ACCOUNT_JSON=/path/to/key.json
+export PROSPECT_SHEET_ID=...                  # the spreadsheet
+export GHL_API_KEY=...                        # Private Integration token
+export GHL_LOCATION_ID=...
+export GHL_PIPELINE_ID=...                    # which pipeline
+export GHL_STAGE_ID=...                       # the "New Lead" stage
+```
+
+Anything unset is skipped with a message rather than failing the run, so the
+sheet half works before the CRM half is configured. The service account needs
+no broad permissions: create it in Google Cloud, then share the one spreadsheet
+with its email address as an Editor. That share is the entire grant.
+
+### Running it every day
+
+`sync.js` is an ordinary command, so any scheduler works. On a Mac that is
+launchd or cron:
+
+```
+0 7 * * *  cd /path/to/InfinityReachMedia-Pub && /usr/bin/node intel/sync.js --discover --area orange-county >> ~/prospect-sync.log 2>&1
+```
+
+State lives in `prospects/` — which businesses have been seen, which have been
+researched, and when. Keep it. Without it a run still produces correct output
+(the sheet merge and CRM upsert both dedupe on their own) but it re-discovers
+and re-researches everything from scratch every day, which costs Places
+requests for no benefit.
+
+That is also what makes a stateless cloud runner (GitHub Actions and similar)
+awkward: `prospects/` cannot be committed to this repo, because it names real
+businesses and the repo is public. Running it where the state can persist is
+the simple answer.
+
 ---
 
 ## The one rule everything else serves
@@ -244,7 +318,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 58 tests, no network or API key needed
+node intel/test/all.js           # 76 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —
