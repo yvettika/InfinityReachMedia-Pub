@@ -147,7 +147,26 @@ business run by Steve is exactly the failure this system exists to avoid — it
 proves in one word that nobody looked. The composer greets without a name until
 one can be verified.
 
-## Email outreach
+## Outbound is Jarvis's — see [JARVIS.md](JARVIS.md)
+
+As of 2026-08-05 the deployed `lead-generation-agent` ("Jarvis") owns all
+outbound: it has the live Resend sender on the warmed subdomain, Slack approval
+links, reply classification and the global suppression list. This repo
+researches and hands findings over via `signals.intel` on Jarvis's prospects.
+
+`OUTBOUND_OWNER` defaults to `jarvis`, which turns off draft composition here.
+The composer below still exists and is still tested — set `OUTBOUND_OWNER=intel`
+to use it — but under the default it does not run.
+
+```bash
+node intel/jarvis-enrich.js --dry-run    # research Jarvis's prospects
+node intel/jarvis-enrich.js --limit 15   # write signals.intel back
+```
+
+Discovery also skips any business Jarvis already owns, so the two pipelines
+cannot both email the same company.
+
+## Email outreach (only when OUTBOUND_OWNER=intel)
 
 ```bash
 node intel/outreach.js baxterheating.com --industry hvac   # read the words first
@@ -516,7 +535,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 162 tests, no network or API key needed
+node intel/test/all.js           # 176 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

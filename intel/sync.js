@@ -43,6 +43,16 @@ const { createState } = require('./lib/state');
 const ghl = require('./lib/ghl');
 const slack = require('./lib/slack');
 const { composeSequence, verifySignatureImage, IMAGE } = require('./lib/outreach');
+const jarvis = require('./lib/jarvis');
+
+// Who sends cold email. Decision 2026-08-05: Jarvis (the deployed
+// lead-generation-agent) owns ALL outbound — it has the live Resend sender,
+// the Slack approval links, reply handling and the global suppression list.
+// With OUTBOUND_OWNER=jarvis (the default) this sync does research + CRM +
+// sheet only: it composes no outreach, writes no Outreach fields, applies no
+// outreach-draft tag. Set OUTBOUND_OWNER=intel to restore the old behaviour
+// if Jarvis is ever retired.
+const outboundOwner = () => (process.env.OUTBOUND_OWNER || 'jarvis').toLowerCase();
 
 const USAGE = `
 Daily sync — find, research, and push prospects (sheet-backed, stateless)
@@ -122,7 +132,26 @@ async function main() {
         seenPlaceIds: placeIds,
         onProgress: () => {},
       });
-      for (const c of found.candidates) {
+
+      // One company, one owner. Anything Jarvis already has a prospect row for
+      // stays Jarvis's — running two pipelines at the same business is how it
+      // gets emailed twice.
+      let fresh = found.candidates;
+      if (jarvis.configured()) {
+        try {
+          const theirs = await jarvis.knownDomains();
+          const split = jarvis.dedupeAgainstJarvis(found.candidates, theirs);
+          fresh = split.mine;
+          if (split.theirs.length) {
+            log(`  ${split.theirs.length} candidate(s) already in Jarvis — left to Jarvis.`);
+          }
+        } catch (err) {
+          log(`  ! Jarvis dedupe unavailable (${err.message}) — keeping all candidates.`);
+          failures.push(`jarvis dedupe: ${err.message.slice(0, 100)}`);
+        }
+      }
+
+      for (const c of fresh) {
         if (work.has(c.domain)) continue;
         const p = toProspect({ ...c, placeId: c.placeIds || c.placeId });
         work.set(c.domain, p);
@@ -158,8 +187,9 @@ async function main() {
       (todo.length < needs.length ? ` · doing ${todo.length} this run` : ''));
 
   // Preflight the signature image once, before composing anything with it.
+  // (Skipped entirely under Jarvis ownership — nothing here composes email.)
   let imageVerdict = { ok: false, checked: false };
-  if (IMAGE().url) {
+  if (outboundOwner() !== 'jarvis' && IMAGE().url) {
     imageVerdict = await verifySignatureImage();
     log(imageVerdict.ok
       ? `Signature image: ok${imageVerdict.warn ? ' — ' + imageVerdict.warn : ''}`
@@ -192,20 +222,23 @@ async function main() {
         topLeak: fresh.topLeak, leadAgent: fresh.leadAgent,
         syncState: 'researched',
       });
-      // Compose the outreach draft here, while the full record is in hand —
-      // the sheet only carries the summary, and the email needs the receipts.
-      try {
-        const seq = composeSequence(record, a, p, {
-          imageVerified: IMAGE().url ? imageVerdict.ok : undefined,
-          imageReason: imageVerdict.reason,
-        });
-        p.outreachSubject = seq.steps[0].subject;
-        p.outreachBody = seq.steps[0].body;
-        p.outreachBodyHtml = seq.steps[0].html;
-        p.outreachEvidence = seq.evidence.join('\n');
-        if (seq.blockers.length) outreachBlockers.add(seq.blockers[0]);
-      } catch (err) {
-        log(`  ! ${p.domain} — outreach draft failed: ${err.message}`);
+      // Outreach drafts only when this repo owns outbound. Under Jarvis
+      // ownership the handoff is jarvis-enrich.js writing signals.intel; a
+      // parallel draft path here would just race it.
+      if (outboundOwner() !== 'jarvis') {
+        try {
+          const seq = composeSequence(record, a, p, {
+            imageVerified: IMAGE().url ? imageVerdict.ok : undefined,
+            imageReason: imageVerdict.reason,
+          });
+          p.outreachSubject = seq.steps[0].subject;
+          p.outreachBody = seq.steps[0].body;
+          p.outreachBodyHtml = seq.steps[0].html;
+          p.outreachEvidence = seq.evidence.join('\n');
+          if (seq.blockers.length) outreachBlockers.add(seq.blockers[0]);
+        } catch (err) {
+          log(`  ! ${p.domain} — outreach draft failed: ${err.message}`);
+        }
       }
 
       researched++;

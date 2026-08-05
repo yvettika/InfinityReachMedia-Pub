@@ -19,6 +19,11 @@
 #   SLACK_WEBHOOK_URL            optional: Slack Incoming Webhook — posts a
 #                                digest of new leads to the channel it's bound
 #                                to. Without it, Slack is skipped silently.
+#   JARVIS_SUPABASE_URL          the lead-generation-agent's Supabase URL
+#   JARVIS_SUPABASE_KEY          its service-role key. Both from the Vercel
+#                                project lead-generation-agent → Settings →
+#                                Environment Variables (SUPABASE_URL /
+#                                SUPABASE_SERVICE_ROLE_KEY).
 #   INTEL_INDUSTRIES_JSON        optional: the private industries.json body.
 #                                Without it the committed .example priors are
 #                                used, which shifts dollar estimates a little
@@ -79,6 +84,12 @@ jobs:
           GHL_PIPELINE_NAME: Infinity Reach Media
           GHL_STAGE_NAME: New Lead
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Jarvis bridge — same Supabase the lead-generation-agent uses.
+          # When set: discovery skips businesses Jarvis owns, outreach is
+          # composed by Jarvis (OUTBOUND_OWNER defaults to jarvis), and the
+          # enrich step below writes research into Jarvis's prospects.
+          JARVIS_SUPABASE_URL: ${{ secrets.JARVIS_SUPABASE_URL }}
+          JARVIS_SUPABASE_KEY: ${{ secrets.JARVIS_SUPABASE_KEY }}
           # Outreach. Without OUTREACH_POSTAL_ADDRESS every draft is blocked on
           # CAN-SPAM, so the run still works but nothing becomes sendable.
           OUTREACH_POSTAL_ADDRESS: ${{ secrets.OUTREACH_POSTAL_ADDRESS }}
@@ -88,3 +99,19 @@ jobs:
           # Public URL, not a secret. Unset = no image on any step.
           OUTREACH_SIGNATURE_IMAGE_URL: ${{ vars.OUTREACH_SIGNATURE_IMAGE_URL }}
           OUTREACH_SIGNATURE_IMAGE_ALT: Yvette Kahn, Infinity Reach Media
+
+      # Hand the research to Jarvis: writes signals.intel on its prospects so
+      # its next drafts open with verified facts. No-op if the bridge secrets
+      # are absent.
+      - name: Enrich Jarvis prospects
+        if: always()
+        run: |
+          if [ -n "$JARVIS_SUPABASE_URL" ] && [ -n "$JARVIS_SUPABASE_KEY" ]; then
+            node intel/jarvis-enrich.js --limit 15
+          else
+            echo "Jarvis bridge not configured — skipped."
+          fi
+        env:
+          JARVIS_SUPABASE_URL: ${{ secrets.JARVIS_SUPABASE_URL }}
+          JARVIS_SUPABASE_KEY: ${{ secrets.JARVIS_SUPABASE_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
