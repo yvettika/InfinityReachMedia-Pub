@@ -122,6 +122,24 @@ const QUESTION_BY_LEAK = {
   reviews: 'how do you ask for reviews right now — is it a system, or does someone have to remember?',
 };
 
+/**
+ * The ask gets its own line with blank lines either side.
+ *
+ * Buried at the end of a paragraph, the one question you want answered reads
+ * as part of the pitch and gets skimmed past. On its own it is the thing the
+ * eye lands on, and a reply becomes the obvious next action rather than an
+ * effort. Every step's call to action goes through here so the treatment is
+ * identical across the sequence.
+ */
+function callToAction(text) {
+  return ['', text, ''];
+}
+
+/** Sentence-case a fragment written to sit mid-sentence. */
+function asSentence(s) {
+  return String(s).charAt(0).toUpperCase() + String(s).slice(1);
+}
+
 function topLeakKey(analysis) {
   return analysis?.leaks?.items?.find(i => i.monthly > 0)?.key || 'missed';
 }
@@ -231,8 +249,8 @@ function composeSequence(record, analysis, prospect = {}) {
       ? `${observation.text} — so people are clearly finding you.`
       : `I had a look at ${business} before writing.`,
     '',
-    `Quick question, and I'm genuinely asking rather than pitching: ${question}`,
-    '',
+    `Quick question, and I'm genuinely asking rather than pitching:`,
+    ...callToAction(asSentence(question)),
     'If the answer is "it goes to voicemail and we call back when we can", that\'s the ' +
     'normal answer and it\'s usually the most expensive one in the business.',
     footer(sender),
@@ -268,8 +286,8 @@ function composeSequence(record, analysis, prospect = {}) {
       : `I can't put a number on it without knowing roughly how many enquiries you get in a ` +
         `month — that one figure decides whether this is worth your time or a rounding error. ` +
         `If you tell me, I'll do the maths and send it over either way.`,
-    '',
-    'If it\'s worth ten minutes to find out, my calendar is here: ' + sender.bookingUrl,
+    ...callToAction('Worth ten minutes to find out?'),
+    'My calendar is here: ' + sender.bookingUrl,
     footer(sender),
   ].join('\n');
 
@@ -278,9 +296,9 @@ function composeSequence(record, analysis, prospect = {}) {
     greeting,
     '',
     `Last one from me — I don't want to be the person who keeps emailing.`,
-    '',
-    `If this isn't a priority, just say "not now" and I'll close the file. ` +
-    `If it is, the calendar link is ${sender.bookingUrl}.`,
+    ...callToAction('Is it a bad idea to look at this before the season turns?'),
+    `If it is, just say "not now" and I'll close the file. If it isn't, the calendar ` +
+    `link is ${sender.bookingUrl}.`,
     '',
     'Either way, good luck with the rest of the year.',
     footer(sender),
@@ -334,4 +352,4 @@ function composeSequence(record, analysis, prospect = {}) {
   };
 }
 
-module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, IMAGE, footer, toHtml };
+module.exports = { composeSequence, openingObservation, QUESTION_BY_LEAK, SENDER, IMAGE, footer, toHtml, callToAction, asSentence };

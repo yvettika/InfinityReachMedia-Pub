@@ -55,6 +55,9 @@ Options
   --niches <spec>      core (default) | all | comma-separated keys
   --limit <n>          cap prospects researched this run (default 25)
   --refresh-after <n>  re-research prospects older than n days (default 30)
+  --refresh-drafts     re-research and re-compose every draft still awaiting
+                       approval, so wording changes reach them. Leaves
+                       approved and sent ones alone.
   --sheet-only         skip the CRM push
   --contacts-only      create CRM contacts but no opportunities
   --dir <path>         local-state directory when no sheet is configured
@@ -70,6 +73,7 @@ function parseArgs(argv) {
     else if (a === '--niches') o.niches = argv[++i];
     else if (a === '--limit') o.limit = Number(argv[++i]);
     else if (a === '--refresh-after') o.refreshAfter = Number(argv[++i]);
+    else if (a === '--refresh-drafts') o.refreshDrafts = true;
     else if (a === '--sheet-only') o.sheetOnly = true;
     else if (a === '--contacts-only') o.contactsOnly = true;
     else if (a === '--dir') o.dir = argv[++i];
@@ -131,7 +135,16 @@ async function main() {
 
   // ---- 2. research --------------------------------------------------------
   const staleBefore = Date.now() - o.refreshAfter * 86400000;
+
+  // A draft still sitting in "drafted" has not been approved or sent, so
+  // rewording it is safe and is exactly what --refresh-drafts is for. Anything
+  // already approved, sent or replied-to is left alone — rewriting an email a
+  // prospect has already received would be worse than leaving it stale.
+  const awaitingApproval = p =>
+    String(p.outreach || '').trim().toLowerCase() === 'drafted';
+
   const needs = [...work.values()].filter(p => {
+    if (o.refreshDrafts && awaitingApproval(p)) return true;
     if (!p.researchedAt) return true;
     const t = Date.parse(p.researchedAt);
     return !Number.isFinite(t) || t < staleBefore;
@@ -155,6 +168,12 @@ async function main() {
         log(`  ✗ ${p.domain} — ${p.syncState}`);
         continue;
       }
+      // Contact discovery came free with the pages we already fetched.
+      if (record.email) {
+        p.email = record.email.email;
+        p.emailWhy = `${record.email.why} (${record.email.score}/100)`;
+      }
+
       const a = analyze(record, p.industry || industryForNiche(p.niche));
       const fresh = toProspect(p, a);
       Object.assign(p, {

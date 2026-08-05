@@ -154,13 +154,41 @@ const analysis = (over = {}) => ({
       });
       const seq = composeSequence(record(), noshow, { name: 'Acme', email: 'a@b.com' });
       assert.strictEqual(seq.leakKey, 'noshow');
-      assert.match(seq.steps[0].body, /how many actually show up/);
+      assert.match(seq.steps[0].body, /how many actually show up/i);
 
       const reviews = analysis({
         leaks: { annualRecover: 1000, items: [{ key: 'reviews', label: 'Weak reviews & reputation', monthly: 500 }] },
       });
       const seq2 = composeSequence(record(), reviews, { name: 'Acme', email: 'a@b.com' });
-      assert.match(seq2.steps[0].body, /how do you ask for reviews/);
+      assert.match(seq2.steps[0].body, /how do you ask for reviews/i);
+    });
+
+    test('the call to action sits alone, with a blank line either side', () => {
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      for (const step of seq.steps) {
+        const lines = step.body.split('\n');
+        // Find the ask: a line ending in '?' that is not the greeting.
+        const i = lines.findIndex(l => /\?\s*$/.test(l) && !/^Hi/.test(l));
+        assert.ok(i > 0, `step ${step.n} has no question line at all`);
+        assert.strictEqual(lines[i - 1].trim(), '',
+          `step ${step.n}: no blank line above the ask`);
+        assert.strictEqual((lines[i + 1] || '').trim(), '',
+          `step ${step.n}: no blank line below the ask`);
+        assert.ok(lines[i].trim().length < 120,
+          `step ${step.n}: the ask is buried in a paragraph, not standing alone`);
+      }
+    });
+
+    test('the isolated ask reads as a sentence, not a fragment', () => {
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      const ask = seq.steps[0].body.split('\n').find(l => /\?\s*$/.test(l) && !/^Hi/.test(l));
+      assert.match(ask, /^[A-Z]/, 'the ask starts lowercase on its own line');
+    });
+
+    test('the ask survives into the HTML part with its spacing', () => {
+      const seq = composeSequence(record(), analysis(), { name: 'Acme', email: 'a@b.com' });
+      // A blank source line becomes a lone <br> — the visual gap in an inbox.
+      assert.match(seq.steps[0].html, /<br>\n<br>\n/, 'blank lines were collapsed in the HTML');
     });
 
     test('no "we helped another company like you" boilerplate', () => {

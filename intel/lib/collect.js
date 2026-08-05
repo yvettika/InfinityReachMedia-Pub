@@ -2,6 +2,7 @@
 
 const { detect } = require('./detect');
 const { fetchPlaces } = require('./places');
+const { extractEmails, pickBest } = require('./contacts');
 
 /**
  * Collection layer: fetch what is public, record where every fact came from.
@@ -109,7 +110,8 @@ async function loadRobots(origin, opts) {
 /**
  * Run collection for one prospect.
  * @param {string} input   domain or URL
- * @param {object} options { timeoutMs, maxPages, placesKey, skipExtraPages }
+ * @param {object} options { timeoutMs, maxPages, placesKey, skipExtraPages,
+ *                            contactDomain }
  */
 async function collect(input, options = {}) {
   const opts = { ...DEFAULTS, ...options };
@@ -195,6 +197,15 @@ async function collect(input, options = {}) {
   allSignals.title = homeSignals.title;
   allSignals.metaDescription = homeSignals.metaDescription;
   record.signals = allSignals;
+
+  // Contact discovery runs over the same pages we already downloaded — the
+  // /contact page is in `combined`, which is exactly where the address lives.
+  // No extra requests.
+  // `contactDomain` lets a caller state the brand domain explicitly when the
+  // site is served from somewhere else — a staging host, an agency's server, or
+  // a fixture. Defaults to the domain we fetched.
+  record.emailCandidates = extractEmails(combined, opts.contactDomain || record.domain);
+  record.email = pickBest(record.emailCandidates);
 
   // Google Places is optional. Without a key the system still works; it just
   // has to ask about review volume on the call instead of knowing it.

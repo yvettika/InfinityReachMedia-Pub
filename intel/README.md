@@ -112,6 +112,41 @@ it. Until it exists, the run degrades to contacts-only and says so, rather
 than failing — and the error message lists the pipelines that *do* exist.
 Explicit `GHL_PIPELINE_ID`/`GHL_STAGE_ID` still win when set.
 
+## Contact discovery
+
+Runs over the pages already fetched during research — the `/contact` page is
+already downloaded, which is exactly where the address lives, so this costs no
+extra requests.
+
+Three things a naive regex misses, all handled:
+
+- **Cloudflare email protection.** Small-business sites sit behind it
+  constantly and it rewrites addresses to `/cdn-cgi/l/email-protection#<hex>`.
+  The obfuscation is a single-byte XOR; without decoding it those sites look
+  like they have no email at all.
+- **Human obfuscation** — `info [at] example [dot] com` and its cousins,
+  including HTML entity encoding.
+- **Other people's addresses.** A page routinely carries the web designer's
+  email, a platform support address, or a `noreply@`. Writing to one of those
+  burns the prospect and the sending domain at once, so third-party domains are
+  rejected outright and an address on the company's own domain always outranks
+  everything else.
+
+Candidates are ranked — owner-style addresses first, general inboxes next,
+`accounts@`/`billing@` last (right company, wrong department) — and each one
+carries the reason it scored what it did. Free-provider addresses are kept
+rather than rejected: a twelve-truck contractor genuinely runs on Gmail, and
+that address is often the one that reaches the owner.
+
+`verified` is always `null`. Deliverability checking is a separate paid step
+(ZeroBounce, NeverBounce); "not checked" must never be mistaken for "checked
+and fine".
+
+**Decision-maker names are deliberately not guessed.** A wrong "Hi Mike," to a
+business run by Steve is exactly the failure this system exists to avoid — it
+proves in one word that nobody looked. The composer greets without a name until
+one can be verified.
+
 ## Email outreach
 
 ```bash
@@ -136,8 +171,25 @@ inventing one. Specific things it will not do:
 - use a review count too small to be flattering as an opener
 - end with "we recently helped another HVAC company…" boilerplate
 
+**The call to action stands alone.** Every step's ask sits on its own line with
+a blank line either side, sentence-cased. Buried at the end of a paragraph the
+one question you want answered reads as part of the pitch and gets skimmed; on
+its own it is what the eye lands on. The spacing survives into the HTML part,
+and a test asserts both.
+
 `blockers` stop a send (no postal address, no email address). `notes` are for
 the reviewer and do not hold the email.
+
+### Updating drafts already waiting
+
+```bash
+node intel/sync.js --refresh-drafts
+```
+
+Re-researches and re-composes every prospect whose Outreach column still reads
+`drafted`, then pushes the new wording to GHL. Anything already `approved`,
+`sent` or `replied` is left alone — rewriting an email a prospect has already
+received would be worse than leaving it stale.
 
 Deliberately not an LLM. A template seeded with real observations beats a model
 asked to be clever about a business it cannot see, and every sentence traces to
@@ -442,7 +494,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 124 tests, no network or API key needed
+node intel/test/all.js           # 151 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —
@@ -456,10 +508,8 @@ in `proof.json`.
 
 In the order I'd build them:
 
-1. **Contact discovery.** Places gives the business, website and phone — not a
-   person or an inbox. Role addresses off their own contact page (`info@`,
-   `office@`) are free, legal, and for a 12-truck contractor often reach the
-   same person a paid enrichment record would.
+1. **Email verification.** Every discovered address is unverified. A bounce
+   rate over 2% damages a sending domain, so this belongs before volume.
 2. **Snapshot + diff.** Store each run, re-run weekly, alert on change. "They
    just posted a CSR job" is a far better outreach trigger than any static
    score. This is just a diff over a table.

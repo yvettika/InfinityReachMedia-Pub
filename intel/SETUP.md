@@ -193,9 +193,17 @@ node intel/outreach.js baxterheating.com --industry hvac
 The composer refuses to assert anything it did not verify, but it cannot judge
 whether the tone is yours. Edit the templates in `intel/lib/outreach.js`.
 
-**Contact discovery is not built.** Places gives the business, website and
-phone — not an inbox. Until that exists, drafts compose and sit. The build is
-pulling role addresses (`info@`, `office@`) off each company's own contact page.
+**Verify the addresses before volume.** Contact discovery now pulls role
+addresses off each company's own contact page during research, at no extra
+request cost. They are *unverified* — `verified` is always null. A bounce rate
+over 2% damages a sending domain, so run them through ZeroBounce or NeverBounce
+(about $20 to start) before sending at scale.
+
+**If you change the email wording**, push it to drafts already waiting:
+```
+node intel/sync.js --refresh-drafts
+```
+Only touches drafts still awaiting approval; approved and sent ones are left alone.
 
 **Approve the first batch by hand.** Filter GHL contacts by tag
 `outreach-draft`, read each, add `outreach-ready` to the ones you want sent.

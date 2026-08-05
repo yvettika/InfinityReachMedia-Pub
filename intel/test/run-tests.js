@@ -65,10 +65,11 @@ function startServer(fixtureFile) {
   });
 }
 
-async function research(fixture, industry) {
+async function research(fixture, industry, extra = {}) {
   const { server, port } = await startServer(fixture);
   try {
-    const record = await collect(`http://127.0.0.1:${port}`, { politenessMs: 0, timeoutMs: 5000 });
+    const record = await collect(`http://127.0.0.1:${port}`,
+      { politenessMs: 0, timeoutMs: 5000, ...extra });
     const analysis = record.signals ? analyze(record, industry) : null;
     return { record, analysis, server };
   } finally {
@@ -78,7 +79,8 @@ async function research(fixture, industry) {
 
 (async () => {
   console.log('\nneglected-hvac.html — the classic underserved prospect');
-  const neglected = await research('neglected-hvac.html', 'hvac');
+  const neglected = await research('neglected-hvac.html', 'hvac',
+    { contactDomain: 'baxterheatingair.com' });
   {
     const s = neglected.record.signals;
     const a = neglected.analysis;
@@ -108,6 +110,22 @@ async function research(fixture, industry) {
       assert.ok(a.pct < 75, `expected a leaking score, got ${a.pct}`);
       assert.ok(['Critical', 'Heavy loss', 'Leaking'].includes(a.band));
     });
+    test('contact discovery ran over the pages already fetched', () => {
+      // No extra requests: the addresses come out of the same HTML the signal
+      // detection used. This is the wiring, not the extractor — the extractor
+      // has its own suite.
+      assert.ok(Array.isArray(neglected.record.emailCandidates));
+      assert.ok(neglected.record.email, 'no address picked from a page that has one');
+      assert.strictEqual(neglected.record.email.email, 'office@baxterheatingair.com');
+      assert.strictEqual(neglected.record.email.verified, null);
+    });
+
+    test('an address on an unrelated domain is not adopted', () => {
+      // Same fixture, but without telling collect the brand domain: the
+      // addresses now look like somebody else's and must be dropped.
+      assert.ok(neglected.record.emailCandidates.every(c => !/somewebshop/.test(c.email)));
+    });
+
     test('lead volume unknown → unit basis flagged', () => {
       assert.strictEqual(a.unitBasis, true);
       assert.match(a.inputs.leads.display, /per 100 leads/);

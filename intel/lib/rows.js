@@ -25,6 +25,8 @@ const COLUMNS = [
   { key: 'niche',       header: 'Niche',           from: p => p.niche },
   { key: 'city',        header: 'City',            from: p => p.city || '' },
   { key: 'phone',       header: 'Phone',           from: p => p.phone || '' },
+  { key: 'email',       header: 'Email',           from: p => p.email || '' },
+  { key: 'emailWhy',    header: 'Email Source',    from: p => p.emailWhy || '' },
   { key: 'website',     header: 'Website',         from: p => p.website || `https://${p.domain}` },
   { key: 'score',       header: 'Score',           from: p => (p.score ?? '') },
   { key: 'band',        header: 'Band',            from: p => p.band || '' },
@@ -86,6 +88,7 @@ function toProspect(candidate = {}, analysis = null) {
     // Populated once contact discovery exists; the CRM push falls back to
     // phone as the identifier until then.
     email: candidate.email || null,
+    emailWhy: candidate.emailWhy || null,
   };
 
   if (analysis) {
@@ -139,6 +142,8 @@ function fromRow(row, idx) {
     researchedAt: get('Researched') || null,
     syncState: get('Sync State') || '',
     outreach: get('Outreach') || '',
+    email: get('Email') || null,
+    emailWhy: get('Email Source') || null,
   };
 }
 
