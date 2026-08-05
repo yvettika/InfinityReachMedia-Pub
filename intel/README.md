@@ -225,6 +225,17 @@ What the renderer guarantees, all tested:
 - the unsubscribe merge token survives HTML escaping (a test asserts it,
   because escaping it would silently break compliance on every send)
 
+Getting the file in:
+
+```bash
+node intel/add-headshot.js ~/Desktop/photo.jpg --name yvette-kahn
+```
+
+Validates shape and weight against what an inbox actually does with it — 120px
+wide — then copies it into `images/` and prints the rest. A tall portrait is
+refused by default, because at that width a face that fills a third of a
+full-body shot lands around 20px across.
+
 **The URL is preflighted once per run.** A typo, a file that was never
 deployed, or a rename would otherwise put a grey broken-image box in every
 email in the campaign — and it is invisible to whoever set the config, because
@@ -505,7 +516,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 158 tests, no network or API key needed
+node intel/test/all.js           # 162 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

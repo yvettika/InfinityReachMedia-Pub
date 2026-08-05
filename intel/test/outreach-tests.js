@@ -402,6 +402,63 @@ const analysis = (over = {}) => ({
     resetImageCheck();
   }
 
+  console.log('\nheadshot helper — the checks that matter at 120px');
+  {
+    const { dimensions } = require('../add-headshot');
+    const zlib = require('zlib');
+
+    // Minimal but real encoders, so the header parsing is tested against
+    // actual file bytes rather than a hand-written buffer.
+    const png = (w, h) => {
+      const raw = Buffer.alloc((w * 3 + 1) * h);
+      const idat = zlib.deflateSync(raw);
+      const chunk = (t, d) => {
+        const len = Buffer.alloc(4); len.writeUInt32BE(d.length);
+        const td = Buffer.concat([Buffer.from(t), d]);
+        let c = ~0;
+        for (const b of td) { c ^= b; for (let k = 0; k < 8; k++) c = (c >>> 1) ^ (0xEDB88320 & -(c & 1)); }
+        const crc = Buffer.alloc(4); crc.writeUInt32BE((~c) >>> 0);
+        return Buffer.concat([len, td, crc]);
+      };
+      const ihdr = Buffer.alloc(13);
+      ihdr.writeUInt32BE(w, 0); ihdr.writeUInt32BE(h, 4); ihdr[8] = 8; ihdr[9] = 2;
+      return Buffer.concat([
+        Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+        chunk('IHDR', ihdr), chunk('IDAT', idat), chunk('IEND', Buffer.alloc(0)),
+      ]);
+    };
+    const jpeg = (w, h) => {
+      const sof = Buffer.alloc(11);
+      sof[0] = 0xff; sof[1] = 0xc0; sof.writeUInt16BE(9, 2); sof[4] = 8;
+      sof.writeUInt16BE(h, 5); sof.writeUInt16BE(w, 7);
+      return Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x02]), sof]);
+    };
+    const gif = (w, h) => {
+      const b = Buffer.alloc(13);
+      b.write('GIF89a', 0, 'ascii'); b.writeUInt16LE(w, 6); b.writeUInt16LE(h, 8);
+      return b;
+    };
+
+    test('reads PNG dimensions from the header', () => {
+      assert.deepStrictEqual(dimensions(png(400, 400)),
+        { type: 'image/png', width: 400, height: 400 });
+    });
+    test('reads JPEG dimensions by walking to the start-of-frame', () => {
+      const d = dimensions(jpeg(1130, 1966));
+      assert.strictEqual(d.type, 'image/jpeg');
+      assert.strictEqual(d.width, 1130);
+      assert.strictEqual(d.height, 1966);
+    });
+    test('reads GIF dimensions (little-endian, unlike the others)', () => {
+      assert.deepStrictEqual(dimensions(gif(320, 240)),
+        { type: 'image/gif', width: 320, height: 240 });
+    });
+    test('a non-image returns null rather than a wrong guess', () => {
+      assert.strictEqual(dimensions(Buffer.from('this is a text file')), null);
+      assert.strictEqual(dimensions(Buffer.alloc(0)), null);
+    });
+  }
+
   console.log('\nopener priority');
   {
     test('reviews beat ad pixels beat booking', () => {

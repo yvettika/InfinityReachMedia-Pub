@@ -120,7 +120,17 @@ channel-bound and is the entire integration.
 
 ## Photo — ~10 min, optional
 
-**13.** Drop a headshot or GIF into `images/`, push, and it is live at
+**13.** Easiest route:
+
+```
+node intel/add-headshot.js ~/Desktop/photo.jpg --name yvette-kahn
+```
+
+It checks the image is usable at the 120px an inbox renders it at — a tall
+full-body shot shrinks until the face is a few pixels across — then copies it
+in and prints the remaining commands.
+
+Or by hand: drop a headshot or GIF into `images/`, push, and it is live at
 `https://infinityreachmedia.com/images/<name>`. Add a repository **variable**
 (not a secret — it is a public URL) `OUTREACH_SIGNATURE_IMAGE_URL`.
 
