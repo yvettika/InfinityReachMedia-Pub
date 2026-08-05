@@ -92,6 +92,17 @@ the whole call is built around — not a guess at our fee. Only researched
 prospects are pushed; an unresearched row has no score and would land in the
 CRM as noise.
 
+**Slack gets a digest, and GHL gets the whole row.** When SLACK_WEBHOOK_URL is
+set, each run posts one message to the channel the webhook is bound to: how
+many new leads, the five worst scores with band, recoverable revenue and top
+leak, and a link to the sheet. A run that found nothing new stays silent so the
+channel keeps meaning something — except failures, which always post, because a
+job that breaks silently on a Tuesday is still broken in March. On the CRM
+side, the sheet's key columns (Leak Score, Leak Band, Recoverable Revenue, Top
+Leak, Lead Agent, Prospect Niche) are written to the contact as custom fields —
+created automatically via the API on first run — so the intel is on the record
+a rep has open while dialling, not in a separate tab.
+
 **The pipeline is resolved by name.** GHL has no API for creating pipelines —
 not in the connector, not in their public v2 REST API; they are made in the UI.
 So instead of copying opaque IDs out of a URL bar, set `GHL_PIPELINE_NAME`
@@ -121,6 +132,7 @@ export GHL_API_KEY=...                        # Private Integration token
 export GHL_LOCATION_ID=...
 export GHL_PIPELINE_NAME="Outbound Prospecting"   # looked up at runtime
 export GHL_STAGE_NAME="New Lead"                  # default if unset
+export SLACK_WEBHOOK_URL=...                      # optional: digest channel
 ```
 
 Anything unset is skipped with a message rather than failing the run, so the
@@ -136,10 +148,10 @@ Because the sheet carries all the state, the runner needs nothing from the
 previous day and writes nothing to the repo — which is exactly right for a
 public repo that must never contain prospect data.
 
-Setup is six repository secrets (Settings → Secrets and variables → Actions):
+Setup is a handful of repository secrets (Settings → Secrets and variables → Actions):
 `GOOGLE_PLACES_API_KEY`, `GOOGLE_SERVICE_ACCOUNT_KEY` (the key file's full JSON
 body), `PROSPECT_SHEET_ID`, `GHL_API_KEY`, `GHL_LOCATION_ID`, and optionally
-`INTEL_INDUSTRIES_JSON` (the private priors — without it the committed
+`SLACK_WEBHOOK_URL` (the digest channel) and `INTEL_INDUSTRIES_JSON` (the private priors — without it the committed
 placeholder priors are used, which shifts dollar estimates but not observed
 signals). The workflow can also be fired by hand from the Actions tab.
 
@@ -343,7 +355,7 @@ every machine. Only the rules themselves are private.
 ## Tests
 
 ```bash
-node intel/test/all.js           # 89 tests, no network or API key needed
+node intel/test/all.js           # 99 tests, no network or API key needed
 ```
 
 They run the real collector over real HTTP against a local fixture server —

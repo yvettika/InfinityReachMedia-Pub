@@ -174,7 +174,7 @@ const prospect = (domain, over = {}) => ({
 
   console.log('\nCRM push — idempotency against a mock GHL');
   {
-    const state = { contacts: new Map(), opportunities: [], calls: [] };
+    const state = { contacts: new Map(), opportunities: [], calls: [], customFields: [] };
     const server = http.createServer((req, res) => {
       let body = '';
       req.on('data', c => (body += c));
@@ -187,6 +187,12 @@ const prospect = (domain, over = {}) => ({
           res.end(JSON.stringify(obj));
         };
 
+        if (/^\/locations\/[^/]+\/customFields$/.test(url.pathname)) {
+          if (req.method === 'GET') return send(200, { customFields: state.customFields });
+          const f = { id: `cf_${state.customFields.length + 1}`, ...json };
+          state.customFields.push(f);
+          return send(200, { customField: f });
+        }
         if (url.pathname === '/opportunities/pipelines') {
           return send(200, { pipelines: [
             { id: 'pipe_course', name: 'AI Advantage Pipeline 1',
@@ -270,6 +276,42 @@ const prospect = (domain, over = {}) => ({
       process.env.GHL_API_KEY = saved;
     });
 
+    console.log('\ncustom fields — the spreadsheet columns, on the contact record');
+    {
+      test('intel custom fields were created on first sync', () => {
+        const names = state.customFields.map(f => f.name);
+        for (const spec of ghl.CUSTOM_FIELDS) {
+          assert.ok(names.includes(spec.name), `field "${spec.name}" was never created`);
+        }
+        assert.ok(state.customFields.every(f => f.model === 'contact'));
+      });
+
+      test('the contact carries the sheet values — score, band, top leak', () => {
+        const c = [...state.contacts.values()][0];
+        assert.ok(Array.isArray(c.customFields) && c.customFields.length >= 4,
+          'no custom field values on the contact');
+        const byId = new Map(state.customFields.map(f => [f.id, f.name]));
+        const values = Object.fromEntries(c.customFields.map(v => [byId.get(v.id), v.field_value]));
+        assert.strictEqual(values['Leak Score'], '55');
+        assert.strictEqual(values['Leak Band'], 'Heavy loss');
+        assert.strictEqual(values['Recoverable Revenue (est/yr)'], '348998');
+        assert.strictEqual(values['Top Leak'], 'Missed & unanswered calls');
+      });
+
+      test('fields are created once, not once per prospect', () => {
+        const creates = state.calls.filter(c => c.startsWith('POST /locations/')).length;
+        assert.strictEqual(creates, ghl.CUSTOM_FIELDS.length,
+          `expected ${ghl.CUSTOM_FIELDS.length} field creations, saw ${creates}`);
+      });
+
+      const before = state.customFields.length;
+      const map = await ghl.ensureCustomFields({});
+      test('ensureCustomFields is idempotent against existing fields', () => {
+        assert.strictEqual(state.customFields.length, before, 'duplicate fields created');
+        assert.ok(Object.values(map).every(Boolean));
+      });
+    }
+
     console.log('\npipeline resolution by name — because GHL has no create-pipeline API');
     {
       delete process.env.GHL_PIPELINE_ID;
@@ -313,6 +355,74 @@ const prospect = (domain, over = {}) => ({
     }
 
     server.close();
+  }
+
+  console.log('\nSlack digest — a signal, not a firehose');
+  {
+    const { buildDigest, postDigest } = require('../lib/slack');
+
+    test('a run that did nothing posts nothing', () => {
+      assert.strictEqual(buildDigest({ newLeads: [], researched: [], failures: [] }), null);
+    });
+
+    test('new leads produce one digest, worst score first, capped at five', () => {
+      const leads = [72, 55, 38, 90, 61, 45, 83].map((score, i) =>
+        prospect(`lead${i}.com`, { score, name: `Lead ${score}` }));
+      const msg = buildDigest({ newLeads: leads, researched: leads, totals: { prospects: 7, synced: 7 } });
+      assert.match(msg.text, /7 new leads/);
+      const body = JSON.stringify(msg.blocks);
+      assert.ok(body.includes('Lead 38'), 'worst lead missing');
+      assert.ok(!body.includes('Lead 90'), 'list was not capped at the five worst');
+      // Worst first: 38 must appear before 55 in the rendered rows.
+      assert.ok(body.indexOf('Lead 38') < body.indexOf('Lead 55'));
+    });
+
+    test('the digest carries the sheet link and the leak details', () => {
+      const msg = buildDigest({
+        newLeads: [prospect('a.com')],
+        totals: { prospects: 1, synced: 1 },
+        sheetUrl: 'https://docs.google.com/spreadsheets/d/SHEET/edit',
+      });
+      const body = JSON.stringify(msg.blocks);
+      assert.match(body, /55\/100 Heavy loss/);
+      assert.match(body, /348,998/);
+      assert.match(body, /Missed & unanswered calls/);
+      assert.match(body, /docs.google.com\/spreadsheets\/d\/SHEET/);
+    });
+
+    test('failures always post, even with nothing new', () => {
+      const msg = buildDigest({ newLeads: [], researched: [], failures: ['GHL x.com: HTTP 500'] });
+      assert.ok(msg, 'failure run stayed silent');
+      assert.match(msg.text, /1 problem/);
+      assert.match(JSON.stringify(msg.blocks), /HTTP 500/);
+    });
+
+    // postDigest against a mock webhook.
+    const posts = [];
+    const hookSrv = http.createServer((req, res) => {
+      let body = '';
+      req.on('data', c => (body += c));
+      req.on('end', () => { posts.push(JSON.parse(body)); res.writeHead(200); res.end('ok'); });
+    });
+    await new Promise(r => hookSrv.listen(0, '127.0.0.1', r));
+
+    delete process.env.SLACK_WEBHOOK_URL;
+    const noHook = await postDigest({ newLeads: [prospect('a.com')] });
+    test('no webhook configured → explicit skip, not an error', () => {
+      assert.strictEqual(noHook, 'skipped-no-webhook');
+    });
+
+    process.env.SLACK_WEBHOOK_URL = `http://127.0.0.1:${hookSrv.address().port}/hook`;
+    const posted = await postDigest({ newLeads: [prospect('a.com')], totals: { prospects: 1, synced: 1 } });
+    const quiet = await postDigest({ newLeads: [], researched: [], failures: [] });
+    test('posts to the webhook when there is news, stays quiet when not', () => {
+      assert.strictEqual(posted, 'posted');
+      assert.strictEqual(quiet, 'skipped-empty');
+      assert.strictEqual(posts.length, 1, 'quiet run still posted');
+      assert.ok(posts[0].blocks, 'no blocks in the payload');
+    });
+    hookSrv.close();
+    delete process.env.SLACK_WEBHOOK_URL;
   }
 
   console.log('\nsheet as state store — end to end against a mock Sheets API');

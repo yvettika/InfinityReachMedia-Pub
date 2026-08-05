@@ -59,6 +59,56 @@ async function call(path, { apiKey, method = 'GET', body, query } = {}) {
 }
 
 /**
+ * The intel columns, mirrored onto the GHL contact as custom fields — so the
+ * spreadsheet's key numbers are visible on the record a rep has open while
+ * dialling, not in a separate tab.
+ *
+ * Fields are created via the API on first use (the location starts with
+ * none). The name is the identity: renaming one in the GHL UI orphans it and
+ * the sync will create a fresh one with the old name.
+ */
+const CUSTOM_FIELDS = [
+  { name: 'Leak Score', dataType: 'NUMERICAL', value: p => p.score },
+  { name: 'Leak Band', dataType: 'TEXT', value: p => p.band },
+  { name: 'Recoverable Revenue (est/yr)', dataType: 'NUMERICAL', value: p => p.recoverableAnnual != null ? Math.round(p.recoverableAnnual) : null },
+  { name: 'Top Leak', dataType: 'TEXT', value: p => p.topLeak },
+  { name: 'Lead Agent', dataType: 'TEXT', value: p => p.leadAgent },
+  { name: 'Prospect Niche', dataType: 'TEXT', value: p => p.niche },
+];
+
+/**
+ * Make sure the custom fields exist, returning { name → id }.
+ * Cached on `opts` by the caller loop, same as pipeline resolution — a
+ * 200-prospect run does this once.
+ */
+async function ensureCustomFields(opts = {}) {
+  const { apiKey, locationId } = requireConfig(opts);
+
+  const res = await call(`/locations/${locationId}/customFields`, {
+    apiKey, query: { model: 'contact' },
+  });
+  const existing = new Map(
+    (res?.customFields || []).map(f => [String(f.name || '').trim().toLowerCase(), f.id])
+  );
+
+  const map = {};
+  for (const spec of CUSTOM_FIELDS) {
+    const key = spec.name.toLowerCase();
+    if (existing.has(key)) {
+      map[spec.name] = existing.get(key);
+      continue;
+    }
+    const created = await call(`/locations/${locationId}/customFields`, {
+      apiKey,
+      method: 'POST',
+      body: { name: spec.name, dataType: spec.dataType, model: 'contact' },
+    });
+    map[spec.name] = (created?.customField || created)?.id;
+  }
+  return map;
+}
+
+/**
  * Create or update a contact, keyed on email when we have one and on the
  * business phone otherwise. GHL's own upsert handles the dedupe; we pass
  * whatever identifier we actually hold.
@@ -82,6 +132,20 @@ async function upsertContact(prospect, opts = {}) {
   if (prospect.phone) body.phone = prospect.phone;
   if (prospect.city) body.city = prospect.city;
   if (prospect.address) body.address1 = prospect.address;
+
+  if (opts.fieldMap) {
+    body.customFields = CUSTOM_FIELDS
+      .map(spec => {
+        const id = opts.fieldMap[spec.name];
+        const value = spec.value(prospect);
+        if (!id || value === null || value === undefined || value === '') return null;
+        // GHL's docs have shown both `field_value` and `value` for this
+        // payload across versions; sending both is harmless (unknown props
+        // are ignored) and works against either.
+        return { id, field_value: String(value), value: String(value) };
+      })
+      .filter(Boolean);
+  }
 
   const res = await call('/contacts/upsert', { apiKey, method: 'POST', body });
   const contact = res?.contact || res;
@@ -187,6 +251,18 @@ async function ensureOpportunity(contactId, prospect, opts = {}) {
 
 /** Push one prospect all the way into the CRM. */
 async function syncProspect(prospect, opts = {}) {
+  // Resolve (and if needed create) the intel custom fields once per run.
+  if (!opts.fieldMap && !opts.skipCustomFields) {
+    try {
+      opts.fieldMap = await ensureCustomFields(opts);
+    } catch (err) {
+      // Fields are enrichment, not identity — a location that refuses field
+      // creation still gets the contact, the tags and the opportunity.
+      opts.skipCustomFields = true;
+      opts.fieldMapError = err.message;
+    }
+  }
+
   const contact = await upsertContact(prospect, opts);
   if (!contact.id) throw new Error(`No contact id returned for ${prospect.domain}`);
 
@@ -197,4 +273,7 @@ async function syncProspect(prospect, opts = {}) {
   return { domain: prospect.domain, contact, opportunity };
 }
 
-module.exports = { upsertContact, ensureOpportunity, findOpportunity, syncProspect, resolvePipeline, requireConfig };
+module.exports = {
+  upsertContact, ensureOpportunity, findOpportunity, syncProspect,
+  resolvePipeline, ensureCustomFields, requireConfig, CUSTOM_FIELDS,
+};

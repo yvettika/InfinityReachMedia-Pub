@@ -41,6 +41,7 @@ const { discover } = require('./lib/discover');
 const { toProspect } = require('./lib/rows');
 const { createState } = require('./lib/state');
 const ghl = require('./lib/ghl');
+const slack = require('./lib/slack');
 
 const USAGE = `
 Daily sync — find, research, and push prospects (sheet-backed, stateless)
@@ -96,6 +97,11 @@ async function main() {
   // of the run writes it back through the state store's merge rules.
   const work = new Map(known.map(p => [p.domain, { ...p }]));
 
+  // What this run actually did — feeds the Slack digest at the end.
+  const newThisRun = [];
+  const researchedThisRun = [];
+  const failures = [];
+
   // ---- 1. discovery -------------------------------------------------------
   if (o.doDiscover) {
     if (!o.area) { console.error('--discover requires --area'); process.exit(2); }
@@ -109,14 +115,14 @@ async function main() {
         seenPlaceIds: placeIds,
         onProgress: () => {},
       });
-      let added = 0;
       for (const c of found.candidates) {
         if (work.has(c.domain)) continue;
-        work.set(c.domain, toProspect({ ...c, placeId: c.placeIds || c.placeId }));
-        added++;
+        const p = toProspect({ ...c, placeId: c.placeIds || c.placeId });
+        work.set(c.domain, p);
+        newThisRun.push(p);
       }
-      log(`  ${found.stats.requests} queries → ${found.candidates.length} candidates, ${added} genuinely new`);
-      for (const e of found.errors.slice(0, 5)) log(`  ! ${e}`);
+      log(`  ${found.stats.requests} queries → ${found.candidates.length} candidates, ${newThisRun.length} genuinely new`);
+      for (const e of found.errors.slice(0, 5)) { log(`  ! ${e}`); failures.push(`discovery: ${e}`); }
     }
   }
 
@@ -155,6 +161,7 @@ async function main() {
         syncState: 'researched',
       });
       researched++;
+      researchedThisRun.push(p);
       log(`  ✓ ${p.domain} — ${p.score}/100 ${p.band}`);
     } catch (err) {
       failed++;
@@ -183,53 +190,84 @@ async function main() {
   }
 
   // ---- 4. the CRM ---------------------------------------------------------
-  if (o.sheetOnly) { log(''); return; }
-  if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) {
-    log(`GHL: skipped — set GHL_API_KEY and GHL_LOCATION_ID.\n`);
-    return;
-  }
+  let synced = 0;
+  if (!o.sheetOnly) {
+    if (!process.env.GHL_API_KEY || !process.env.GHL_LOCATION_ID) {
+      log(`GHL: skipped — set GHL_API_KEY and GHL_LOCATION_ID.`);
+    } else {
+      const ghlOpts = { contactsOnly: o.contactsOnly };
+      if (!o.contactsOnly) {
+        try {
+          ghlOpts._resolved = await ghl.resolvePipeline(ghlOpts);
+          const r = ghlOpts._resolved;
+          log(`GHL: pipeline resolved ${r.resolvedBy === 'name' ? `"${r.pipelineName}" / "${r.stageName}"` : 'by explicit IDs'}.`);
+        } catch (err) {
+          log(`GHL: ${err.message}`);
+          log(`GHL: falling back to contacts-only so the leads still land somewhere.`);
+          failures.push(`GHL pipeline: ${err.message.slice(0, 120)}`);
+          ghlOpts.contactsOnly = true;
+        }
+      }
 
-  const ghlOpts = { contactsOnly: o.contactsOnly };
-  if (!o.contactsOnly) {
-    try {
-      ghlOpts._resolved = await ghl.resolvePipeline(ghlOpts);
-      const r = ghlOpts._resolved;
-      log(`GHL: pipeline resolved ${r.resolvedBy === 'name' ? `"${r.pipelineName}" / "${r.stageName}"` : 'by explicit IDs'}.`);
-    } catch (err) {
-      log(`GHL: ${err.message}`);
-      log(`GHL: falling back to contacts-only so the leads still land somewhere.\n`);
-      ghlOpts.contactsOnly = true;
+      if (o.dryRun) {
+        log(`GHL (dry run): would sync ${all.length} contacts${ghlOpts.contactsOnly ? '' : ' + opportunities'}.`);
+      } else {
+        let ok = 0, created = 0, ghlFailed = 0;
+        for (const p of all) {
+          // Only push prospects that have been researched — an unresearched
+          // row has no score, no band and no deal value: CRM noise.
+          if (p.score == null) continue;
+          try {
+            const res = await ghl.syncProspect(p, ghlOpts);
+            ok++;
+            if (res.opportunity.created) created++;
+            p.syncState = 'synced';
+          } catch (err) {
+            ghlFailed++;
+            p.syncState = `ghl-failed: ${err.message.slice(0, 80)}`;
+            log(`  ✗ ${p.domain} — ${err.message}`);
+            failures.push(`GHL ${p.domain}: ${err.message.slice(0, 100)}`);
+          }
+        }
+        synced = ok;
+        log(`GHL: ${ok} contacts synced, ${created} new opportunities, ${ghlFailed} failed.`);
+
+        // Second save so syncState reflects what actually happened in the CRM.
+        if (ok || ghlFailed) {
+          try { await state.save(all); } catch { /* already reported above */ }
+        }
+        if (ghlFailed) process.exitCode = 1;
+      }
     }
   }
 
+  // ---- 5. Slack digest ----------------------------------------------------
+  // Posts only what is NEW this run; a run that did nothing posts nothing,
+  // except failures, which always post — a job that breaks silently on a
+  // Tuesday is still broken in March.
+  const digest = {
+    newLeads: newThisRun,
+    researched: researchedThisRun,
+    failures,
+    totals: { prospects: work.size, synced },
+    sheetUrl: process.env.PROSPECT_SHEET_ID
+      ? `https://docs.google.com/spreadsheets/d/${process.env.PROSPECT_SHEET_ID}/edit`
+      : null,
+  };
   if (o.dryRun) {
-    log(`GHL (dry run): would sync ${all.length} contacts${ghlOpts.contactsOnly ? '' : ' + opportunities'}.\n`);
-    return;
-  }
-
-  let ok = 0, created = 0, ghlFailed = 0;
-  for (const p of all) {
-    // Only push prospects that have been researched — an unresearched row has
-    // no score, no band and no deal value, and would land in the CRM as noise.
-    if (p.score == null) continue;
+    const would = slack.buildDigest(digest);
+    log(`Slack (dry run): ${would ? `would post — "${would.text}"` : 'nothing to post'}.`);
+  } else {
     try {
-      const res = await ghl.syncProspect(p, ghlOpts);
-      ok++;
-      if (res.opportunity.created) created++;
-      p.syncState = 'synced';
+      const outcome = await slack.postDigest(digest);
+      log(`Slack: ${outcome === 'posted' ? `posted — "${slack.buildDigest(digest).text}"`
+        : outcome === 'skipped-empty' ? 'nothing new, stayed quiet'
+        : 'skipped — SLACK_WEBHOOK_URL not set'}.`);
     } catch (err) {
-      ghlFailed++;
-      p.syncState = `ghl-failed: ${err.message.slice(0, 80)}`;
-      log(`  ✗ ${p.domain} — ${err.message}`);
+      // Slack being down must never fail the run that just did the real work.
+      log(`Slack: FAILED — ${err.message}`);
     }
   }
-  log(`GHL: ${ok} contacts synced, ${created} new opportunities, ${ghlFailed} failed.`);
-
-  // Second save so syncState reflects what actually happened in the CRM.
-  if (!o.dryRun && (ok || ghlFailed)) {
-    try { await state.save(all); } catch { /* already reported above */ }
-  }
-  if (ghlFailed) process.exitCode = 1;
   log('');
 }
 

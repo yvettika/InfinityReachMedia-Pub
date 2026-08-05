@@ -18,7 +18,7 @@ let failures = 0;
 for (const suite of SUITES) {
   const res = spawnSync(process.execPath, [path.join(__dirname, suite)], {
     stdio: 'inherit',
-    env: { ...process.env, PLACES_ENDPOINT: undefined, GOOGLE_PLACES_API_KEY: undefined, GHL_ENDPOINT: undefined, GHL_API_KEY: undefined },
+    env: { ...process.env, PLACES_ENDPOINT: undefined, GOOGLE_PLACES_API_KEY: undefined, GHL_ENDPOINT: undefined, GHL_API_KEY: undefined, SLACK_WEBHOOK_URL: undefined },
   });
   if (res.status !== 0) failures++;
 }

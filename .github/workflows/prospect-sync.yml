@@ -13,6 +13,9 @@
 #   PROSPECT_SHEET_ID            the spreadsheet ID
 #   GHL_API_KEY                  GHL Private Integration token
 #   GHL_LOCATION_ID              GHL location
+#   SLACK_WEBHOOK_URL            optional: Slack Incoming Webhook — posts a
+#                                digest of new leads to the channel it's bound
+#                                to. Without it, Slack is skipped silently.
 #   INTEL_INDUSTRIES_JSON        optional: the private industries.json body.
 #                                Without it the committed .example priors are
 #                                used, which shifts dollar estimates a little
@@ -72,3 +75,4 @@ jobs:
           GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
           GHL_PIPELINE_NAME: Outbound Prospecting
           GHL_STAGE_NAME: New Lead
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
