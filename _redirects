@@ -8,3 +8,8 @@
 # unreachable while these rules are in place.
 /pilot        /first-10   301!
 /pilot.html   /first-10   301!
+
+# Short, shareable link to the Fullerton Heating and Cooling client site while it
+# is staged here. A rewrite (200), not a redirect, so the client sees a clean URL.
+# Retire this once the site moves to their own domain.
+/fullerton-hvac   /demos/fullerton-heating-and-cooling/index.html   200

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /thanks
+Disallow: /demos/
 
 Sitemap: https://infinityreachmedia.com/sitemap.xml
