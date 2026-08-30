@@ -163,6 +163,29 @@
     .math-grid,.demo-in{grid-template-columns:1fr}
     section.block{padding:64px 0}
   }
+
+  /* ---- The walkthrough ------------------------------------------------
+     Lives at #walkthrough. Player hides itself if the mp4 isn't there yet,
+     and .wt-fallback takes over — the page never shows a broken frame. */
+  .wt{background:var(--paper);border-top:1px solid var(--line);text-align:center}
+  .wt h2{margin-bottom:14px}
+  .wt .sub{margin-bottom:38px}
+  .wt-stage{max-width:860px;margin:0 auto;background:var(--ink);border-radius:20px;padding:14px;box-shadow:0 30px 60px rgba(11,11,15,.22)}
+  .wt-video{display:block;width:100%;aspect-ratio:16/9;border-radius:12px;background:#000}
+  .wt-video[hidden]{display:none}
+  .wt-fallback{padding:52px 26px;color:#fff}
+  .wt-fallback[hidden]{display:none}
+  .wt-fb-k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:10px}
+  .wt-fallback p{color:rgba(255,255,255,.75);max-width:46ch;margin:0 auto 22px}
+  .wt-beats{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:860px;margin:30px auto 0;padding:0;text-align:left}
+  .wt-beats li{font-size:.9rem;color:var(--muted);border-top:2px solid var(--line);padding-top:12px}
+  .wt-beats b{display:block;font-family:'Montserrat',sans-serif;color:var(--cta);letter-spacing:.06em;font-size:.8rem;margin-bottom:4px}
+  .wt-next{margin-top:34px;font-weight:500}
+  .wt-next a{color:var(--cta);font-weight:700}
+  @media(max-width:760px){
+    .wt-stage{padding:10px;border-radius:16px}
+    .wt-beats{grid-template-columns:repeat(2,1fr)}
+  }
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -289,7 +312,7 @@
       <h2>Honest, warm, and never pretending to be you.</h2>
       <p class="sub" style="margin:0 0 8px">The agent tells people it's an AI assistant — every time, on purpose. In coaching, a prospect who feels tricked never books. What it does instead is answer fast, qualify kindly, and get the real conversation on your calendar while the interest is still hot.</p>
       <p class="sub" style="margin:0 0 8px"><strong>Illustrative exchange</strong> — this is the pattern we build to, tuned to your offer, your pricing rules, and your qualifying questions.</p>
-      <a class="btn btn-pink" href="#get-started">See the Full Walkthrough ↓</a>
+      <a class="btn btn-pink" href="#walkthrough">See the Full Walkthrough &darr;</a>
     </div>
     <div class="phone" aria-hidden="true">
       <div class="time">Tue 10:41 PM</div>
@@ -303,6 +326,60 @@
     </div>
   </div>
 </section>
+
+
+<!-- ===================================================================
+     THE WALKTHROUGH
+     Drop the file at /videos/coaches-walkthrough.mp4 and this section
+     goes live on its own — no code change needed. Optional poster at
+     /images/coaches-walkthrough-poster.jpg (1280x720).
+     Until the file exists the player removes itself and the fallback
+     below takes over, so the page never promises a video it can't play.
+     =================================================================== -->
+<section class="block wt" id="walkthrough">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--cta)">Watch it work</div>
+    <h2>Sixty seconds. One real agent, answering a real DM.</h2>
+    <p class="sub">Not a slide, not a mockup. This is the Closer replying in a live inbox with the clock running in the corner. Watch it, then decide whether it's worth a call.</p>
+
+    <div class="wt-stage">
+      <video id="wtVideo" class="wt-video" controls playsinline preload="metadata"
+             poster="/images/coaches-walkthrough-poster.jpg"
+             aria-label="Sixty second walkthrough: the DM Closer answering a live inquiry" hidden>
+        <source src="/videos/coaches-walkthrough.mp4" type="video/mp4">
+      </video>
+
+      <div class="wt-fallback" id="wtFallback">
+        <p class="wt-fb-k">The walkthrough is being cut right now.</p>
+        <p>Don't want to wait? Book a call and I'll show you the agent running live, on my screen, before we hang up.</p>
+        <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Show Me It Live &rarr;</a>
+      </div>
+    </div>
+
+    <ul class="wt-beats">
+      <li><b>0:00</b> A real inquiry lands, after hours.</li>
+      <li><b>0:19</b> The agent answers &mdash; timestamp in frame.</li>
+      <li><b>0:32</b> It qualifies before it sends a calendar.</li>
+      <li><b>0:50</b> Booked, confirmed, reminder scheduled.</li>
+    </ul>
+
+    <p class="wt-next">Want this running on your practice? <a href="#get-started">Get the 7&nbsp;day build plan &rarr;</a></p>
+  </div>
+</section>
+
+<script>
+/* The player stays hidden until we've confirmed the file is actually there.
+   Default state is the fallback panel, so the page never shows a dead frame
+   or a broken poster. Drop the mp4 in /videos/ and this flips on its own. */
+(function(){
+  var v=document.getElementById('wtVideo'),fb=document.getElementById('wtFallback');
+  if(!v||!fb)return;
+  var src=v.querySelector('source'),url=src&&src.getAttribute('src');
+  function show(ok){v.hidden=!ok;fb.hidden=!!ok;if(ok)v.load();}
+  if(!url||!window.fetch)return;
+  fetch(url,{method:'HEAD'}).then(function(r){show(r.ok);}).catch(function(){show(false);});
+})();
+</script>
 
 <section class="block case">
   <div class="wrap">
