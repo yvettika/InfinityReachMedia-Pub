@@ -145,25 +145,6 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .hero .micro { margin-top: 18px; font-size: 0.92rem; color: var(--color-muted); }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-/* ---------- Breadth-as-proof band ---------- */
-/* Reads as a statement of pattern, not a targeting list. Centered and wide so
-   the industry sweep is the first thing the eye takes in. */
-.breadth { max-width: 860px; margin: 0 auto; text-align: center; }
-.breadth .breadth-line {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(1.2rem, 2.6vw, 1.7rem); line-height: 1.4;
-  letter-spacing: -0.01em; color: var(--color-text); margin: 0 auto 18px;
-}
-.breadth .breadth-line em {
-  font-style: normal;
-  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-}
-.breadth .breadth-sub {
-  color: var(--color-muted); font-size: 1.02rem; line-height: 1.7;
-  max-width: 660px; margin: 0 auto;
-}
-
 /* ---------- Section helpers ---------- */
 .section { padding: 84px 0; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
