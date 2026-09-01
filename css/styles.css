@@ -347,7 +347,10 @@ a.card { display: block; }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--color-border); padding: 56px 0 32px; background: var(--color-surface); }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.35fr 1.25fr 1fr; gap: 30px; margin-bottom: 40px; }
+/* Five link columns need more room than the previous four; collapse to two well
+   before the generic 880px breakpoint, or Company squeezes to ~88px. */
+@media (max-width: 1040px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
 .footer-grid h4 { font-size: 0.95rem; margin-bottom: 16px; }
 .footer-grid ul { list-style: none; }
 .footer-grid ul li { margin-bottom: 10px; }
