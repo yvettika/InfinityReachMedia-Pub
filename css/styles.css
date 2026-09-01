@@ -262,6 +262,14 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .card .meta strong { color: var(--color-text); }
 a.card { display: block; }
 .learn-more { display: inline-block; margin-top: 14px; color: var(--color-accent-2); font-weight: 600; font-size: 0.9rem; }
+/* Grid cards stretch to equal height, so a card with shorter body copy used to
+   leave its CTA floating mid-card while its neighbours' sat lower. Push the CTA
+   to the bottom of every card so the row of links reads as one line.
+   Scoped to a.card: the div-cards in about.html have no CTA to align.
+   padding-top carries the 14px breathing room, since margin-top:auto resolves
+   to 0 on the tallest card and would otherwise crowd the paragraph. */
+.grid-3 a.card { display: flex; flex-direction: column; }
+.grid-3 a.card .learn-more { margin-top: auto; padding-top: 16px; align-self: flex-start; }
 .feed { max-width: 760px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
 .feed-row { display: flex; gap: 18px; padding: 16px 22px; border-bottom: 1px solid var(--color-border); }
 .feed-row:last-child { border-bottom: 0; }
