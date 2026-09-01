@@ -92,6 +92,13 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 .demo-card .eyebrow{color:var(--gold)}
 .demo-card h2{margin:10px 0 16px}
 .demo-card .lead{max-width:640px;color:var(--muted);font-size:1.08rem}
+.demo-switch{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.demo-tab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:inherit;font-size:.92rem;font-weight:600;color:var(--muted);
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:10px 18px;transition:color .15s,border-color .15s,background .15s}
+.demo-tab:hover{color:var(--paper);border-color:var(--gold)}
+.demo-tab.is-active{color:#0D0D0D;background:var(--gold);border-color:var(--gold)}
 .demo-note{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;font-size:.86rem;color:var(--muted)}
 .demo-note b{color:var(--paper);font-weight:700}
 .demo-frame-wrap{margin-top:30px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0D0D0D;box-shadow:0 24px 60px rgba(0,0,0,.4)}
@@ -236,11 +243,53 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="demo-card">
       <span class="eyebrow">Live Demo · No Signup</span>
       <h2>Don't take our word for it. Talk to one.</h2>
-      <p class="lead">Below is a real agent, running live right now for a sample business — Summit &amp; Vale Home Services. Talk to it like you're their customer: tell it your AC died, ask what a repair costs, try to book a visit, or try to stump it. This is the same engine that would answer for <em>your</em> business, in your voice.</p>
-      <span class="demo-note"><b>Set up as an HVAC company for the demo.</b> Yours would sound like you.</span>
-      <div class="demo-frame-wrap">
-        <iframe src="https://agent-router-theta.vercel.app/?tenant=summit-vale" title="Live AI agent demo — Summit &amp; Vale Home Services" loading="lazy" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+      <p class="lead">Two real agents, running live right now for two very different businesses. Pick whichever looks more like yours, then talk to it like you're the customer — ask what something costs, try to book, or try to stump it. Same engine either way. Yours would answer in <em>your</em> voice, about <em>your</em> business.</p>
+      <!-- Dual demo: the single HVAC demo made the whole suite read as a trades-only
+           product. Both tenants are live in the agent router; the toggle swaps the
+           iframe src and the prompt hint. Keep summit-vale first (it is the more
+           battle-tested tenant) but never let it be the only thing on the page. -->
+      <div class="demo-switch" role="tablist" aria-label="Choose a demo business">
+        <button type="button" class="demo-tab is-active" role="tab" aria-selected="true"
+                data-tenant="summit-vale"
+                data-label="Summit &amp; Vale Home Services"
+                data-hint="Set up as an HVAC &amp; plumbing company. Try: &ldquo;my AC died and it&rsquo;s 95 degrees.&rdquo;">
+          🔧 Home Services
+        </button>
+        <button type="button" class="demo-tab" role="tab" aria-selected="false"
+                data-tenant="demo-coaching-co"
+                data-label="Demo Coaching Co"
+                data-hint="Set up as a business coach. Try: &ldquo;I&rsquo;m stuck at 10k a month and can&rsquo;t get past it.&rdquo;">
+          📈 Coaching &amp; Consulting
+        </button>
       </div>
+      <span class="demo-note" id="demo-hint"><b>Set up as an HVAC &amp; plumbing company.</b> Try: &ldquo;my AC died and it&rsquo;s 95 degrees.&rdquo;</span>
+      <div class="demo-frame-wrap">
+        <iframe id="demo-frame" src="https://agent-router-theta.vercel.app/?tenant=summit-vale" title="Live AI agent demo — Summit &amp; Vale Home Services" loading="lazy" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+      </div>
+<script>
+(function () {
+  var frame = document.getElementById('demo-frame');
+  var hint  = document.getElementById('demo-hint');
+  var tabs  = document.querySelectorAll('.demo-tab');
+  if (!frame || !hint || !tabs.length) return;
+  Array.prototype.forEach.call(tabs, function (tab) {
+    tab.addEventListener('click', function () {
+      if (tab.classList.contains('is-active')) return;
+      Array.prototype.forEach.call(tabs, function (t) {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      // Reassigning src restarts the conversation, which is what we want —
+      // a half-finished HVAC chat should not carry into the coaching demo.
+      frame.src = 'https://agent-router-theta.vercel.app/?tenant=' + tab.dataset.tenant;
+      frame.title = 'Live AI agent demo \u2014 ' + tab.dataset.label;
+      hint.innerHTML = tab.dataset.hint.replace(/^([^.]+\.)/, '<b>$1</b>');
+    });
+  });
+})();
+</script>
     </div>
   </div>
 </section>
