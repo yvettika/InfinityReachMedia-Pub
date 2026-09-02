@@ -268,6 +268,11 @@ a.card { display: block; }
    Scoped to a.card: the div-cards in about.html have no CTA to align.
    padding-top carries the 14px breathing room, since margin-top:auto resolves
    to 0 on the tallest card and would otherwise crowd the paragraph. */
+/* Quotes in a 3-up grid: same problem as the cards — different quote lengths
+   left the attributions at different heights. Scoped to .grid-3 so the
+   homepage's 2-column .grid-t quotes are untouched. */
+.grid-3 .quote { display: flex; flex-direction: column; }
+.grid-3 .quote .who { margin-top: auto; padding-top: 18px; }
 .grid-3 a.card { display: flex; flex-direction: column; }
 .grid-3 a.card .learn-more { margin-top: auto; padding-top: 16px; align-self: flex-start; }
 .feed { max-width: 760px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
