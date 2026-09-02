@@ -290,6 +290,12 @@ a.card { display: block; }
   display: grid; place-items: center; color: var(--color-muted); box-shadow: var(--shadow);
 }
 .media-frame img { width: 100%; height: 100%; object-fit: cover; }
+/* Specificity note: .two-col p sets colour on every paragraph in this layout,
+   so the founder credit line has to match that weight to keep its accent. */
+p.founder-line, .two-col p.founder-line {
+  font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
+  color: var(--color-accent-2); margin-bottom: 18px; letter-spacing: .01em;
+}
 .value-list { list-style: none; }
 .value-list li { padding: 10px 0; padding-left: 30px; position: relative; color: var(--color-muted); }
 .value-list li::before { content: "✓"; position: absolute; left: 0; color: var(--color-accent-2); font-weight: 800; }
