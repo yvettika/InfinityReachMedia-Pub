@@ -8,3 +8,9 @@
 # unreachable while these rules are in place.
 /pilot        /first-10   301!
 /pilot.html   /first-10   301!
+
+# The Follow-Up Gap Blueprint (free guide for coaching businesses, companion to
+# the "wipe out half of coaching businesses" video) is hosted on Vercel. Short
+# link for the YouTube description and DMs. 302 on purpose: if the page moves
+# onto this domain later, the redirect can change without browsers caching it.
+/blueprint    https://follow-up-gap-blueprint.vercel.app   302
