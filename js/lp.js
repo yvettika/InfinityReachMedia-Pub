@@ -18,7 +18,7 @@
     insurance: 'Insurance Landing Page',
     smallbiz:  'Small Business Landing Page',
     coach:     'Coach Landing Page',
-    jessica:   'Jessica AI Landing Page'
+    jessica:   'Jessica Landing Page'
   };
 
   // analytics.js owns irmTrack; fall back to a no-op so the form still works
