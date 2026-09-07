@@ -105,6 +105,8 @@
   .demo-in h2{margin-top:0}
   .demo-in p{color:var(--muted);margin-bottom:14px}
   .phone{background:var(--ink);border-radius:22px;padding:22px;color:#fff;font-size:.85rem;box-shadow:0 24px 48px rgba(11,11,15,.18)}
+  .phone.live{padding:0;overflow:hidden;height:520px}
+  .phone.live iframe{display:block;width:100%;height:100%;border:0;background:var(--ink)}
   .bubble{border-radius:14px;padding:12px 14px;margin-bottom:10px;max-width:88%}
   .them{background:rgba(255,255,255,.1)}
   .us{background:var(--accent-lt);color:var(--ink);margin-left:auto;font-weight:500}
@@ -193,18 +195,14 @@
   <div class="wrap demo-in">
     <div>
       <div class="eyebrow" style="color:var(--accent)">Watch.</div>
-      <h2>This is a real conversation with Jessica.</h2>
-      <p>Not a mockup. This is Jessica answering for Infinity Reach Media, copied out of the log the day we wired her up. Notice she says she's an AI in the first line, and again when asked.</p>
-      <p>Try it yourself. Call the number and play a lead who pushes on price, stalls, or asks if she's a bot. Texting works too.</p>
+      <h2>Talk to Jessica right here.</h2>
+      <p>That's not a screenshot. It's her, live, running on our own number. Type like a lead would. Push on price, say you need to think about it, ask if she's a bot.</p>
+      <p>Prefer the phone? Call the number and she'll pick up. Texting works too.</p>
       <a class="btn btn-pink" href="tel:+17149243024">Call (714) 924-3024</a>
     </div>
-    <div class="phone" aria-label="Sample text conversation with Jessica AI">
-      <div class="time">Today 3:41 PM</div>
-      <div class="bubble them">Hi, I own an HVAC company in Anaheim. Saw your ad. What do you actually do?</div>
-      <div class="bubble us">Hey! Thanks for reaching out to Infinity Reach Media — I'm Jessica AI, here to help you get set up. Short version: we build AI agents that catch missed calls, follow up on leads in seconds, cut no-shows, and revive old customer lists. What's costing you the most right now, missed calls or slow follow-up?</div>
-      <div class="bubble them">We miss calls all the time when the techs are out. Is this a real person btw?</div>
-      <div class="bubble us">Good question — I'm Jessica AI, an AI assistant for Infinity Reach Media, and a real team member reviews everything and can hop on with you anytime. Missed calls are exactly the leak our AI Receptionist plugs. Want me to show you how it'd work for your business on a quick call?</div>
-      <div class="time">Replied in 7 seconds</div>
+    <div class="phone live" aria-label="Live chat with Jessica AI">
+      <iframe src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media" title="Chat with Jessica AI" loading="lazy" allow="clipboard-write"></iframe>
+    </div>
     </div>
     </div>
   </div>
