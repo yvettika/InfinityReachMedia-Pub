@@ -266,6 +266,13 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .gtee-note{text-align:center;margin-top:22px;font-size:0.95rem;color:var(--color-muted)}
 .gtee-note a{color:var(--color-accent);font-weight:700}
 
+/* Founder credit line — the short form of the section that was cut. */
+.byline{max-width:720px;margin:0 auto;text-align:center;font-size:1.05rem;
+  line-height:1.7;color:var(--color-muted);border-top:1px solid var(--color-border);
+  border-bottom:1px solid var(--color-border);padding:22px 0}
+.byline b{color:var(--color-text);font-weight:700}
+.byline a{color:var(--color-accent-2);font-weight:700;white-space:nowrap}
+
 /* ---------- Section helpers ---------- */
 .section { padding: 84px 0; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
