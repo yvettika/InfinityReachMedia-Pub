@@ -187,6 +187,70 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .btn { cursor: pointer; }
 .learn-more { text-decoration: underline; text-underline-offset: 3px; }
 
+/* ---------- Split hero (.vh) ----------
+   Arrangement adapted from viktor.com: oversized headline left, the ask right,
+   the product on screen immediately, a trust strip under the fold. Rebuilt in
+   the navy palette. Kept separate from .hero, which 17 other pages use. */
+
+
+.vh{position:relative;overflow:hidden;padding:80px 0 0}
+/* the glow that makes navy feel like depth rather than a flat black box */
+.vh::before{content:"";position:absolute;inset:-10% -20% auto -20%;height:720px;
+  background:
+    radial-gradient(760px 380px at 22% 8%, rgba(123,47,190,.42), transparent 66%),
+    radial-gradient(620px 340px at 82% 26%, rgba(233,30,140,.24), transparent 68%);
+  pointer-events:none}
+.vh .container{position:relative}
+
+/* Split hero: headline left, the ask on the right. Viktor's key move — it stops
+   the page opening with a centred wall of text. */
+.vh-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:start}
+@media(max-width:900px){.vh-grid{grid-template-columns:1fr;gap:30px}}
+
+.vh h1{font-size:clamp(3rem,7.2vw,5.6rem);line-height:.98;letter-spacing:-.035em;
+  font-weight:800;margin:0 0 0;max-width:13ch}
+.vh h1 .grad{background:linear-gradient(120deg,var(--color-accent),var(--color-accent-2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+.vh-right{padding-top:14px}
+.vh-sub{font-size:1.2rem;line-height:1.55;max-width:34ch;margin:0 0 26px}
+.vh-promise{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;
+  color:var(--color-accent-2);letter-spacing:.01em;margin:0 0 22px}
+.vh-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.vh-micro{font-size:.9rem;color:rgba(247,244,239,.72);margin:0}
+
+/* Floating preview card — Viktor puts the product on screen immediately instead
+   of describing it. Hers is the agent actually answering. */
+.vh-stage{margin-top:64px;position:relative}
+.vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(247,244,239,.16);
+  border-radius:22px 22px 0 0;background:linear-gradient(180deg,#151E33,#111827);
+  box-shadow:0 -2px 0 rgba(247,244,239,.06),0 40px 90px rgba(0,0,0,.55);
+  padding:18px 18px 0;overflow:hidden}
+.vh-bar{display:flex;align-items:center;gap:8px;padding:2px 6px 14px}
+.vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(247,244,239,.22)}
+.vh-bar b{margin-left:8px;font-family:'Montserrat',sans-serif;font-size:.72rem;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(247,244,239,.55);font-weight:700}
+.vh-thread{background:#0C1222;border-radius:14px 14px 0 0;padding:22px 22px 30px;
+  display:grid;gap:12px}
+.vh-msg{max-width:74%;padding:12px 16px;border-radius:16px;font-size:.97rem;line-height:1.5}
+.vh-them{background:var(--color-surface-2);border:1px solid rgba(247,244,239,.10);
+  border-bottom-left-radius:5px}
+.vh-us{margin-left:auto;background:linear-gradient(100deg,var(--color-accent),var(--color-purple));
+  color:#fff;border-bottom-right-radius:5px}
+.vh-time{font-size:.72rem;color:rgba(247,244,239,.5);margin-top:-6px}
+.vh-time.r{text-align:right}
+
+/* Trust strip. Viktor runs a rating + client logos here; these are the equivalent
+   facts Infinity Reach Media can actually stand behind. */
+.vh-trust{border-top:1px solid rgba(247,244,239,.12);margin-top:0;
+  background:rgba(12,18,34,.6);padding:26px 0}
+.vh-trust .container{display:flex;align-items:center;justify-content:center;
+  gap:12px 26px;flex-wrap:wrap;text-align:center}
+.vh-trust span{font-size:.88rem;color:rgba(247,244,239,.8);white-space:nowrap}
+.vh-trust b{color:var(--color-text);font-weight:700}
+.vh-trust .sep{width:1px;height:22px;background:rgba(247,244,239,.16)}
+@media(max-width:700px){.vh-trust .sep{display:none}}
+
 /* ---------- Section helpers ---------- */
 .section { padding: 84px 0; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }

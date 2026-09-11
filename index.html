@@ -116,18 +116,58 @@
 
 
   <main id="main">
-  <!-- HERO -->
-  <section class="hero">
+  <!-- HERO — split layout: headline left, the ask right, the agent on screen.
+       Styles live in css/styles.css under .vh -->
+  <section class="vh">
     <div class="container">
       <span class="eyebrow">Done-For-You AI Agents · Orange County, CA</span>
-      <h1>You're Losing Customers<br>You <span class="grad">Already Paid For.</span></h1>
-      <p class="hero-promise">Every leak plugged in <b>7 days</b> — <b>without adding a single hire.</b></p>
-      <p class="lead">The call that rang out. The lead nobody answered for six hours. The no-show. The customer who quietly stopped coming back. We build the AI agents that plug all four leaks — for a fraction of the front-desk hire you'd need to do it by hand.</p>
-      <div class="hero-actions">
-        <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book My Free Call</a>
-        <a href="/live-demo" class="btn btn-ghost" target="_blank" rel="noopener">Talk to a Live Agent First →<span class="sr-only"> (opens in a new tab)</span></a>
+
+      <div class="vh-grid">
+        <div>
+          <h1>You're Losing Customers You <span class="grad">Already Paid For.</span></h1>
+        </div>
+
+        <div class="vh-right">
+          <p class="vh-promise">Every leak plugged in 7 days — without adding a single hire.</p>
+          <p class="vh-sub">The call that rang out. The lead nobody answered for six hours. The no-show. The customer who quietly stopped coming back.</p>
+          <div class="vh-actions">
+            <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book My Free Call</a>
+            <a href="/live-demo" target="_blank" rel="noopener" class="btn btn-ghost">Talk to a Live Agent<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
+          <p class="vh-micro">30 minutes, free, no pitch deck. You'll leave knowing exactly what you're losing — whether you work with us or not.</p>
+        </div>
       </div>
-      <p class="micro">30 minutes, free, no pitch deck. You'll leave knowing exactly what you're losing — whether you work with us or not.</p>
+
+      <!-- The product, on screen, instead of described. -->
+      <div class="vh-stage">
+        <div class="vh-card">
+          <div class="vh-bar">
+            <span class="vh-dot"></span><span class="vh-dot"></span><span class="vh-dot"></span>
+            <b>Speed to Lead · answered in 41 seconds</b>
+          </div>
+          <div class="vh-thread">
+            <div class="vh-msg vh-them">Hi — saw your ad. Do you have anything open this week?</div>
+            <p class="vh-time">Sat 9:41 PM</p>
+            <div class="vh-msg vh-us">Hi Dana — yes. I've got Thursday 10:00 or Friday 2:30. Which suits you better? (I'm the AI assistant here, happy to hand you to the team any time.)</div>
+            <p class="vh-time r">Sat 9:41 PM · 41 seconds later</p>
+            <div class="vh-msg vh-them">Thursday works.</div>
+            <p class="vh-time">Sat 9:44 PM</p>
+            <div class="vh-msg vh-us">Booked for Thursday 10:00. You'll get a reminder the day before, and one two hours out.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vh-trust">
+      <div class="container">
+        <span><b>Three guarantees</b> written into our Terms</span>
+        <span class="sep"></span>
+        <span><b>Live in 7 days</b> or your setup fee back</span>
+        <span class="sep"></span>
+        <span><b>12 clients</b> at a time, on purpose</span>
+        <span class="sep"></span>
+        <span><b>Your data</b> stays in your accounts</span>
+      </div>
     </div>
   </section>
 
