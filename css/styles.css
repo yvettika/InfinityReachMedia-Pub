@@ -5,9 +5,9 @@
 
 :root {
   /* Brand palette — matched to the agentic-flows / book / thanks pages */
-  --color-bg: #0D0D0D;          /* ink */
-  --color-surface: #161513;     /* card / section surface */
-  --color-surface-2: #211f1c;   /* lighter surface */
+  --color-bg: #0C1222;          /* dark navy */
+  --color-surface: #131B2E;     /* card / section surface */
+  --color-surface-2: #1C2540;   /* lighter surface */
   --color-text: #F7F4EF;        /* paper */
   --color-muted: #F7F4EF;
   --color-accent: #E91E8C;      /* pink */
@@ -85,7 +85,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13, 13, 13, 0.86);
+  background: rgba(12,18,34, 0.86);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }

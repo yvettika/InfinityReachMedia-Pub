@@ -45,6 +45,8 @@ if (form) {
       ['last_name',  'Last Name',  (v) => v.trim() !== '', 'Enter your last name.'],
       ['email',      'Email',      (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
                                    'Enter an email address in the form name@example.com.'],
+      ['phone',      'Phone',      (v) => v.replace(/\D/g, '').length >= 10,
+                                   'Enter a phone number with at least 10 digits, for example (714) 555-0123.'],
     ];
     form.querySelectorAll('.field-error').forEach((el) => el.remove());
     form.querySelectorAll('[aria-invalid]').forEach((el) => {

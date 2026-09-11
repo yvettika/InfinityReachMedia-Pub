@@ -141,6 +141,7 @@
     .math-grid,.demo-in{grid-template-columns:1fr}
     section.block{padding:64px 0}
   }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -236,7 +237,7 @@
       <div class="eyebrow" style="color:var(--cta)">Don't take our word for it</div>
       <h2>Text the agent. Time it yourself.</h2>
       <p class="sub" style="margin:0 0 8px">This is a live demo of the exact Speed to Lead agent we install for HVAC companies. Send it a message like a homeowner with a dead AC on a Saturday night. Watch how fast it answers, qualifies, and books.</p>
-      <a class="btn btn-pink" href="/live-demo">Try the Live Demo</a>
+      <a class="btn btn-pink" href="/live-demo" target="_blank" rel="noopener">Try the Live Demo<span class="sr-only"> (opens in a new tab)</span></a>
     </div>
     <div class="phone" aria-hidden="true">
       <div class="time">Sat 9:47 PM</div>
