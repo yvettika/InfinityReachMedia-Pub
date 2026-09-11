@@ -1,5 +1,59 @@
+# infinityreachmedia.com
+
 User-agent: *
 Allow: /
 Disallow: /thanks
 
+# --- AI search and assistants -------------------------------------------------
+# Named explicitly so these crawlers are opted IN rather than relying on the
+# wildcard above. This is what lets the site be retrieved and cited in ChatGPT,
+# Perplexity, Claude, Copilot and Google's AI surfaces.
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+
+# Google AI surfaces (AI Overviews, Gemini grounding)
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Copilot
+User-agent: Bingbot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl — feeds many downstream models
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# --- Index --------------------------------------------------------------------
 Sitemap: https://infinityreachmedia.com/sitemap.xml
+
+# Plain-language summary of the site for LLMs: https://infinityreachmedia.com/llms.txt

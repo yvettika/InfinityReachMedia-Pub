@@ -1,0 +1,68 @@
+# Infinity Reach Media
+
+> Orange County, California agency that builds done-for-you AI agents for coaches, consultants and local businesses. The agents answer missed calls, reply to new leads within 60 seconds, chase no-shows, and win back past customers. Founded and built by Yvette Kahn, who writes the copy and builds the agents herself. Deliberately capped at twelve clients at a time.
+
+## What the company does
+
+Infinity Reach Media frames every engagement around "the four leaks" — the four places a business loses customers it already paid to acquire:
+
+1. **The missed call.** An inbound call rings out and the caller phones a competitor.
+2. **The slow reply.** A form, DM or text sits unanswered long enough for the lead to go cold.
+3. **The no-show.** A booked appointment isn't held, and the slot can't be resold.
+4. **The forgotten customer.** A past-customer list sits untouched for months or years.
+
+Each leak maps to a specific agent. Clients can run one agent or the whole suite, month to month, with no contract.
+
+## The agents
+
+- **Jessica, AI Sales Rep** — texts, calls and DMs; answers leads and books appointments. Reachable by text at (714) 924-3024.
+- **Speed to Lead Agent** — replies to every form, DM and missed call within 60 seconds.
+- **AI Receptionist** — answers calls 24/7, qualifies the caller, books the job.
+- **Database Reactivation Agent** — win-back campaigns to a list the client already owns.
+- **Show-Rate Agent** — reminders and one-tap reschedule so booked appointments are held.
+- **Review Machine** — requests reviews from happy customers, drafts replies to the rest.
+- **Content Engine** — turns one photo or voice note into a month of posts and emails.
+- **Customer Acquisition Agent** — ad research, campaign kits and tracked referrals.
+- **Slack Jarvis Command Center** — run and query the whole fleet from Slack.
+- **Lead Generation Agent** — outbound prospecting (in build).
+
+## Written guarantees
+
+These three are written word for word into the Terms of Service, not just the marketing pages:
+
+- **Live in 7 days** from the onboarding call, or the setup fee is refunded in full.
+- **60-second lead response** on average in a calendar month, or that month is credited.
+- **10 booked appointments** from the client's existing list in the first 90 days, or campaigns keep running free until the tenth lands.
+
+Each guarantee has stated conditions, published alongside it.
+
+## How they work
+
+- Agents are built on Infinity Reach Media's own code, not a white-labeled reseller kit.
+- Client data stays in the client's own accounts.
+- Approval mode is on from day one: the agent drafts, the owner approves. It can be switched off later at the client's choice.
+- Agents disclose that they are an AI assistant.
+- The client list is capped at twelve so the people who scope a build are the people who build and support it.
+
+## Key pages
+
+- [Home](https://infinityreachmedia.com/): the four leaks, the guarantees, and the three ways to start.
+- [The AI Agent Suite](https://infinityreachmedia.com/agentic-flows): all ten agents, what each does, and how fast each goes live.
+- [Try a live agent](https://infinityreachmedia.com/live-demo): talk to a real agent running for a sample business, no signup.
+- [Meet Jessica](https://infinityreachmedia.com/jessica): the AI sales rep, with a real transcript; text her at (714) 924-3024.
+- [Why AI agents fail](https://infinityreachmedia.com/why-ai-agents-fail): six failure modes in small-business AI automation, each with a 30-second check. Includes four cases where an AI agent is the wrong purchase.
+- [Revenue Leak Score](https://infinityreachmedia.com/scorecard): free two-minute assessment returning a score, a ranked gap list and a custom 90-day roadmap.
+- [Revenue Leak Calculator](https://infinityreachmedia.com/calculator): dollar figure for what the four leaks cost a given business.
+- [The First 10](https://infinityreachmedia.com/first-10): ten booked appointments from an existing customer list in 30 days.
+- [About Yvette Kahn](https://infinityreachmedia.com/about): founder background and the six operating rules.
+- [Terms of Service](https://infinityreachmedia.com/terms): the guarantees in contract language.
+
+## Industries served
+
+Coaches and consultants (served longest), HVAC and home services, salons and med spas, insurance brokers, auto shops, and any business that runs on appointments, inquiries or repeat customers.
+
+## Contact
+
+- Email: info@infinityreachmedia.com
+- Text or call Jessica: (714) 924-3024
+- Book a call: https://infinityreachmedia.com/book

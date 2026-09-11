@@ -15,26 +15,75 @@
   <meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://infinityreachmedia.com/#business",
-    "name": "Infinity Reach Media",
-    "description": "AI marketing agency building revenue-generating AI agents for small businesses: instant lead follow-up, database reactivation, customer acquisition, and content marketing.",
-    "url": "https://infinityreachmedia.com/",
-    "logo": "https://infinityreachmedia.com/images/logo-mark.png",
-    "image": "https://infinityreachmedia.com/images/marketing-team.jpg",
-    "email": "info@infinityreachmedia.com",
-    "founder": { "@type": "Person", "name": "Yvette Kahn" },
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Orange County, CA" },
-      { "@type": "State", "name": "California" }
-    ],
-    "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" },
-    "priceRange": "$$",
-    "knowsAbout": ["AI agents", "AI automation", "lead follow-up", "digital marketing", "small business marketing"]
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://infinityreachmedia.com/#website",
+      "url": "https://infinityreachmedia.com/",
+      "name": "Infinity Reach Media",
+      "publisher": { "@id": "https://infinityreachmedia.com/#business" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": ["ProfessionalService", "Organization"],
+      "@id": "https://infinityreachmedia.com/#business",
+      "name": "Infinity Reach Media",
+      "alternateName": "IRM",
+      "description": "Orange County agency building done-for-you AI agents for coaches, consultants and local businesses \u2014 instant lead follow-up, missed-call answering, no-show recovery, and customer reactivation.",
+      "url": "https://infinityreachmedia.com/",
+      "logo": "https://infinityreachmedia.com/images/logo-mark.png",
+      "image": "https://infinityreachmedia.com/images/marketing-team.jpg",
+      "email": "info@infinityreachmedia.com",
+      "telephone": "+1-714-924-3024",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://infinityreachmedia.com/#yvette",
+        "name": "Yvette Kahn",
+        "jobTitle": "Founder",
+        "description": "Twenty years writing marketing copy and building funnels; builds Infinity Reach Media's AI agents herself.",
+        "worksFor": { "@id": "https://infinityreachmedia.com/#business" }
+      },
+      "sameAs": [
+        "https://www.facebook.com/yvettika",
+        "https://www.instagram.com/boss.bae.yvette/",
+        "https://www.tiktok.com/@yvettejkahn",
+        "https://www.skool.com/theaiadvantagecommunity/about"
+      ],
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Orange County, California" },
+        { "@type": "State", "name": "California" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" },
+      "priceRange": "$$",
+      "knowsAbout": [
+        "AI agents for small business",
+        "AI receptionist",
+        "speed to lead",
+        "missed call text back",
+        "database reactivation",
+        "no-show recovery",
+        "AI sales rep",
+        "marketing automation"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Agent Suite",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Receptionist", "description": "Answers every call 24/7, qualifies the caller and books the appointment." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Speed to Lead Agent", "description": "Replies to every form, DM and missed call within 60 seconds." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Database Reactivation Agent", "description": "Wins back past customers and dead leads from a list you already own." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Show-Rate Agent", "description": "Reminds and reschedules so booked appointments are actually held." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Review Machine", "description": "Requests reviews from happy customers and drafts replies to the rest." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Engine", "description": "Turns one photo or voice note into a month of posts and emails." } }
+        ]
+      }
+    }
+  ]
+}
+</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
