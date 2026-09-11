@@ -54,6 +54,7 @@ Each guarantee has stated conditions, published alongside it.
 - [Revenue Leak Score](https://infinityreachmedia.com/scorecard): free two-minute assessment returning a score, a ranked gap list and a custom 90-day roadmap.
 - [Revenue Leak Calculator](https://infinityreachmedia.com/calculator): dollar figure for what the four leaks cost a given business.
 - [The First 10](https://infinityreachmedia.com/first-10): ten booked appointments from an existing customer list in 30 days.
+- [Common questions](https://infinityreachmedia.com/faq): what people ask before working with us.
 - [About Yvette Kahn](https://infinityreachmedia.com/about): founder background and the six operating rules.
 - [Terms of Service](https://infinityreachmedia.com/terms): the guarantees in contract language.
 - [Accessibility Statement](https://infinityreachmedia.com/accessibility): WCAG 2.1 AA commitment, known limitations, and how to report a barrier.
