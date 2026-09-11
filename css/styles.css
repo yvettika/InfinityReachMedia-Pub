@@ -5,14 +5,15 @@
 
 :root {
   /* Brand palette — matched to the agentic-flows / book / thanks pages */
-  --color-bg: #0C1222;          /* dark navy */
-  --color-surface: #131B2E;     /* card / section surface */
-  --color-surface-2: #1C2540;   /* lighter surface */
+  --color-bg: #16203A;          /* dark navy */
+  --color-surface: #1E2A47;     /* card / section surface */
+  --color-surface-2: #27344F;   /* lighter surface */
   --color-text: #F7F4EF;        /* paper */
   --color-muted: #F7F4EF;
   --color-accent: #E91E8C;      /* pink */
   --color-accent-2: #F0B429;    /* gold */
-  --color-purple: #7B2FBE;      /* purple, used in gradients/blooms */
+  --color-purple: #7B2FBE;
+  --color-accent-text: #FF5FAF; /* pink for TEXT on navy — #E91E8C only clears 3.9:1 here */      /* purple, used in gradients/blooms */
   --color-border: rgba(247, 244, 239, 0.14);
 
   /* Typography */
@@ -78,7 +79,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   border-color: var(--color-border);
   color: var(--color-text);
 }
-.btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.btn-ghost:hover { border-color: var(--color-accent-text); color: var(--color-accent-text); }
 
 /* ---------- Header / Nav ---------- */
 .site-header {
@@ -97,7 +98,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; }
-.brand em { color: var(--color-accent); font-style: normal; }
+.brand em { color: var(--color-accent-text); font-style: normal; }
 .brand .mark {
   width: 40px; height: 40px; object-fit: contain; display: block;
 }
@@ -150,7 +151,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 
 /* Required-field markers. The asterisk is aria-hidden and paired with .sr-only
    text, so it reads as "required" rather than "star" in a screen reader. */
-.req { color: var(--color-accent); font-weight: 700; }
+.req { color: var(--color-accent-text); font-weight: 700; }
 .req-note { font-size: 0.95rem; color: var(--color-muted); margin-bottom: 18px; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -230,7 +231,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(247,244,239,.22)}
 .vh-bar b{margin-left:8px;font-family:'Montserrat',sans-serif;font-size:.72rem;
   letter-spacing:.12em;text-transform:uppercase;color:rgba(247,244,239,.55);font-weight:700}
-.vh-thread{background:#0C1222;border-radius:14px 14px 0 0;padding:22px 22px 30px;
+.vh-thread{background:#16203A;border-radius:14px 14px 0 0;padding:22px 22px 30px;
   display:grid;gap:12px}
 .vh-msg{max-width:74%;padding:12px 16px;border-radius:16px;font-size:.97rem;line-height:1.5}
 .vh-them{background:var(--color-surface-2);border:1px solid rgba(247,244,239,.10);
