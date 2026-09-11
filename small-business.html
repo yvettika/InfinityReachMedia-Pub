@@ -32,15 +32,15 @@
 </script>
 <style>
   :root{
-    --ink:#0B0B0F;
-    --paper:#FCFAF6;
+    --ink:#0C1222;
+    --paper:#F6F8FC;
     --accent:#0F9B8E;   /* teal: the general/small-business page */
     --accent-lt:#4FD1C5;
     --cta:#E91E8C;      /* brand pink */
     --deep:#7B2FBE;     /* brand purple */
     --gold:#F0B429;
-    --muted:#5C5A55;
-    --line:rgba(11,11,15,.12);
+    --muted:#565C6B;
+    --line:rgba(12,18,34,.14);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -58,7 +58,7 @@
   .btn-dark{background:var(--ink);color:#fff}
   .btn-dark:hover{transform:translateY(-2px)}
 
-  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,15,.92);backdrop-filter:blur(8px)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(12,18,34,.92);backdrop-filter:blur(8px)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
   .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
   .logo em{color:var(--gold)}
@@ -110,14 +110,14 @@
   .demo-band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .demo-in{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
   .demo-in .btn{margin-top:10px}
-  .phone{background:var(--ink);border-radius:22px;padding:22px;color:#fff;font-size:.85rem;box-shadow:0 24px 48px rgba(11,11,15,.18)}
+  .phone{background:var(--ink);border-radius:22px;padding:22px;color:#fff;font-size:.85rem;box-shadow:0 24px 48px rgba(12,18,34,.18)}
   .bubble{border-radius:14px;padding:12px 14px;margin-bottom:10px;max-width:88%}
   .them{background:rgba(255,255,255,.1)}
   .us{background:var(--accent-lt);color:var(--ink);margin-left:auto;font-weight:500}
   .time{font-size:.66rem;color:rgba(255,255,255,.45);text-align:center;margin:8px 0}
 
   /* VSL — click-to-play, nothing loads until the poster is clicked */
-  .vsl-frame{position:relative;display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--ink);cursor:pointer;padding:0;box-shadow:0 24px 60px rgba(11,11,15,.22)}
+  .vsl-frame{position:relative;display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--ink);cursor:pointer;padding:0;box-shadow:0 24px 60px rgba(12,18,34,.22)}
   .vsl-frame img{width:100%;height:100%;object-fit:cover;opacity:.8}
   .vsl-frame .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
   .vsl-frame .play span{width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.4);transition:transform .15s}

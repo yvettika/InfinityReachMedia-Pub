@@ -62,7 +62,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   letter-spacing: 0.03em;
   cursor: pointer;
   border: 1px solid transparent;
@@ -142,7 +142,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .hero p.hero-promise b { color: var(--color-accent-2); font-weight: 800; }
 
 .hero p.lead { color: var(--color-muted); font-size: 1.15rem; line-height: 1.65; max-width: 640px; margin: 0 auto 30px; }
-.hero .micro { margin-top: 18px; font-size: 0.92rem; color: var(--color-muted); }
+.hero .micro { margin-top: 18px; font-size: 0.95rem; color: var(--color-muted); }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
 
@@ -151,7 +151,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 /* Required-field markers. The asterisk is aria-hidden and paired with .sr-only
    text, so it reads as "required" rather than "star" in a screen reader. */
 .req { color: var(--color-accent); font-weight: 700; }
-.req-note { font-size: 0.9rem; color: var(--color-muted); margin-bottom: 18px; }
+.req-note { font-size: 0.95rem; color: var(--color-muted); margin-bottom: 18px; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
@@ -192,7 +192,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
 .section-head .eyebrow { margin-bottom: 12px; }
 .section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; margin-bottom: 14px; }
-.section-head p { color: var(--color-muted); font-size: 1.05rem; }
+.section-head p { color: var(--color-muted); }
 .section-alt { background: var(--color-surface); }
 
 /* ---------- Stats ---------- */
@@ -212,7 +212,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* Column layout so the three "conditions" triggers line up along the bottom
    even though the promises above them run different lengths. */
 .guarantee { text-align: center; display: flex; flex-direction: column; }
-.guarantee .g-num { font-size: 1.62rem; line-height: 1.22; font-weight: 800;
+.guarantee .g-num { font-size: 1.6rem; line-height: 1.22; font-weight: 800;
   font-family: 'Playfair Display', serif; color: var(--color-accent-2); margin-bottom: 9px; }
 .guarantee .g-label { color: var(--color-muted); font-size: 1rem; line-height: 1.55; }
 /* Conditions popover. Opens on hover for mouse users and on focus for keyboard
@@ -220,7 +220,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
    unreachable on a phone. */
 .g-detail { position: relative; margin: auto auto 0; padding-top: 14px; }
 .g-trigger { background: none; border: 0; padding: 0; cursor: help;
-  font-family: var(--font-display); font-size: 0.78rem; letter-spacing: 0.12em;
+  font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.12em;
   text-transform: uppercase; font-weight: 700; color: var(--color-accent-2);
   border-bottom: 1px dashed rgba(240,180,41,.55); }
 .g-trigger::after { content: " ⌄"; letter-spacing: 0; }
@@ -273,12 +273,12 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .price-card.featured { border-color: rgba(240,180,41,.5); background: linear-gradient(160deg, rgba(233,30,140,.10), rgba(123,47,190,.08)); }
 .price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-2); }
-.price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.45rem;
+.price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.4rem;
   line-height: 1.12; margin: 12px 0 4px; }
 .price-card .per { color: var(--color-muted); font-size: 1rem; margin-bottom: 18px; }
 .price-card ul { list-style: none; padding: 0; margin: 0 0 24px; }
-.price-card li { position: relative; padding-left: 25px; margin-bottom: 11px; font-size: 1.02rem; color: var(--color-muted); }
-.price-card li::before { content: "✦"; position: absolute; left: 0; color: var(--color-accent-2); font-size: .82rem; top: 4px; }
+.price-card li { position: relative; padding-left: 25px; margin-bottom: 11px; color: var(--color-muted); }
+.price-card li::before { content: "✦"; position: absolute; left: 0; color: var(--color-accent-2); font-size: 0.8rem; top: 4px; }
 .price-card .btn { margin-top: auto; }
 @media (max-width: 860px) { .pricing { grid-template-columns: 1fr; } }
 
@@ -297,13 +297,13 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   background: var(--color-surface-2); font-size: 1.5rem; margin-bottom: 18px;
 }
 .card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-.card p { color: var(--color-muted); font-size: 0.97rem; }
+.card p { color: var(--color-muted); font-size: 1rem; }
 
 /* ---------- Agentic Flows page ---------- */
-.card .meta { font-size: 0.85rem; color: var(--color-muted); margin-top: 14px; line-height: 1.7; }
+.card .meta { font-size: 0.88rem; color: var(--color-muted); margin-top: 14px; line-height: 1.7; }
 .card .meta strong { color: var(--color-text); }
 a.card { display: block; }
-.learn-more { display: inline-block; margin-top: 14px; color: var(--color-accent-2); font-weight: 600; font-size: 0.9rem; }
+.learn-more { display: inline-block; margin-top: 14px; color: var(--color-accent-2); font-weight: 600; font-size: 0.95rem; }
 /* Grid cards stretch to equal height, so a card with shorter body copy used to
    leave its CTA floating mid-card while its neighbours' sat lower. Push the CTA
    to the bottom of every card so the row of links reads as one line.
@@ -321,10 +321,10 @@ a.card { display: block; }
 .feed-row { display: flex; gap: 18px; padding: 16px 22px; border-bottom: 1px solid var(--color-border); }
 .feed-row:last-child { border-bottom: 0; }
 .feed-row:nth-child(even) { background: var(--color-surface); }
-.feed-time { color: var(--color-accent-2); font-weight: 700; font-size: 0.85rem; min-width: 64px; flex-shrink: 0; }
+.feed-time { color: var(--color-accent-2); font-weight: 700; font-size: 0.88rem; min-width: 64px; flex-shrink: 0; }
 .feed-msg { color: var(--color-muted); font-size: 0.95rem; }
 .feed-msg strong { color: var(--color-text); }
-.built-on { text-align: center; color: var(--color-muted); font-size: 0.9rem; margin-top: 18px; }
+.built-on { text-align: center; color: var(--color-muted); font-size: 0.95rem; margin-top: 18px; }
 .built-on b { color: var(--color-accent-2); }
 
 /* ---------- Two-column (about / cta) ---------- */
@@ -352,19 +352,19 @@ p.founder-line, .two-col p.founder-line {
   background: var(--color-surface); border: 1px solid var(--color-border);
   border-radius: var(--radius); padding: 30px;
 }
-.quote p { font-size: 1.02rem; margin-bottom: 20px; }
+.quote p { margin-bottom: 20px; }
 .quote .who { display: flex; align-items: center; gap: 12px; }
 .quote .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-surface-2);
   display: grid; place-items: center; font-weight: 700; color: var(--color-accent-2); }
 .quote .who .name { font-weight: 600; font-size: 0.95rem; }
-.quote .who .role { color: var(--color-muted); font-size: 0.85rem; }
+.quote .who .role { color: var(--color-muted); font-size: 0.88rem; }
 
 /* ---------- FAQ ---------- */
 .faq { max-width: 760px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid var(--color-border); }
 .faq-q {
   width: 100%; text-align: left; background: none; border: 0; color: var(--color-text);
-  font-size: 1.05rem; font-weight: 600; padding: 22px 40px 22px 0; cursor: pointer; position: relative;
+  font-size: 17px; font-weight: 600; padding: 22px 40px 22px 0; cursor: pointer; position: relative;
 }
 .faq-q::after { content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   color: var(--color-accent); font-size: 1.5rem; transition: transform 0.2s; }
@@ -384,7 +384,7 @@ p.founder-line, .two-col p.founder-line {
 /* ---------- Contact form ---------- */
 .form { display: grid; gap: 16px; max-width: 560px; }
 .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.field label { display: block; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 6px; }
+.field label { display: block; font-size: 0.88rem; color: var(--color-muted); margin-bottom: 6px; }
 .field input, .field textarea, .field select {
   width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--color-border);
   background: var(--color-surface); color: var(--color-text); font-family: inherit; font-size: 0.95rem;
@@ -396,7 +396,7 @@ p.founder-line, .two-col p.founder-line {
   border: 1px solid var(--color-border); display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; }
 .contact-info .item .label { font-size: 0.8rem; color: var(--color-muted); }
 .contact-info .item .val { font-weight: 600; }
-.form-note { font-size: 0.85rem; color: var(--color-muted); }
+.form-note { font-size: 0.88rem; color: var(--color-muted); }
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--color-border); padding: 56px 0 32px; background: var(--color-surface); }
@@ -407,15 +407,15 @@ p.founder-line, .two-col p.founder-line {
 .footer-grid h4 { font-size: 0.95rem; margin-bottom: 16px; }
 .footer-grid ul { list-style: none; }
 .footer-grid ul li { margin-bottom: 10px; }
-.footer-grid ul li a { color: var(--color-muted); font-size: 0.92rem; }
+.footer-grid ul li a { color: var(--color-muted); font-size: 0.95rem; }
 .footer-grid ul li a:hover { color: var(--color-text); }
-.footer-about p { color: var(--color-muted); font-size: 0.92rem; max-width: 34ch; margin-top: 14px; }
+.footer-about p { color: var(--color-muted); font-size: 0.95rem; max-width: 34ch; margin-top: 14px; }
 .socials { display: flex; gap: 12px; margin-top: 18px; }
 .socials a { width: 38px; height: 38px; border-radius: 10px; background: var(--color-surface-2);
   display: grid; place-items: center; color: var(--color-muted); transition: color 0.15s, background 0.15s; }
 .socials a:hover { color: var(--color-text); background: var(--color-accent); }
 .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 24px; display: flex;
-  justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-muted); font-size: 0.85rem; }
+  justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-muted); font-size: 0.88rem; }
 
 /* ---------- Page hero (interior pages) ---------- */
 .page-hero { padding: 80px 0 40px; text-align: center; position: relative; }
@@ -423,13 +423,13 @@ p.founder-line, .two-col p.founder-line {
   background: radial-gradient(500px 250px at 50% -20%, rgba(123,47,190,0.3), transparent 70%); pointer-events: none; }
 .page-hero .container { position: relative; }
 .page-hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.02em; margin-bottom: 14px; }
-.page-hero p { color: var(--color-muted); max-width: 56ch; margin: 0 auto; font-size: 1.08rem; }
+.page-hero p { color: var(--color-muted); max-width: 56ch; margin: 0 auto; font-size: 1.1rem; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
   .nav-links, .nav-cta .btn-ghost { display: none; }
   .nav-toggle { display: block; }
-  .nav-cta .btn-primary { padding: 10px 18px; font-size: 0.78rem; white-space: nowrap; flex-shrink: 0; }
+  .nav-cta .btn-primary { padding: 10px 18px; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0; }
   .brand { font-size: 0.95rem; gap: 8px; flex-shrink: 0; white-space: nowrap; }
   .brand .mark { width: 30px; height: 30px; }
   .nav-links.open {
@@ -446,9 +446,9 @@ p.founder-line, .two-col p.founder-line {
 @media (max-width: 480px) {
   .site-header .container { padding: 0 16px; }
   .nav { gap: 8px; }
-  .brand { font-size: 0.85rem; gap: 6px; }
+  .brand { font-size: 0.88rem; gap: 6px; }
   .brand .mark { width: 26px; height: 26px; }
-  .nav-cta .btn-primary { padding: 8px 14px; font-size: 0.72rem; }
+  .nav-cta .btn-primary { padding: 8px 14px; font-size: 0.75rem; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { justify-content: center; text-align: center; }
 }
