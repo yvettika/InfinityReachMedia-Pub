@@ -56,6 +56,7 @@ Each guarantee has stated conditions, published alongside it.
 - [The First 10](https://infinityreachmedia.com/first-10): ten booked appointments from an existing customer list in 30 days.
 - [About Yvette Kahn](https://infinityreachmedia.com/about): founder background and the six operating rules.
 - [Terms of Service](https://infinityreachmedia.com/terms): the guarantees in contract language.
+- [Accessibility Statement](https://infinityreachmedia.com/accessibility): WCAG 2.1 AA commitment, known limitations, and how to report a barrier.
 
 ## Industries served
 

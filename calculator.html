@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#0D0D0D;--paper:#F7F4EF;--pink:#E91E8C;--purple:#7B2FBE;--gold:#F0B429;
-    --muted:rgba(247,244,239,.68);--line:rgba(247,244,239,.14);
+    --muted:#F7F4EF;--line:rgba(247,244,239,.14);
     --panel:rgba(247,244,239,.03);--panel2:rgba(247,244,239,.06);--radius:22px}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -73,7 +73,7 @@
     color:var(--paper);font-size:16px;font-family:'DM Sans',sans-serif;padding:13px 14px;outline:none;transition:border-color .15s}
   select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239a9aa3' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:38px}
   input:focus,select:focus{border-color:var(--pink)}
-  input::placeholder{color:rgba(247,244,239,.35)}
+  input::placeholder{color:rgba(247,244,239,.86)}
   input[type=number]{-moz-appearance:textfield}
   input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
@@ -135,12 +135,12 @@
   .payback{font-size:14px;color:var(--muted);background:var(--panel2);border-radius:12px;padding:13px 16px;margin-bottom:22px}
   .payback b{color:var(--gold)}
   .roi .btnrow{text-align:center}
-  .roi .fine{font-size:12px;color:rgba(247,244,239,.45);margin-top:14px;text-align:center}
+  .roi .fine{font-size:12px;color:rgba(247,244,239,.86);margin-top:14px;text-align:center}
   @media(max-width:520px){.roi-grid{grid-template-columns:1fr}}
   .cta-block{background:linear-gradient(160deg,rgba(233,30,140,.14),rgba(123,47,190,.10));border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:30px;text-align:center}
   .cta-block h3{margin-top:0}
   .cta-block p{color:var(--muted);font-size:14.5px;max-width:46ch;margin:8px auto 20px}
-  .disclaimer{font-size:12.5px;color:rgba(247,244,239,.45);margin-top:30px;line-height:1.6}
+  .disclaimer{font-size:12.5px;color:rgba(247,244,239,.86);margin-top:30px;line-height:1.6}
   footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:.85rem;color:var(--muted)}
   footer a{color:var(--gold)}
   .hidden{display:none}

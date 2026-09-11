@@ -27,7 +27,7 @@
   --purple:#7B2FBE;
   --gold:#F0B429;
   --blue:#1A4FBF;
-  --muted:rgba(247,244,239,.68);
+  --muted:#F7F4EF;
   --line:rgba(247,244,239,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -183,6 +183,16 @@ footer a{color:var(--gold);text-decoration:none}
 .demo-frame-wrap{margin-top:30px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0D0D0D;box-shadow:0 24px 60px rgba(0,0,0,.4)}
 .demo-frame-wrap iframe{display:block;width:100%;height:640px;border:0}
 @media(max-width:600px){.demo-frame-wrap iframe{height:560px}}
+
+.navburger{display:none;background:none;border:0;color:inherit;font-size:1.5rem;line-height:1;cursor:pointer;padding:4px 8px}
+@media(max-width:980px){
+  .navburger{display:block}
+  nav .wrap{position:relative;flex-wrap:wrap}
+  nav .navlinks{display:none;flex-direction:column;align-items:flex-start;gap:2px;width:100%;order:3;padding:10px 0 4px}
+  nav .navlinks.open{display:flex}
+  nav .navlinks li{width:100%}
+  nav .navlinks a{display:block;padding:10px 2px;font-size:15px}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 <script type="application/ld+json">
@@ -204,7 +214,7 @@ footer a{color:var(--gold);text-decoration:none}
 <nav>
   <div class="wrap">
     <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
-    <ul class="navlinks">
+    <ul class="navlinks" id="sitemenu">
       <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>
       <li><a href="/agentic-flows">AI Agent Suite</a></li>
@@ -212,6 +222,7 @@ footer a{color:var(--gold);text-decoration:none}
       <li><a href="https://www.skool.com/theaiadvantagecommunity/about" target="_blank" rel="noopener">Free Community</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="book" href="/book">Book a Call →</a>
   </div>
 </nav>
@@ -296,5 +307,16 @@ footer a{color:var(--gold);text-decoration:none}
     <p>© 2026 Infinity Reach Media · Orange County, CA · <a href="/book">Book a call</a></p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var b=document.querySelector('.navburger'), m=document.getElementById('sitemenu');
+  if(!b||!m) return;
+  b.addEventListener('click',function(){
+    var open=m.classList.toggle('open');
+    b.setAttribute('aria-expanded', open?'true':'false');
+  });
+})();
+</script>
 </body>
 </html>

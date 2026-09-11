@@ -2,7 +2,13 @@
 const toggle = document.querySelector('.nav-toggle');
 const links = document.querySelector('.nav-links');
 if (toggle && links) {
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', 'sitemenu');
+  links.id = links.id || 'sitemenu';
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 }
 
 // FAQ accordion
@@ -31,6 +37,47 @@ if (form) {
 
     // Bots fill the hidden honeypot; humans never do.
     if (raw.company_website) { form.reset(); return; }
+
+    // Name every problem field explicitly. A generic "please fill in this field"
+    // tells someone using a screen reader nothing about which field or why.
+    const rules = [
+      ['first_name', 'First Name', (v) => v.trim() !== '', 'Enter your first name.'],
+      ['last_name',  'Last Name',  (v) => v.trim() !== '', 'Enter your last name.'],
+      ['email',      'Email',      (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+                                   'Enter an email address in the form name@example.com.'],
+    ];
+    form.querySelectorAll('.field-error').forEach((el) => el.remove());
+    form.querySelectorAll('[aria-invalid]').forEach((el) => {
+      el.removeAttribute('aria-invalid');
+      el.removeAttribute('aria-describedby');
+    });
+
+    const problems = [];
+    rules.forEach(([name, label, ok, msg]) => {
+      const input = form.querySelector('[name="' + name + '"]');
+      if (!input || ok(raw[name] || '')) return;
+      const id = 'err-' + name;
+      const p = document.createElement('p');
+      p.className = 'field-error';
+      p.id = id;
+      p.textContent = msg;
+      input.insertAdjacentElement('afterend', p);
+      input.setAttribute('aria-invalid', 'true');
+      input.setAttribute('aria-describedby', id);
+      problems.push({ label, input });
+    });
+
+    if (problems.length) {
+      note.className = 'form-note form-note-error';
+      note.setAttribute('role', 'alert');
+      note.textContent = problems.length === 1
+        ? 'One field needs attention: ' + problems[0].label + '.'
+        : problems.length + ' fields need attention: ' + problems.map((p) => p.label).join(', ') + '.';
+      problems[0].input.focus();
+      return;
+    }
+    note.className = 'form-note';
+    note.removeAttribute('role');
 
     const fullName = [raw.first_name, raw.last_name].filter(Boolean).join(' ');
     const parts = [];

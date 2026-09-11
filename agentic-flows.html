@@ -50,7 +50,7 @@
   --purple:#7B2FBE;
   --gold:#F0B429;
   --blue:#1A4FBF;
-  --muted:rgba(247,244,239,.68);
+  --muted:#F7F4EF;
   --line:rgba(247,244,239,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -187,6 +187,16 @@ footer a{color:var(--gold);text-decoration:none}
   *{transition:none!important;animation:none!important}
   html{scroll-behavior:auto}
 }
+
+.navburger{display:none;background:none;border:0;color:inherit;font-size:1.5rem;line-height:1;cursor:pointer;padding:4px 8px}
+@media(max-width:980px){
+  .navburger{display:block}
+  nav .wrap{position:relative;flex-wrap:wrap}
+  nav .navlinks{display:none;flex-direction:column;align-items:flex-start;gap:2px;width:100%;order:3;padding:10px 0 4px}
+  nav .navlinks.open{display:flex}
+  nav .navlinks li{width:100%}
+  nav .navlinks a{display:block;padding:10px 2px;font-size:15px}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -195,7 +205,7 @@ footer a{color:var(--gold);text-decoration:none}
 <nav>
   <div class="wrap">
     <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
-    <ul class="navlinks">
+    <ul class="navlinks" id="sitemenu">
       <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>
       <li><a href="/agentic-flows" class="active">AI Agent Suite</a></li>
@@ -203,6 +213,7 @@ footer a{color:var(--gold);text-decoration:none}
       <li><a href="https://www.skool.com/theaiadvantagecommunity/about" target="_blank" rel="noopener">Free Community</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="book" href="/book">Book a Call →</a>
   </div>
 </nav>
@@ -417,8 +428,8 @@ footer a{color:var(--gold);text-decoration:none}
 .fleet-demo-shell{position:relative;border:1px solid rgba(247,244,239,.14);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,rgba(123,47,190,.10),transparent 60%),#100f0e;max-width:880px;margin:0 auto}
 .fleet-demo-ticker{border-top:1px solid rgba(247,244,239,.10);padding:13px 18px;font-size:.86rem;color:rgba(247,244,239,.68);min-height:46px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .fleet-demo-ticker b{color:#F7F4EF;font-weight:700}
-.fleet-demo-count{margin-left:auto;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,244,239,.4)}
-.fleet-demo-note{text-align:center;font-size:.8rem;color:rgba(247,244,239,.45);margin-top:14px}
+.fleet-demo-count{margin-left:auto;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,244,239,.86)}
+.fleet-demo-note{text-align:center;font-size:.8rem;color:rgba(247,244,239,.86);margin-top:14px}
 </style>
 <script src="/js/fleet-demo.js" defer></script>
 </section>
@@ -552,6 +563,17 @@ function calc(){
 }
 [newcust,sale,repeat].forEach(el=>el.addEventListener('input',calc));
 calc();
+</script>
+
+<script>
+(function(){
+  var b=document.querySelector('.navburger'), m=document.getElementById('sitemenu');
+  if(!b||!m) return;
+  b.addEventListener('click',function(){
+    var open=m.classList.toggle('open');
+    b.setAttribute('aria-expanded', open?'true':'false');
+  });
+})();
 </script>
 </body>
 </html>
