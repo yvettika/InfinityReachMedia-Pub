@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/images/logo-mark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Try a Live AI Agent — No Signup | Infinity Reach Media</title>
+<meta name="description" content="Talk to a real AI agent running live for a sample business. Ask what something costs, try to book, or try to stump it. No signup, nothing gated.">
+<link rel="canonical" href="https://infinityreachmedia.com/live-demo">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="AI Agents for Small Business — Talk to One Live">
+<meta property="og:description" content="The full AI agent suite — nine agents, what each one does, and how fast each goes live.">
+<meta property="og:url" content="https://infinityreachmedia.com/live-demo">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI Agents for Small Business",
+  "serviceType": "AI marketing automation",
+  "provider": { "@id": "https://infinityreachmedia.com/#business" },
+  "areaServed": { "@type": "AdministrativeArea", "name": "Orange County, CA" },
+  "description": "Done-for-you AI agents: instant lead follow-up (Speed to Lead), database reactivation, customer acquisition campaign kits, AI content generation, and referral tracking — with one-tap owner approval.",
+  "url": "https://infinityreachmedia.com/agentic-flows"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Will it sound like a robot?", "acceptedAnswer": { "@type": "Answer", "text": "No. During setup we train your agent on your voice, your services, and your way of talking to customers. Most customers never realize they weren't texting the owner." } },
+    { "@type": "Question", "name": "What if it says something wrong?", "acceptedAnswer": { "@type": "Answer", "text": "You choose the control level. Drafts wait for your approval. Recommendations wait for your tap. Only low risk actions like posting scheduled content run on their own, and you set those rules upfront." } },
+    { "@type": "Question", "name": "Do I need any tech skills?", "acceptedAnswer": { "@type": "Answer", "text": "Zero. Setup is fully done for you. If you can tap approve on your phone, you can run your agents." } },
+    { "@type": "Question", "name": "What kind of businesses does this work for?", "acceptedAnswer": { "@type": "Answer", "text": "Any business that lives on leads and reputation. Salons, med spas, contractors, realtors, gyms, clinics, restaurants, coaches. If customers call, message, or Google you, this works." } },
+    { "@type": "Question", "name": "Is there a contract?", "acceptedAnswer": { "@type": "Answer", "text": "Month to month. We keep clients because the agents keep working, not because a contract traps you." } }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --paper:#F7F4EF;
+  --pink:#E91E8C;
+  --purple:#7B2FBE;
+  --gold:#F0B429;
+  --blue:#1A4FBF;
+  --muted:rgba(247,244,239,.68);
+  --line:rgba(247,244,239,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2{font-family:'Playfair Display',serif;font-weight:800;line-height:1.08}
+h1{font-size:clamp(2.6rem,6.4vw,4.6rem)}
+h2{font-size:clamp(1.9rem,4vw,2.9rem)}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:16px 34px;border-radius:999px;transition:transform .18s ease,box-shadow .18s ease}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn.pink{background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35)}
+.btn.pink:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(233,30,140,.5)}
+.btn.ghost{border:1.5px solid var(--line);color:var(--paper)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
+.logo em{color:var(--pink);font-style:normal}
+.logo .mark{width:36px;height:36px;object-fit:contain;display:block}
+nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
+
+/* hero */
+.hero{padding:96px 0 64px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-220px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.4),transparent 65%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-260px;left:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 65%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;max-width:880px;text-align:center}
+.hero p.sub{margin:26px auto 38px;max-width:620px;font-size:1.15rem;color:var(--muted)}
+.hero h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .micro{margin-top:18px;font-size:.9rem;color:var(--muted)}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+
+/* calculator */
+.calc{padding:30px 0 90px}
+.calc-card{position:relative;border:1px solid var(--line);border-radius:24px;padding:48px clamp(24px,5vw,64px);background:linear-gradient(160deg,rgba(123,47,190,.16),rgba(13,13,13,.4) 55%);}
+.calc-card .eyebrow{color:var(--pink)}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:34px;align-items:center}
+.slider-block{margin-bottom:30px}
+.slider-block label{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.slider-block label output{color:var(--gold);font-size:15px}
+input[type=range]{width:100%;appearance:none;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--pink) var(--fill,50%),rgba(247,244,239,.18) var(--fill,50%));outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold)}
+input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.leak{text-align:center;border-left:1px solid var(--line);padding-left:48px}
+.leak .num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,5vw,4rem);color:var(--gold)}
+.leak .cap{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.leak p{margin-top:18px;font-size:.95rem;color:var(--muted)}
+
+/* agents */
+.agents{padding:90px 0;border-top:1px solid var(--line)}
+.agents header{text-align:center;max-width:640px;margin:0 auto 56px}
+.agents header p{margin-top:16px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:rgba(247,244,239,.025);transition:transform .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-4px);border-color:rgba(240,180,41,.5)}
+.card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
+.card.c1 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
+.card.c2 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.c3 .tag{background:rgba(26,79,191,.2);color:#7fa4f5}
+.card.c4 .tag{background:rgba(123,47,190,.2);color:#b98af0}
+.card.c5 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.c6 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
+.card.c7 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.maker{border-color:rgba(240,180,41,.45)}
+.card h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;margin-bottom:10px}
+.card .price{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:var(--gold);margin-bottom:18px}
+.card .price span{font-weight:600;font-size:.8rem;color:var(--muted)}
+.card .meta{font-size:.9rem;color:var(--muted);margin-bottom:18px}
+.card .meta strong{color:var(--paper)}
+.card ul{list-style:none;margin-bottom:26px}
+.card li{padding-left:26px;position:relative;margin-bottom:12px;font-size:.95rem;color:var(--muted)}
+.card li::before{content:"✦";position:absolute;left:0;color:var(--pink);font-size:.8rem;top:3px}
+.card .btn{margin-top:auto;text-align:center}
+.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(240,180,41,.08),rgba(233,30,140,.06))}
+.bundle strong{font-family:'Playfair Display',serif;font-size:1.35rem}
+.bundle p{color:var(--muted);font-size:.95rem}
+
+/* how */
+/* tracking / leak map */
+.track{padding:90px 0;border-top:1px solid var(--line)}
+.track .lede{max-width:640px;color:var(--muted);margin-top:18px}
+.track-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:46px}
+.track-item{border:1px solid var(--line);border-radius:16px;padding:20px;background:linear-gradient(160deg,rgba(26,79,191,.12),rgba(13,13,13,.35) 60%)}
+.track-item .step-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;color:var(--gold)}
+.track-item .stage{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin:6px 0 10px}
+.track-item .metric{font-size:.92rem;color:var(--muted);line-height:1.5}
+.track-note{margin-top:34px;padding:22px 26px;border-left:3px solid var(--gold);background:rgba(247,244,239,.03)}
+.track-note p{margin:0;color:var(--muted)}
+.track-note b{color:var(--paper)}
+.how{padding:90px 0;border-top:1px solid var(--line)}
+.how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:52px}
+.step .k{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:2.4rem;color:var(--pink)}
+.step h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.04em;margin:12px 0 10px}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* about */
+.about{padding:90px 0;border-top:1px solid var(--line)}
+.about .inner{display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:center}
+.about .mark{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(3rem,6vw,4.4rem);line-height:1.05;background:linear-gradient(120deg,var(--pink),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.about p{color:var(--muted);margin-bottom:16px}
+
+/* faq */
+.faq{padding:90px 0;border-top:1px solid var(--line);max-width:760px;margin:0 auto}
+.faq h2{text-align:center;margin-bottom:44px}
+details{border-bottom:1px solid var(--line);padding:22px 4px}
+summary{cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+summary::after{content:"+";color:var(--gold);font-size:1.4rem;font-weight:400}
+details[open] summary::after{content:"–"}
+details p{margin-top:14px;color:var(--muted);font-size:.97rem}
+
+/* cta */
+.cta{padding:110px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,47,190,.28),transparent 70%);pointer-events:none}
+.cta .wrap{position:relative;z-index:1}
+.cta p{max-width:520px;margin:20px auto 36px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:880px){
+  .cards,.how .steps{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .leak{border-left:none;border-top:1px solid var(--line);padding:36px 0 0}
+  .about .inner{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* live demo */
+.demo{padding:20px 0 90px}
+.demo-card{position:relative;border:1px solid var(--line);border-radius:24px;padding:44px clamp(24px,5vw,56px);background:linear-gradient(160deg,rgba(26,79,191,.16),rgba(13,13,13,.4) 55%)}
+.demo-card .eyebrow{color:var(--gold)}
+.demo-card h2{margin:10px 0 16px}
+.demo-card .lead{max-width:640px;color:var(--muted);font-size:1.08rem}
+.demo-switch{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.demo-tab{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  font-family:inherit;font-size:.92rem;font-weight:600;color:var(--muted);
+  background:transparent;border:1px solid var(--line);border-radius:999px;
+  padding:10px 18px;transition:color .15s,border-color .15s,background .15s}
+.demo-tab:hover{color:var(--paper);border-color:var(--gold)}
+.demo-tab.is-active{color:#0D0D0D;background:var(--gold);border-color:var(--gold)}
+.demo-note{display:inline-flex;align-items:center;gap:9px;margin-top:18px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;font-size:.86rem;color:var(--muted)}
+.demo-note b{color:var(--paper);font-weight:700}
+.demo-frame-wrap{margin-top:30px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0D0D0D;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.demo-frame-wrap iframe{display:block;width:100%;height:640px;border:0}
+@media(max-width:600px){.demo-frame-wrap iframe{height:560px}}
+</style>
+<script src="/js/analytics.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+    <a class="book" href="/book">Book a Call →</a>
+  </div>
+</nav>
+
+<section class="hero" id="top" style="padding-bottom:34px">
+  <div class="wrap">
+    <span class="eyebrow">Live Demo · No Signup</span>
+    <h1>Don't take our word for it.<br><span class="shine">Talk to one.</span></h1>
+    <p class="sub">Two real agents, running live right now for two very different sample businesses. Pick whichever looks more like yours, then talk to it like you're the customer. Ask what something costs, try to book, or try to stump it.</p>
+    <p class="micro">Nothing here is gated. Yours would answer in <em>your</em> voice, about <em>your</em> business.</p>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="demo-card">
+        <p class="lead" style="margin:0 0 4px">Same engine either way. Pick whichever is closer to your business:</p>
+<!-- Dual demo: the single HVAC demo made the whole suite read as a trades-only
+           product. Both tenants are live in the agent router; the toggle swaps the
+           iframe src and the prompt hint. Keep summit-vale first (it is the more
+           battle-tested tenant) but never let it be the only thing on the page. -->
+      <div class="demo-switch" role="tablist" aria-label="Choose a demo business">
+        <button type="button" class="demo-tab is-active" role="tab" aria-selected="true"
+                data-tenant="summit-vale"
+                data-label="Summit &amp; Vale Home Services"
+                data-hint="Set up as an HVAC &amp; plumbing company. Try: &ldquo;my AC died and it&rsquo;s 95 degrees.&rdquo;">
+          🔧 Home Services
+        </button>
+        <button type="button" class="demo-tab" role="tab" aria-selected="false"
+                data-tenant="demo-coaching-co"
+                data-label="Demo Coaching Co"
+                data-hint="Set up as a business coach. Try: &ldquo;I&rsquo;m stuck at 10k a month and can&rsquo;t get past it.&rdquo;">
+          📈 Coaching &amp; Consulting
+        </button>
+      </div>
+      <span class="demo-note" id="demo-hint"><b>Set up as an HVAC &amp; plumbing company.</b> Try: &ldquo;my AC died and it&rsquo;s 95 degrees.&rdquo;</span>
+      <div class="demo-frame-wrap">
+        <iframe id="demo-frame" src="https://agent-router-theta.vercel.app/?tenant=summit-vale" title="Live AI agent demo — Summit &amp; Vale Home Services" loading="lazy" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+      </div>
+<script>
+(function () {
+  var frame = document.getElementById('demo-frame');
+  var hint  = document.getElementById('demo-hint');
+  var tabs  = document.querySelectorAll('.demo-tab');
+  if (!frame || !hint || !tabs.length) return;
+  Array.prototype.forEach.call(tabs, function (tab) {
+    tab.addEventListener('click', function () {
+      if (tab.classList.contains('is-active')) return;
+      Array.prototype.forEach.call(tabs, function (t) {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      // Reassigning src restarts the conversation, which is what we want —
+      // a half-finished HVAC chat should not carry into the coaching demo.
+      frame.src = 'https://agent-router-theta.vercel.app/?tenant=' + tab.dataset.tenant;
+      frame.title = 'Live AI agent demo \u2014 ' + tab.dataset.label;
+      hint.innerHTML = tab.dataset.hint.replace(/^([^.]+\.)/, '<b>$1</b>');
+    });
+  });
+})();
+</script>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Want one of these answering for you?</h2>
+    <p class="lede">Thirty minutes, free, no deck. We run your real numbers together and you leave with a plan — whether you work with us or not.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn pink" href="/book">Book Your Free Demo Call</a>
+      <a class="btn ghost" href="/agentic-flows">See All the Agents →</a>
+    </div>
+    <p class="micro" style="margin-top:14px">Home services, HVAC or plumbing? <a href="/hvac" style="color:var(--gold)">See the agent built for your trade →</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Infinity Reach Media · Orange County, CA · <a href="/book">Book a call</a></p>
+  </div>
+</footer>
+</body>
+</html>
