@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Infinity Reach Media">
 <meta property="og:title" content="AI Agents for Small Business — Talk to One Live">
-<meta property="og:description" content="The full AI agent suite — nine agents, what each one does, and how fast each goes live.">
+<meta property="og:description" content="Talk to a real AI agent running live for a sample business. No signup, nothing gated.">
 <meta property="og:url" content="https://infinityreachmedia.com/live-demo">
 <meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,6 +74,10 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
 .logo em{color:var(--pink);font-style:normal}
 .logo .mark{width:36px;height:36px;object-fit:contain;display:block}
+nav .navlinks{display:flex;align-items:center;gap:22px;list-style:none;margin:0;padding:0}
+nav .navlinks a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .15s}
+nav .navlinks a:hover,nav .navlinks a.active{color:var(--paper)}
+@media(max-width:980px){nav .navlinks{display:none}}
 nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
 
 /* hero */
@@ -210,6 +214,14 @@ footer a{color:var(--gold);text-decoration:none}
 <nav>
   <div class="wrap">
     <a class="logo" href="/"><img class="mark" src="images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="https://www.skool.com/theaiadvantagecommunity/about" target="_blank" rel="noopener">Free Community</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
     <a class="book" href="/book">Book a Call →</a>
   </div>
 </nav>

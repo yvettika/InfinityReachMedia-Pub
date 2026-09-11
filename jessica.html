@@ -61,6 +61,10 @@
   .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
   .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
   .logo em{color:var(--gold)}
+  .navlinks{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
+  .navlinks a{color:rgba(255,255,255,.72);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .15s}
+  .navlinks a:hover{color:#fff}
+  @media(max-width:980px){.navlinks{display:none}}
   .nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border:1.5px solid var(--gold);border-radius:999px;padding:9px 18px}
   .nav-cta:hover{background:var(--gold);color:var(--ink)}
 
@@ -167,7 +171,15 @@
 <nav>
   <div class="nav-in">
     <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
-    <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call</a>
+    <ul class="navlinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="https://www.skool.com/theaiadvantagecommunity/about" target="_blank" rel="noopener">Free Community</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>
 
@@ -220,8 +232,6 @@
     </div>
     <div class="phone live" aria-label="Live chat with Jessica">
       <iframe src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media" title="Chat with Jessica" loading="lazy" allow="clipboard-write"></iframe>
-    </div>
-    </div>
     </div>
   </div>
 </section>
