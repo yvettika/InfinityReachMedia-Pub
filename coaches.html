@@ -186,6 +186,21 @@
     .wt-stage{padding:10px;border-radius:16px}
     .wt-beats{grid-template-columns:repeat(2,1fr)}
   }
+
+/* Split hero for the vertical landing pages. Their hero band is already dark
+   navy (background:var(--ink)) even though the page body is light, so this is
+   the same treatment as the homepage — not a light variant. Eyebrow spans the
+   top, headline left, the ask right, stat row full width underneath. */
+.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:end;margin-bottom:8px}
+.hero .vh-grid h1{margin:0;font-size:clamp(2.5rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.03em;max-width:17ch}
+.hero .vh-right{display:flex;flex-direction:column;gap:14px}
+.hero .vh-right .lead{margin:0;max-width:44ch}
+.hero .vh-right .hero-ctas{margin:6px 0 0}
+.hero .vh-right p{margin:0}
+@media(max-width:900px){
+  .hero .vh-grid{grid-template-columns:1fr;gap:20px;align-items:start}
+  .hero .vh-grid h1{max-width:none}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -201,12 +216,18 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">AI Agents for Coaches &amp; Consultants</div>
-    <h1>Your best client started as a DM. <span>How many died in one?</span></h1>
-    <p class="lead">You're brilliant on a call. The leak is everywhere else: the "tell me more" that sat until Tuesday, the discovery call that no-showed, the person who said "not right now" nine months ago and never heard from you again. We build the AI agents that catch all three — so your calendar fills with conversations instead of your evenings filling with follow-up.</p>
+    <div class="vh-grid">
+      <div>
+        <h1>Your best client started as a DM. <span>How many died in one?</span></h1>
+      </div>
+      <div class="vh-right">
+        <p class="lead">You're brilliant on a call. The leak is everywhere else: the "tell me more" that sat until Tuesday, the discovery call that no-showed, the person who said "not right now" nine months ago and never heard from you again. We build the AI agents that catch all three — so your calendar fills with conversations instead of your evenings filling with follow-up.</p>
     <p style="font-size:.95rem;color:var(--gold);font-weight:500;margin-bottom:34px">Coaches and consultants are who we've served longest — the client stories below are all from this world, by name and by face.</p>
     <div class="hero-ctas">
       <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
       <a class="btn btn-ghost" href="#get-started">Send Me the Walkthrough ↓</a>
+    </div>
+      </div>
     </div>
     <div class="stats">
       <div class="stat"><b>60 sec</b><span>Every inquiry answered, day or night</span></div>

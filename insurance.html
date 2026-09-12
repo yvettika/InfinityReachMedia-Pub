@@ -132,6 +132,21 @@
     .why-grid{grid-template-columns:1fr}
     section.block{padding:64px 0}
   }
+
+/* Split hero for the vertical landing pages. Their hero band is already dark
+   navy (background:var(--ink)) even though the page body is light, so this is
+   the same treatment as the homepage — not a light variant. Eyebrow spans the
+   top, headline left, the ask right, stat row full width underneath. */
+.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:end;margin-bottom:8px}
+.hero .vh-grid h1{margin:0;font-size:clamp(2.5rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.03em;max-width:17ch}
+.hero .vh-right{display:flex;flex-direction:column;gap:14px}
+.hero .vh-right .lead{margin:0;max-width:44ch}
+.hero .vh-right .hero-ctas{margin:6px 0 0}
+.hero .vh-right p{margin:0}
+@media(max-width:900px){
+  .hero .vh-grid{grid-template-columns:1fr;gap:20px;align-items:start}
+  .hero .vh-grid h1{max-width:none}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -147,12 +162,18 @@
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">AI Agents for Insurance Agents &amp; Brokers</div>
-    <h1>Leads go cold in minutes. <span>Your follow up shouldn't.</span></h1>
-    <p class="lead">Internet leads, referrals, quote requests. If you're not first to respond, you paid for someone else's client. Our done for you AI agents answer every lead in 60 seconds, work your book at renewal time, and post the content that keeps your pipeline warm. You approve every send.</p>
+    <div class="vh-grid">
+      <div>
+        <h1>Leads go cold in minutes. <span>Your follow up shouldn't.</span></h1>
+      </div>
+      <div class="vh-right">
+        <p class="lead">Internet leads, referrals, quote requests. If you're not first to respond, you paid for someone else's client. Our done for you AI agents answer every lead in 60 seconds, work your book at renewal time, and post the content that keeps your pipeline warm. You approve every send.</p>
     <p class="cred">Built by an agency founder who carries her own book of business. We speak insurance because we live it.</p>
     <div class="hero-ctas">
       <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
       <a class="btn btn-ghost" href="#proof">Hear From Other Brokers</a>
+    </div>
+      </div>
     </div>
     <div class="stats">
       <div class="stat"><b>60 sec</b><span>Lead response, day or night</span></div>
