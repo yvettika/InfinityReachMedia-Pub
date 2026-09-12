@@ -173,6 +173,10 @@
   .navlinks li{width:100%}
   .navlinks a{display:block;padding:10px 2px;font-size:15px}
 }
+
+/* Brand mark in the nav, matching the homepage at 30px. */
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo .mark{width:30px;height:30px;object-fit:contain;display:block;flex-shrink:0}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -180,7 +184,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
     <ul class="navlinks" id="sitemenu">
       <li><a href="/">Home</a></li>
       <li><a href="/services">Services</a></li>

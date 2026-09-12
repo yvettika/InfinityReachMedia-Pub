@@ -147,6 +147,10 @@
   .hero .vh-grid{grid-template-columns:1fr;gap:20px;align-items:start}
   .hero .vh-grid h1{max-width:none}
 }
+
+/* Brand mark in the nav, matching the homepage at 30px. */
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo .mark{width:30px;height:30px;object-fit:contain;display:block;flex-shrink:0}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -154,7 +158,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
     <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>

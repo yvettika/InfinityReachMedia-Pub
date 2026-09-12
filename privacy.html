@@ -68,13 +68,17 @@
   footer{background:var(--ink);color:rgba(255,255,255,.85);padding:36px 0;font-size:.85rem;text-align:center}
   footer .logo{font-size:1rem}
   footer a{color:rgba(255,255,255,.85)}
+
+/* Brand mark in the nav, matching the homepage at 30px. */
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo .mark{width:30px;height:30px;object-fit:contain;display:block;flex-shrink:0}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-in">
-    <a class="logo" href="https://infinityreachmedia.com/">Infinity <em>Reach</em> Media</a>
+    <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
     <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>
