@@ -273,6 +273,22 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .byline b{color:var(--color-text);font-weight:700}
 .byline a{color:var(--color-accent-2);font-weight:700;white-space:nowrap}
 
+/* Interior-page split hero. Same asymmetry and oversized type as the homepage
+   .vh, minus the product card and trust strip — those are homepage-specific.
+   Used on pages whose hero is an eyebrow, a headline and one paragraph. */
+.vh-lite{padding:74px 0 44px}
+.vh-lite .vh-grid{grid-template-columns:1.1fr .9fr;gap:48px;align-items:end}
+.vh-lite h1{font-size:clamp(2.6rem,5.6vw,4.4rem);max-width:16ch}
+.vh-lite .vh-right{padding-top:0}
+.vh-lite .vh-right p{font-size:1.15rem;line-height:1.6;margin:0 0 14px}
+.vh-lite .vh-right p:last-child{margin-bottom:0}
+.vh-lite .vh-right .hero-promise{font-family:var(--font-display);font-weight:700;
+  font-size:1.05rem;color:var(--color-accent-2);margin-bottom:14px}
+@media(max-width:900px){
+  .vh-lite .vh-grid{grid-template-columns:1fr;gap:22px;align-items:start}
+  .vh-lite h1{max-width:none}
+}
+
 /* ---------- Section helpers ---------- */
 .section { padding: 84px 0; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }

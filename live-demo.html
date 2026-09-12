@@ -196,6 +196,18 @@ footer a{color:var(--gold);text-decoration:none}
   nav .navlinks li{width:100%}
   nav .navlinks a{display:block;padding:10px 2px;font-size:15px}
 }
+
+/* Split hero, matching the homepage. Oversized headline left, the ask right. */
+.vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:end}
+.vh-grid h1{margin:0;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1;letter-spacing:-.03em;max-width:15ch}
+.vh-right{display:flex;flex-direction:column;gap:14px}
+.vh-right .sub{margin:0;max-width:36ch}
+.vh-right .cta-row{margin:4px 0 0}
+.vh-right .micro{margin:0}
+@media(max-width:900px){
+  .vh-grid{grid-template-columns:1fr;gap:22px;align-items:start}
+  .vh-grid h1{max-width:none}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 <script type="application/ld+json">
@@ -233,9 +245,15 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="hero" id="top" style="padding-bottom:34px">
   <div class="wrap">
     <span class="eyebrow">Live Demo · No Signup</span>
-    <h1>Don't take our word for it.<br><span class="shine">Talk to one.</span></h1>
-    <p class="sub">Two real agents, running live right now for two very different sample businesses. Pick whichever looks more like yours, then talk to it like you're the customer. Ask what something costs, try to book, or try to stump it.</p>
+    <div class="vh-grid">
+      <div>
+        <h1>Don't take our word for it.<br><span class="shine">Talk to one.</span></h1>
+      </div>
+      <div class="vh-right">
+        <p class="sub">Two real agents, running live right now for two very different sample businesses. Pick whichever looks more like yours, then talk to it like you're the customer. Ask what something costs, try to book, or try to stump it.</p>
     <p class="micro">Nothing here is gated. Yours would answer in <em>your</em> voice, about <em>your</em> business.</p>
+      </div>
+    </div>
   </div>
 </section>
 

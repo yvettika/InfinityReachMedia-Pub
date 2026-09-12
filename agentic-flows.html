@@ -201,6 +201,18 @@ footer a{color:var(--gold);text-decoration:none}
   nav .navlinks a{display:block;padding:10px 2px;font-size:15px}
 }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Split hero, matching the homepage. Oversized headline left, the ask right. */
+.vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:end}
+.vh-grid h1{margin:0;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1;letter-spacing:-.03em;max-width:15ch}
+.vh-right{display:flex;flex-direction:column;gap:14px}
+.vh-right .sub{margin:0;max-width:36ch}
+.vh-right .cta-row{margin:4px 0 0}
+.vh-right .micro{margin:0}
+@media(max-width:900px){
+  .vh-grid{grid-template-columns:1fr;gap:22px;align-items:start}
+  .vh-grid h1{max-width:none}
+}
 </style>
 <script src="/js/analytics.js" defer></script>
 </head>
@@ -225,8 +237,12 @@ footer a{color:var(--gold);text-decoration:none}
 <section class="hero" id="top">
   <div class="wrap">
     <span class="eyebrow">AI Agents for Small Business</span>
-    <h1>Tools don't grow your business.<br><span class="shine">Customers do.</span></h1>
-    <p class="sub">Done for you AI agents that go get new customers, bring old ones back, and turn every lead into booked revenue — without adding a $45,000 front desk to your payroll. You approve. They earn.</p>
+    <div class="vh-grid">
+      <div>
+        <h1>Tools don't grow your business.<br><span class="shine">Customers do.</span></h1>
+      </div>
+      <div class="vh-right">
+        <p class="sub">Done for you AI agents that go get new customers, bring old ones back, and turn every lead into booked revenue — without adding a $45,000 front desk to your payroll. You approve. They earn.</p>
     <div class="cta-row">
       <a class="btn pink" href="/book">Book Your Free Demo Call</a>
       <a class="btn ghost" href="/live-demo" target="_blank" rel="noopener">Try the Live Demo →<span class="sr-only"> (opens in a new tab)</span></a>
@@ -234,6 +250,8 @@ footer a{color:var(--gold);text-decoration:none}
     <p class="micro">30 minutes. No pressure. Or talk to a real agent right now, no signup.</p>
     <p class="micro" style="margin-top:8px">Home services, HVAC or plumbing? <a href="/hvac" style="color:var(--gold)">See the agent built for your trade →</a></p>
       <p class="micro" style="margin-top:8px">Not ready to talk? <a href="/scorecard" style="color:var(--gold)">Take the 2-minute Growth Scorecard →</a></p>
+      </div>
+    </div>
   </div>
 </section>
 
