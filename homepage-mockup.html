@@ -109,10 +109,32 @@
     .vh h1{font-size:clamp(2.3rem,4.4vw,3.7rem);max-width:15ch;margin-bottom:22px}
     .vh-copy .vh-promise{margin-bottom:18px}
     .vh-copy .vh-sub{max-width:44ch;margin-bottom:24px}
-    @media(max-width:1000px){
-      .vh-grid{grid-template-columns:1fr;gap:40px}
-      .vh h1{max-width:none}
-      .vh-copy .vh-sub{max-width:none}
+
+    /* Hold the side-by-side layout as far down as it will honestly fit. The
+       phone belongs beside the copy, not under it — a laptop window that isn't
+       maximised, or a tablet, should still get the agent next to the headline.
+       Shrink the column and the type rather than dropping to one column. */
+    @media(max-width:1100px){
+      .vh-grid{grid-template-columns:1fr minmax(290px,350px);gap:34px}
+      .vh h1{font-size:clamp(2.1rem,4.2vw,3rem);max-width:none}
+      .vh-copy .vh-sub{max-width:none;font-size:1.05rem}
+      .jphone{max-width:100%;padding:10px}
+      .vh-try{font-size:.82rem}
+    }
+    @media(max-width:880px){
+      .vh-grid{grid-template-columns:1fr minmax(260px,300px);gap:26px}
+      .vh h1{font-size:clamp(1.95rem,4vw,2.5rem)}
+      .vh-copy .vh-sub{font-size:1rem}
+      .vh-actions{gap:10px}
+      .vh-actions .btn{padding:12px 20px;font-size:.84rem}
+    }
+    /* Only a real phone gets the stacked version, and there it goes first. */
+    @media(max-width:720px){
+      .vh-grid{grid-template-columns:1fr;gap:36px}
+      .vh h1{font-size:clamp(2.2rem,8vw,3rem)}
+      .vh-copy .vh-sub{font-size:1.08rem}
+      .vh-actions .btn{padding:14px 26px;font-size:.9rem}
+      .jphone{max-width:380px;padding:12px}
     }
 
     .vh-live{display:flex;flex-direction:column;align-items:center}
