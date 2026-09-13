@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo-mark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Jessica Live in 7 Days | Infinity Reach Media</title>
+  <meta name="description" content="What happens after you say yes to Jessica — the day-by-day build, exactly what we need from you, and what stalls the clock. About 60 minutes of your time across seven days." />
+  <link rel="canonical" href="https://infinityreachmedia.com/jessica-onboarding" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Infinity Reach Media" />
+  <meta property="og:title" content="Getting Jessica Live in 7 Days" />
+  <meta property="og:description" content="The day-by-day onboarding for Jessica, our AI sales rep — and exactly what we need from you." />
+  <meta property="og:url" content="https://infinityreachmedia.com/jessica-onboarding" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ---------------------------------------------------------------
+       Onboarding-specific layout. Colors all come from css/styles.css.
+       --------------------------------------------------------------- */
+
+    /* Day rail — the spine of the page. The numbers are real days against
+       the 7-day guarantee, so the sequence carries information. */
+    .rail{position:relative;max-width:820px;margin:0 auto;padding-left:78px}
+    @media(max-width:680px){.rail{padding-left:54px}}
+    .rail::before{content:"";position:absolute;left:27px;top:12px;bottom:12px;width:2px;
+      background:linear-gradient(180deg,var(--color-accent),var(--color-purple),rgba(247,244,239,.12))}
+    @media(max-width:680px){.rail::before{left:17px}}
+
+    .day{position:relative;padding-bottom:44px}
+    .day:last-child{padding-bottom:0}
+    .day .pin{position:absolute;left:-78px;top:0;width:56px;height:56px;border-radius:50%;
+      display:grid;place-items:center;text-align:center;line-height:1.05;
+      font-family:var(--font-display);font-weight:800;font-size:.66rem;letter-spacing:.06em;
+      text-transform:uppercase;color:#fff;background:var(--color-surface-2);
+      border:2px solid var(--color-border)}
+    @media(max-width:680px){
+      .day .pin{left:-54px;width:36px;height:36px;font-size:.56rem;border-width:1.5px}
+    }
+    /* The days we actually build on get the live gradient; the client's own
+       days are outlined, so you can see at a glance who is working. */
+    .day.ours .pin{background:linear-gradient(140deg,var(--color-accent),var(--color-purple));
+      border-color:transparent}
+    .day.yours .pin{background:rgba(233,30,140,.10);border-color:var(--color-accent-text);
+      color:var(--color-accent-text)}
+
+    .day h3{font-family:var(--font-serif);font-size:1.42rem;line-height:1.2;margin:4px 0 6px}
+    .day .who{font-family:var(--font-display);font-weight:700;font-size:.68rem;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-text)}
+    .day.ours .who{color:var(--color-accent-2)}
+    .day p{color:var(--color-muted);opacity:.88;margin-bottom:10px}
+    .day ul{list-style:none;padding:0;margin:12px 0 0}
+    .day li{position:relative;padding-left:22px;margin-bottom:8px;color:var(--color-muted);
+      opacity:.88;font-size:.96rem}
+    .day li::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;
+      border-radius:50%;background:var(--color-accent)}
+    .day .ask{margin-top:14px;padding:13px 16px;border-radius:12px;
+      background:rgba(233,30,140,.08);border:1px solid rgba(255,95,175,.3);
+      font-size:.93rem;color:var(--color-text)}
+    .day .ask b{color:var(--color-accent-text);font-family:var(--font-display);
+      font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+
+    /* Intake checklist */
+    .intake{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:900px;margin:0 auto}
+    @media(max-width:760px){.intake{grid-template-columns:1fr}}
+    .item{background:rgba(247,244,239,.03);border:1px solid var(--color-border);
+      border-radius:14px;padding:22px 22px 20px}
+    .item h4{font-family:var(--font-display);font-weight:700;font-size:.92rem;
+      letter-spacing:.02em;margin-bottom:7px;color:var(--color-text)}
+    .item p{color:var(--color-muted);font-size:.92rem;line-height:1.55;opacity:.85}
+    .item .eg{display:block;margin-top:9px;font-size:.86rem;color:var(--color-accent-2);
+      font-style:italic}
+
+    /* Time ledger */
+    .ledger{max-width:620px;margin:0 auto;border:1px solid var(--color-border);
+      border-radius:18px;overflow:hidden}
+    .ledger .row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+      padding:15px 22px;border-bottom:1px solid var(--color-border)}
+    .ledger .row:last-child{border-bottom:0;background:rgba(240,180,41,.07)}
+    .ledger .row span{color:var(--color-muted);font-size:.96rem}
+    .ledger .row b{font-family:var(--font-display);font-weight:700;font-size:.95rem;
+      color:var(--color-text);white-space:nowrap;font-variant-numeric:tabular-nums}
+    .ledger .row:last-child b{color:var(--color-accent-2);font-size:1.05rem}
+
+    /* Stall warnings — the honest bit most agencies leave out. */
+    .stalls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;margin:0 auto}
+    @media(max-width:860px){.stalls{grid-template-columns:1fr}}
+    .stall{border:1px solid rgba(240,180,41,.32);background:rgba(240,180,41,.05);
+      border-radius:16px;padding:22px}
+    .stall b{display:block;font-family:var(--font-display);font-weight:800;font-size:.95rem;
+      color:var(--color-accent-2);margin-bottom:8px}
+    .stall p{color:var(--color-muted);font-size:.93rem;line-height:1.55}
+
+    .fine{max-width:720px;margin:0 auto;text-align:center;color:var(--color-muted);
+      font-size:.95rem;line-height:1.7;opacity:.85}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="agentic-flows.html">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="vh vh-lite">
+    <div class="container">
+      <span class="eyebrow">Onboarding · Jessica, AI Sales Rep</span>
+      <div class="vh-grid">
+        <div>
+          <h1>You said yes. Here's every day of the next seven.</h1>
+        </div>
+        <div class="vh-right">
+          <p class="hero-promise">About 60 minutes of your time, total.</p>
+          <p>No project portal to learn, no eight-week discovery. You answer questions about your own business once, we build, you try to break her, she goes live.</p>
+          <p>If she isn't answering real leads by day seven, your setup fee comes back. That's in our <a href="/terms" style="color:var(--color-accent-2);font-weight:700">Terms</a>, not in a sales deck.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SEVEN DAYS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The build</span>
+        <h2>Seven days, and you're only in four of them.</h2>
+        <p>Pink days are yours. Gradient days are ours. The clock starts the moment your intake lands, not the moment you pay — so nothing is ticking while you're still gathering pricing.</p>
+      </div>
+
+      <div class="rail">
+
+        <div class="day yours">
+          <span class="pin">Day<br>0</span>
+          <span class="who">You · 10 minutes</span>
+          <h3>You say yes</h3>
+          <p>Agreement and setup fee go through in one link. Then you get exactly one thing back: the intake.</p>
+          <ul>
+            <li>Signed agreement and setup fee, both in the same email</li>
+            <li>Your kickoff call booked inside 48 hours</li>
+            <li>The intake link — one form, no login, save and come back</li>
+          </ul>
+          <div class="ask"><b>Important</b>The seven-day clock starts when your intake is submitted, not at checkout. Take the weekend if you need it.</div>
+        </div>
+
+        <div class="day yours">
+          <span class="pin">Day<br>1</span>
+          <span class="who">You · 25 minutes</span>
+          <h3>The intake — the only real homework</h3>
+          <p>This is the whole job on your side. Everything Jessica knows about your business comes from this one form, so it's worth the 25 minutes. Full list is further down this page.</p>
+          <ul>
+            <li>Your services, in the words your customers actually use</li>
+            <li>What she's allowed to quote, and what she must never quote</li>
+            <li>The ten questions leads ask you every week, and the right answers</li>
+            <li>Three texts you've sent a customer that sounded like you</li>
+          </ul>
+          <div class="ask"><b>If you'd rather talk than type</b>Get on the kickoff call and we'll fill it in with you, live, while you talk. Most people find that faster.</div>
+        </div>
+
+        <div class="day ours">
+          <span class="pin">Day<br>2</span>
+          <span class="who">Us · you approve one thing</span>
+          <h3>Numbers and access</h3>
+          <p>We set up the plumbing. Everything lives in accounts you own — if we ever part ways, you keep all of it, conversations included.</p>
+          <ul>
+            <li>A local number provisioned, or your existing line forwarded on no-answer</li>
+            <li>Your calendar connected, with real buffers and real working hours</li>
+            <li>Instagram, Messenger and WhatsApp connected if you want those channels</li>
+            <li>Compliance set up: opt-out language, consent capture, the required disclosures</li>
+          </ul>
+          <div class="ask"><b>Your one job today</b>Approve the connection requests when they hit your phone. Takes about two minutes.</div>
+        </div>
+
+        <div class="day ours">
+          <span class="pin">Day<br>3–4</span>
+          <span class="who">Us · nothing needed from you</span>
+          <h3>She learns your business</h3>
+          <p>This is the part that makes her Jessica instead of a chatbot with your logo on it.</p>
+          <ul>
+            <li>Trained on your services, your pricing rules, your objections</li>
+            <li>Booking logic wired to your real calendar, not a generic slot picker</li>
+            <li>Escalation rules: what she must hand to a human, and how fast</li>
+            <li>Her AI disclosure line, written in your voice — she says it on every first message</li>
+            <li>The disqualifiers, so she stops wasting your time on leads you don't want</li>
+          </ul>
+        </div>
+
+        <div class="day yours">
+          <span class="pin">Day<br>5</span>
+          <span class="who">You · 20 minutes</span>
+          <h3>Test day — try to break her</h3>
+          <p>You get a test number before any real lead ever touches her. This is the day people tell us they stopped being nervous.</p>
+          <ul>
+            <li>Text her like your worst lead. Push on price. Go quiet. Get rude.</li>
+            <li>Paste in five real messages from past leads and see what she does</li>
+            <li>Anything she gets wrong goes on a list and gets fixed the same day</li>
+          </ul>
+          <div class="ask"><b>Nothing goes live without your yes</b>If test day doesn't satisfy you, we don't launch. We fix and retest.</div>
+        </div>
+
+        <div class="day ours">
+          <span class="pin">Day<br>6</span>
+          <span class="who">Us · watching every message</span>
+          <h3>Soft launch, one channel</h3>
+          <p>She goes live on a single channel — usually text or web chat — and a human on our side reads every conversation that day. Not a sample. Every one.</p>
+          <ul>
+            <li>Real leads, one channel, full human review behind her</li>
+            <li>Anything awkward gets corrected before it happens twice</li>
+            <li>You get a short end-of-day note on what came in and what she did</li>
+          </ul>
+        </div>
+
+        <div class="day ours">
+          <span class="pin">Day<br>7</span>
+          <span class="who">Live</span>
+          <h3>Full launch</h3>
+          <p>Every channel you approved is on. Leak one and leak two are plugged. The guarantee is met.</p>
+          <ul>
+            <li>All approved channels answering, one conversation per person across them</li>
+            <li>Bookings landing on your calendar with reminders already scheduled</li>
+            <li>Your team gets the handoff alerts, so nobody is guessing</li>
+          </ul>
+        </div>
+
+        <div class="day ours">
+          <span class="pin">Wk<br>2</span>
+          <span class="who">Us · tuning</span>
+          <h3>The week nobody else does</h3>
+          <p>Week two is where a good agent becomes yours. We read transcripts daily and tighten her against what your real leads actually say.</p>
+          <ul>
+            <li>Daily transcript review, every weekday</li>
+            <li>A Friday note: what she got wrong, what we changed, what's still open</li>
+            <li>New FAQ answers added as your leads surface them</li>
+          </ul>
+        </div>
+
+        <div class="day yours">
+          <span class="pin">Day<br>30</span>
+          <span class="who">You · 30 minutes</span>
+          <h3>The number that decides everything</h3>
+          <p>One call, real figures, no spin. You see what she did and you decide what happens next.</p>
+          <ul>
+            <li>Leads answered, and how fast she answered the first message</li>
+            <li>Appointments booked, kept, and no-showed</li>
+            <li>Conversations she escalated, and the ones she still can't handle</li>
+            <li>Then you pick: more channels, the next agent, or stop here</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TIME LEDGER -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Your side of it</span>
+        <h2>Every minute we'll ask you for.</h2>
+        <p>Written down in advance, so nobody discovers a surprise workload in week two.</p>
+      </div>
+      <div class="ledger">
+        <div class="row"><span>Day 0 — agreement and setup fee</span><b>10 min</b></div>
+        <div class="row"><span>Day 1 — the intake form</span><b>25 min</b></div>
+        <div class="row"><span>Day 2 — approve account connections</span><b>2 min</b></div>
+        <div class="row"><span>Day 5 — test day, try to break her</span><b>20 min</b></div>
+        <div class="row"><span>Day 30 — the results call</span><b>30 min</b></div>
+        <div class="row"><span><b>Total, across the first month</b></span><b>87 min</b></div>
+      </div>
+      <p class="fine" style="margin-top:26px">Anything not on this list, we do. You will not be asked to write scripts, build flows, learn a dashboard, or sit in a weekly status meeting.</p>
+    </div>
+  </section>
+
+  <!-- INTAKE CHECKLIST -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Day 1 in detail</span>
+        <h2>What the intake actually asks.</h2>
+        <p>Here it is in advance, so you can gather anything you don't have on hand. Most of it you already know by heart — it's the pricing rules that take people a minute.</p>
+      </div>
+      <div class="intake">
+        <div class="item">
+          <h4>Your services, in customer words</h4>
+          <p>Not your internal names. What people type when they message you.</p>
+          <span class="eg">"AC not blowing cold" — not "diagnostic call-out"</span>
+        </div>
+        <div class="item">
+          <h4>Pricing rules</h4>
+          <p>What she can say out loud, what's a range, and what has to wait for a human. This is the one that protects you.</p>
+          <span class="eg">"Can quote the $89 service call. Never quotes install."</span>
+        </div>
+        <div class="item">
+          <h4>Hours, service area, holidays</h4>
+          <p>When you're open, how far you'll travel, and the days you're closed but leads still text.</p>
+          <span class="eg">She answers at 2am. She just won't promise you will.</span>
+        </div>
+        <div class="item">
+          <h4>Your calendar and its rules</h4>
+          <p>Which calendar, how long a booking runs, travel buffers, and who owns which slot.</p>
+          <span class="eg">"90 min, 30 min drive buffer, never book Fridays after 3."</span>
+        </div>
+        <div class="item">
+          <h4>The ten questions you get every week</h4>
+          <p>Your real FAQ, with the answers you'd give. This is the single biggest factor in how good she sounds.</p>
+          <span class="eg">"Do you take insurance?" "Are you licensed?" "How soon?"</span>
+        </div>
+        <div class="item">
+          <h4>Who you don't want</h4>
+          <p>The leads that waste your day. She'll spot them and close them out politely instead of booking them.</p>
+          <span class="eg">Out of area, price shoppers, jobs you don't take</span>
+        </div>
+        <div class="item">
+          <h4>Escalation and handoff</h4>
+          <p>Who she hands a live one to, how they get told, and how fast. Angry customers always go to a human.</p>
+          <span class="eg">"Text Mike within 5 minutes on anything over $5k."</span>
+        </div>
+        <div class="item">
+          <h4>Three texts that sound like you</h4>
+          <p>Real messages you've sent a customer. She learns your voice from these, not from a tone slider.</p>
+          <span class="eg">Screenshots are fine. Copy and paste is fine.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT STALLS IT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Straight talk</span>
+        <h2>Three things that stall a build.</h2>
+        <p>These are the only reasons a seven-day launch has ever slipped for us. All three are avoidable if you know about them on day zero.</p>
+      </div>
+      <div class="stalls">
+        <div class="stall">
+          <b>Undecided pricing rules</b>
+          <p>By far the most common. If you haven't settled what she's allowed to quote, she can't answer the question every lead opens with. Decide this before day one and nothing else slows you down.</p>
+        </div>
+        <div class="stall">
+          <b>Meta account access</b>
+          <p>Instagram and Messenger need a Business account with you as admin. If yours is a personal profile, that conversion takes a day or two on Meta's side, not ours. We'll launch text and web chat first and add socials when it clears.</p>
+        </div>
+        <div class="stall">
+          <b>No one to hand off to</b>
+          <p>Jessica books appointments and escalates live ones. If nobody is on the other end of an escalation, she's answering into a void. We need one name and one number before launch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE + CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="gtee-band">
+        <div class="gtee-row">
+          <div class="gtee">
+            <b>Live in 7 days</b>
+            <span>Counted from your intake, not your payment. Miss it and your setup fee comes back.</span>
+          </div>
+          <div class="gtee">
+            <b>Nothing launches without your yes</b>
+            <span>Test day is a real gate. If she doesn't satisfy you, we fix and retest before any lead sees her.</span>
+          </div>
+          <div class="gtee">
+            <b>Your accounts, your data</b>
+            <span>Number, calendar, conversations, contacts. All in accounts you own and keep.</span>
+          </div>
+        </div>
+        <p class="gtee-note">Conditions in full in our <a href="/terms">Terms of Service</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center">
+      <div class="section-head" style="margin-bottom:28px">
+        <span class="eyebrow">Start</span>
+        <h2>Want Jessica?</h2>
+        <p>Talk to her first. Push on price, tell her you need to think about it, ask her whether she's a bot. If she handles you well, she'll handle your leads — and she'll book the call herself.</p>
+      </div>
+      <div class="vh-actions" style="justify-content:center">
+        <a class="btn btn-primary" href="sms:+17149243024?body=I%20want%20Jessica%20for%20my%20business">Text Jessica: (714) 924-3024</a>
+        <a class="btn btn-ghost" href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book the kickoff call<span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+      <p class="fine" style="margin-top:26px">We run twelve clients at a time on purpose. If we're full, we'll tell you that on the call and give you the date we open up — we won't take your setup fee and put you in a queue.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="index.html"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+        <p>Done-for-you AI agents that stop businesses from leaking revenue — missed calls and DMs, slow follow-up, no-shows, and forgotten customers.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/yvettika" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+          <a href="https://www.instagram.com/boss.bae.yvette/" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+          <a href="https://www.tiktok.com/@yvettejkahn" aria-label="TikTok" target="_blank" rel="noopener">TT</a>
+        </div>
+      </div>
+      <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="services.html">Services</a></li><li><a href="agentic-flows.html">AI Agent Suite</a></li><li><a href="/reviews">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Industries</h4><ul><li><a href="/small-business">Small Business</a></li><li><a href="/coaches">Coaches &amp; Consultants</a></li><li><a href="/hvac">HVAC &amp; Home Services</a></li><li><a href="/salon">Salons &amp; Med Spas</a></li><li><a href="/insurance">Insurance Agents</a></li></ul></div>
+      <div><h4>Free Tools &amp; Guides</h4><ul><li><a href="/jessica">Meet Jessica</a></li><li><a href="/scorecard">Revenue Leak Score</a></li><li><a href="/calculator">Revenue Leak Calculator</a></li><li><a href="/missed-calls">Missed Call Calculator</a></li><li><a href="/reactivation-playbook">Reactivation Playbook</a></li></ul></div>
+      <div><h4>Get in Touch</h4><ul><li><a href="mailto:info@infinityreachmedia.com">info@infinityreachmedia.com</a></li><li><a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book a Call</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Infinity Reach Media. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/accessibility">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

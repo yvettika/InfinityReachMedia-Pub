@@ -100,15 +100,38 @@
       background:#111827;height:600px}
     .jphone-bar{display:flex;align-items:center;gap:10px;padding:14px 18px 12px;
       background:rgba(12,18,34,.9);border-bottom:1px solid var(--color-border)}
-    .javatar{width:34px;height:34px;border-radius:50%;flex:0 0 34px;
-      display:grid;place-items:center;font-family:var(--font-display);font-weight:800;
-      font-size:.85rem;color:#fff;
+    .javatar{width:34px;height:34px;min-width:34px;border-radius:50%;flex:0 0 34px;
+      font-family:var(--font-display);font-weight:800;font-size:.85rem;color:#fff;
+      text-align:center;line-height:34px;
       background:linear-gradient(120deg,var(--color-accent),var(--color-purple))}
     .jphone-bar b{font-family:var(--font-display);font-size:.86rem;display:block;
       line-height:1.25}
     .jphone-bar span{font-size:.7rem;color:rgba(247,244,239,.6);display:block}
-    .jphone iframe{display:block;width:100%;height:calc(600px - 60px);border:0;
-      background:#111827}
+    .jstage{position:relative;height:calc(600px - 60px)}
+    .jphone iframe{position:relative;z-index:2;display:block;width:100%;height:100%;
+      border:0;background:#111827;opacity:0;transition:opacity .35s ease}
+    .jphone iframe.ready{opacity:1}
+
+    /* Fallback thread — visible only until the live widget paints over it. */
+    .jfallback{position:absolute;inset:0;z-index:1;padding:18px 16px;
+      display:flex;flex-direction:column;gap:9px;overflow:hidden;background:#111827}
+    .jfallback .m{max-width:82%;padding:11px 15px;border-radius:16px;font-size:.92rem;
+      line-height:1.5}
+    .jfallback .them{background:var(--color-surface-2);
+      border:1px solid rgba(247,244,239,.1);border-bottom-left-radius:5px;align-self:flex-start}
+    .jfallback .us{background:linear-gradient(100deg,var(--color-accent),var(--color-purple));
+      color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+    .jfallback .stamp{font-size:.66rem;color:rgba(247,244,239,.45);text-align:center}
+    .jtyping{display:flex;gap:4px;align-self:flex-start;background:var(--color-surface-2);
+      border:1px solid rgba(247,244,239,.1);border-radius:16px;border-bottom-left-radius:5px;
+      padding:13px 15px}
+    .jtyping i{width:6px;height:6px;border-radius:50%;background:rgba(247,244,239,.6);
+      animation:jtype 1.3s infinite}
+    .jtyping i:nth-child(2){animation-delay:.18s}
+    .jtyping i:nth-child(3){animation-delay:.36s}
+    @keyframes jtype{0%,60%,100%{opacity:.3;transform:translateY(0)}
+      30%{opacity:1;transform:translateY(-3px)}}
+    @media(prefers-reduced-motion:reduce){.jtyping i{animation:none}}
     .jcap{text-align:center;font-size:.82rem;color:rgba(247,244,239,.58);
       margin-top:16px}
 
@@ -249,7 +272,7 @@
 
           <div class="jactions">
             <a class="btn btn-primary" href="sms:+17149243024?body=Hi%20Jessica">Text her: (714) 924-3024</a>
-            <a class="btn btn-ghost" href="/jessica">See everything she does →</a>
+            <a class="btn btn-ghost" href="/jessica-onboarding">What happens if I want her →</a>
           </div>
 
           <p class="jmicro">That's not a screenshot and it's not a script. Push on price. Say you need to think about it. Ask if she's a bot — she'll tell you straight.</p>
@@ -265,11 +288,23 @@
                   <span>AI sales rep · replies in seconds</span>
                 </span>
               </div>
-              <iframe
-                src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media"
-                title="Chat with Jessica, the AI sales rep"
-                loading="lazy"
-                allow="clipboard-write"></iframe>
+              <div class="jstage">
+                <div class="jfallback" aria-hidden="true">
+                  <p class="stamp">Sat 9:41 PM</p>
+                  <div class="m them">Hey — saw your ad. Do you have anything open this week?</div>
+                  <div class="m us">Hi! This is Jessica, the AI assistant at Infinity Reach Media. I've got Thursday 10:00 or Friday 2:30 open. Which suits you better?</div>
+                  <p class="stamp">41 seconds later</p>
+                  <div class="m them">what's it cost though</div>
+                  <div class="m us">Fair question. It depends on which leak we're plugging, so nobody quotes you a number that's wrong. Yvette gives you the real figure on the call — and the call is free.</div>
+                  <div class="jtyping"><i></i><i></i><i></i></div>
+                </div>
+                <iframe
+                  src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media"
+                  title="Chat with Jessica, the AI sales rep"
+                  loading="lazy"
+                  allow="clipboard-write"
+                  onload="this.classList.add('ready')"></iframe>
+              </div>
             </div>
           </div>
           <p class="jcap">Live agent · same Jessica as our real number</p>
