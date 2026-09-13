@@ -30,6 +30,7 @@
 {"@type":"Question","name":"How fast is setup?","acceptedAnswer":{"@type":"Answer","text":"Seven days from signup to live. We connect your lead sources, your calendar, and your book, then test everything with you before it touches a real lead."}}]}
 </script>
 <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <style>
   :root{
     --ink:#101B3D;
@@ -138,9 +139,10 @@
    navy (background:var(--ink)) even though the page body is light, so this is
    the same treatment as the homepage — not a light variant. Eyebrow spans the
    top, headline left, the ask right, stat row full width underneath. */
-.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:end;margin-bottom:8px}
+.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:start;margin-bottom:8px}
 .hero .vh-grid h1{margin:0;font-size:clamp(2.5rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.03em;max-width:17ch}
 .hero .vh-right{display:flex;flex-direction:column;gap:14px}
+  .vh-right .sub{margin:0;max-width:none;text-align:left}
 .hero .vh-right .lead{margin:0;max-width:44ch}
 .hero .vh-right .hero-ctas{margin:6px 0 0}
 .hero .vh-right p{margin:0}
@@ -160,6 +162,15 @@
 <nav>
   <div class="nav-in">
     <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks" id="sitemenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>
@@ -376,5 +387,6 @@
 
 <script src="/js/lp.js" defer></script>
 
+<script src="/js/nav.js" defer></script>
 </body>
 </html>

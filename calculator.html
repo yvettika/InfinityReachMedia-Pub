@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <style>
   :root{--ink:var(--brand-navy);--paper:var(--brand-paper);--pink:#E91E8C;--purple:#7B2FBE;--gold:var(--brand-pink-lt);
     --muted:var(--brand-paper);--line:rgba(241,244,251,.14);
@@ -160,6 +161,15 @@
 <nav>
   <div class="navwrap">
     <a class="logo" href="/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo"> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks" id="sitemenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="bk" href="/book">Book a Call →</a>
   </div>
 </nav>
@@ -450,5 +460,6 @@ function renderResults(r, firstName){
     document.getElementById('pct').textContent = pct+'%'; },150);
 }
 </script>
+<script src="/js/nav.js" defer></script>
 </body>
 </html>

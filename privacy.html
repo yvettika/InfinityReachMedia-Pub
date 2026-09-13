@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <style>
   :root{
     --ink:#101B3D;
@@ -80,6 +81,15 @@
 <nav>
   <div class="nav-in">
     <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks" id="sitemenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>
@@ -228,5 +238,6 @@
   </div>
 </footer>
 
+<script src="/js/nav.js" defer></script>
 </body>
 </html>
