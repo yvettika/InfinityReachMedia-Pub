@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo-mark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started | Infinity Reach Media</title>
+  <meta name="description" content="Welcome aboard. Three steps to get your AI agents live: one form, one quick connection per agent, and a test day before anything goes live." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://infinityreachmedia.com/start" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ---------------------------------------------------------------
+       /start: the one link a new client gets after they say yes.
+       Personalised by URL: /start?agents=receptionist,showrate&biz=Oily's
+       Only the agents in the link are shown, so nobody reads setup steps
+       for things they didn't buy. Colours all come from css/styles.css.
+       --------------------------------------------------------------- */
+
+    .wrap{max-width:900px;margin:0 auto}
+
+    /* Three-step strip. These ARE a sequence, so the numbers are earned. */
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:980px;margin:0 auto;
+      border:1px solid var(--color-border);border-radius:20px;overflow:hidden}
+    @media(max-width:820px){.steps{grid-template-columns:1fr}}
+    .stp{padding:26px 26px 24px;border-right:1px solid var(--color-border);position:relative}
+    .stp:last-child{border-right:0}
+    @media(max-width:820px){.stp{border-right:0;border-bottom:1px solid var(--color-border)}.stp:last-child{border-bottom:0}}
+    .stp .n{font-family:var(--font-display);font-weight:800;font-size:.7rem;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--color-accent-text)}
+    .stp h3{font-family:var(--font-serif);font-size:1.35rem;line-height:1.2;margin:6px 0 8px}
+    .stp p{color:var(--color-muted);opacity:.88;font-size:.95rem;line-height:1.55;margin:0}
+    .stp .t{display:inline-block;margin-top:14px;font-family:var(--font-display);font-weight:700;
+      font-size:.76rem;letter-spacing:.06em;color:var(--color-accent-2);font-variant-numeric:tabular-nums}
+    .stp.live{background:rgba(76,123,255,.07)}
+
+    /* Agent picker */
+    .picker{max-width:900px;margin:0 auto 8px;text-align:left}
+    .picker p{color:var(--color-muted);font-size:.95rem;margin:0 0 12px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{position:relative}
+    .chip input{position:absolute;opacity:0;width:0;height:0}
+    .chip span{display:inline-block;font-family:var(--font-display);font-weight:700;
+      font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+      border:1.5px solid var(--color-border);border-radius:999px;padding:10px 16px;
+      color:var(--color-muted);transition:border-color .15s ease,color .15s ease,background .15s ease}
+    .chip input:checked + span{border-color:var(--color-accent-text);color:var(--color-accent-text);
+      background:rgba(233,30,140,.1)}
+    .chip input:focus-visible + span{outline:3px solid var(--color-accent-2);outline-offset:2px}
+    .edit{background:none;border:0;padding:0;color:var(--color-accent-2);font-weight:700;
+      text-decoration:underline;cursor:pointer;font-size:.9rem}
+
+    /* Per-agent cards: what we build / your one job / timeline */
+    .agents{display:grid;gap:16px;max-width:900px;margin:0 auto}
+    .ag{border:1px solid var(--color-border);border-radius:18px;background:rgba(241,244,251,.03);
+      display:grid;grid-template-columns:230px 1fr;overflow:hidden}
+    @media(max-width:760px){.ag{grid-template-columns:1fr}}
+    .ag-head{padding:22px 22px;background:rgba(76,123,255,.06);border-right:1px solid var(--color-border)}
+    @media(max-width:760px){.ag-head{border-right:0;border-bottom:1px solid var(--color-border)}}
+    .ag-head h3{font-family:var(--font-serif);font-size:1.25rem;line-height:1.2;margin:0 0 8px}
+    .ag-head .tl{font-family:var(--font-display);font-weight:700;font-size:.7rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--color-accent-2);display:block}
+    .ag-head .mins{display:block;margin-top:6px;font-size:.86rem;color:var(--color-muted);opacity:.8}
+    .ag-body{padding:22px 24px;display:grid;gap:14px}
+    .ag-body .we{color:var(--color-muted);opacity:.9;font-size:.95rem;line-height:1.55;margin:0}
+    .ag-body .we b{color:var(--color-text)}
+    .job{padding:13px 16px;border-radius:12px;background:rgba(233,30,140,.08);
+      border:1px solid rgba(255,95,175,.3);font-size:.94rem;line-height:1.55;color:var(--color-text)}
+    .job b.k{color:var(--color-accent-text);font-family:var(--font-display);font-size:.7rem;
+      letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+    .job.none{background:rgba(76,123,255,.06);border-color:rgba(76,123,255,.3)}
+    .job.none b.k{color:var(--color-accent-2)}
+    details.how{font-size:.9rem;color:var(--color-muted)}
+    details.how summary{cursor:pointer;color:var(--color-accent-2);font-weight:700;list-style:none}
+    details.how summary::-webkit-details-marker{display:none}
+    details.how summary::before{content:"+ ";}
+    details.how[open] summary::before{content:"– ";}
+    details.how ol,details.how ul{margin:10px 0 0;padding-left:20px}
+    details.how li{margin-bottom:6px;line-height:1.5}
+    details.how code{font-size:.88em;background:rgba(241,244,251,.08);padding:1px 6px;border-radius:5px}
+
+    /* Time ledger */
+    .ledger{max-width:620px;margin:0 auto;border:1px solid var(--color-border);border-radius:18px;overflow:hidden}
+    .ledger .row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+      padding:14px 22px;border-bottom:1px solid var(--color-border)}
+    .ledger .row:last-child{border-bottom:0;background:rgba(76,123,255,.07)}
+    .ledger .row span{color:var(--color-muted);font-size:.96rem}
+    .ledger .row b{font-family:var(--font-display);font-weight:700;font-size:.95rem;color:var(--color-text);
+      white-space:nowrap;font-variant-numeric:tabular-nums}
+    .ledger .row:last-child b{color:var(--color-accent-2);font-size:1.05rem}
+
+    /* ---- Form (same system as /jessica-intake) ---- */
+    .prog{position:sticky;top:72px;z-index:40;background:rgba(12,19,55,.92);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border);padding:12px 0}
+    .prog .container{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .prog .bar{flex:1;min-width:160px;height:6px;border-radius:999px;background:rgba(241,244,251,.12);overflow:hidden}
+    .prog .fill{height:100%;width:0;border-radius:999px;
+      background:linear-gradient(90deg,var(--color-accent),var(--color-purple));transition:width .3s ease}
+    .prog .txt{font-family:var(--font-display);font-weight:700;font-size:.74rem;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--color-accent-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .prog .saved{font-size:.76rem;color:rgba(241,244,251,.55);white-space:nowrap}
+
+    .formwrap{max-width:780px;margin:0 auto}
+    fieldset{border:1px solid var(--color-border);border-radius:18px;padding:28px 26px;
+      margin:0 0 20px;background:rgba(241,244,251,.03);min-width:0}
+    @media(max-width:560px){fieldset{padding:22px 18px}}
+    legend{font-family:var(--font-serif);font-weight:800;font-size:1.3rem;padding:0 12px;color:var(--color-text)}
+    fieldset > .why{color:var(--color-muted);opacity:.82;font-size:.94rem;margin:0 0 20px;max-width:60ch}
+    fieldset .step{font-family:var(--font-display);font-weight:800;font-size:.66rem;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--color-accent-2);display:block;margin-bottom:6px}
+    fieldset .for{font-family:var(--font-display);font-weight:700;font-size:.66rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--color-accent-text);margin-left:8px}
+
+    .f{margin-bottom:18px}
+    .f:last-child{margin-bottom:0}
+    .f > label,.f > .lbl{display:block;font-family:var(--font-display);font-weight:700;font-size:.76rem;
+      letter-spacing:.09em;text-transform:uppercase;color:var(--color-text);margin-bottom:7px}
+    .f .hint{display:block;font-family:var(--font-sans);font-weight:400;font-size:.86rem;letter-spacing:0;
+      text-transform:none;color:var(--color-muted);opacity:.75;margin-top:3px}
+    .f input[type=text],.f input[type=email],.f input[type=tel],.f input[type=url],.f textarea,.f select{
+      width:100%;font-family:var(--font-sans);font-size:1rem;color:var(--color-text);
+      background:rgba(12,19,55,.55);border:1px solid var(--color-border);border-radius:11px;
+      padding:13px 14px;line-height:1.5}
+    .f select option{background:#161F4A;color:#F1F4FB}
+    .f textarea{min-height:100px;resize:vertical}
+    .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--color-accent);
+      outline:2px solid rgba(76,123,255,.35);outline-offset:1px}
+    .f input::placeholder,.f textarea::placeholder{color:rgba(241,244,251,.34)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:560px){.two{grid-template-columns:1fr}}
+    .qa{border-left:2px solid rgba(76,123,255,.4);padding-left:16px;margin-bottom:16px}
+    .qa input{margin-bottom:8px}
+    .opts{display:flex;flex-wrap:wrap;gap:10px}
+
+    .warn{display:none;margin-top:10px;padding:12px 14px;border-radius:11px;font-size:.9rem;line-height:1.5;
+      background:rgba(255,138,138,.08);border:1px solid rgba(255,138,138,.4);color:#ffc2c2}
+    .warn.on{display:block}
+
+    .consent{display:flex;gap:11px;align-items:flex-start;font-size:.88rem;color:var(--color-muted);
+      line-height:1.55;margin:6px 0 16px}
+    .consent input{margin-top:4px;width:17px;height:17px;flex:0 0 17px;accent-color:var(--color-accent)}
+    .consent a{color:var(--color-accent-2);font-weight:700}
+
+    .submit-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px}
+    .note{font-size:.9rem;margin-top:14px;min-height:1.2em}
+    .note.err{color:#ff8a8a}
+    .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    .clear{background:none;border:0;color:rgba(241,244,251,.5);font-size:.84rem;text-decoration:underline;cursor:pointer;padding:0}
+    .clear:hover{color:var(--color-accent-text)}
+
+    .done{display:none;border:1px solid rgba(255,95,175,.4);background:rgba(233,30,140,.07);
+      border-radius:20px;padding:36px 30px}
+    .done h2{font-size:1.9rem;margin-bottom:12px;text-align:center}
+    .done > p{color:var(--color-muted);max-width:56ch;margin:0 auto 20px;text-align:center}
+    .done ul{list-style:none;padding:0;margin:0 auto 24px;max-width:600px;display:grid;gap:10px}
+    .done li{padding:12px 16px;border-radius:12px;border:1px solid var(--color-border);
+      background:rgba(241,244,251,.03);font-size:.95rem;line-height:1.5}
+    .done li b{color:var(--color-accent-text)}
+
+    .fine{max-width:720px;margin:0 auto;text-align:center;color:var(--color-muted);font-size:.95rem;line-height:1.7;opacity:.85}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media
+    </a>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/agentic-flows">AI Agent Suite</a></li>
+        <li><a href="/jessica">Meet Jessica</a></li>
+        <li><a href="/coaches">For Coaches</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    <div class="nav-cta">
+      <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="vh vh-lite">
+    <div class="container">
+      <span class="eyebrow" id="heroEyebrow">Welcome aboard</span>
+      <div class="vh-grid">
+        <div>
+          <h1 id="heroTitle">Three steps, and your agents are live.</h1>
+        </div>
+        <div class="vh-right">
+          <p class="hero-promise" id="heroTime">About 45 minutes of your time, total.</p>
+          <p>You tell us about your business once. You make one quick connection per agent. You test everything before a single customer sees it. We do the rest.</p>
+          <p>You won't write scripts, build workflows, or learn new software. Everything we set up is yours to keep.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE STEPS -->
+  <section class="section section-alt" style="padding-top:56px;padding-bottom:56px">
+    <div class="container">
+      <div class="steps">
+        <div class="stp">
+          <span class="n">Step 1 · You</span>
+          <h3>Tell us about your business</h3>
+          <p>One form, below. It saves as you type, so you can stop and come back. Rather talk than type? Bring it to your kickoff call and we'll fill it in with you.</p>
+          <span class="t" id="tForm">About 20 min</span>
+        </div>
+        <div class="stp">
+          <span class="n">Step 2 · You</span>
+          <h3>One quick connection per agent</h3>
+          <p>Forward a phone line, accept an invite, send a spreadsheet. Each agent below tells you its one job. Some have none.</p>
+          <span class="t" id="tJobs">About 5 min</span>
+        </div>
+        <div class="stp live">
+          <span class="n">Step 3 · You</span>
+          <h3>Test day, then live</h3>
+          <p>We give you a private test version. Try to break it. Nothing goes live until you say yes.</p>
+          <span class="t">About 20 min</span>
+        </div>
+      </div>
+      <p class="fine" style="margin-top:22px">Your launch clock starts when your form comes in, not when you paid. Take the time you need.</p>
+    </div>
+  </section>
+
+  <!-- YOUR AGENTS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Your agents</span>
+        <h2>What we build, and your one job for each.</h2>
+        <p>These are the agents you signed up for. Pink boxes are your part. Everything else is ours.</p>
+      </div>
+
+      <div class="picker" id="picker">
+        <p id="pickerLead">Which agents did you sign up for? Tick them and the page updates to show only what applies to you.</p>
+        <div class="chips" id="chips" role="group" aria-label="Your agents">
+          <label class="chip"><input type="checkbox" value="jessica"><span>Jessica, AI Sales Rep</span></label>
+          <label class="chip"><input type="checkbox" value="receptionist"><span>AI Receptionist</span></label>
+          <label class="chip"><input type="checkbox" value="speedtolead"><span>Speed to Lead</span></label>
+          <label class="chip"><input type="checkbox" value="deadlist"><span>Dead List Miner</span></label>
+          <label class="chip"><input type="checkbox" value="showrate"><span>Show-Rate</span></label>
+          <label class="chip"><input type="checkbox" value="reviews"><span>Review Machine</span></label>
+          <label class="chip"><input type="checkbox" value="content"><span>Content Engine</span></label>
+          <label class="chip"><input type="checkbox" value="acquisition"><span>Customer Acquisition</span></label>
+          <label class="chip"><input type="checkbox" value="jarvis"><span>Slack Command Center</span></label>
+          <label class="chip"><input type="checkbox" value="leadgen"><span>Lead Generation</span></label>
+        </div>
+      </div>
+      <p class="fine" id="pickerLocked" hidden style="text-align:left;max-width:900px;margin:0 auto 18px">Showing the agents on your plan. <button type="button" class="edit" id="editAgents">Change</button></p>
+
+      <div class="agents" id="agentCards" style="margin-top:22px">
+
+        <article class="ag" data-agent="jessica">
+          <div class="ag-head">
+            <h3>Jessica, AI Sales Rep</h3>
+            <span class="tl">Live in 7 days</span>
+            <span class="mins">Your time: about 25 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> an AI sales rep that answers your leads in seconds by text, phone, web chat and social DMs, qualifies them, handles "let me think about it," and books them on your calendar. She says she's an AI on every first message.</p>
+            <div class="job"><b class="k">Your one job</b>Approve the account connections when they come to your phone (about 2 minutes). If you want Instagram or Facebook messages answered, your Instagram needs to be a Business account.</div>
+            <details class="how"><summary>See her full day-by-day</summary>
+              <p style="margin:10px 0 0">Jessica has her own detailed plan, including what test day looks like: <a href="/jessica-onboarding" style="color:var(--color-accent-2);font-weight:700">Getting Jessica live in 7 days</a>. Her questions are already in the form below, so you don't fill in anything twice.</p>
+            </details>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="receptionist">
+          <div class="ag-head">
+            <h3>AI Receptionist</h3>
+            <span class="tl">5–7 business days</span>
+            <span class="mins">Your time: about 7 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> a phone receptionist that answers in your business name, answers your common questions, and books, moves or cancels appointments. You keep your phone number. We set up a new line for the AI, and your calls forward to it.</p>
+            <div class="job"><b class="k">Your one job</b>Turn on call forwarding from your business phone. On test day we text you the exact code for your carrier. Usually you dial it once and you're done (about 1 minute). To turn it off, dial <b>*73</b> on most carriers.</div>
+            <details class="how"><summary>Which calls go to the AI? You choose</summary>
+              <ul>
+                <li><b>Missed calls only (most popular):</b> your team answers when they can. If nobody picks up after about 4 rings, the AI answers.</li>
+                <li><b>After hours:</b> the AI answers only when you're closed.</li>
+                <li><b>All calls:</b> the AI answers everything. Good if you have no front desk.</li>
+              </ul>
+              <p style="margin:10px 0 0">On an office phone system (RingCentral, Ooma, Spectrum, Comcast)? It's a setting in your provider's online account. We'll walk you through it on a 5-minute call.</p>
+            </details>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="speedtolead">
+          <div class="ag-head">
+            <h3>Speed to Lead</h3>
+            <span class="tl">5–7 business days</span>
+            <span class="mins">Your time: about 5 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> an instant reply to every new inquiry from your website form, ads or other lead sources, in seconds, with your booking link, plus follow-ups so nobody slips through. You get an alert for each new lead.</p>
+            <div class="job"><b class="k">Your one job</b>Tell us where your leads come in (it's in the form). Then give us access to your website builder by adding <b>info@infinityreachmedia.com</b> as a collaborator on Wix, Squarespace, WordPress or GoHighLevel. We make the change ourselves. If a web person runs your site, just forward them our email.</div>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="deadlist">
+          <div class="ag-head">
+            <h3>Dead List Miner</h3>
+            <span class="tl">3–5 business days</span>
+            <span class="mins">Your time: about 15 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> a personal win-back campaign, written in your voice, to past customers and old leads who already know you. Before anything sends, we check your list and tell you who's safe to email. Replies go straight to your inbox.</p>
+            <div class="job"><b class="k">Your one job</b>Export your customer list as a spreadsheet and send it to us. Then reply <b>YES</b> to the short email where we confirm the address your campaign will send from.</div>
+            <details class="how"><summary>How to export your list</summary>
+              <ul>
+                <li>Columns we need: <b>name</b> and <b>email</b>. Nice to have: <b>phone</b> and <b>last visit or purchase date</b>. The date helps us email your most recent customers first.</li>
+                <li>Most booking, CRM and point-of-sale tools have an "Export" or "Download CSV" button on the customers or contacts page.</li>
+                <li>Send it by replying to your welcome email with the file attached. Please don't paste it into this form.</li>
+                <li>Only your own customers and people who contacted you. We can't email bought or scraped lists. No sending setup makes those safe.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="showrate">
+          <div class="ag-head">
+            <h3>Show-Rate</h3>
+            <span class="tl">3–5 business days</span>
+            <span class="mins">Your time: about 5 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> automatic reminders 24 hours and 2 hours before every appointment, with one tap to confirm or reschedule. If someone no-shows, they get a friendly note to rebook.</p>
+            <div class="job none"><b class="k">Your one job</b>None, if Jessica or your AI Receptionist books your appointments. They're already connected. If you book through another tool, like Calendly, Acuity or GoHighLevel, add <b>info@infinityreachmedia.com</b> as a team member and we'll connect it.</div>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="reviews">
+          <div class="ag-head">
+            <h3>Review Machine</h3>
+            <span class="tl">3–5 business days</span>
+            <span class="mins">Your time: about 5 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> review requests to your recent customers, all pointing to your public Google review page, plus drafted replies to new reviews for you to approve. Every customer gets the same link. We never filter out unhappy customers, which is what keeps it within Google's rules.</p>
+            <div class="job"><b class="k">Your one job</b>Paste your Google review link into the form, and send a list of recent customers. If you're also using Dead List Miner, the same spreadsheet works.</div>
+            <details class="how"><summary>Where to find your Google review link</summary>
+              <ol>
+                <li>Search your business name on Google while signed in to the account that manages your Business Profile.</li>
+                <li>Click <b>Ask for reviews</b> (sometimes under "Read reviews" or "Share review form").</li>
+                <li>Copy the link and paste it into the form. Can't find it? Leave it blank and we'll find it for you.</li>
+              </ol>
+            </details>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="content">
+          <div class="ag-head">
+            <h3>Content Engine</h3>
+            <span class="tl">3–5 business days</span>
+            <span class="mins">Your time: about 8 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> your own content page. Drop in a photo or a voice note and get back posts, reel scripts and emails in your voice, each ending with a reason to book. With Instagram connected, photo posts publish in one click.</p>
+            <div class="job"><b class="k">Your one job</b>Accept our Instagram invite <b>on a computer</b> at <b>instagram.com/accounts/manage_access</b>, under "Tester invites." The invite doesn't show up in the Instagram app. Your account needs to be Business or Creator (a free switch in Settings).</div>
+            <details class="how"><summary>Good to know</summary>
+              <ul>
+                <li>Instagram asks you to re-approve the connection about every 60 days. We text you when it's due, and it takes one tap.</li>
+                <li>Not connecting Instagram? Everything else still works. You copy and post.</li>
+                <li>Publishing covers photo posts for now. Reels and carousels come as scripts you film or design.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="acquisition">
+          <div class="ag-head">
+            <h3>Customer Acquisition</h3>
+            <span class="tl">7–10 business days</span>
+            <span class="mins">Your time: about 30 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> a ready-to-launch ad campaign modelled on the longest-running ads in your industry (copy, targeting, budget and checklist), plus a referral program that asks happy customers to send friends and tracks the rewards.</p>
+            <div class="job"><b class="k">Your one job</b>Join a 20-minute screen share where we launch the campaign together in <b>your own</b> Ads Manager. You click Publish. Your card and your account stay yours, and we never hold your ad spend. For referrals, send a list of happy customers.</div>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="jarvis">
+          <div class="ag-head">
+            <h3>Slack Command Center</h3>
+            <span class="tl">7–10 business days</span>
+            <span class="mins">Your time: about 3 min</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> one Slack command to ask your agents anything, like "how much revenue came in this week?" or "show me today's leads," plus alerts from every agent in one channel.</p>
+            <div class="job"><b class="k">Your one job</b>When we send the install link, click <b>Allow</b> to add the app to your Slack workspace (about 1 minute). Don't use Slack? Skip this. Your client dashboard shows the same numbers.</div>
+          </div>
+        </article>
+
+        <article class="ag" data-agent="leadgen">
+          <div class="ag-head">
+            <h3>Lead Generation</h3>
+            <span class="tl">Early access</span>
+            <span class="mins">Your time: about 15 min, then 10 min a day</span>
+          </div>
+          <div class="ag-body">
+            <p class="we"><b>We build:</b> a prospecting engine that finds businesses that fit your ideal customer, writes each one a short personal email, and stops the moment someone replies. You take the call from there.</p>
+            <div class="job"><b class="k">Your one job</b>Approve your ideal-customer description and the first batch of prospects. After that, a daily review page lets you send, edit or skip each email before it goes out. Nothing sends without your OK.</div>
+          </div>
+        </article>
+
+        <p class="fine" id="noAgents" hidden>Tick your agents above to see your setup steps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIME LEDGER -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Your side of it</span>
+        <h2>Every minute we'll ask you for.</h2>
+        <p>Written down now, so there are no surprise tasks in week two.</p>
+      </div>
+      <div class="ledger" id="ledger" aria-live="polite"></div>
+      <p class="fine" style="margin-top:24px">Anything not on this list, we do. That includes accounts, phone numbers, writing, compliance wording, testing and fixes.</p>
+    </div>
+  </section>
+</main>
+
+<!-- PROGRESS -->
+<div class="prog" id="prog" role="status" aria-live="polite">
+  <div class="container">
+    <span class="txt" id="progTxt">0% complete</span>
+    <span class="bar"><span class="fill" id="progFill"></span></span>
+    <span class="saved" id="savedTxt">Saves as you type</span>
+  </div>
+</div>
+
+<section class="section" id="form" style="padding-top:48px">
+  <div class="container formwrap">
+
+    <div class="section-head" style="text-align:left;max-width:none;margin-bottom:30px">
+      <span class="eyebrow">Step 1 · the form</span>
+      <h2 style="margin-bottom:14px">Tell us about your business.</h2>
+      <p style="max-width:62ch">Answer the way you'd explain it to a new hire. Short, real answers beat polished ones. Only the sections for your agents are shown. Skip anything you're unsure about, and we'll ask on the kickoff call.</p>
+    </div>
+
+    <form id="startForm" novalidate>
+      <div class="hp" aria-hidden="true"><label for="company_website">Leave blank</label><input id="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+
+      <fieldset data-for="all">
+        <span class="step"></span>
+        <legend>Who you are</legend>
+        <p class="why">So we can set things up in your name and reach you when something needs a decision.</p>
+        <div class="two">
+          <div class="f"><label for="q_name">Your name</label><input id="q_name" type="text" autocomplete="name" required></div>
+          <div class="f"><label for="q_biz">Business name</label><input id="q_biz" type="text" autocomplete="organization" required></div>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_email">Email</label><input id="q_email" type="email" autocomplete="email" required></div>
+          <div class="f"><label for="q_phone">Mobile</label><input id="q_phone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_site">Website</label><input id="q_site" type="url" placeholder="https://"></div>
+          <div class="f"><label for="q_tz">Time zone</label>
+            <select id="q_tz">
+              <option>Pacific</option><option>Mountain</option><option>Central</option><option>Eastern</option><option>Other (tell us below)</option>
+            </select>
+          </div>
+        </div>
+        <div class="f" data-for="deadlist reviews acquisition speedtolead leadgen showrate">
+          <label for="q_address">Business mailing address
+            <span class="hint">US law requires a real postal address at the bottom of marketing emails. It appears in the footer, so a business or PO box address is fine.</span>
+          </label>
+          <input id="q_address" type="text" autocomplete="street-address" placeholder="123 Main St, Suite 4, Irvine, CA 92618">
+        </div>
+      </fieldset>
+
+      <fieldset data-for="all">
+        <span class="step"></span>
+        <legend>What you sell, and to whom</legend>
+        <p class="why">In the words your customers use, not your internal names.</p>
+        <div class="f">
+          <label for="q_services">Your services
+            <span class="hint">One per line, the way a customer would say it.</span>
+          </label>
+          <textarea id="q_services" placeholder="AC not blowing cold&#10;Yearly tune-up&#10;New system quote"></textarea>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_best">What do you most want more of?</label><input id="q_best" type="text" placeholder="New system installs"></div>
+          <div class="f"><label for="q_ideal">Your best customer, in one line</label><input id="q_ideal" type="text" placeholder="Homeowners in south OC, 10+ year old systems"></div>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_hours">Working hours</label><input id="q_hours" type="text" placeholder="Mon–Fri 7:30–5, Sat 8–1"></div>
+          <div class="f"><label for="q_area">Service area</label><input id="q_area" type="text" placeholder="Orange County, 25 miles from Irvine"></div>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_booking">Your booking link
+            <span class="hint">Calendly, GoHighLevel, Acuity, anything. None? Leave blank and we'll set one up.</span></label>
+            <input id="q_booking" type="url" placeholder="https://calendly.com/…"></div>
+          <div class="f"><label for="q_length">Appointment length and buffer</label><input id="q_length" type="text" placeholder="60 min, 30 min travel buffer"></div>
+        </div>
+      </fieldset>
+
+      <fieldset data-for="jessica receptionist speedtolead acquisition">
+        <span class="step"></span>
+        <legend>Pricing rules</legend>
+        <p class="why">The section that protects you. Your agents never make up a number. They only say what you put here.</p>
+        <div class="f"><label for="q_quote">What they CAN quote outright</label><textarea id="q_quote" placeholder="$89 service call&#10;$149 annual tune-up"></textarea></div>
+        <div class="f"><label for="q_range">What gets a RANGE only</label><textarea id="q_range" placeholder="Full replacement: $6,000 to $14,000 depending on size"></textarea></div>
+        <div class="f"><label for="q_never">What they must NEVER quote</label><textarea id="q_never" placeholder="Repair prices by phone. Commercial jobs."></textarea></div>
+      </fieldset>
+
+      <fieldset data-for="jessica receptionist speedtolead content reviews">
+        <span class="step"></span>
+        <legend>The questions you get every week</legend>
+        <p class="why">This one section decides how good your agents sound. Answer the way you'd answer, not the way a brochure would.</p>
+        <div id="qaList">
+          <div class="qa"><input type="text" class="qa-q" aria-label="Question 1" placeholder="Question 1, e.g. Are you licensed and insured?"><input type="text" class="qa-a" aria-label="Answer 1" placeholder="Your answer, in your words"></div>
+          <div class="qa"><input type="text" class="qa-q" aria-label="Question 2" placeholder="Question 2, e.g. How soon can you come out?"><input type="text" class="qa-a" aria-label="Answer 2" placeholder="Your answer, in your words"></div>
+          <div class="qa"><input type="text" class="qa-q" aria-label="Question 3" placeholder="Question 3, e.g. Do you offer financing?"><input type="text" class="qa-a" aria-label="Answer 3" placeholder="Your answer, in your words"></div>
+          <div class="qa"><input type="text" class="qa-q" aria-label="Question 4" placeholder="Question 4"><input type="text" class="qa-a" aria-label="Answer 4" placeholder="Your answer, in your words"></div>
+          <div class="qa"><input type="text" class="qa-q" aria-label="Question 5" placeholder="Question 5"><input type="text" class="qa-a" aria-label="Answer 5" placeholder="Your answer, in your words"></div>
+        </div>
+        <button type="button" class="btn btn-ghost" id="addQa" style="font-size:.8rem;padding:10px 20px">Add another question</button>
+      </fieldset>
+
+      <fieldset data-for="jessica receptionist speedtolead">
+        <span class="step"></span>
+        <legend>Who you don't want, and who takes over</legend>
+        <p class="why">Your agents close out bad-fit leads politely. Anything urgent, angry or expensive goes to a person, so we need one name and one number.</p>
+        <div class="f"><label for="q_disqualify">Leads that waste your day</label><textarea id="q_disqualify" placeholder="Outside the service area&#10;Renters who can't approve the work"></textarea></div>
+        <div class="two">
+          <div class="f"><label for="q_esc_name">Who takes the handoff</label><input id="q_esc_name" type="text" placeholder="Mike Torres"></div>
+          <div class="f"><label for="q_esc_phone">Their mobile</label><input id="q_esc_phone" type="tel"></div>
+        </div>
+        <div class="f"><label for="q_esc_when">What must always reach a human, and how fast</label><textarea id="q_esc_when" placeholder="Jobs over $5,000: text Mike within 5 minutes&#10;Any complaint from an existing customer: right away"></textarea></div>
+      </fieldset>
+
+      <fieldset data-for="jessica">
+        <span class="step"></span>
+        <legend>Jessica's channels</legend>
+        <p class="why">Pick where she should answer. Text and web chat go live fastest. Social channels are added once Meta approves the connection.</p>
+        <div class="f">
+          <span class="lbl">Channels to turn on</span>
+          <div class="opts" data-name="Jessica channels">
+            <label class="chip"><input type="checkbox" value="Text" checked><span>Text</span></label>
+            <label class="chip"><input type="checkbox" value="Phone"><span>Phone</span></label>
+            <label class="chip"><input type="checkbox" value="Web chat" checked><span>Web chat</span></label>
+            <label class="chip"><input type="checkbox" value="Instagram DM"><span>Instagram DM</span></label>
+            <label class="chip"><input type="checkbox" value="Messenger"><span>Messenger</span></label>
+            <label class="chip"><input type="checkbox" value="WhatsApp"><span>WhatsApp</span></label>
+            <label class="chip"><input type="checkbox" value="Email"><span>Email</span></label>
+          </div>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_ig">Instagram handle</label><input id="q_ig" type="text" placeholder="@yourbusiness"></div>
+          <div class="f"><label for="q_agentname">Name for your AI rep
+            <span class="hint">"Jessica" is fine, or choose your own.</span></label><input id="q_agentname" type="text" placeholder="Jessica"></div>
+        </div>
+      </fieldset>
+
+      <fieldset data-for="receptionist">
+        <span class="step"></span>
+        <legend>Your phone line</legend>
+        <p class="why">So we can set up forwarding and give you the exact code for your carrier.</p>
+        <div class="two">
+          <div class="f"><label for="q_bizphone">Business phone number</label><input id="q_bizphone" type="tel"></div>
+          <div class="f"><label for="q_phonetype">What kind of phone is it?</label>
+            <select id="q_phonetype">
+              <option value="">Choose one</option>
+              <option>Cell phone: AT&amp;T</option><option>Cell phone: Verizon</option><option>Cell phone: T-Mobile</option>
+              <option>Cell phone: other carrier</option><option>Landline</option>
+              <option>Office phone system (RingCentral, Ooma, Spectrum, etc.)</option><option>Not sure</option>
+            </select>
+          </div>
+        </div>
+        <div class="f">
+          <span class="lbl">Which calls should the AI answer?</span>
+          <div class="opts" data-name="Calls to AI" data-single="1">
+            <label class="chip"><input type="radio" name="q_mode" value="Missed calls only" checked><span>Missed calls only</span></label>
+            <label class="chip"><input type="radio" name="q_mode" value="After hours only"><span>After hours only</span></label>
+            <label class="chip"><input type="radio" name="q_mode" value="All calls"><span>All calls</span></label>
+          </div>
+        </div>
+        <div class="f"><label for="q_emergency">Emergency or after-hours policy</label><input id="q_emergency" type="text" placeholder="No-heat calls: $150 after-hours fee, tech calls back within 30 min"></div>
+      </fieldset>
+
+      <fieldset data-for="speedtolead">
+        <span class="step"></span>
+        <legend>Where your leads come in</legend>
+        <p class="why">We connect every source, so each lead gets an answer in seconds.</p>
+        <div class="f">
+          <span class="lbl">Lead sources</span>
+          <div class="opts" data-name="Lead sources">
+            <label class="chip"><input type="checkbox" value="Website form"><span>Website form</span></label>
+            <label class="chip"><input type="checkbox" value="Facebook/Instagram lead ads"><span>FB / IG lead ads</span></label>
+            <label class="chip"><input type="checkbox" value="Google"><span>Google</span></label>
+            <label class="chip"><input type="checkbox" value="Angi/Thumbtack/Yelp"><span>Angi / Thumbtack / Yelp</span></label>
+            <label class="chip"><input type="checkbox" value="GoHighLevel"><span>GoHighLevel</span></label>
+            <label class="chip"><input type="checkbox" value="Other"><span>Other</span></label>
+          </div>
+        </div>
+        <div class="f"><label for="q_sitebuilder">What is your website built on?</label><input id="q_sitebuilder" type="text" placeholder="Wix / Squarespace / WordPress / GoHighLevel / my web person handles it"></div>
+      </fieldset>
+
+      <fieldset data-for="deadlist">
+        <span class="step"></span>
+        <legend>Your customer list</legend>
+        <p class="why">Where your list came from decides how we send to it safely. This protects your email reputation, so please be candid.</p>
+        <div class="f"><label for="q_listorigin">Who is on this list?</label>
+          <select id="q_listorigin">
+            <option value="">Choose one</option>
+            <option>My own customers or people who contacted me, emailed in the last 6 months</option>
+            <option>My own customers or people who contacted me, but it's been a while</option>
+            <option>A mix, some old or from a previous business</option>
+            <option>Not sure where some of it came from</option>
+            <option value="bought">Bought, rented or scraped</option>
+          </select>
+          <p class="warn" id="boughtWarn">We can't email bought or scraped lists. No sending setup makes that safe, and it could get your business flagged. Let's find another route on the kickoff call. There usually is one.</p>
+        </div>
+        <div class="two">
+          <div class="f"><label for="q_listsize">Roughly how many contacts?</label><input id="q_listsize" type="text" placeholder="About 800"></div>
+          <div class="f"><label for="q_listsource">Where does the list live now?</label><input id="q_listsource" type="text" placeholder="Square / Jobber / GoHighLevel / a spreadsheet"></div>
+        </div>
+        <div class="f"><label for="q_reason">A reason to come back
+            <span class="hint">It doesn't have to be a discount. "Now booking fall tune-ups" or "we added Saturday hours" works well.</span></label>
+          <input id="q_reason" type="text"></div>
+        <div class="f"><label for="q_replyto">Where should customer replies go?</label><input id="q_replyto" type="email" placeholder="you@yourbusiness.com"></div>
+        <label class="consent" for="q_listok">
+          <input type="checkbox" id="q_listok">
+          <span>I confirm these contacts are my own customers or people who contacted my business, and none were bought or scraped.</span>
+        </label>
+      </fieldset>
+
+      <fieldset data-for="showrate">
+        <span class="step"></span>
+        <legend>Your appointments</legend>
+        <p class="why">So reminders sound like you and respect your rules.</p>
+        <div class="two">
+          <div class="f"><label for="q_booktool">Where are appointments booked?</label><input id="q_booktool" type="text" placeholder="Our AI agents / Calendly / GoHighLevel / by hand"></div>
+          <div class="f"><label for="q_appttypes">Appointment types</label><input id="q_appttypes" type="text" placeholder="Estimate, service call, consultation"></div>
+        </div>
+        <div class="f"><label for="q_noshow">Cancellation or no-show policy</label><input id="q_noshow" type="text" placeholder="24 hours' notice to reschedule, no fee"></div>
+      </fieldset>
+
+      <fieldset data-for="reviews">
+        <span class="step"></span>
+        <legend>Reviews</legend>
+        <p class="why">Where customers should leave reviews, and when to ask.</p>
+        <div class="f"><label for="q_reviewlink">Google review link
+          <span class="hint">Can't find it? Leave blank and we'll find it.</span></label><input id="q_reviewlink" type="url" placeholder="https://g.page/r/…"></div>
+        <div class="two">
+          <div class="f"><label for="q_reviewwhen">When to ask after a job</label><input id="q_reviewwhen" type="text" placeholder="The next day"></div>
+          <div class="f"><label for="q_reviewvol">Customers served per month</label><input id="q_reviewvol" type="text" placeholder="About 60"></div>
+        </div>
+      </fieldset>
+
+      <fieldset data-for="content">
+        <span class="step"></span>
+        <legend>Your content</legend>
+        <p class="why">What you post about, and what you never want said.</p>
+        <div class="two">
+          <div class="f"><label for="q_ighandle">Instagram handle</label><input id="q_ighandle" type="text" placeholder="@yourbusiness"></div>
+          <div class="f"><label for="q_platforms">Other platforms</label><input id="q_platforms" type="text" placeholder="Facebook, TikTok, email newsletter"></div>
+        </div>
+        <div class="f"><label for="q_topics">Topics you love, and topics that are off limits</label><textarea id="q_topics" placeholder="Love: before/after, customer stories, seasonal tips&#10;Never: politics, competitors by name"></textarea></div>
+        <div class="f"><label for="q_cta">What should people do after reading?</label><input id="q_cta" type="text" placeholder="Book a free estimate"></div>
+      </fieldset>
+
+      <fieldset data-for="acquisition">
+        <span class="step"></span>
+        <legend>Ads and referrals</legend>
+        <p class="why">So your campaign is built around real numbers and your best offer.</p>
+        <div class="two">
+          <div class="f"><label for="q_budget">Monthly ad budget</label><input id="q_budget" type="text" placeholder="$1,500"></div>
+          <div class="f"><label for="q_adplatform">Where to advertise</label><input id="q_adplatform" type="text" placeholder="Facebook/Instagram, Google, or both"></div>
+        </div>
+        <div class="f"><label for="q_competitors">Two or three competitors you respect</label><input id="q_competitors" type="text"></div>
+        <div class="two">
+          <div class="f"><label for="q_offer">Your strongest offer</label><input id="q_offer" type="text" placeholder="$89 tune-up, first-time customers"></div>
+          <div class="f"><label for="q_reward">Referral reward</label><input id="q_reward" type="text" placeholder="$50 credit for both people"></div>
+        </div>
+      </fieldset>
+
+      <fieldset data-for="jarvis">
+        <span class="step"></span>
+        <legend>Slack</legend>
+        <p class="why">Where to install your command center.</p>
+        <div class="two">
+          <div class="f"><label for="q_slack">Slack workspace URL</label><input id="q_slack" type="text" placeholder="yourbusiness.slack.com"></div>
+          <div class="f"><label for="q_slackwho">Who should have access?</label><input id="q_slackwho" type="text" placeholder="Me and my office manager"></div>
+        </div>
+      </fieldset>
+
+      <fieldset data-for="leadgen">
+        <span class="step"></span>
+        <legend>Who we should find for you</legend>
+        <p class="why">A tight description gets fewer, better prospects.</p>
+        <div class="two">
+          <div class="f"><label for="q_icp">Type of business you sell to</label><input id="q_icp" type="text" placeholder="Independent dental offices"></div>
+          <div class="f"><label for="q_cities">Cities or regions</label><input id="q_cities" type="text" placeholder="Irvine, Tustin, Costa Mesa"></div>
+        </div>
+        <div class="f"><label for="q_nocontact">Who we should never contact</label><input id="q_nocontact" type="text" placeholder="Current clients, franchise chains"></div>
+      </fieldset>
+
+      <fieldset data-for="all">
+        <span class="step"></span>
+        <legend>How you sound, and how to reach you</legend>
+        <p class="why">Your agents learn your voice from real messages, not a tone setting. Paste three texts or emails you've actually sent a customer, typos and all.</p>
+        <div class="f"><label for="q_voice">Three real messages</label>
+          <textarea id="q_voice" style="min-height:140px" placeholder="Hey Dana, running about 15 behind, still good for 2?&#10;&#10;No worries at all, want me to hold Thursday for you?"></textarea></div>
+        <div class="two">
+          <div class="f"><label for="q_alerts">Where should alerts go?</label>
+            <select id="q_alerts"><option>Email</option><option>Text message</option><option>Slack</option><option>Email and text</option></select>
+          </div>
+          <div class="f"><label for="q_alertto">Alert email or number, if different from above</label><input id="q_alertto" type="text"></div>
+        </div>
+        <div class="f"><label for="q_anything">Anything else we should know</label>
+          <textarea id="q_anything" style="min-height:80px" placeholder="Optional. The thing you'd tell a new hire on day one."></textarea></div>
+      </fieldset>
+
+      <label class="consent" for="q_consent">
+        <input type="checkbox" id="q_consent">
+        <span>If I give my mobile number, I agree to receive texts from Infinity Reach Media about this setup. Message and data rates may apply, message frequency varies, reply STOP to opt out. Consent is not a condition of purchase. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+      </label>
+
+      <div class="submit-row">
+        <button class="btn btn-primary" type="submit" id="submitBtn">Send it and start the clock</button>
+        <button type="button" class="clear" id="clearBtn">Clear saved answers</button>
+      </div>
+      <p class="note" id="note" role="alert"></p>
+    </form>
+
+    <div class="done" id="done" tabindex="-1">
+      <h2>Got it. Your clock starts now.</h2>
+      <p>We're building. Here's what's left on your side, and we'll remind you of each one when it's time:</p>
+      <ul id="doneList"></ul>
+      <p>Questions? Just reply to your welcome email, or write to <a href="mailto:info@infinityreachmedia.com" style="color:var(--color-accent-2);font-weight:700">info@infinityreachmedia.com</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="gtee-band">
+      <div class="gtee-row">
+        <div class="gtee"><b>Nothing launches without your yes</b><span>Test day is a real checkpoint. If something isn't right, we fix it and you test again before any customer sees it.</span></div>
+        <div class="gtee"><b>Your accounts, your data</b><span>Phone numbers, contacts, conversations and content stay in accounts you own and keep.</span></div>
+        <div class="gtee"><b>Honest AI, every time</b><span>Your agents say they're AI. Every email carries a one-click unsubscribe. Every text honours STOP.</span></div>
+      </div>
+      <p class="gtee-note">Conditions in full in our <a href="/terms">Terms of Service</a>.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:0">
+      <span>© 2026 Infinity Reach Media. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/accessibility">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function(){
+  // ---- Agent catalogue: names, minutes, and the one job (for the ledger + done list)
+  var AGENTS={
+    jessica:     {name:'Jessica, AI Sales Rep', form:10, job:2,  jobText:'Approve account connections when they come to your phone', test:true},
+    receptionist:{name:'AI Receptionist',       form:5,  job:2,  jobText:'Turn on call forwarding (we text you the exact code on test day)', test:true},
+    speedtolead: {name:'Speed to Lead',         form:3,  job:2,  jobText:'Add info@infinityreachmedia.com as a collaborator on your website builder', test:true},
+    deadlist:    {name:'Dead List Miner',       form:5,  job:10, jobText:'Reply to your welcome email with your customer list attached, then reply YES to the sending-address email', test:false},
+    showrate:    {name:'Show-Rate',             form:3,  job:2,  jobText:'Only if you book outside our agents: add info@infinityreachmedia.com to your booking tool', test:false},
+    reviews:     {name:'Review Machine',        form:2,  job:3,  jobText:'Send a list of recent customers (the same spreadsheet works)', test:false},
+    content:     {name:'Content Engine',        form:4,  job:4,  jobText:'Accept the Instagram tester invite on a computer at instagram.com/accounts/manage_access', test:false},
+    acquisition: {name:'Customer Acquisition',  form:5,  job:25, jobText:'Join the 20-minute screen share to launch your campaign in your own Ads Manager', test:false},
+    jarvis:      {name:'Slack Command Center',  form:2,  job:1,  jobText:'Click Allow on the Slack install link', test:false},
+    leadgen:     {name:'Lead Generation',       form:5,  job:10, jobText:'Approve your ideal-customer description and first batch of prospects', test:false}
+  };
+  var CORE_FORM=15, TEST_MIN=20;
+
+  var params=new URLSearchParams(location.search);
+  var chips=[].slice.call(document.querySelectorAll('#chips input'));
+  var form=document.getElementById('startForm');
+  var bizFromLink=(params.get('biz')||'').trim().slice(0,80);
+  var linkAgents=(params.get('agents')||'').split(',').map(function(s){return s.trim().toLowerCase();}).filter(function(k){return AGENTS[k];});
+  var KEY='irm-start-v1'+(bizFromLink?':'+bizFromLink.toLowerCase():'');
+
+  function selected(){ return chips.filter(function(c){return c.checked;}).map(function(c){return c.value;}); }
+
+  // ---- Personalise the hero from the link (textContent only; never HTML)
+  if(bizFromLink){
+    document.getElementById('heroEyebrow').textContent='Welcome aboard, '+bizFromLink;
+    var biz=document.getElementById('q_biz'); if(!biz.value) biz.value=bizFromLink;
+  }
+  if(linkAgents.length){
+    chips.forEach(function(c){ c.checked=linkAgents.indexOf(c.value)>-1; });
+    document.getElementById('picker').hidden=true;
+    document.getElementById('pickerLocked').hidden=false;
+  }
+  document.getElementById('editAgents').addEventListener('click',function(){
+    document.getElementById('picker').hidden=false;
+    document.getElementById('pickerLocked').hidden=true;
+    chips[0].focus();
+  });
+
+  function applies(el,sel){
+    var f=(el.getAttribute('data-for')||'').split(/\s+/);
+    if(f.indexOf('all')>-1) return true;
+    return f.some(function(k){return sel.indexOf(k)>-1;});
+  }
+
+  function render(){
+    var sel=selected();
+    // cards
+    document.querySelectorAll('.ag').forEach(function(card){ card.hidden=sel.indexOf(card.getAttribute('data-agent'))<0; });
+    document.getElementById('noAgents').hidden=sel.length>0;
+    // form sections + nested fields
+    var visible=[];
+    form.querySelectorAll('fieldset').forEach(function(fs){ fs.hidden=!applies(fs,sel); if(!fs.hidden) visible.push(fs); });
+    form.querySelectorAll('.f[data-for]').forEach(function(f){ f.hidden=!applies(f,sel); });
+    visible.forEach(function(fs,i){ fs.querySelector('.step').textContent='Section '+(i+1)+' of '+visible.length; });
+    // minutes
+    var formMin=CORE_FORM, jobMin=0, rows=[];
+    sel.forEach(function(k){ formMin+=AGENTS[k].form; jobMin+=AGENTS[k].job; });
+    var total=formMin+jobMin+TEST_MIN+30;
+    document.getElementById('tForm').textContent='About '+formMin+' min';
+    document.getElementById('tJobs').textContent=sel.length?('About '+jobMin+' min, all agents'):'Depends on your agents';
+    var setupMin=formMin+jobMin+TEST_MIN;
+    var hrs=Math.round(setupMin/30)/2;
+    var hrsText=(hrs%1?Math.floor(hrs)+'½':String(hrs))+(hrs>1?' hours':' hour');
+    document.getElementById('heroTime').textContent='About '+(setupMin>=60?hrsText:setupMin+' minutes')+' of your time to get set up.';
+    // ledger
+    var led=document.getElementById('ledger'); led.textContent='';
+    function row(label,min,strong){
+      var r=document.createElement('div'); r.className='row';
+      var s=document.createElement('span'); s.textContent=label; if(strong){ s.style.fontWeight='700'; s.style.color='var(--color-text)'; }
+      var b=document.createElement('b'); b.textContent=min+' min';
+      r.appendChild(s); r.appendChild(b); led.appendChild(r);
+    }
+    row('Step 1: the form',formMin);
+    sel.forEach(function(k){ if(AGENTS[k].job) row('Step 2: '+AGENTS[k].name,AGENTS[k].job); });
+    row('Step 3: test day',TEST_MIN);
+    row('Day 30: results call',30);
+    row('Total, across your first month',total,true);
+    progress();
+  }
+
+  chips.forEach(function(c){ c.addEventListener('change',function(){
+    var sel=selected(); var u=new URL(location.href);
+    if(sel.length) u.searchParams.set('agents',sel.join(',')); else u.searchParams.delete('agents');
+    try{ history.replaceState(null,'',u); }catch(e){}
+    render(); save();
+  }); });
+
+  // ---- Dead list: bought/scraped warning
+  var origin=document.getElementById('q_listorigin');
+  origin.addEventListener('change',function(){ document.getElementById('boughtWarn').classList.toggle('on',origin.value==='bought'); });
+
+  // ---- Save / restore
+  function inputs(){ return [].slice.call(form.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select')).filter(function(el){return el.id && el.id!=='company_website';}); }
+  function save(){
+    var d={qa:[],opts:{},checks:{}};
+    inputs().forEach(function(el){ d[el.id]=el.value; });
+    form.querySelectorAll('.qa').forEach(function(r){ d.qa.push([r.querySelector('.qa-q').value,r.querySelector('.qa-a').value]); });
+    form.querySelectorAll('.opts').forEach(function(g){ d.opts[g.getAttribute('data-name')]=[].slice.call(g.querySelectorAll('input:checked')).map(function(i){return i.value;}); });
+    ['q_listok','q_consent'].forEach(function(id){ d.checks[id]=document.getElementById(id).checked; });
+    d.agents=selected();
+    try{ localStorage.setItem(KEY,JSON.stringify(d)); document.getElementById('savedTxt').textContent='Saved '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'}); }
+    catch(e){ document.getElementById('savedTxt').textContent='Not saving in this browser'; }
+  }
+  function addQaRow(){
+    var list=document.getElementById('qaList'), n=list.children.length+1, d=document.createElement('div');
+    d.className='qa';
+    var q=document.createElement('input'); q.type='text'; q.className='qa-q'; q.placeholder='Question '+n; q.setAttribute('aria-label','Question '+n);
+    var a=document.createElement('input'); a.type='text'; a.className='qa-a'; a.placeholder='Your answer, in your words'; a.setAttribute('aria-label','Answer '+n);
+    d.appendChild(q); d.appendChild(a); list.appendChild(d); return d;
+  }
+  function restore(){
+    var d; try{ d=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return; }
+    if(!d) return;
+    inputs().forEach(function(el){ if(d[el.id]!=null && d[el.id]!=='') el.value=d[el.id]; });
+    (d.qa||[]).forEach(function(p,i){ var rows=form.querySelectorAll('.qa'); if(!rows[i]) addQaRow(); rows=form.querySelectorAll('.qa'); rows[i].querySelector('.qa-q').value=p[0]||''; rows[i].querySelector('.qa-a').value=p[1]||''; });
+    Object.keys(d.opts||{}).forEach(function(name){ var g=form.querySelector('.opts[data-name="'+name+'"]'); if(g) g.querySelectorAll('input').forEach(function(i){ i.checked=d.opts[name].indexOf(i.value)>-1; }); });
+    Object.keys(d.checks||{}).forEach(function(id){ var el=document.getElementById(id); if(el) el.checked=!!d.checks[id]; });
+    if(!linkAgents.length && d.agents && d.agents.length){ chips.forEach(function(c){ c.checked=d.agents.indexOf(c.value)>-1; }); }
+    origin.dispatchEvent(new Event('change'));
+    document.getElementById('savedTxt').textContent='Restored your saved answers';
+  }
+
+  // ---- Progress (visible fields only)
+  function progress(){
+    var all=[].slice.call(form.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,.qa-q')).filter(function(el){ return el.id!=='company_website' && !el.closest('[hidden]'); });
+    var filled=all.filter(function(el){return el.value.trim()!=='';}).length;
+    var pct=all.length?Math.round(filled/all.length*100):0;
+    document.getElementById('progTxt').textContent=pct+'% complete';
+    document.getElementById('progFill').style.width=pct+'%';
+  }
+
+  document.getElementById('addQa').addEventListener('click',function(){ addQaRow().querySelector('.qa-q').focus(); });
+  var t; form.addEventListener('input',function(){ progress(); clearTimeout(t); t=setTimeout(save,600); });
+  form.addEventListener('change',function(){ clearTimeout(t); t=setTimeout(save,300); });
+  document.getElementById('clearBtn').addEventListener('click',function(){
+    if(!confirm('Clear everything you have typed so far? This cannot be undone.')) return;
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    form.reset(); if(bizFromLink) document.getElementById('q_biz').value=bizFromLink; progress(); document.getElementById('savedTxt').textContent='Cleared';
+  });
+
+  // ---- Submit: same endpoint as every form on the site; whole intake packed into the message.
+  function labelFor(el){
+    var f=el.closest('.f'); var l=f && f.querySelector('label,.lbl'); if(!l) return el.id;
+    var txt=''; l.childNodes.forEach(function(n){ if(n.nodeType===3) txt+=n.textContent; }); return txt.trim();
+  }
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var note=document.getElementById('note'); note.className='note'; note.textContent='';
+    var sel=selected();
+    var name=document.getElementById('q_name').value.trim(), email=document.getElementById('q_email').value.trim(), biz=document.getElementById('q_biz').value.trim();
+    function fail(msg,el){ note.className='note err'; note.textContent=msg; if(el) el.focus(); }
+    if(!sel.length) return fail('Tick at least one agent at the top of the page, so we know what to build.',chips[0]);
+    if(!name) return fail('Add your name so we know who to reach.',document.getElementById('q_name'));
+    if(!biz) return fail('Add your business name.',document.getElementById('q_biz'));
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail('Add an email address we can reach you at.',document.getElementById('q_email'));
+    if(sel.indexOf('deadlist')>-1){
+      if(origin.value==='bought') return fail('We can\'t email bought or scraped lists. Change your list answer, or untick Dead List Miner and we\'ll talk options on the kickoff call.',origin);
+      if(!document.getElementById('q_listok').checked) return fail('Please confirm where your customer list came from (the checkbox in "Your customer list").',document.getElementById('q_listok'));
+    }
+    if(document.getElementById('company_website').value) return;
+
+    var blocks=['AGENTS: '+sel.map(function(k){return AGENTS[k].name;}).join(', ')];
+    form.querySelectorAll('fieldset').forEach(function(fs){
+      if(fs.hidden) return;
+      var lines=[];
+      fs.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select').forEach(function(el){
+        if(el.id==='company_website' || el.closest('[hidden]') || ['q_name','q_email','q_phone'].indexOf(el.id)>-1) return;
+        if(el.classList.contains('qa-q')||el.classList.contains('qa-a')) return;
+        var v=el.value.trim(); if(v) lines.push(labelFor(el)+': '+v);
+      });
+      fs.querySelectorAll('.opts').forEach(function(g){
+        var v=[].slice.call(g.querySelectorAll('input:checked')).map(function(i){return i.value;});
+        if(v.length) lines.push(g.getAttribute('data-name')+': '+v.join(', '));
+      });
+      var qa=[]; fs.querySelectorAll('.qa').forEach(function(r){ var q=r.querySelector('.qa-q').value.trim(), a=r.querySelector('.qa-a').value.trim(); if(q) qa.push('  Q: '+q+'\n  A: '+(a||'(no answer given)')); });
+      if(qa.length) lines.push('FAQ:\n'+qa.join('\n'));
+      if(fs.querySelector('#q_listok')) lines.push('List confirmed as own customers: '+(document.getElementById('q_listok').checked?'yes':'no'));
+      if(lines.length) blocks.push('## '+fs.querySelector('legend').textContent+'\n'+lines.join('\n'));
+    });
+
+    var payload={ name:name, email:email, phone:document.getElementById('q_phone').value.trim(), source:'Client Onboarding',
+      message:'CLIENT ONBOARDING: '+biz+'\n\n'+blocks.join('\n\n'), company_website:'' };
+
+    var btn=document.getElementById('submitBtn'), original=btn.textContent;
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      var res=await fetch('https://speed-to-lead-agent-two.vercel.app/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var json=await res.json();
+      if(!res.ok||!json.ok) throw new Error(json.error||'Request failed');
+      if(typeof window.irmTrack==='function'){ window.irmTrack('generate_lead',{form_location:'client_onboarding'}); }
+      var list=document.getElementById('doneList'); list.textContent='';
+      sel.forEach(function(k){ var li=document.createElement('li'); var b=document.createElement('b'); b.textContent=AGENTS[k].name+': '; li.appendChild(b); li.appendChild(document.createTextNode(AGENTS[k].jobText)); list.appendChild(li); });
+      var li=document.createElement('li'); var b=document.createElement('b'); b.textContent='Test day: '; li.appendChild(b); li.appendChild(document.createTextNode('We send you a private test version. Try to break it, then give us your yes.')); list.appendChild(li);
+      form.hidden=true; document.getElementById('prog').hidden=true;
+      var done=document.getElementById('done'); done.style.display='block'; done.focus();
+      try{ localStorage.removeItem(KEY); }catch(e){}
+    }catch(err){
+      note.className='note err';
+      note.textContent='That didn\'t send. Your answers are still saved on this page, so try again, or email them to info@infinityreachmedia.com.';
+      btn.disabled=false; btn.textContent=original;
+    }
+  });
+
+  restore();
+  render();
+})();
+</script>
+</body>
+</html>
