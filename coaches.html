@@ -31,6 +31,7 @@
 {"@type":"Question","name":"Is this only for coaches with a group program?","acceptedAnswer":{"@type":"Answer","text":"No. It fits any consultant, coach, or service business that sells from a conversation: one-to-one, group, mastermind, or done-for-you. If a booked call is how you make money, the agents fit."}}]}
 </script>
 <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <style>
   :root{
     --ink:#101B3D;
@@ -192,9 +193,10 @@
    navy (background:var(--ink)) even though the page body is light, so this is
    the same treatment as the homepage — not a light variant. Eyebrow spans the
    top, headline left, the ask right, stat row full width underneath. */
-.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:end;margin-bottom:8px}
+.hero .vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:start;margin-bottom:8px}
 .hero .vh-grid h1{margin:0;font-size:clamp(2.5rem,5.6vw,4.3rem);line-height:1.02;letter-spacing:-.03em;max-width:17ch}
 .hero .vh-right{display:flex;flex-direction:column;gap:14px}
+  .vh-right .sub{margin:0;max-width:none;text-align:left}
 .hero .vh-right .lead{margin:0;max-width:44ch}
 .hero .vh-right .hero-ctas{margin:6px 0 0}
 .hero .vh-right p{margin:0}
@@ -214,6 +216,15 @@
 <nav>
   <div class="nav-in">
     <a class="logo" href="https://infinityreachmedia.com/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks" id="sitemenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/coaches" class="active">For Coaches</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
     <a class="nav-cta" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
   </div>
 </nav>
@@ -227,7 +238,7 @@
       </div>
       <div class="vh-right">
         <p class="lead">You're brilliant on a call. The leak is everywhere else: the "tell me more" that sat until Tuesday, the discovery call that no-showed, the person who said "not right now" nine months ago and never heard from you again. We build the AI agents that catch all three — so your calendar fills with conversations instead of your evenings filling with follow-up.</p>
-    <p style="font-size:.95rem;color:var(--gold);font-weight:500;margin-bottom:34px">Coaches and consultants are who we've served longest — the client stories below are all from this world, by name and by face.</p>
+    <p style="font-size:.95rem;color:var(--gold);font-weight:500;margin-bottom:6px">Coaches and consultants are who we've served longest — the client stories below are all from this world, by name and by face.</p>
     <div class="hero-ctas">
       <a class="btn btn-pink" href="https://calendly.com/yvettekahn/30min">Book a Free Call</a>
       <a class="btn btn-ghost" href="#get-started">Send Me the Walkthrough ↓</a>
@@ -336,8 +347,8 @@
     <div>
       <div class="eyebrow" style="color:var(--cta)">What it actually sounds like</div>
       <h2>Honest, warm, and never pretending to be you.</h2>
-      <p class="sub" style="margin:0 0 8px">The agent tells people it's an AI assistant — every time, on purpose. In coaching, a prospect who feels tricked never books. What it does instead is answer fast, qualify kindly, and get the real conversation on your calendar while the interest is still hot.</p>
-      <p class="sub" style="margin:0 0 8px"><strong>Illustrative exchange</strong> — this is the pattern we build to, tuned to your offer, your pricing rules, and your qualifying questions.</p>
+      <p class="sub" style="margin:0">The agent tells people it's an AI assistant — every time, on purpose. In coaching, a prospect who feels tricked never books. What it does instead is answer fast, qualify kindly, and get the real conversation on your calendar while the interest is still hot.</p>
+      <p class="sub" style="margin:0"><strong>Illustrative exchange</strong> — this is the pattern we build to, tuned to your offer, your pricing rules, and your qualifying questions.</p>
       <a class="btn btn-pink" href="#walkthrough">See the Full Walkthrough &darr;</a>
     </div>
     <div class="phone" aria-hidden="true">
@@ -593,5 +604,6 @@
 })();
 </script>
 
+<script src="/js/nav.js" defer></script>
 </body>
 </html>

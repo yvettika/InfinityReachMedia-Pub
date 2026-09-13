@@ -88,11 +88,11 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 .hero{padding:96px 0 64px;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;top:-220px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.4),transparent 65%);pointer-events:none}
 .hero::after{content:"";position:absolute;bottom:-260px;left:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 65%);pointer-events:none}
-.hero .wrap{position:relative;z-index:1;max-width:880px;text-align:center}
-.hero p.sub{margin:26px auto 38px;max-width:620px;font-size:1.15rem;color:var(--muted)}
+.hero .wrap{position:relative;z-index:1;max-width:1080px;text-align:left}
+.hero p.sub{margin:0 0 4px;max-width:44ch;font-size:1.08rem;color:var(--muted)}
 .hero h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .micro{margin-top:18px;font-size:.9rem;color:var(--muted)}
-.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-start}
 
 
 /* calculator */
@@ -204,7 +204,7 @@ footer a{color:var(--gold);text-decoration:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* Split hero, matching the homepage. Oversized headline left, the ask right. */
-.vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:end}
+.vh-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:start}
 .vh-grid h1{margin:0;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1;letter-spacing:-.03em;max-width:15ch}
 .vh-right{display:flex;flex-direction:column;gap:14px}
 .vh-right .sub{margin:0;max-width:36ch}
@@ -249,8 +249,7 @@ footer a{color:var(--gold);text-decoration:none}
       <a class="btn ghost" href="/live-demo" target="_blank" rel="noopener">Try the Live Demo →<span class="sr-only"> (opens in a new tab)</span></a>
     </div>
     <p class="micro">30 minutes. No pressure. Or talk to a real agent right now, no signup.</p>
-    <p class="micro" style="margin-top:8px">Home services, HVAC or plumbing? <a href="/hvac" style="color:var(--gold)">See the agent built for your trade →</a></p>
-      <p class="micro" style="margin-top:8px">Not ready to talk? <a href="/scorecard" style="color:var(--gold)">Take the 2-minute Growth Scorecard →</a></p>
+      <p class="micro" style="margin-top:10px">In <a href="/hvac" style="color:var(--gold)">home services</a>? Or <a href="/scorecard" style="color:var(--gold)">take the 2-minute scorecard</a> instead.</p>
       </div>
     </div>
   </div>
