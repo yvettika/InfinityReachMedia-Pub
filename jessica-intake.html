@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo-mark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jessica Intake | Infinity Reach Media</title>
+  <meta name="description" content="The one form that teaches Jessica your business. About 25 minutes, saves as you go, no login." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://infinityreachmedia.com/jessica-intake" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ---------------------------------------------------------------
+       Intake form. Long by necessity — this is the only homework the
+       client has — so it saves as you type and says how far along you are.
+       --------------------------------------------------------------- */
+
+    .intake-wrap{max-width:780px;margin:0 auto}
+
+    /* Sticky progress. A 25-minute form with no sense of progress gets abandoned. */
+    .prog{position:sticky;top:72px;z-index:40;background:rgba(8,15,40,.92);
+      backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border);
+      padding:12px 0}
+    .prog .container{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+    .prog .bar{flex:1;min-width:160px;height:6px;border-radius:999px;
+      background:rgba(241,244,251,.12);overflow:hidden}
+    .prog .fill{height:100%;width:0;border-radius:999px;
+      background:linear-gradient(90deg,var(--color-accent),var(--color-purple));
+      transition:width .3s ease}
+    .prog .txt{font-family:var(--font-display);font-weight:700;font-size:.74rem;
+      letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-2);
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .prog .saved{font-size:.76rem;color:rgba(241,244,251,.55);white-space:nowrap}
+
+    fieldset{border:1px solid var(--color-border);border-radius:18px;padding:28px 26px;
+      margin-bottom:20px;background:rgba(241,244,251,.03)}
+    @media(max-width:560px){fieldset{padding:22px 18px}}
+    legend{font-family:var(--font-serif);font-weight:800;font-size:1.3rem;padding:0 12px;
+      color:var(--color-text)}
+    fieldset > .why{color:var(--color-muted);opacity:.82;font-size:.94rem;margin-bottom:20px;
+      max-width:60ch}
+    fieldset .step{font-family:var(--font-display);font-weight:800;font-size:.66rem;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-2);
+      display:block;margin-bottom:6px}
+
+    .f{margin-bottom:18px}
+    .f:last-child{margin-bottom:0}
+    .f label{display:block;font-family:var(--font-display);font-weight:700;font-size:.76rem;
+      letter-spacing:.09em;text-transform:uppercase;color:var(--color-text);margin-bottom:7px}
+    .f .hint{display:block;font-family:var(--font-sans);font-weight:400;font-size:.86rem;
+      letter-spacing:0;text-transform:none;color:var(--color-muted);opacity:.75;
+      margin-top:3px}
+    .f input[type=text],.f input[type=email],.f input[type=tel],.f input[type=url],
+    .f textarea,.f select{
+      width:100%;font-family:var(--font-sans);font-size:1rem;color:var(--color-text);
+      background:rgba(8,15,40,.55);border:1px solid var(--color-border);border-radius:11px;
+      padding:13px 14px;line-height:1.5}
+    .f textarea{min-height:110px;resize:vertical}
+    .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--color-accent);
+      outline:2px solid rgba(59,107,240,.35);outline-offset:1px}
+    .f input::placeholder,.f textarea::placeholder{color:rgba(241,244,251,.34)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:560px){.two{grid-template-columns:1fr}}
+
+    /* Q&A pairs for the FAQ block */
+    .qa{border-left:2px solid rgba(59,107,240,.4);padding-left:16px;margin-bottom:16px}
+    .qa input{margin-bottom:8px}
+
+    /* Channel picker */
+    .chans{display:flex;flex-wrap:wrap;gap:10px}
+    .chan{position:relative}
+    .chan input{position:absolute;opacity:0;width:0;height:0}
+    .chan span{display:inline-block;font-family:var(--font-display);font-weight:700;
+      font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+      border:1.5px solid var(--color-border);border-radius:999px;padding:10px 16px;
+      color:var(--color-muted);transition:all .15s ease}
+    .chan input:checked + span{border-color:var(--color-accent-text);
+      color:var(--color-accent-text);background:rgba(233,30,140,.1)}
+    .chan input:focus-visible + span{outline:3px solid var(--color-accent-2);outline-offset:2px}
+
+    .consent{display:flex;gap:11px;align-items:flex-start;font-size:.88rem;
+      color:var(--color-muted);line-height:1.55;margin:6px 0 20px}
+    .consent input{margin-top:4px;width:17px;height:17px;flex:0 0 17px;
+      accent-color:var(--color-accent)}
+    .consent a{color:var(--color-accent-2);font-weight:700}
+
+    .submit-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .note{font-size:.9rem;margin-top:14px;min-height:1.2em}
+    .note.err{color:#ff8a8a}
+    .note.ok{color:var(--color-accent-2)}
+    .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+    .done{display:none;text-align:center;border:1px solid rgba(255,95,175,.4);
+      background:rgba(233,30,140,.07);border-radius:20px;padding:40px 28px}
+    .done h2{font-size:1.9rem;margin-bottom:12px}
+    .done p{color:var(--color-muted);max-width:52ch;margin:0 auto 22px}
+
+    .clear{background:none;border:0;color:rgba(241,244,251,.5);font-size:.84rem;
+      text-decoration:underline;cursor:pointer;padding:0}
+    .clear:hover{color:var(--color-accent-text)}
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="agentic-flows.html">AI Agent Suite</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/jessica-onboarding" class="active">Onboarding</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="prog" role="status" aria-live="polite">
+  <div class="container">
+    <span class="txt" id="progTxt">0% complete</span>
+    <span class="bar"><span class="fill" id="progFill"></span></span>
+    <span class="saved" id="savedTxt">Saves as you type</span>
+  </div>
+</div>
+
+<main id="main">
+  <section class="section" style="padding-top:48px">
+    <div class="container intake-wrap">
+
+      <div class="section-head" style="text-align:left;max-width:none;margin-bottom:34px">
+        <span class="eyebrow">Day 1 · about 25 minutes</span>
+        <h2 style="margin-bottom:14px">Teach Jessica your business.</h2>
+        <p style="max-width:62ch">This is the only homework. Everything she knows comes from this form, so the more real your answers, the less she sounds like a chatbot. It saves in this browser as you type, so you can stop and come back.</p>
+        <p style="max-width:62ch;margin-top:10px;font-size:.95rem;opacity:.8">Your seven-day clock starts when this lands, not when you paid. Take the time you need. If you'd rather talk it through, bring it to the kickoff call and we'll fill it in with you.</p>
+      </div>
+
+      <form id="intakeForm" novalidate>
+        <div class="hp" aria-hidden="true"><label for="company_website">Leave blank</label><input id="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+
+        <!-- 1 -->
+        <fieldset>
+          <span class="step">Section 1 of 8</span>
+          <legend>Who you are</legend>
+          <p class="why">So we can set up your accounts and reach you when something needs a decision.</p>
+          <div class="two">
+            <div class="f"><label for="q_name">Your name</label><input id="q_name" type="text" autocomplete="name" required></div>
+            <div class="f"><label for="q_biz">Business name</label><input id="q_biz" type="text" autocomplete="organization" required></div>
+          </div>
+          <div class="two">
+            <div class="f"><label for="q_email">Email</label><input id="q_email" type="email" autocomplete="email" required></div>
+            <div class="f"><label for="q_phone">Mobile</label><input id="q_phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="f"><label for="q_site">Website</label><input id="q_site" type="url" placeholder="https://"></div>
+        </fieldset>
+
+        <!-- 2 -->
+        <fieldset>
+          <span class="step">Section 2 of 8</span>
+          <legend>What you sell</legend>
+          <p class="why">In the words your customers use, not your internal names. She has to recognize what someone means when they type it badly at 11pm.</p>
+          <div class="f">
+            <label for="q_services">Your services
+              <span class="hint">One per line. Write them the way a customer would say it.</span>
+            </label>
+            <textarea id="q_services" placeholder="AC not blowing cold&#10;Heater making a noise&#10;Yearly tune up&#10;New system quote"></textarea>
+          </div>
+          <div class="f">
+            <label for="q_best">Which one do you most want more of?
+              <span class="hint">She'll steer toward this when a lead is undecided.</span>
+            </label>
+            <input id="q_best" type="text">
+          </div>
+        </fieldset>
+
+        <!-- 3 -->
+        <fieldset>
+          <span class="step">Section 3 of 8</span>
+          <legend>Pricing rules</legend>
+          <p class="why">The most important section on this form, and the one that stalls builds when it's skipped. She will never invent a number. She'll only say what you put here.</p>
+          <div class="f">
+            <label for="q_quote">What she CAN quote outright
+              <span class="hint">Fixed prices she's allowed to say out loud.</span>
+            </label>
+            <textarea id="q_quote" placeholder="$89 diagnostic call-out&#10;$149 annual tune up"></textarea>
+          </div>
+          <div class="f">
+            <label for="q_range">What she can give a RANGE on
+              <span class="hint">Ballpark only, with the real number coming from a human.</span>
+            </label>
+            <textarea id="q_range" placeholder="Full system replacement: $6,000 to $14,000 depending on size"></textarea>
+          </div>
+          <div class="f">
+            <label for="q_never">What she must NEVER quote
+              <span class="hint">Anything custom, negotiated, or that has burned you before.</span>
+            </label>
+            <textarea id="q_never" placeholder="Commercial jobs. Anything involving insurance. Multi-unit."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 4 -->
+        <fieldset>
+          <span class="step">Section 4 of 8</span>
+          <legend>Hours, area, and calendar</legend>
+          <p class="why">She answers at 3am. She just won't promise that you will.</p>
+          <div class="two">
+            <div class="f"><label for="q_hours">Working hours</label><input id="q_hours" type="text" placeholder="Mon–Fri 7:30–5, Sat 8–1"></div>
+            <div class="f"><label for="q_area">Service area</label><input id="q_area" type="text" placeholder="Orange County, up to 25 miles from Irvine"></div>
+          </div>
+          <div class="f">
+            <label for="q_closed">Days you're closed but leads still message
+              <span class="hint">What should she say then?</span>
+            </label>
+            <input id="q_closed" type="text" placeholder="Sundays and major holidays — book for next business day">
+          </div>
+          <div class="two">
+            <div class="f"><label for="q_calendar">Which calendar does she book into?</label><input id="q_calendar" type="text" placeholder="Google Calendar — ops@…"></div>
+            <div class="f"><label for="q_length">Appointment length and buffer</label><input id="q_length" type="text" placeholder="90 min job, 30 min drive buffer"></div>
+          </div>
+          <div class="f">
+            <label for="q_blackout">Booking rules she must respect
+              <span class="hint">Slots she can never take, people who own certain days, anything that's caused a mess before.</span>
+            </label>
+            <textarea id="q_blackout" placeholder="Never book Fridays after 3. Tuesdays are Mike's only. Two jobs max per day."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 5 -->
+        <fieldset>
+          <span class="step">Section 5 of 8</span>
+          <legend>The questions you get every week</legend>
+          <p class="why">This single section decides how good she sounds. Answer them the way you'd answer them, not the way a brochure would.</p>
+          <div id="qaList">
+            <div class="qa">
+              <input type="text" class="qa-q" placeholder="Question 1 — e.g. Do you take insurance?">
+              <input type="text" class="qa-a" placeholder="Your answer, in your words">
+            </div>
+            <div class="qa">
+              <input type="text" class="qa-q" placeholder="Question 2 — e.g. Are you licensed and insured?">
+              <input type="text" class="qa-a" placeholder="Your answer, in your words">
+            </div>
+            <div class="qa">
+              <input type="text" class="qa-q" placeholder="Question 3 — e.g. How soon can someone come out?">
+              <input type="text" class="qa-a" placeholder="Your answer, in your words">
+            </div>
+            <div class="qa">
+              <input type="text" class="qa-q" placeholder="Question 4">
+              <input type="text" class="qa-a" placeholder="Your answer, in your words">
+            </div>
+            <div class="qa">
+              <input type="text" class="qa-q" placeholder="Question 5">
+              <input type="text" class="qa-a" placeholder="Your answer, in your words">
+            </div>
+          </div>
+          <button type="button" class="btn btn-ghost" id="addQa" style="font-size:.8rem;padding:10px 20px">Add another question</button>
+        </fieldset>
+
+        <!-- 6 -->
+        <fieldset>
+          <span class="step">Section 6 of 8</span>
+          <legend>Who you don't want</legend>
+          <p class="why">She'll spot these and close them out politely instead of putting them on your calendar.</p>
+          <div class="f">
+            <label for="q_disqualify">Leads that waste your day</label>
+            <textarea id="q_disqualify" placeholder="Outside the service area&#10;Rentals where the tenant can't authorize work&#10;Anyone shopping three quotes on price alone"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 7 -->
+        <fieldset>
+          <span class="step">Section 7 of 8</span>
+          <legend>When she hands off to a human</legend>
+          <p class="why">She books and qualifies. Anything live, angry, or expensive goes to a person. We need to know who, and how fast.</p>
+          <div class="two">
+            <div class="f"><label for="q_esc_name">Who takes the handoff</label><input id="q_esc_name" type="text" placeholder="Mike Torres"></div>
+            <div class="f"><label for="q_esc_phone">Their mobile</label><input id="q_esc_phone" type="tel"></div>
+          </div>
+          <div class="f">
+            <label for="q_esc_when">What must always reach a human, and how fast
+              <span class="hint">Angry customers and anyone who asks for a person always escalate. Add your own.</span>
+            </label>
+            <textarea id="q_esc_when" placeholder="Anything over $5,000 — text Mike within 5 minutes&#10;Existing customer with a complaint — immediately, and don't sell them anything"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 8 -->
+        <fieldset>
+          <span class="step">Section 8 of 8</span>
+          <legend>How you sound</legend>
+          <p class="why">She learns your voice from real messages, not from a tone setting. Paste three texts you've actually sent a customer. Typos and all — that's the point.</p>
+          <div class="f">
+            <label for="q_voice">Three real messages</label>
+            <textarea id="q_voice" style="min-height:150px" placeholder="Hey Dana, running about 15 behind, still good for 2?&#10;&#10;No worries at all, want me to hold Thursday for you?&#10;&#10;All set — you're down for Tuesday 10, I'll text the day before."></textarea>
+          </div>
+          <div class="f">
+            <label>Channels to turn on
+              <span class="hint">Pick what you want live. Text and web chat launch fastest.</span>
+            </label>
+            <div class="chans">
+              <label class="chan"><input type="checkbox" value="SMS" checked><span>SMS</span></label>
+              <label class="chan"><input type="checkbox" value="Phone"><span>Phone</span></label>
+              <label class="chan"><input type="checkbox" value="Web chat" checked><span>Web chat</span></label>
+              <label class="chan"><input type="checkbox" value="Instagram DM"><span>Instagram DM</span></label>
+              <label class="chan"><input type="checkbox" value="Messenger"><span>Messenger</span></label>
+              <label class="chan"><input type="checkbox" value="WhatsApp"><span>WhatsApp</span></label>
+              <label class="chan"><input type="checkbox" value="Email"><span>Email</span></label>
+            </div>
+          </div>
+          <div class="f">
+            <label for="q_anything">Anything else she should know</label>
+            <textarea id="q_anything" style="min-height:80px" placeholder="Optional. The thing you'd tell a new hire on day one."></textarea>
+          </div>
+        </fieldset>
+
+        <label class="consent" for="q_consent">
+          <input type="checkbox" id="q_consent">
+          <span>If I give my mobile number, I agree to receive texts from Infinity Reach Media about this build. Message and data rates may apply, message frequency varies, reply STOP to opt out. Consent is not a condition of purchase. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms</a>.</span>
+        </label>
+
+        <div class="submit-row">
+          <button class="btn btn-primary" type="submit" id="submitBtn">Submit intake &amp; start the clock</button>
+          <button type="button" class="clear" id="clearBtn">Clear saved answers</button>
+        </div>
+        <p class="note" id="note" role="alert"></p>
+      </form>
+
+      <div class="done" id="done" tabindex="-1">
+        <h2>Got it. The clock starts now.</h2>
+        <p>Your build is underway. You'll hear from us on day two to approve account connections, and your test number lands on day five. Nothing goes live until you've tried to break her.</p>
+        <a class="btn btn-primary" href="/jessica-onboarding">See what happens next →</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:0">
+      <span>© 2026 Infinity Reach Media. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/accessibility">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+(function(){
+  var KEY='irm-jessica-intake-v1';
+  var form=document.getElementById('intakeForm');
+  var note=document.getElementById('note');
+  var done=document.getElementById('done');
+  var savedTxt=document.getElementById('savedTxt');
+  var progTxt=document.getElementById('progTxt');
+  var progFill=document.getElementById('progFill');
+
+  function fields(){
+    return Array.prototype.slice.call(
+      form.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea')
+    ).filter(function(el){ return el.id!=='company_website'; });
+  }
+
+  // --- save / restore -------------------------------------------------
+  // A 25-minute form that loses your answers is a form nobody finishes.
+  function save(){
+    var data={qa:[]};
+    fields().forEach(function(el){ if(el.id) data[el.id]=el.value; });
+    form.querySelectorAll('.qa').forEach(function(row){
+      data.qa.push([row.querySelector('.qa-q').value, row.querySelector('.qa-a').value]);
+    });
+    data.chans=[];
+    form.querySelectorAll('.chan input:checked').forEach(function(c){ data.chans.push(c.value); });
+    try{
+      localStorage.setItem(KEY,JSON.stringify(data));
+      savedTxt.textContent='Saved '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+    }catch(e){ savedTxt.textContent='Not saving in this browser'; }
+  }
+
+  function restore(){
+    var data;
+    try{ data=JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return; }
+    if(!data) return;
+    fields().forEach(function(el){ if(el.id && data[el.id]!=null) el.value=data[el.id]; });
+    if(data.qa){
+      data.qa.forEach(function(pair,i){
+        var rows=form.querySelectorAll('.qa');
+        if(!rows[i]) addQaRow();
+        rows=form.querySelectorAll('.qa');
+        if(rows[i]){ rows[i].querySelector('.qa-q').value=pair[0]||''; rows[i].querySelector('.qa-a').value=pair[1]||''; }
+      });
+    }
+    if(data.chans){
+      form.querySelectorAll('.chan input').forEach(function(c){ c.checked=data.chans.indexOf(c.value)>-1; });
+    }
+    savedTxt.textContent='Restored your saved answers';
+  }
+
+  // --- progress -------------------------------------------------------
+  function progress(){
+    var all=fields().concat(Array.prototype.slice.call(form.querySelectorAll('.qa-q')));
+    var filled=all.filter(function(el){ return el.value.trim()!==''; }).length;
+    var pct=all.length?Math.round(filled/all.length*100):0;
+    progTxt.textContent=pct+'% complete';
+    progFill.style.width=pct+'%';
+  }
+
+  function addQaRow(){
+    var list=document.getElementById('qaList');
+    var n=list.children.length+1;
+    var d=document.createElement('div');
+    d.className='qa';
+    d.innerHTML='<input type="text" class="qa-q" placeholder="Question '+n+'">'+
+                '<input type="text" class="qa-a" placeholder="Your answer, in your words">';
+    list.appendChild(d);
+    return d;
+  }
+  document.getElementById('addQa').addEventListener('click',function(){
+    addQaRow().querySelector('.qa-q').focus();
+  });
+
+  var t;
+  form.addEventListener('input',function(){
+    progress();
+    clearTimeout(t); t=setTimeout(save,600);
+  });
+
+  document.getElementById('clearBtn').addEventListener('click',function(){
+    if(!confirm('Clear everything you have typed so far? This cannot be undone.')) return;
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    form.reset(); progress(); savedTxt.textContent='Cleared';
+  });
+
+  // --- submit ---------------------------------------------------------
+  // Posts to the same endpoint as every other form on the site, with the whole
+  // intake packed into the message body. No new backend to stand up.
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    note.className='note'; note.textContent='';
+
+    var name=document.getElementById('q_name').value.trim();
+    var email=document.getElementById('q_email').value.trim();
+    var biz=document.getElementById('q_biz').value.trim();
+    if(!name||!email||!biz){
+      note.className='note err';
+      note.textContent='We need at least your name, business and email before this can start the clock.';
+      (name?(biz?document.getElementById('q_email'):document.getElementById('q_biz')):document.getElementById('q_name')).focus();
+      return;
+    }
+    if(document.getElementById('company_website').value){ return; }
+
+    var lines=[];
+    function add(label,id){
+      var v=(document.getElementById(id)||{}).value;
+      if(v&&v.trim()) lines.push(label+': '+v.trim());
+    }
+    add('Website','q_site');
+    add('Services','q_services'); add('Wants more of','q_best');
+    add('Can quote','q_quote'); add('Range only','q_range'); add('Never quote','q_never');
+    add('Hours','q_hours'); add('Service area','q_area'); add('Closed days','q_closed');
+    add('Calendar','q_calendar'); add('Length + buffer','q_length'); add('Booking rules','q_blackout');
+    var qa=[];
+    form.querySelectorAll('.qa').forEach(function(r){
+      var q=r.querySelector('.qa-q').value.trim(), a=r.querySelector('.qa-a').value.trim();
+      if(q) qa.push('  Q: '+q+'\n  A: '+(a||'(no answer given)'));
+    });
+    if(qa.length) lines.push('FAQ:\n'+qa.join('\n'));
+    add('Disqualifiers','q_disqualify');
+    add('Escalates to','q_esc_name'); add('Escalation mobile','q_esc_phone'); add('Escalation rules','q_esc_when');
+    add('Voice samples','q_voice');
+    var chans=[];
+    form.querySelectorAll('.chan input:checked').forEach(function(c){ chans.push(c.value); });
+    if(chans.length) lines.push('Channels: '+chans.join(', '));
+    add('Anything else','q_anything');
+
+    var payload={
+      name:name,
+      email:email,
+      phone:document.getElementById('q_phone').value.trim(),
+      source:'Jessica Intake',
+      message:'JESSICA INTAKE — '+biz+'\n\n'+lines.join('\n\n'),
+      company_website:''
+    };
+
+    var btn=document.getElementById('submitBtn');
+    var original=btn.textContent;
+    btn.disabled=true; btn.textContent='Sending…';
+    try{
+      var res=await fetch('https://speed-to-lead-agent-two.vercel.app/api/lead',{
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+      });
+      var json=await res.json();
+      if(!res.ok||!json.ok) throw new Error(json.error||'Request failed');
+      if(typeof window.irmTrack==='function'){ window.irmTrack('generate_lead',{form_location:'jessica_intake'}); }
+      form.style.display='none';
+      document.querySelector('.prog').style.display='none';
+      done.style.display='block';
+      done.focus();
+      try{ localStorage.removeItem(KEY); }catch(e){}
+    }catch(err){
+      note.className='note err';
+      note.textContent='That did not send. Your answers are still saved here — try again, or email them to info@infinityreachmedia.com.';
+      btn.disabled=false; btn.textContent=original;
+    }
+  });
+
+  restore();
+  progress();
+})();
+</script>
+</body>
+</html>

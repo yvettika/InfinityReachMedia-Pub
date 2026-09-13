@@ -44,14 +44,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#16203A;
-  --paper:#F7F4EF;
+  --ink:#101B3D;
+  --paper:#F1F4FB;
   --pink:#E91E8C;
   --purple:#7B2FBE;
-  --gold:#F0B429;
-  --blue:#1A4FBF;
-  --muted:#F7F4EF;
-  --line:rgba(247,244,239,.14);
+  --gold:#8FB0FF;
+  --blue:#3B6BF0;
+  --muted:#F1F4FB;
+  --line:rgba(241,244,251,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -65,9 +65,9 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .btn.pink{background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35)}
 .btn.pink:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(233,30,140,.5)}
-.btn.ghost{border:2px solid var(--gold);color:var(--paper);background:rgba(240,180,41,.10);box-shadow:0 2px 0 rgba(240,180,41,.35)}
-.btn.ghost:hover{background:var(--gold);border-color:var(--gold);color:#16203A;transform:translateY(-1px);box-shadow:0 4px 14px rgba(240,180,41,.35)}
-.btn.ghost:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(240,180,41,.35)}
+.btn.ghost{border:2px solid var(--gold);color:var(--paper);background:rgba(59,107,240,.10);box-shadow:0 2px 0 rgba(59,107,240,.35)}
+.btn.ghost:hover{background:var(--gold);border-color:var(--gold);color:#101B3D;transform:translateY(-1px);box-shadow:0 4px 14px rgba(59,107,240,.35)}
+.btn.ghost:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(59,107,240,.35)}
 .card .btn.ghost{width:100%}
 
 
@@ -102,7 +102,7 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 .slider-block{margin-bottom:30px}
 .slider-block label{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .slider-block label output{color:var(--gold);font-size:15px}
-input[type=range]{width:100%;appearance:none;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--pink) var(--fill,50%),rgba(247,244,239,.18) var(--fill,50%));outline:none;cursor:pointer}
+input[type=range]{width:100%;appearance:none;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--pink) var(--fill,50%),rgba(241,244,251,.18) var(--fill,50%));outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);box-shadow:0 0 0 2px var(--gold)}
 input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
 .leak{text-align:center;border-left:1px solid var(--line);padding-left:48px}
@@ -115,17 +115,17 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .agents header{text-align:center;max-width:640px;margin:0 auto 56px}
 .agents header p{margin-top:16px;color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
-.card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:rgba(247,244,239,.025);transition:transform .2s ease,border-color .2s ease}
-.card:hover{transform:translateY(-4px);border-color:rgba(240,180,41,.5)}
+.card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:rgba(241,244,251,.025);transition:transform .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-4px);border-color:rgba(59,107,240,.5)}
 .card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
 .card.c1 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
-.card.c2 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.c2 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
 .card.c3 .tag{background:rgba(26,79,191,.2);color:#7fa4f5}
 .card.c4 .tag{background:rgba(123,47,190,.2);color:#b98af0}
-.card.c5 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
+.card.c5 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
 .card.c6 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
-.card.c7 .tag{background:rgba(240,180,41,.14);color:var(--gold)}
-.card.maker{border-color:rgba(240,180,41,.45)}
+.card.c7 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
+.card.maker{border-color:rgba(59,107,240,.45)}
 .card h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;margin-bottom:10px}
 .card .price{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:var(--gold);margin-bottom:18px}
 .card .price span{font-weight:600;font-size:.8rem;color:var(--muted)}
@@ -135,7 +135,7 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .card li{padding-left:26px;position:relative;margin-bottom:12px;font-size:.95rem;color:var(--muted)}
 .card li::before{content:"✦";position:absolute;left:0;color:var(--pink);font-size:.8rem;top:3px}
 .card .btn{margin-top:auto;text-align:center}
-.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(240,180,41,.08),rgba(233,30,140,.06))}
+.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(59,107,240,.08),rgba(233,30,140,.06))}
 .bundle strong{font-family:'Playfair Display',serif;font-size:1.35rem}
 .bundle p{color:var(--muted);font-size:.95rem}
 
@@ -148,7 +148,7 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .track-item .step-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;color:var(--gold)}
 .track-item .stage{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin:6px 0 10px}
 .track-item .metric{font-size:.92rem;color:var(--muted);line-height:1.5}
-.track-note{margin-top:34px;padding:22px 26px;border-left:3px solid var(--gold);background:rgba(247,244,239,.03)}
+.track-note{margin-top:34px;padding:22px 26px;border-left:3px solid var(--gold);background:rgba(241,244,251,.03)}
 .track-note p{margin:0;color:var(--muted)}
 .track-note b{color:var(--paper)}
 .how{padding:90px 0;border-top:1px solid var(--line)}
@@ -257,7 +257,7 @@ footer a{color:var(--gold);text-decoration:none}
 
 <section style="padding:0 0 8px">
   <div class="wrap">
-    <div style="border:1px solid rgba(240,180,41,.35);border-radius:18px;background:rgba(240,180,41,.06);padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;text-align:center">
+    <div style="border:1px solid rgba(59,107,240,.35);border-radius:18px;background:rgba(59,107,240,.06);padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;text-align:center">
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">Live in 7 Days</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">Counted from the day you send access — we never run your clock while waiting on you.</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">60-Second Lead Response</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">Every new lead answered in under a minute, or that month is credited back.</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">10 Booked Appointments</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">In your first 90 days — or we keep running your campaigns free until you get them.</div></div>
@@ -300,7 +300,7 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
       <div class="card c7 maker">
         <span class="tag">Fastest ROI</span>
-        <h3>Database Reactivation Agent</h3>
+        <h3>Dead List Miner</h3>
         <p class="meta"><strong>Best for:</strong> Any business with a list of past customers or old leads sitting idle<br><strong>Timeline:</strong> 3–5 business days</p>
         <ul>
           <li>Mines your past customers and dead leads — the list you already own</li>
@@ -447,11 +447,11 @@ footer a{color:var(--gold);text-decoration:none}
     <p class="fleet-demo-note">Demo data, clearly labeled — the live dashboard runs on your real leads, bookings, and reviews.</p>
   </div>
 <style>
-.fleet-demo-shell{position:relative;border:1px solid rgba(247,244,239,.14);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,rgba(123,47,190,.10),transparent 60%),#1E2A47;max-width:880px;margin:0 auto}
-.fleet-demo-ticker{border-top:1px solid rgba(247,244,239,.10);padding:13px 18px;font-size:.86rem;color:rgba(247,244,239,.68);min-height:46px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.fleet-demo-ticker b{color:#F7F4EF;font-weight:700}
-.fleet-demo-count{margin-left:auto;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,244,239,.86)}
-.fleet-demo-note{text-align:center;font-size:.8rem;color:rgba(247,244,239,.86);margin-top:14px}
+.fleet-demo-shell{position:relative;border:1px solid rgba(241,244,251,.14);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,rgba(123,47,190,.10),transparent 60%),#18244F;max-width:880px;margin:0 auto}
+.fleet-demo-ticker{border-top:1px solid rgba(241,244,251,.10);padding:13px 18px;font-size:.86rem;color:rgba(241,244,251,.68);min-height:46px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fleet-demo-ticker b{color:#F1F4FB;font-weight:700}
+.fleet-demo-count{margin-left:auto;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,244,251,.86)}
+.fleet-demo-note{text-align:center;font-size:.8rem;color:rgba(241,244,251,.86);margin-top:14px}
 </style>
 <script src="/js/fleet-demo.js" defer></script>
 </section>
@@ -485,10 +485,10 @@ footer a{color:var(--gold);text-decoration:none}
     <h2 style="text-align:center">A lot of "AI agencies" resell the same kit.<br>We built ours.</h2>
     <p style="max-width:640px;margin:16px auto 26px;text-align:center;color:var(--muted)">There's a cottage industry right now selling white-labeled AI agent templates — same software, same scripts, different logo. Fair warning: some of them are cheaper than us. Here's what you only get when the person you hired actually built the thing:</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(247,244,239,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Custom-built, owned code</h4><p style="font-size:.92rem;color:var(--muted)">Our agents run on our own software — not a rented template. If your business needs something a kit can't do, we build it. Resellers can't.</p></div>
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(247,244,239,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Your data stays yours</h4><p style="font-size:.92rem;color:var(--muted)">Your customer list and conversations live in accounts <em>you</em> own — not trapped in our platform. Leave anytime and everything goes with you.</p></div>
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(247,244,239,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Security in writing</h4><p style="font-size:.92rem;color:var(--muted)">Every agent is hardened against prompt manipulation, access is locked per client, and we put our security standard on paper before onboarding.</p></div>
-      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(247,244,239,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Guarantees on paper</h4><p style="font-size:.92rem;color:var(--muted)">Live in 7 days, 60-second responses, 10 booked appointments in 90 days — written into <a href="/terms" style="color:var(--gold)">our terms</a>, not just said on a sales call.</p></div>
+      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(241,244,251,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Custom-built, owned code</h4><p style="font-size:.92rem;color:var(--muted)">Our agents run on our own software — not a rented template. If your business needs something a kit can't do, we build it. Resellers can't.</p></div>
+      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(241,244,251,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Your data stays yours</h4><p style="font-size:.92rem;color:var(--muted)">Your customer list and conversations live in accounts <em>you</em> own — not trapped in our platform. Leave anytime and everything goes with you.</p></div>
+      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(241,244,251,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Security in writing</h4><p style="font-size:.92rem;color:var(--muted)">Every agent is hardened against prompt manipulation, access is locked per client, and we put our security standard on paper before onboarding.</p></div>
+      <div style="border:1px solid var(--line);border-radius:16px;padding:22px;background:rgba(241,244,251,.03)"><h4 style="margin-bottom:8px;color:var(--gold)">Guarantees on paper</h4><p style="font-size:.92rem;color:var(--muted)">Live in 7 days, 60-second responses, 10 booked appointments in 90 days — written into <a href="/terms" style="color:var(--gold)">our terms</a>, not just said on a sales call.</p></div>
     </div>
   </div>
 </section>

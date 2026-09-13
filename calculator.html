@@ -8,7 +8,7 @@
 <meta name="description" content="A free, interactive calculator that shows business owners exactly how much revenue is leaking out of their business to fixable gaps — missed calls, slow follow-up, no-shows, unworked leads — and how much is recoverable.">
 <link rel="canonical" href="https://infinityreachmedia.com/calculator">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#16203A">
+<meta name="theme-color" content="#101B3D">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Infinity Reach Media">
 <meta property="og:title" content="Revenue Leak Calculator — What's Your Business Losing?">
@@ -21,9 +21,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#16203A;--paper:#F7F4EF;--pink:#E91E8C;--purple:#7B2FBE;--gold:#F0B429;
-    --muted:#F7F4EF;--line:rgba(247,244,239,.14);
-    --panel:rgba(247,244,239,.03);--panel2:rgba(247,244,239,.06);--radius:22px}
+  :root{--ink:#101B3D;--paper:#F1F4FB;--pink:#E91E8C;--purple:#7B2FBE;--gold:#8FB0FF;
+    --muted:#F1F4FB;--line:rgba(241,244,251,.14);
+    --panel:rgba(241,244,251,.03);--panel2:rgba(241,244,251,.06);--radius:22px}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
@@ -73,7 +73,7 @@
     color:var(--paper);font-size:16px;font-family:'DM Sans',sans-serif;padding:13px 14px;outline:none;transition:border-color .15s}
   select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239a9aa3' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:38px}
   input:focus,select:focus{border-color:var(--pink)}
-  input::placeholder{color:rgba(247,244,239,.86)}
+  input::placeholder{color:rgba(241,244,251,.86)}
   input[type=number]{-moz-appearance:textfield}
   input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
@@ -83,7 +83,7 @@
   .slider-block .toprow label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;margin:0}
   .slider-block output{font-family:'Playfair Display',serif;font-weight:800;color:var(--paper);font-size:1.35rem;white-space:nowrap;font-variant-numeric:tabular-nums}
   .slider-block .hint{font-weight:400;color:var(--muted);font-size:13px;display:block;margin-top:2px}
-  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:rgba(247,244,239,.12);outline:none;margin:14px 0 2px;cursor:pointer}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:rgba(241,244,251,.12);outline:none;margin:14px 0 2px;cursor:pointer}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(120deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 12px rgba(233,30,140,.45)}
   input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
   input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:linear-gradient(120deg,var(--pink),var(--purple));cursor:grab;border:none;box-shadow:0 2px 12px rgba(233,30,140,.45)}
@@ -94,7 +94,7 @@
 
   /* results */
   .tierchip{display:inline-block;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--gold);background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.35);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+    color:var(--gold);background:rgba(59,107,240,.07);border:1px solid rgba(59,107,240,.35);border-radius:999px;padding:6px 14px;margin-bottom:18px}
   .bignum{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,9vw,4.2rem);line-height:1;font-variant-numeric:tabular-nums;
     background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
   .bignum-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:8px 0 26px}
@@ -102,7 +102,7 @@
   .compare .box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px}
   .compare .box .v{font-family:'Playfair Display',serif;font-weight:800;font-size:1.5rem;font-variant-numeric:tabular-nums}
   .compare .box .k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
-  .compare .box.pot{border-color:rgba(240,180,41,.4)}
+  .compare .box.pot{border-color:rgba(59,107,240,.4)}
   .compare .box.pot .v{color:var(--gold)}
   .meter{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden;margin:16px 0 6px}
   .meter i{display:block;height:100%;background:linear-gradient(95deg,var(--pink),var(--gold));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
@@ -122,7 +122,7 @@
   summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--muted)}
   details p{font-size:13.5px;color:var(--muted);margin-top:10px}
   /* ROI block */
-  .roi{background:var(--panel);border:1px solid rgba(240,180,41,.35);border-radius:var(--radius);padding:32px clamp(20px,4vw,38px);margin-top:30px}
+  .roi{background:var(--panel);border:1px solid rgba(59,107,240,.35);border-radius:var(--radius);padding:32px clamp(20px,4vw,38px);margin-top:30px}
   .roi .kicker{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
   .roi h3{margin:0 0 4px}
   .roi .roi-sub{color:var(--muted);font-size:14px;margin-bottom:18px}
@@ -130,17 +130,17 @@
   .roi-grid .box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
   .roi-grid .box .v{font-family:'Playfair Display',serif;font-weight:800;font-size:1.4rem;font-variant-numeric:tabular-nums}
   .roi-grid .box .k{font-family:'Montserrat',sans-serif;font-weight:700;font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
-  .roi-grid .box.ret{border-color:rgba(240,180,41,.4)}
+  .roi-grid .box.ret{border-color:rgba(59,107,240,.4)}
   .roi-grid .box.ret .v{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
   .payback{font-size:14px;color:var(--muted);background:var(--panel2);border-radius:12px;padding:13px 16px;margin-bottom:22px}
   .payback b{color:var(--gold)}
   .roi .btnrow{text-align:center}
-  .roi .fine{font-size:12px;color:rgba(247,244,239,.86);margin-top:14px;text-align:center}
+  .roi .fine{font-size:12px;color:rgba(241,244,251,.86);margin-top:14px;text-align:center}
   @media(max-width:520px){.roi-grid{grid-template-columns:1fr}}
   .cta-block{background:linear-gradient(160deg,rgba(233,30,140,.14),rgba(123,47,190,.10));border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:30px;text-align:center}
   .cta-block h3{margin-top:0}
   .cta-block p{color:var(--muted);font-size:14.5px;max-width:46ch;margin:8px auto 20px}
-  .disclaimer{font-size:12.5px;color:rgba(247,244,239,.86);margin-top:30px;line-height:1.6}
+  .disclaimer{font-size:12.5px;color:rgba(241,244,251,.86);margin-top:30px;line-height:1.6}
   footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:.85rem;color:var(--muted)}
   footer a{color:var(--gold)}
   .hidden{display:none}

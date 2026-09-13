@@ -5,16 +5,17 @@
 
 :root {
   /* Brand palette — matched to the agentic-flows / book / thanks pages */
-  --color-bg: #16203A;          /* dark navy */
-  --color-surface: #1E2A47;     /* card / section surface */
-  --color-surface-2: #27344F;   /* lighter surface */
-  --color-text: #F7F4EF;        /* paper */
-  --color-muted: #F7F4EF;
-  --color-accent: #E91E8C;      /* pink */
-  --color-accent-2: #F0B429;    /* gold */
-  --color-purple: #7B2FBE;
-  --color-accent-text: #FF5FAF; /* pink for TEXT on navy — #E91E8C only clears 3.9:1 here */      /* purple, used in gradients/blooms */
-  --color-border: rgba(247, 244, 239, 0.14);
+  --color-bg: #101B3D;          /* dark navy */
+  --color-surface: #18244F;     /* card / section surface */
+  --color-surface-2: #223163;   /* lighter surface */
+  --color-text: #F1F4FB;        /* paper */
+  --color-muted: #F1F4FB;
+  --color-accent: #3B6BF0;      /* blue — primary. Carries buttons and gradients. */
+  --color-accent-2: #8FB0FF;    /* blue, lightened for eyebrows and labels on navy */
+  --color-purple: #7B2FBE;      /* purple — the other half of every gradient */
+  --color-magenta: #E91E8C;     /* magenta — accent only, used sparingly */
+  --color-accent-text: #FF5FAF; /* magenta for TEXT on navy — #E91E8C only clears 3.9:1 here */
+  --color-border: rgba(241, 244, 251, 0.14);
 
   /* Typography */
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -73,7 +74,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   background: linear-gradient(100deg, var(--color-accent), var(--color-purple));
   color: #ffffff;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(233, 30, 140, 0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59, 107, 240, 0.42); }
 .btn-ghost {
   background: transparent;
   border-color: var(--color-border);
@@ -86,7 +87,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(12,18,34, 0.86);
+  background: rgba(8,15,40, 0.86);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -114,7 +115,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   content: ""; position: absolute; inset: 0;
   background:
     radial-gradient(600px 300px at 50% -10%, rgba(123, 47, 190, 0.35), transparent 70%),
-    radial-gradient(500px 250px at 80% 20%, rgba(233, 30, 140, 0.16), transparent 70%);
+    radial-gradient(500px 250px at 80% 20%, rgba(59, 107, 240, 0.22), transparent 70%);
   pointer-events: none;
 }
 .hero .container { position: relative; }
@@ -129,7 +130,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   font-weight: 800; max-width: 940px; margin: 0 auto 24px;
 }
 .hero h1 .grad {
-  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
+  background: linear-gradient(120deg, var(--color-accent-2), var(--color-purple));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 /* The Fabinal-style promise line: quantified outcome + timeframe + the
@@ -199,7 +200,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .vh::before{content:"";position:absolute;inset:-10% -20% auto -20%;height:720px;
   background:
     radial-gradient(760px 380px at 22% 8%, rgba(123,47,190,.42), transparent 66%),
-    radial-gradient(620px 340px at 82% 26%, rgba(233,30,140,.24), transparent 68%);
+    radial-gradient(620px 340px at 82% 26%, rgba(59,107,240,.30), transparent 68%);
   pointer-events:none}
 .vh .container{position:relative}
 
@@ -210,7 +211,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 
 .vh h1{font-size:clamp(3rem,7.2vw,5.6rem);line-height:.98;letter-spacing:-.035em;
   font-weight:800;margin:0 0 0;max-width:13ch}
-.vh h1 .grad{background:linear-gradient(120deg,var(--color-accent),var(--color-accent-2));
+.vh h1 .grad{background:linear-gradient(120deg,var(--color-accent-2),var(--color-purple));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 .vh-right{padding-top:14px}
@@ -218,45 +219,45 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .vh-promise{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;
   color:var(--color-accent-2);letter-spacing:.01em;margin:0 0 22px}
 .vh-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.vh-micro{font-size:.9rem;color:rgba(247,244,239,.72);margin:0}
+.vh-micro{font-size:.9rem;color:rgba(241,244,251,.72);margin:0}
 
 /* Floating preview card — Viktor puts the product on screen immediately instead
    of describing it. Hers is the agent actually answering. */
 .vh-stage{margin-top:64px;position:relative}
-.vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(247,244,239,.16);
-  border-radius:22px 22px 0 0;background:linear-gradient(180deg,#151E33,#111827);
-  box-shadow:0 -2px 0 rgba(247,244,239,.06),0 40px 90px rgba(0,0,0,.55);
+.vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(241,244,251,.16);
+  border-radius:22px 22px 0 0;background:linear-gradient(180deg,#0D1734,#0B1430);
+  box-shadow:0 -2px 0 rgba(241,244,251,.06),0 40px 90px rgba(0,0,0,.55);
   padding:18px 18px 0;overflow:hidden}
 .vh-bar{display:flex;align-items:center;gap:8px;padding:2px 6px 14px}
-.vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(247,244,239,.22)}
+.vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(241,244,251,.22)}
 .vh-bar b{margin-left:8px;font-family:'Montserrat',sans-serif;font-size:.72rem;
-  letter-spacing:.12em;text-transform:uppercase;color:rgba(247,244,239,.55);font-weight:700}
-.vh-thread{background:#16203A;border-radius:14px 14px 0 0;padding:22px 22px 30px;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(241,244,251,.55);font-weight:700}
+.vh-thread{background:#101B3D;border-radius:14px 14px 0 0;padding:22px 22px 30px;
   display:grid;gap:12px}
 .vh-msg{max-width:74%;padding:12px 16px;border-radius:16px;font-size:.97rem;line-height:1.5}
-.vh-them{background:var(--color-surface-2);border:1px solid rgba(247,244,239,.10);
+.vh-them{background:var(--color-surface-2);border:1px solid rgba(241,244,251,.10);
   border-bottom-left-radius:5px}
 .vh-us{margin-left:auto;background:linear-gradient(100deg,var(--color-accent),var(--color-purple));
   color:#fff;border-bottom-right-radius:5px}
-.vh-time{font-size:.72rem;color:rgba(247,244,239,.5);margin-top:-6px}
+.vh-time{font-size:.72rem;color:rgba(241,244,251,.5);margin-top:-6px}
 .vh-time.r{text-align:right}
 
 /* Trust strip. Viktor runs a rating + client logos here; these are the equivalent
    facts Infinity Reach Media can actually stand behind. */
-.vh-trust{border-top:1px solid rgba(247,244,239,.12);margin-top:0;
-  background:rgba(12,18,34,.6);padding:26px 0}
+.vh-trust{border-top:1px solid rgba(241,244,251,.12);margin-top:0;
+  background:rgba(8,15,40,.6);padding:26px 0}
 .vh-trust .container{display:flex;align-items:center;justify-content:center;
   gap:12px 26px;flex-wrap:wrap;text-align:center}
-.vh-trust span{font-size:.88rem;color:rgba(247,244,239,.8);white-space:nowrap}
+.vh-trust span{font-size:.88rem;color:rgba(241,244,251,.8);white-space:nowrap}
 .vh-trust b{color:var(--color-text);font-weight:700}
-.vh-trust .sep{width:1px;height:22px;background:rgba(247,244,239,.16)}
+.vh-trust .sep{width:1px;height:22px;background:rgba(241,244,251,.16)}
 @media(max-width:700px){.vh-trust .sep{display:none}}
 
 /* Short-form guarantee band. The long version with hover popovers was cut from
    the homepage; this states the three promises and sends people to the Terms for
    the conditions, so there is one source of truth for the wording. */
-.gtee-band{border:1px solid rgba(240,180,41,.35);border-radius:20px;
-  background:rgba(240,180,41,.05);padding:30px 28px}
+.gtee-band{border:1px solid rgba(59,107,240,.35);border-radius:20px;
+  background:rgba(59,107,240,.05);padding:30px 28px}
 .gtee-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media(max-width:820px){.gtee-row{grid-template-columns:1fr;gap:18px}}
 .gtee{text-align:center}
@@ -301,7 +302,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .stat { text-align: center; }
 .stat .num { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;
-  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
+  background: linear-gradient(120deg, var(--color-accent-2), var(--color-purple));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .stat .label { color: var(--color-muted); font-size: 0.95rem; }
 
@@ -309,8 +310,8 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* Separate from .stats — these carry a full sentence, so the headline size is
    tuned for phrases, not the 2-3 character figures .stat .num was built for. */
 .guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  border: 1px solid rgba(240,180,41,.32); border-radius: 20px; padding: 30px 28px;
-  background: rgba(240,180,41,.05); }
+  border: 1px solid rgba(59,107,240,.32); border-radius: 20px; padding: 30px 28px;
+  background: rgba(59,107,240,.05); }
 /* Column layout so the three "conditions" triggers line up along the bottom
    even though the promises above them run different lengths. */
 .guarantee { text-align: center; display: flex; flex-direction: column; }
@@ -324,14 +325,14 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .g-trigger { background: none; border: 0; padding: 0; cursor: help;
   font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.12em;
   text-transform: uppercase; font-weight: 700; color: var(--color-accent-2);
-  border-bottom: 1px dashed rgba(240,180,41,.55); }
+  border-bottom: 1px dashed rgba(59,107,240,.55); }
 .g-trigger::after { content: " ⌄"; letter-spacing: 0; }
 .g-trigger:hover, .g-trigger:focus-visible { color: var(--color-text); border-bottom-color: var(--color-text); }
 .g-pop {
   position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px);
   width: max(260px, 100%); max-width: 320px; z-index: 20;
   background: var(--color-surface-2); color: var(--color-muted);
-  border: 1px solid rgba(240,180,41,.38); border-radius: 14px;
+  border: 1px solid rgba(59,107,240,.38); border-radius: 14px;
   padding: 14px 16px; text-align: left; font-size: 0.88rem; line-height: 1.6;
   box-shadow: var(--shadow);
   opacity: 0; visibility: hidden; pointer-events: none;
@@ -371,8 +372,8 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* ---------- Pricing ---------- */
 .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
 .price-card { border: 1px solid var(--color-line); border-radius: 20px; padding: 30px 26px;
-  background: rgba(247,244,239,.03); display: flex; flex-direction: column; }
-.price-card.featured { border-color: rgba(240,180,41,.5); background: linear-gradient(160deg, rgba(233,30,140,.10), rgba(123,47,190,.08)); }
+  background: rgba(241,244,251,.03); display: flex; flex-direction: column; }
+.price-card.featured { border-color: rgba(255,95,175,.45); background: linear-gradient(160deg, rgba(233,30,140,.09), rgba(59,107,240,.10)); }
 .price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-2); }
 .price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.4rem;
@@ -393,7 +394,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
   background: var(--color-surface); border: 1px solid var(--color-border);
   border-radius: var(--radius); padding: 30px; transition: transform 0.18s ease, border-color 0.18s ease;
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(240, 180, 41, 0.5); }
+.card:hover { transform: translateY(-4px); border-color: rgba(255, 95, 175, 0.45); }
 .card .icon {
   width: 50px; height: 50px; border-radius: 12px; display: grid; place-items: center;
   background: var(--color-surface-2); font-size: 1.5rem; margin-bottom: 18px;
@@ -477,7 +478,7 @@ p.founder-line, .two-col p.founder-line {
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: linear-gradient(120deg, rgba(123,47,190,0.18), rgba(233,30,140,0.1));
+  background: linear-gradient(120deg, rgba(123,47,190,0.18), rgba(59,107,240,0.14));
   border: 1px solid var(--color-border); border-radius: 24px; padding: 56px; text-align: center;
 }
 .cta-band h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 14px; }

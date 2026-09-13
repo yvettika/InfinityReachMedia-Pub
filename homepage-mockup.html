@@ -27,7 +27,7 @@
     .leaks{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     @media(max-width:980px){.leaks{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:560px){.leaks{grid-template-columns:1fr}}
-    .leak{position:relative;background:rgba(247,244,239,.03);
+    .leak{position:relative;background:rgba(241,244,251,.03);
       border:1px solid var(--color-border);border-radius:18px;padding:28px 24px 26px;
       transition:transform .18s ease,border-color .18s ease}
     .leak:hover{transform:translateY(-4px);border-color:rgba(233,30,140,.55)}
@@ -47,7 +47,7 @@
        Full-bleed, her own ground, so the widget reads as a live product and
        not another card in the stack. */
     .jband{position:relative;overflow:hidden;padding:96px 0 100px;
-      background:linear-gradient(168deg,#1B1030 0%,#16203A 58%,#1E2A47 100%);
+      background:linear-gradient(168deg,#141046 0%,#101B3D 58%,#18244F 100%);
       border-top:1px solid var(--color-border);
       border-bottom:1px solid var(--color-border)}
     .jband::before{content:"";position:absolute;inset:-30% -10% auto -20%;height:760px;
@@ -67,7 +67,7 @@
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
     .jband .jlead{font-size:1.12rem;line-height:1.65;color:var(--color-muted);
       max-width:46ch;margin:0 0 16px;opacity:.9}
-    .jband .jmicro{font-size:.92rem;color:rgba(247,244,239,.66);margin:16px 0 0;
+    .jband .jmicro{font-size:.92rem;color:rgba(241,244,251,.66);margin:16px 0 0;
       max-width:44ch}
 
     /* Live badge — the one thing that tells people this is not a screenshot. */
@@ -86,7 +86,7 @@
     .jchip{font-family:var(--font-display);font-weight:700;font-size:.68rem;
       letter-spacing:.1em;text-transform:uppercase;
       border:1px solid var(--color-border);border-radius:999px;padding:7px 13px;
-      color:rgba(247,244,239,.8);background:rgba(247,244,239,.04)}
+      color:rgba(241,244,251,.8);background:rgba(241,244,251,.04)}
 
     .jactions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 
@@ -94,52 +94,52 @@
        rather than as a chat box bolted to a marketing page. */
     .jphone{position:relative;margin:0 auto;width:100%;max-width:392px;
       border-radius:40px;padding:12px;
-      background:linear-gradient(180deg,rgba(247,244,239,.16),rgba(247,244,239,.05));
-      box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(247,244,239,.08) inset}
+      background:linear-gradient(180deg,rgba(241,244,251,.16),rgba(241,244,251,.05));
+      box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(241,244,251,.08) inset}
     .jphone-in{position:relative;border-radius:30px;overflow:hidden;
-      background:#111827;height:600px}
+      background:#0B1430;height:600px}
     .jphone-bar{display:flex;align-items:center;gap:10px;padding:14px 18px 12px;
-      background:rgba(12,18,34,.9);border-bottom:1px solid var(--color-border)}
+      background:rgba(8,15,40,.9);border-bottom:1px solid var(--color-border)}
     .javatar{width:34px;height:34px;min-width:34px;border-radius:50%;flex:0 0 34px;
       font-family:var(--font-display);font-weight:800;font-size:.85rem;color:#fff;
       text-align:center;line-height:34px;
       background:linear-gradient(120deg,var(--color-accent),var(--color-purple))}
     .jphone-bar b{font-family:var(--font-display);font-size:.86rem;display:block;
       line-height:1.25}
-    .jphone-bar span{font-size:.7rem;color:rgba(247,244,239,.6);display:block}
+    .jphone-bar span{font-size:.7rem;color:rgba(241,244,251,.6);display:block}
     .jstage{position:relative;height:calc(600px - 60px)}
     .jphone iframe{position:relative;z-index:2;display:block;width:100%;height:100%;
-      border:0;background:#111827;opacity:0;transition:opacity .35s ease}
+      border:0;background:#0B1430;opacity:0;transition:opacity .35s ease}
     .jphone iframe.ready{opacity:1}
 
     /* Fallback thread — visible only until the live widget paints over it. */
     .jfallback{position:absolute;inset:0;z-index:1;padding:18px 16px;
-      display:flex;flex-direction:column;gap:9px;overflow:hidden;background:#111827}
+      display:flex;flex-direction:column;gap:9px;overflow:hidden;background:#0B1430}
     .jfallback .m{max-width:82%;padding:11px 15px;border-radius:16px;font-size:.92rem;
       line-height:1.5}
     .jfallback .them{background:var(--color-surface-2);
-      border:1px solid rgba(247,244,239,.1);border-bottom-left-radius:5px;align-self:flex-start}
+      border:1px solid rgba(241,244,251,.1);border-bottom-left-radius:5px;align-self:flex-start}
     .jfallback .us{background:linear-gradient(100deg,var(--color-accent),var(--color-purple));
       color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
-    .jfallback .stamp{font-size:.66rem;color:rgba(247,244,239,.45);text-align:center}
+    .jfallback .stamp{font-size:.66rem;color:rgba(241,244,251,.45);text-align:center}
     .jtyping{display:flex;gap:4px;align-self:flex-start;background:var(--color-surface-2);
-      border:1px solid rgba(247,244,239,.1);border-radius:16px;border-bottom-left-radius:5px;
+      border:1px solid rgba(241,244,251,.1);border-radius:16px;border-bottom-left-radius:5px;
       padding:13px 15px}
-    .jtyping i{width:6px;height:6px;border-radius:50%;background:rgba(247,244,239,.6);
+    .jtyping i{width:6px;height:6px;border-radius:50%;background:rgba(241,244,251,.6);
       animation:jtype 1.3s infinite}
     .jtyping i:nth-child(2){animation-delay:.18s}
     .jtyping i:nth-child(3){animation-delay:.36s}
     @keyframes jtype{0%,60%,100%{opacity:.3;transform:translateY(0)}
       30%{opacity:1;transform:translateY(-3px)}}
     @media(prefers-reduced-motion:reduce){.jtyping i{animation:none}}
-    .jcap{text-align:center;font-size:.82rem;color:rgba(247,244,239,.58);
+    .jcap{text-align:center;font-size:.82rem;color:rgba(241,244,251,.58);
       margin-top:16px}
 
     /* Proof strip under the band */
     .jproof{display:flex;justify-content:center;gap:14px 34px;flex-wrap:wrap;
       margin-top:56px;padding-top:30px;border-top:1px solid var(--color-border);
       text-align:center}
-    .jproof span{font-size:.9rem;color:rgba(247,244,239,.8);white-space:nowrap}
+    .jproof span{font-size:.9rem;color:rgba(241,244,251,.8);white-space:nowrap}
     .jproof b{color:var(--color-text)}
   </style>
 </head>
@@ -342,7 +342,7 @@
         </div>
         <div class="card">
           <div class="icon" aria-hidden="true">🔁</div>
-          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">Reactivation</h3>
+          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">Dead List Miner</h3>
           <p style="color:var(--color-muted);font-size:.95rem">Works your old customer list the way you would if you had the time. You don't.</p>
         </div>
         <div class="card">
@@ -418,7 +418,7 @@
       </div>
       <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="services.html">Services</a></li><li><a href="agentic-flows.html">AI Agent Suite</a></li><li><a href="/reviews">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Industries</h4><ul><li><a href="/small-business">Small Business</a></li><li><a href="/coaches">Coaches &amp; Consultants</a></li><li><a href="/hvac">HVAC &amp; Home Services</a></li><li><a href="/salon">Salons &amp; Med Spas</a></li><li><a href="/insurance">Insurance Agents</a></li></ul></div>
-      <div><h4>Free Tools &amp; Guides</h4><ul><li><a href="/jessica">Meet Jessica</a></li><li><a href="/scorecard">Revenue Leak Score</a></li><li><a href="/calculator">Revenue Leak Calculator</a></li><li><a href="/missed-calls">Missed Call Calculator</a></li><li><a href="/reactivation-playbook">Reactivation Playbook</a></li></ul></div>
+      <div><h4>Free Tools &amp; Guides</h4><ul><li><a href="/jessica">Meet Jessica</a></li><li><a href="/scorecard">Revenue Leak Score</a></li><li><a href="/calculator">Revenue Leak Calculator</a></li><li><a href="/missed-calls">Missed Call Calculator</a></li><li><a href="/reactivation-playbook">Dead List Miner Playbook</a></li></ul></div>
       <div><h4>Get in Touch</h4><ul><li><a href="mailto:info@infinityreachmedia.com">info@infinityreachmedia.com</a></li><li><a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book a Call</a></li></ul></div>
     </div>
     <div class="footer-bottom">
