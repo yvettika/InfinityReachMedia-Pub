@@ -44,12 +44,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#101B3D;
+  --ink:#161F4A;
   --paper:#F1F4FB;
   --pink:#E91E8C;
   --purple:#7B2FBE;
-  --gold:#8FB0FF;
-  --blue:#3B6BF0;
+  --gold:#FF7AC0;
+  --blue:#4C7BFF;
   --muted:#F1F4FB;
   --line:rgba(241,244,251,.14);
 }
@@ -65,9 +65,9 @@ h2{font-size:clamp(1.9rem,4vw,2.9rem)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .btn.pink{background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35)}
 .btn.pink:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(233,30,140,.5)}
-.btn.ghost{border:2px solid var(--gold);color:var(--paper);background:rgba(59,107,240,.10);box-shadow:0 2px 0 rgba(59,107,240,.35)}
-.btn.ghost:hover{background:var(--gold);border-color:var(--gold);color:#101B3D;transform:translateY(-1px);box-shadow:0 4px 14px rgba(59,107,240,.35)}
-.btn.ghost:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(59,107,240,.35)}
+.btn.ghost{border:2px solid var(--gold);color:var(--paper);background:rgba(76,123,255,.10);box-shadow:0 2px 0 rgba(76,123,255,.35)}
+.btn.ghost:hover{background:var(--gold);border-color:var(--gold);color:#161F4A;transform:translateY(-1px);box-shadow:0 4px 14px rgba(76,123,255,.35)}
+.btn.ghost:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(76,123,255,.35)}
 .card .btn.ghost{width:100%}
 
 
@@ -116,16 +116,16 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .agents header p{margin-top:16px;color:var(--muted)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 .card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:rgba(241,244,251,.025);transition:transform .2s ease,border-color .2s ease}
-.card:hover{transform:translateY(-4px);border-color:rgba(59,107,240,.5)}
+.card:hover{transform:translateY(-4px);border-color:rgba(76,123,255,.5)}
 .card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
 .card.c1 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
-.card.c2 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
+.card.c2 .tag{background:rgba(76,123,255,.14);color:var(--gold)}
 .card.c3 .tag{background:rgba(26,79,191,.2);color:#7fa4f5}
 .card.c4 .tag{background:rgba(123,47,190,.2);color:#b98af0}
-.card.c5 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
+.card.c5 .tag{background:rgba(76,123,255,.14);color:var(--gold)}
 .card.c6 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
-.card.c7 .tag{background:rgba(59,107,240,.14);color:var(--gold)}
-.card.maker{border-color:rgba(59,107,240,.45)}
+.card.c7 .tag{background:rgba(76,123,255,.14);color:var(--gold)}
+.card.maker{border-color:rgba(76,123,255,.45)}
 .card h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:800;margin-bottom:10px}
 .card .price{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:var(--gold);margin-bottom:18px}
 .card .price span{font-weight:600;font-size:.8rem;color:var(--muted)}
@@ -135,7 +135,7 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .card li{padding-left:26px;position:relative;margin-bottom:12px;font-size:.95rem;color:var(--muted)}
 .card li::before{content:"✦";position:absolute;left:0;color:var(--pink);font-size:.8rem;top:3px}
 .card .btn{margin-top:auto;text-align:center}
-.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(59,107,240,.08),rgba(233,30,140,.06))}
+.bundle{margin-top:26px;border:1.5px solid var(--gold);border-radius:20px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(120deg,rgba(76,123,255,.08),rgba(233,30,140,.06))}
 .bundle strong{font-family:'Playfair Display',serif;font-size:1.35rem}
 .bundle p{color:var(--muted);font-size:.95rem}
 
@@ -257,7 +257,7 @@ footer a{color:var(--gold);text-decoration:none}
 
 <section style="padding:0 0 8px">
   <div class="wrap">
-    <div style="border:1px solid rgba(59,107,240,.35);border-radius:18px;background:rgba(59,107,240,.06);padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;text-align:center">
+    <div style="border:1px solid rgba(76,123,255,.35);border-radius:18px;background:rgba(76,123,255,.06);padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;text-align:center">
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">Live in 7 Days</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">Counted from the day you send access — we never run your clock while waiting on you.</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">60-Second Lead Response</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">Every new lead answered in under a minute, or that month is credited back.</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:var(--gold);line-height:1.25">10 Booked Appointments</div><div style="font-size:.85rem;color:var(--muted);line-height:1.5">In your first 90 days — or we keep running your campaigns free until you get them.</div></div>
@@ -447,7 +447,7 @@ footer a{color:var(--gold);text-decoration:none}
     <p class="fleet-demo-note">Demo data, clearly labeled — the live dashboard runs on your real leads, bookings, and reviews.</p>
   </div>
 <style>
-.fleet-demo-shell{position:relative;border:1px solid rgba(241,244,251,.14);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,rgba(123,47,190,.10),transparent 60%),#18244F;max-width:880px;margin:0 auto}
+.fleet-demo-shell{position:relative;border:1px solid rgba(241,244,251,.14);border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,rgba(123,47,190,.10),transparent 60%),#1E2A5E;max-width:880px;margin:0 auto}
 .fleet-demo-ticker{border-top:1px solid rgba(241,244,251,.10);padding:13px 18px;font-size:.86rem;color:rgba(241,244,251,.68);min-height:46px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .fleet-demo-ticker b{color:#F1F4FB;font-weight:700}
 .fleet-demo-count{margin-left:auto;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(241,244,251,.86)}
