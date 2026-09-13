@@ -13,7 +13,8 @@
   --color-accent: #4C7BFF;      /* blue — structure: links, borders, focus rings */
   --color-accent-2: #FF7AC0;    /* pink — eyebrows, labels, tier names */
   --color-purple: #8B45D6;      /* purple — the bridge in every gradient */
-  --color-magenta: #FF2D9B;     /* pink — the action colour. Buttons live here. */
+  --color-magenta: #FF2D9B;     /* pink — glows, badges, accents on dark ground */
+  --color-cta: #D10D6E;         /* pink, deepened so white text clears 4.5:1 on button fills */
   --color-accent-text: #FF9AD0; /* magenta for TEXT on navy — #E91E8C only clears 3.9:1 here */
   --color-border: rgba(241, 244, 251, 0.14);
 
@@ -71,10 +72,10 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .btn-primary {
-  background: linear-gradient(100deg, var(--color-magenta), var(--color-purple));
+  background: linear-gradient(100deg, var(--color-cta), var(--color-purple));
   color: #ffffff;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(255, 45, 155, 0.45); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(209, 13, 110, 0.42); }
 .btn-ghost {
   background: transparent;
   border-color: var(--color-border);
@@ -99,7 +100,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; }
-.brand em { color: var(--color-accent-text); font-style: normal; }
+.brand em { color: #FF9AD0; font-style: normal; } /* pinned: same on every page */
 .brand .mark {
   width: 40px; height: 40px; object-fit: contain; display: block;
 }
@@ -176,7 +177,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* Skip link so keyboard and screen-reader users can jump past the nav. */
 .skip-link {
   position: absolute; left: -9999px; top: 0; z-index: 200;
-  background: var(--color-accent); color: #fff; padding: 12px 18px;
+  background: var(--color-cta); color: #fff; padding: 12px 18px;
   font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0;
 }
 .skip-link:focus { left: 0; }
