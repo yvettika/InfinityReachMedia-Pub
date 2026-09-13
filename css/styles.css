@@ -224,7 +224,11 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 
 /* Floating preview card — Viktor puts the product on screen immediately instead
    of describing it. Hers is the agent actually answering. */
-.vh-stage{margin-top:64px;position:relative}
+.vh-stage{margin-top:88px;position:relative;scroll-margin-top:96px}
+/* On a phone the card reads as a phone screen and was sitting tight under the
+   sticky menu bar. More air above it, and a little breathing room in the hero
+   itself so the card doesn't feel stacked on the copy. */
+@media(max-width:900px){.vh-stage{margin-top:112px}.vh{padding-top:96px}}
 .vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(241,244,251,.16);
   border-radius:22px 22px 0 0;background:linear-gradient(180deg,#131B42,#101838);
   box-shadow:0 -2px 0 rgba(241,244,251,.06),0 40px 90px rgba(0,0,0,.55);
