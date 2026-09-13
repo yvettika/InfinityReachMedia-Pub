@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/logo-mark.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Homepage Mockup — Jessica Featured Section | Infinity Reach Media</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Internal mockup: agency hero, the Four Leaks, and Jessica's live widget as section three." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    /* ---------------------------------------------------------------
+       Mockup-only styles. Every color is a variable from css/styles.css
+       so this band cannot drift from the rest of the site.
+       --------------------------------------------------------------- */
+
+    /* Internal banner — delete this block when the layout ships. */
+    .mock-flag{background:var(--color-accent);color:#fff;text-align:center;
+      font-family:var(--font-display);font-weight:700;font-size:.74rem;
+      letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
+
+    /* ---------- The Four Leaks ---------- */
+    .leaks{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    @media(max-width:980px){.leaks{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.leaks{grid-template-columns:1fr}}
+    .leak{position:relative;background:rgba(247,244,239,.03);
+      border:1px solid var(--color-border);border-radius:18px;padding:28px 24px 26px;
+      transition:transform .18s ease,border-color .18s ease}
+    .leak:hover{transform:translateY(-4px);border-color:rgba(233,30,140,.55)}
+    .leak::before{content:"";position:absolute;top:0;left:24px;width:46px;height:4px;
+      border-radius:0 0 4px 4px;
+      background:linear-gradient(90deg,var(--color-accent),var(--color-purple))}
+    .leak .n{font-family:var(--font-display);font-weight:800;font-size:.7rem;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-text)}
+    .leak h3{font-family:var(--font-serif);font-size:1.3rem;margin:10px 0 10px;
+      line-height:1.15}
+    .leak p{color:var(--color-muted);font-size:.95rem;line-height:1.6;opacity:.86}
+    .leak .cost{display:block;margin-top:14px;padding-top:13px;
+      border-top:1px solid var(--color-border);font-family:var(--font-display);
+      font-weight:700;font-size:.82rem;letter-spacing:.04em;color:var(--color-accent-2)}
+
+    /* ---------- Jessica band ----------
+       Full-bleed, her own ground, so the widget reads as a live product and
+       not another card in the stack. */
+    .jband{position:relative;overflow:hidden;padding:96px 0 100px;
+      background:linear-gradient(168deg,#1B1030 0%,#16203A 58%,#1E2A47 100%);
+      border-top:1px solid var(--color-border);
+      border-bottom:1px solid var(--color-border)}
+    .jband::before{content:"";position:absolute;inset:-30% -10% auto -20%;height:760px;
+      background:
+        radial-gradient(680px 360px at 18% 6%, rgba(123,47,190,.46), transparent 68%),
+        radial-gradient(560px 320px at 88% 34%, rgba(233,30,140,.26), transparent 70%);
+      pointer-events:none}
+    .jband .container{position:relative}
+
+    .jgrid{display:grid;grid-template-columns:1fr minmax(340px,420px);
+      gap:64px;align-items:center}
+    @media(max-width:980px){.jgrid{grid-template-columns:1fr;gap:44px}}
+
+    .jband h2{font-size:clamp(2.1rem,4.4vw,3.3rem);letter-spacing:-.025em;
+      line-height:1.04;margin:0 0 20px;max-width:15ch}
+    .jband h2 .grad{background:linear-gradient(120deg,var(--color-accent-text),var(--color-purple));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .jband .jlead{font-size:1.12rem;line-height:1.65;color:var(--color-muted);
+      max-width:46ch;margin:0 0 16px;opacity:.9}
+    .jband .jmicro{font-size:.92rem;color:rgba(247,244,239,.66);margin:16px 0 0;
+      max-width:44ch}
+
+    /* Live badge — the one thing that tells people this is not a screenshot. */
+    .jlive{display:inline-flex;align-items:center;gap:9px;
+      font-family:var(--font-display);font-weight:700;font-size:.72rem;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-text);
+      border:1px solid rgba(255,95,175,.42);border-radius:999px;
+      padding:7px 15px 7px 12px;margin-bottom:20px;background:rgba(233,30,140,.08)}
+    .jlive i{width:8px;height:8px;border-radius:50%;background:var(--color-accent-text);
+      animation:jpulse 1.8s ease-in-out infinite}
+    @keyframes jpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,95,175,.55)}
+      50%{opacity:.55;box-shadow:0 0 0 7px rgba(255,95,175,0)}}
+    @media(prefers-reduced-motion:reduce){.jlive i{animation:none}}
+
+    .jchannels{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 26px}
+    .jchip{font-family:var(--font-display);font-weight:700;font-size:.68rem;
+      letter-spacing:.1em;text-transform:uppercase;
+      border:1px solid var(--color-border);border-radius:999px;padding:7px 13px;
+      color:rgba(247,244,239,.8);background:rgba(247,244,239,.04)}
+
+    .jactions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+    /* The phone. Real device chrome so the embed reads as her, on a phone,
+       rather than as a chat box bolted to a marketing page. */
+    .jphone{position:relative;margin:0 auto;width:100%;max-width:392px;
+      border-radius:40px;padding:12px;
+      background:linear-gradient(180deg,rgba(247,244,239,.16),rgba(247,244,239,.05));
+      box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(247,244,239,.08) inset}
+    .jphone-in{position:relative;border-radius:30px;overflow:hidden;
+      background:#111827;height:600px}
+    .jphone-bar{display:flex;align-items:center;gap:10px;padding:14px 18px 12px;
+      background:rgba(12,18,34,.9);border-bottom:1px solid var(--color-border)}
+    .javatar{width:34px;height:34px;border-radius:50%;flex:0 0 34px;
+      display:grid;place-items:center;font-family:var(--font-display);font-weight:800;
+      font-size:.85rem;color:#fff;
+      background:linear-gradient(120deg,var(--color-accent),var(--color-purple))}
+    .jphone-bar b{font-family:var(--font-display);font-size:.86rem;display:block;
+      line-height:1.25}
+    .jphone-bar span{font-size:.7rem;color:rgba(247,244,239,.6);display:block}
+    .jphone iframe{display:block;width:100%;height:calc(600px - 60px);border:0;
+      background:#111827}
+    .jcap{text-align:center;font-size:.82rem;color:rgba(247,244,239,.58);
+      margin-top:16px}
+
+    /* Proof strip under the band */
+    .jproof{display:flex;justify-content:center;gap:14px 34px;flex-wrap:wrap;
+      margin-top:56px;padding-top:30px;border-top:1px solid var(--color-border);
+      text-align:center}
+    .jproof span{font-size:.9rem;color:rgba(247,244,239,.8);white-space:nowrap}
+    .jproof b{color:var(--color-text)}
+  </style>
+</head>
+<body>
+
+<div class="mock-flag">Mockup · Homepage with Jessica as section three · not linked from the live site</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="agentic-flows.html">AI Agent Suite</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Call</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. HERO — stays agency. Four Leaks positioning, not Jessica. -->
+  <section class="vh">
+    <div class="container">
+      <span class="eyebrow">Done-For-You AI Agents · Orange County, CA</span>
+
+      <div class="vh-grid">
+        <div>
+          <h1>Your Revenue Is Leaking In <span class="grad">Four Places.</span></h1>
+        </div>
+
+        <div class="vh-right">
+          <p class="vh-promise">Every leak plugged in 7 days — without adding a single hire.</p>
+          <p class="vh-sub">The call that rang out. The lead nobody answered for six hours. The no-show. The customer who quietly stopped coming back. You already paid for all four.</p>
+          <div class="vh-actions">
+            <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book My Free Call</a>
+            <a href="#jessica" class="btn btn-ghost">Talk to Jessica Now</a>
+          </div>
+          <p class="vh-micro">30 minutes, free, no pitch deck. You'll leave knowing exactly what you're losing — whether you work with us or not.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vh-trust">
+      <div class="container">
+        <span><b>Three guarantees</b> written into our Terms</span>
+        <span class="sep"></span>
+        <span><b>Live in 7 days</b> or your setup fee back</span>
+        <span class="sep"></span>
+        <span><b>12 clients</b> at a time, on purpose</span>
+        <span class="sep"></span>
+        <span><b>Your data</b> stays in your accounts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. THE FOUR LEAKS — the category IP, high on the page. -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The Four Leaks</span>
+        <h2>Plug the leak first. Then we grow it.</h2>
+        <p>Nobody has a traffic problem until they've fixed these. Every one of them is revenue you already paid to earn, walking back out the door.</p>
+      </div>
+
+      <div class="leaks">
+        <div class="leak">
+          <span class="n">Leak One</span>
+          <h3>The call that rang out</h3>
+          <p>After hours, mid-job, on the other line. It rings out, they call the next name on the list, and you never know it happened.</p>
+          <span class="cost">Most businesses miss 1 in 4</span>
+        </div>
+        <div class="leak">
+          <span class="n">Leak Two</span>
+          <h3>The six-hour reply</h3>
+          <p>The lead filled out your form at 9pm. Someone answers at 3pm tomorrow. By then they've already booked with whoever answered first.</p>
+          <span class="cost">Speed decides who wins</span>
+        </div>
+        <div class="leak">
+          <span class="n">Leak Three</span>
+          <h3>The no-show</h3>
+          <p>It's on the calendar, so it feels like money. Then the slot sits empty, and nothing gets rebooked because nobody chased it.</p>
+          <span class="cost">An empty slot costs full price</span>
+        </div>
+        <div class="leak">
+          <span class="n">Leak Four</span>
+          <h3>The customer who drifted</h3>
+          <p>They didn't leave angry. They just stopped coming back, and nobody reached out. Your warmest list is the one nobody works.</p>
+          <span class="cost">Cheapest revenue you own</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:34px">
+        <a class="btn btn-ghost" href="scorecard.html">Score my four leaks — 2 minutes, free →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. JESSICA — her own band, widget live, full width. -->
+  <section class="jband" id="jessica">
+    <div class="container">
+      <div class="jgrid">
+        <div>
+          <span class="jlive"><i></i> She's answering right now</span>
+          <h2>One of them answers your leads. <span class="grad">Talk to her.</span></h2>
+
+          <p class="jlead">Jessica is the AI sales rep who works leak one and leak two. Texts, calls, DMs and web chat, answered the second they come in — day, night, Sunday, holiday.</p>
+          <p class="jlead">She answers the actual question, qualifies the lead, handles "let me think about it," and books it on your calendar. Then a human takes the call. She never pretends to be one.</p>
+
+          <div class="jchannels">
+            <span class="jchip">SMS</span>
+            <span class="jchip">Phone</span>
+            <span class="jchip">Instagram DM</span>
+            <span class="jchip">Messenger</span>
+            <span class="jchip">Email</span>
+            <span class="jchip">WhatsApp</span>
+            <span class="jchip">Web chat</span>
+          </div>
+
+          <div class="jactions">
+            <a class="btn btn-primary" href="sms:+17149243024?body=Hi%20Jessica">Text her: (714) 924-3024</a>
+            <a class="btn btn-ghost" href="/jessica">See everything she does →</a>
+          </div>
+
+          <p class="jmicro">That's not a screenshot and it's not a script. Push on price. Say you need to think about it. Ask if she's a bot — she'll tell you straight.</p>
+        </div>
+
+        <div>
+          <div class="jphone">
+            <div class="jphone-in">
+              <div class="jphone-bar">
+                <span class="javatar" aria-hidden="true">J</span>
+                <span>
+                  <b>Jessica</b>
+                  <span>AI sales rep · replies in seconds</span>
+                </span>
+              </div>
+              <iframe
+                src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media"
+                title="Chat with Jessica, the AI sales rep"
+                loading="lazy"
+                allow="clipboard-write"></iframe>
+            </div>
+          </div>
+          <p class="jcap">Live agent · same Jessica as our real number</p>
+        </div>
+      </div>
+
+      <div class="jproof">
+        <span><b>41 seconds</b> average first reply</span>
+        <span><b>7 channels</b>, one conversation</span>
+        <span><b>Discloses she's AI</b> on every first message</span>
+        <span><b>Hands off to your team</b> the moment it matters</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. THE REST OF THE SUITE -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The rest of the team</span>
+        <h2>Jessica is one agent. Four leaks need four.</h2>
+        <p>They run on your stack, in your accounts, under your name — and they hand off to each other instead of sitting in separate tools.</p>
+      </div>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="icon" aria-hidden="true">📞</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">Call Catcher</h3>
+          <p style="color:var(--color-muted);font-size:.95rem">Picks up what rings out, takes the details, and texts back before they dial your competitor.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">📅</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">No-Show Killer</h3>
+          <p style="color:var(--color-muted);font-size:.95rem">Reminds, confirms, reschedules, and refills the slot when somebody drops.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">🔁</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">Reactivation</h3>
+          <p style="color:var(--color-muted);font-size:.95rem">Works your old customer list the way you would if you had the time. You don't.</p>
+        </div>
+        <div class="card">
+          <div class="icon" aria-hidden="true">⭐</div>
+          <h3 style="font-family:var(--font-serif);font-size:1.25rem;margin-bottom:10px">Review Engine</h3>
+          <p style="color:var(--color-muted);font-size:.95rem">Asks at the right moment, routes the unhappy ones to you before they post.</p>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:34px">
+        <a class="btn btn-ghost" href="agentic-flows.html">See the full agent suite →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. GUARANTEES -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">In writing</span>
+        <h2>It Pays For Itself Twice</h2>
+        <p>All three of these live in our Terms of Service, not in a sales deck.</p>
+      </div>
+      <div class="gtee-band">
+        <div class="gtee-row">
+          <div class="gtee">
+            <b>Live in 7 days</b>
+            <span>Or we refund your setup fee. No conditions we don't publish.</span>
+          </div>
+          <div class="gtee">
+            <b>10 appointments in 30 days</b>
+            <span>Or we keep working your list until you get them.</span>
+          </div>
+          <div class="gtee">
+            <b>Your data, your accounts</b>
+            <span>Everything runs in your stack. You keep it if we part ways.</span>
+          </div>
+        </div>
+        <p class="gtee-note">Conditions in full in our <a href="/terms">Terms of Service</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SCORECARD CTA -->
+  <section class="section">
+    <div class="container" style="text-align:center">
+      <div class="section-head" style="margin-bottom:28px">
+        <span class="eyebrow">Start here</span>
+        <h2>Find out what it's costing you.</h2>
+        <p>Two minutes, no signup, no call required. You'll see which of the four leaks is costing you most — and a 90-day order to fix them in.</p>
+      </div>
+      <div class="vh-actions" style="justify-content:center">
+        <a class="btn btn-primary" href="scorecard.html">Get my Revenue Leak Score →</a>
+        <a class="btn btn-ghost" href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book the 30-minute call</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="brand" href="index.html"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo" /> Infinity <em>Reach</em> Media</a>
+        <p>Done-for-you AI agents that stop businesses from leaking revenue — missed calls and DMs, slow follow-up, no-shows, and forgotten customers.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/yvettika" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+          <a href="https://www.instagram.com/boss.bae.yvette/" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+          <a href="https://www.tiktok.com/@yvettejkahn" aria-label="TikTok" target="_blank" rel="noopener">TT</a>
+        </div>
+      </div>
+      <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="services.html">Services</a></li><li><a href="agentic-flows.html">AI Agent Suite</a></li><li><a href="/reviews">Reviews</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Industries</h4><ul><li><a href="/small-business">Small Business</a></li><li><a href="/coaches">Coaches &amp; Consultants</a></li><li><a href="/hvac">HVAC &amp; Home Services</a></li><li><a href="/salon">Salons &amp; Med Spas</a></li><li><a href="/insurance">Insurance Agents</a></li></ul></div>
+      <div><h4>Free Tools &amp; Guides</h4><ul><li><a href="/jessica">Meet Jessica</a></li><li><a href="/scorecard">Revenue Leak Score</a></li><li><a href="/calculator">Revenue Leak Calculator</a></li><li><a href="/missed-calls">Missed Call Calculator</a></li><li><a href="/reactivation-playbook">Reactivation Playbook</a></li></ul></div>
+      <div><h4>Get in Touch</h4><ul><li><a href="mailto:info@infinityreachmedia.com">info@infinityreachmedia.com</a></li><li><a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener">Book a Call</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Infinity Reach Media. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/accessibility">Accessibility</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
