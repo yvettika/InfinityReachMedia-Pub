@@ -100,6 +100,13 @@
       font-family:var(--font-display);font-weight:700;font-size:.72rem;
       letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
 
+    /* Jessica's face in the hero card, so the agent you meet at the top is the
+       same one you can talk to in section three. */
+    .vh-face{width:26px;height:26px;min-width:26px;border-radius:50%;
+      font-family:var(--font-display);font-weight:800;font-size:.72rem;color:#fff;
+      text-align:center;line-height:26px;margin-right:2px;
+      background:linear-gradient(120deg,var(--color-cta),var(--color-purple))}
+
     .jband{position:relative;overflow:hidden;padding:92px 0 96px;
       background:linear-gradient(168deg,#241A5E 0%,#1B2557 55%,#23306B 100%);
       border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
@@ -234,8 +241,8 @@
       <div class="vh-stage">
         <div class="vh-card">
           <div class="vh-bar">
-            <span class="vh-dot"></span><span class="vh-dot"></span><span class="vh-dot"></span>
-            <b>Speed to Lead · answered in 41 seconds</b>
+            <span class="vh-face" aria-hidden="true">J</span>
+            <b>Jessica · answered in 41 seconds</b>
           </div>
           <div class="vh-thread">
             <div class="vh-msg vh-them">Hi — saw your ad. Do you have anything open this week?</div>
