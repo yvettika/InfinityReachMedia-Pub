@@ -17,8 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#161F4A;--paper:#F1F4FB;--pink:#E91E8C;--purple:#7B2FBE;--gold:#FF7AC0;--blue:#4C7BFF;--muted:#F1F4FB;--line:rgba(241,244,251,.14)}
+<link rel="stylesheet" href="css/tokens.css" />
+  <style>
+:root{--ink:var(--brand-navy);--paper:var(--brand-paper);--pink:#E91E8C;--purple:#7B2FBE;--gold:var(--brand-pink-lt);--blue:var(--brand-blue);--muted:var(--brand-paper);--line:rgba(241,244,251,.14)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -36,7 +37,7 @@ h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-back
 nav{position:sticky;top:0;z-index:50;background:rgba(22,32,58,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1080px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
-.logo em{color:#FF9AD0;font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
+.logo em{color:var(--brand-logo);font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
 nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
 @media(max-width:540px){
   .logo{font-size:.92rem;gap:7px}

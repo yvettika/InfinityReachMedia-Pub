@@ -30,16 +30,17 @@
 {"@type":"Question","name":"Does she send cold messages?","acceptedAnswer":{"@type":"Answer","text":"No. Jessica only replies to people who contacted the business first or gave written consent. No purchased lists, no blasts."}},
 {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"We price it on the call, on the leak she plugs, not on the software. If you want your numbers first, run the free Revenue Leak Scorecard."}}]}
 </script>
-<style>
+<link rel="stylesheet" href="css/tokens.css" />
+  <style>
   :root{
     --ink:#101B3D;
-    --paper:#F6F8FC;
+    --paper:var(--brand-paper-2);
     --accent:#7B2FBE;
-    --accent-lt:#C39BE8;
-    --cta:#D10D6E;
-    --gold:#2B5BD7;
-    --blue:#2B5BD7;
-    --muted:#565C6B;
+    --accent-lt:var(--brand-purple-lt);
+    --cta:var(--brand-cta);
+    --gold:var(--brand-blue-dk);
+    --blue:var(--brand-blue-dk);
+    --muted:var(--brand-muted-dark);
     --line:rgba(16,27,61,.14);
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -60,7 +61,7 @@
   nav{position:sticky;top:0;z-index:50;background:rgba(16,27,61,.92);backdrop-filter:blur(8px)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
   .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
-  .logo em{color:#FF9AD0;font-style:normal}
+  .logo em{color:var(--brand-logo);font-style:normal}
   .navlinks{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
   .navlinks a{color:rgba(255,255,255,.72);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .15s}
   .navlinks a:hover{color:#fff}

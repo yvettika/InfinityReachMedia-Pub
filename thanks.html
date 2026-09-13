@@ -11,14 +11,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
+<link rel="stylesheet" href="css/tokens.css" />
+  <style>
 :root{
-  --ink:#161F4A;
-  --paper:#F1F4FB;
+  --ink:var(--brand-navy);
+  --paper:var(--brand-paper);
   --pink:#E91E8C;
   --purple:#7B2FBE;
-  --gold:#FF7AC0;
-  --muted:#F1F4FB;
+  --gold:var(--brand-pink-lt);
+  --muted:var(--brand-paper);
   --line:rgba(241,244,251,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -30,7 +31,7 @@ h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-back
 nav{background:rgba(22,32,58,.86);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1080px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
-.logo em{color:#FF9AD0;font-style:normal}
+.logo em{color:var(--brand-logo);font-style:normal}
 .logo .mark{width:30px;height:30px;object-fit:contain;display:block}
 .page{padding:90px 0 100px;position:relative;overflow:hidden;text-align:center}
 .page::before{content:"";position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.32),transparent 65%);pointer-events:none}

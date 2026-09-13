@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/styles.css" />
 
   <style>
@@ -25,6 +26,17 @@
     .pilot b{font-family:var(--font-display);font-weight:800;font-size:.74rem;
       letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:5px}
     .pilot p{font-size:.98rem;max-width:66ch;margin:0 auto;opacity:.96}
+
+    /* Entry step. Deliberately not a fourth tier card — it is a different
+       shape because it is a different kind of offer. */
+    .entry{display:flex;align-items:center;justify-content:space-between;gap:28px;
+      flex-wrap:wrap;border:1px solid var(--color-border);border-radius:18px;
+      background:rgba(241,244,251,.04);padding:26px 28px;margin-bottom:26px}
+    .entry h3{font-family:var(--font-serif);font-size:1.3rem;margin:8px 0 8px}
+    .entry p{color:var(--color-muted);opacity:.85;font-size:.95rem;max-width:74ch}
+    .entry-tag{font-family:var(--font-display);font-weight:800;font-size:.66rem;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-2)}
+    .entry .btn{white-space:nowrap}
 
     /* ---------------- Tier cards ---------------- */
     .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
@@ -133,6 +145,15 @@
         <span class="eyebrow">Pilot pricing</span>
         <h2>Priced on the leak it plugs, not the software it runs on.</h2>
         <p>A one-time build fee and a monthly. Texts, calls and your phone number are included in the monthly, so there's no second bill arriving from a carrier you've never heard of.</p>
+      </div>
+
+      <div class="entry">
+        <div>
+          <span class="entry-tag">Step one · optional</span>
+          <h3>Not ready to commit? Start with The First 10.</h3>
+          <p>One concentrated 30-day sweep of the customer list you already own. Ten booked appointments or we keep working it. It's the Dead List Miner run as a trial, so you see the work before you buy the system — and whatever you pay is credited against your build fee if you continue.</p>
+        </div>
+        <a class="btn btn-ghost" href="/first-10">See The First 10 →</a>
       </div>
 
       <div class="tiers">
@@ -304,8 +325,11 @@
       <p class="faq-q">Why include texts and calls instead of billing them through?</p>
       <p class="faq-a">Because a bill you can't predict is a bill you resent. We'd rather quote one number and size the allowance with you honestly up front. If you're a heavy phone business we'll say so on the call rather than discover it in month three.</p>
 
-      <p class="faq-q">Can I start with The First 10 instead?</p>
-      <p class="faq-a">Yes, and plenty do. It's the paid trial on your existing list, and whatever you invest is credited toward your build fee if you continue. <a href="/first-10" style="color:var(--color-accent-2);font-weight:700">See The First 10 →</a></p>
+      <p class="faq-q">The First 10 promises ten appointments in 30 days. Why does the system only guarantee ten in 90?</p>
+      <p class="faq-a">Because they're the same promise at different stages, and the first sweep is the richest. The First 10 is one concentrated pass through a list nobody has touched in years — that's where the easy wins are, so thirty days is a fair target. Once that's done, the Dead List Miner keeps working a thinner seam every month: people who lapsed recently rather than years ago. Ten in ninety days is the contractual floor for that ongoing work, not the expectation. You aren't buying two sets of ten — you're buying the sprint, then the machine that keeps it going.</p>
+
+      <p class="faq-q">So should I start with The First 10 or go straight to a system?</p>
+      <p class="faq-a">If you're not sure the list has anything in it, start with The First 10 and find out for a fraction of the cost. Whatever you pay is credited against your build fee. If you already know the list is good and the missed calls are bleeding you now, go straight to the system — The First 10 only works one of the four leaks. <a href="/first-10" style="color:var(--color-accent-2);font-weight:700">See The First 10 →</a></p>
 
       <p class="faq-q">What happens when the twelve seats are full?</p>
       <p class="faq-a">Pilot rates close for new clients and standard pricing starts. Anyone already in keeps their rate. We won't take your money and put you in a queue, so if we're full on the day you call, we'll tell you the real date we open up.</p>

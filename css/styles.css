@@ -5,17 +5,17 @@
 
 :root {
   /* Brand palette — matched to the agentic-flows / book / thanks pages */
-  --color-bg: #161F4A;          /* dark navy */
-  --color-surface: #1E2A5E;     /* card / section surface */
-  --color-surface-2: #2B3A78;   /* lighter surface */
-  --color-text: #F1F4FB;        /* paper */
-  --color-muted: #F1F4FB;
-  --color-accent: #4C7BFF;      /* blue — structure: links, borders, focus rings */
-  --color-accent-2: #FF7AC0;    /* pink — eyebrows, labels, tier names */
-  --color-purple: #8B45D6;      /* purple — the bridge in every gradient */
-  --color-magenta: #FF2D9B;     /* pink — glows, badges, accents on dark ground */
-  --color-cta: #D10D6E;         /* pink, deepened so white text clears 4.5:1 on button fills */
-  --color-accent-text: #FF9AD0; /* magenta for TEXT on navy — #E91E8C only clears 3.9:1 here */
+  --color-bg: var(--brand-navy);          /* dark navy */
+  --color-surface: var(--brand-navy-2);     /* card / section surface */
+  --color-surface-2: var(--brand-navy-3);   /* lighter surface */
+  --color-text: var(--brand-paper);        /* paper */
+  --color-muted: var(--brand-paper);
+  --color-accent: var(--brand-blue);      /* blue — structure: links, borders, focus rings */
+  --color-accent-2: var(--brand-pink-lt);    /* pink — eyebrows, labels, tier names */
+  --color-purple: var(--brand-purple);      /* purple — the bridge in every gradient */
+  --color-magenta: var(--brand-pink);     /* pink — glows, badges, accents on dark ground */
+  --color-cta: var(--brand-cta);         /* pink, deepened so white text clears 4.5:1 on button fills */
+  --color-accent-text: var(--brand-logo); /* magenta for TEXT on navy — #E91E8C only clears 3.9:1 here */
   --color-border: rgba(241, 244, 251, 0.14);
 
   /* Typography */
@@ -100,7 +100,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-serif); font-weight: 800; font-size: 1.15rem; }
-.brand em { color: #FF9AD0; font-style: normal; } /* pinned: same on every page */
+.brand em { color: var(--brand-logo); font-style: normal; } /* pinned: same on every page */
 .brand .mark {
   width: 40px; height: 40px; object-fit: contain; display: block;
 }
