@@ -100,12 +100,42 @@
       font-family:var(--font-display);font-weight:700;font-size:.72rem;
       letter-spacing:.16em;text-transform:uppercase;padding:9px 16px}
 
-    /* Jessica's face in the hero card, so the agent you meet at the top is the
-       same one you can talk to in section three. */
-    .vh-face{width:26px;height:26px;min-width:26px;border-radius:50%;
-      font-family:var(--font-display);font-weight:800;font-size:.72rem;color:#fff;
-      text-align:center;line-height:26px;margin-right:2px;
-      background:linear-gradient(120deg,var(--color-cta),var(--color-purple))}
+
+    /* ---------- Hero: copy left, live agent right ----------
+       Overrides the shared .vh rules for this page only, so the widget lands
+       in the fold and someone can type at her without scrolling. */
+    .vh{padding:72px 0 0}
+    .vh-grid{grid-template-columns:1.05fr minmax(320px,400px);gap:56px;align-items:center}
+    .vh h1{font-size:clamp(2.3rem,4.4vw,3.7rem);max-width:15ch;margin-bottom:22px}
+    .vh-copy .vh-promise{margin-bottom:18px}
+    .vh-copy .vh-sub{max-width:44ch;margin-bottom:24px}
+    @media(max-width:1000px){
+      .vh-grid{grid-template-columns:1fr;gap:40px}
+      .vh h1{max-width:none}
+      .vh-copy .vh-sub{max-width:none}
+    }
+
+    .vh-live{display:flex;flex-direction:column;align-items:center}
+    .vh-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);
+      font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+      color:#FFB3DC;border:1px solid rgba(255,45,155,.55);border-radius:999px;
+      padding:7px 15px 7px 12px;margin-bottom:14px;background:rgba(255,45,155,.14)}
+    .vh-badge i{width:8px;height:8px;border-radius:50%;background:var(--color-magenta);
+      animation:jpulse 1.8s ease-in-out infinite}
+    .vh-try{text-align:center;font-size:.86rem;color:rgba(241,244,251,.72);
+      margin-top:14px;max-width:34ch}
+
+    .vh-proof-row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+      margin-top:56px;padding-top:30px;border-top:1px solid var(--color-border)}
+    @media(max-width:820px){.vh-proof-row{grid-template-columns:repeat(2,1fr);gap:22px;
+      margin-top:40px}}
+    @media(max-width:460px){.vh-proof-row{grid-template-columns:1fr;gap:16px}}
+    .pf b{display:block;font-family:var(--font-serif);font-weight:800;font-size:1.35rem;
+      line-height:1.1;color:var(--color-accent-2);margin-bottom:4px}
+    .pf span{display:block;color:var(--color-muted);opacity:.82;font-size:.9rem;line-height:1.45}
+
+    /* Jessica's avatar, shared by the hero widget and the section below. */
+    
 
     .jband{position:relative;overflow:hidden;padding:92px 0 96px;
       background:linear-gradient(168deg,#241A5E 0%,#1B2557 55%,#23306B 100%);
@@ -130,9 +160,7 @@
       font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
       color:#FFB3DC;border:1px solid rgba(255,45,155,.55);border-radius:999px;
       padding:7px 15px 7px 12px;margin-bottom:18px;background:rgba(255,45,155,.14)}
-    .jlive i{width:8px;height:8px;border-radius:50%;background:var(--color-magenta);
-      animation:jpulse 1.8s ease-in-out infinite}
-    @keyframes jpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,45,155,.6)}
+        @keyframes jpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,45,155,.6)}
       50%{opacity:.55;box-shadow:0 0 0 7px rgba(255,45,155,0)}}
 
     .jchips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 24px}
@@ -145,7 +173,7 @@
     .jphone{position:relative;margin:0 auto;width:100%;max-width:380px;border-radius:40px;
       padding:12px;background:linear-gradient(180deg,rgba(241,244,251,.18),rgba(241,244,251,.06));
       box-shadow:0 40px 90px rgba(6,10,30,.55),0 0 0 1px rgba(241,244,251,.09) inset}
-    .jphone-in{border-radius:30px;overflow:hidden;background:#131B42;height:590px}
+    .jphone-in{border-radius:30px;overflow:hidden;background:#131B42;height:520px}
     .jphone-bar{display:flex;align-items:center;gap:10px;padding:14px 18px 12px;
       background:rgba(12,19,55,.92);border-bottom:1px solid var(--color-border)}
     .javatar{width:34px;height:34px;min-width:34px;border-radius:50%;flex:0 0 34px;
@@ -155,7 +183,7 @@
     .jphone-bar b{font-family:var(--font-display);font-size:.85rem;display:block;line-height:1.25}
     .jphone-bar span span{font-size:.69rem;color:rgba(241,244,251,.62);display:block}
 
-    .jstage{position:relative;height:calc(590px - 60px)}
+    .jstage{position:relative;height:calc(520px - 60px)}
     .jphone iframe{position:relative;z-index:2;display:block;width:100%;height:100%;
       border:0;background:#131B42;opacity:0;transition:opacity .35s ease}
     .jphone iframe.ready{opacity:1}
@@ -180,7 +208,13 @@
     @keyframes jtype{0%,60%,100%{opacity:.3;transform:translateY(0)}
       30%{opacity:1;transform:translateY(-3px)}}
     @media(prefers-reduced-motion:reduce){.jlive i,.jtyping i{animation:none}}
-    .jcap{text-align:center;font-size:.8rem;color:rgba(241,244,251,.62);margin-top:15px}
+    .jcap{text-align:center;font-size:.85rem;color:rgba(241,244,251,.72);margin-top:16px}
+    .jface{position:relative;max-width:420px;margin:0 auto}
+    .jface video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;
+      background:#111;box-shadow:0 30px 70px rgba(6,10,30,.5),0 0 0 1px rgba(241,244,251,.09)}
+    .jtag{position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;
+      font-family:var(--font-display);font-size:.72rem;font-weight:700;color:#fff;
+      background:rgba(12,19,55,.78);backdrop-filter:blur(6px)}
 
     .jproof{display:flex;justify-content:center;gap:14px 32px;flex-wrap:wrap;margin-top:50px;
       padding-top:28px;border-top:1px solid var(--color-border);text-align:center}
@@ -222,38 +256,53 @@
       <span class="eyebrow">Done-For-You AI Agents · Orange County, CA</span>
 
       <div class="vh-grid">
-        <div>
+        <div class="vh-copy">
           <h1>You're Losing Customers You <span class="grad">Already Paid For.</span></h1>
-        </div>
-
-        <div class="vh-right">
           <p class="vh-promise">Every leak plugged in 7 days — without adding a single hire.</p>
           <p class="vh-sub">The call that rang out. The lead nobody answered for six hours. The no-show. The customer who quietly stopped coming back.</p>
           <div class="vh-actions">
             <a href="https://calendly.com/yvettekahn/30min" target="_blank" rel="noopener" class="btn btn-primary">Book My Free Call</a>
-            <a href="/live-demo" target="_blank" rel="noopener" class="btn btn-ghost">Talk to a Live Agent<span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="#jessica" class="btn btn-ghost">Who is Jessica?</a>
           </div>
           <p class="vh-micro">30 minutes, free, no pitch deck. You'll leave knowing exactly what you're losing — whether you work with us or not.</p>
         </div>
+
+        <!-- The product, live, in the fold. The only widget on the page. -->
+        <div class="vh-live">
+          <span class="vh-badge"><i></i> She's answering right now</span>
+          <div class="jphone">
+            <div class="jphone-in">
+              <div class="jphone-bar">
+                <span class="javatar" aria-hidden="true">J</span>
+                <span><b>Jessica</b><span>AI sales rep &middot; replies in seconds</span></span>
+              </div>
+              <div class="jstage">
+                <div class="jfallback" aria-hidden="true">
+                  <p class="stamp">Sat 9:41 PM</p>
+                  <div class="m them">Hey &mdash; saw your ad. Do you have anything open this week?</div>
+                  <div class="m us">Hi! This is Jessica, the AI assistant at Infinity Reach Media. I've got Thursday 10:00 or Friday 2:30 open. Which suits you better?</div>
+                  <p class="stamp">41 seconds later</p>
+                  <div class="m them">what's it cost though</div>
+                  <div class="m us">Fair question. It depends on which leak we're plugging, so nobody quotes you a number that's wrong. Yvette gives you the real figure on the call, and the call is free.</div>
+                  <div class="jtyping"><i></i><i></i><i></i></div>
+                </div>
+                <iframe
+                  src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media"
+                  title="Chat with Jessica, the AI sales rep"
+                  allow="clipboard-write"
+                  onload="this.classList.add('ready')"></iframe>
+              </div>
+            </div>
+          </div>
+          <p class="vh-try">Type like a lead would. Push on price, say you need to think about it, ask if she's a bot.</p>
+        </div>
       </div>
 
-      <!-- The product, on screen, instead of described. -->
-      <div class="vh-stage">
-        <div class="vh-card">
-          <div class="vh-bar">
-            <span class="vh-face" aria-hidden="true">J</span>
-            <b>Jessica · answered in 41 seconds</b>
-          </div>
-          <div class="vh-thread">
-            <div class="vh-msg vh-them">Hi — saw your ad. Do you have anything open this week?</div>
-            <p class="vh-time">Sat 9:41 PM</p>
-            <div class="vh-msg vh-us">Hi Dana — yes. I've got Thursday 10:00 or Friday 2:30. Which suits you better? (I'm the AI assistant here, happy to hand you to the team any time.)</div>
-            <p class="vh-time r">Sat 9:41 PM · 41 seconds later</p>
-            <div class="vh-msg vh-them">Thursday works.</div>
-            <p class="vh-time">Sat 9:44 PM</p>
-            <div class="vh-msg vh-us">Booked for Thursday 10:00. You'll get a reminder the day before, and one two hours out.</div>
-          </div>
-        </div>
+      <div class="vh-proof-row">
+        <div class="pf"><b>41 seconds</b><span>average first reply</span></div>
+        <div class="pf"><b>7 channels</b><span>one conversation per person</span></div>
+        <div class="pf"><b>Says she's AI</b><span>on every first message</span></div>
+        <div class="pf"><b>Hands off</b><span>to your team the moment it matters</span></div>
       </div>
     </div>
 
@@ -325,8 +374,8 @@
     <div class="container">
       <div class="jgrid">
         <div>
-          <span class="jlive"><i></i> She's answering right now</span>
-          <h2>One of them answers your leads. <span class="grad">Talk to her.</span></h2>
+          <span class="jlive">Meet Jessica</span>
+          <h2>You just talked to her. <span class="grad">Here's who she is.</span></h2>
           <p class="jlead">Jessica is the AI sales rep who works the first two leaks. Texts, calls, DMs and web chat, answered the second they come in. Day, night, Sunday, holiday.</p>
           <p class="jlead">She answers the actual question, qualifies the lead, handles "let me think about it," and books it on your calendar. Then a human takes the call. She never pretends to be one.</p>
 
@@ -338,47 +387,23 @@
 
           <div class="jactions">
             <a class="btn btn-primary" href="sms:+17149243024?body=Hi%20Jessica">Text her: (714) 924-3024</a>
-            <a class="btn btn-ghost" href="/jessica-onboarding">What happens if I want her &rarr;</a>
+            <a class="btn btn-ghost" href="/jessica">Everything she does &rarr;</a>
           </div>
 
-          <p class="jmicro">That's not a screenshot and it's not a script. Push on price. Say you need to think about it. Ask if she's a bot, she'll tell you straight.</p>
+          <p class="jmicro">She's the same Jessica on our real number. Text her from your own phone and you get the same person you just chatted with.</p>
         </div>
 
         <div>
-          <div class="jphone">
-            <div class="jphone-in">
-              <div class="jphone-bar">
-                <span class="javatar" aria-hidden="true">J</span>
-                <span><b>Jessica</b><span>AI sales rep &middot; replies in seconds</span></span>
-              </div>
-              <div class="jstage">
-                <div class="jfallback" aria-hidden="true">
-                  <p class="stamp">Sat 9:41 PM</p>
-                  <div class="m them">Hey &mdash; saw your ad. Do you have anything open this week?</div>
-                  <div class="m us">Hi! This is Jessica, the AI assistant at Infinity Reach Media. I've got Thursday 10:00 or Friday 2:30 open. Which suits you better?</div>
-                  <p class="stamp">41 seconds later</p>
-                  <div class="m them">what's it cost though</div>
-                  <div class="m us">Fair question. It depends on which leak we're plugging, so nobody quotes you a number that's wrong. Yvette gives you the real figure on the call, and the call is free.</div>
-                  <div class="jtyping"><i></i><i></i><i></i></div>
-                </div>
-                <iframe
-                  src="https://agent-router-theta.vercel.app/closer.html?embed=1&amp;tenant=infinity-reach-media"
-                  title="Chat with Jessica, the AI sales rep"
-                  loading="lazy" allow="clipboard-write"
-                  onload="this.classList.add('ready')"></iframe>
-              </div>
-            </div>
+          <div class="jface">
+            <video autoplay muted loop playsinline preload="metadata" poster="/media/jessica-poster.jpg">
+              <source src="/media/jessica-loop.mp4" type="video/mp4">
+            </video>
+            <span class="jtag">Jessica &middot; (714) 924-3024</span>
           </div>
-          <p class="jcap">Live agent &middot; same Jessica as our real number</p>
+          <p class="jcap">She's live at the top of this page. Scroll up and try to stump her.</p>
         </div>
       </div>
 
-      <div class="jproof">
-        <span><b>41 seconds</b> average first reply</span>
-        <span><b>7 channels</b>, one conversation</span>
-        <span><b>Discloses she's AI</b> on every first message</span>
-        <span><b>Hands off to your team</b> the moment it matters</span>
-      </div>
     </div>
   </section>
   <!-- ===== END JESSICA ===== -->
