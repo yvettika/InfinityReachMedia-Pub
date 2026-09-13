@@ -157,9 +157,13 @@
     .jfallback .m{max-width:82%;padding:11px 15px;border-radius:16px;font-size:.92rem;line-height:1.5}
     .jfallback .them{background:var(--color-surface-2);border:1px solid rgba(241,244,251,.12);
       border-bottom-left-radius:5px;align-self:flex-start}
-    .jfallback .us{background:linear-gradient(100deg,var(--color-magenta),var(--color-purple));
-      color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
-    .jfallback .stamp{font-size:.66rem;color:rgba(241,244,251,.5);text-align:center}
+    /* White on hot pink measured 3.44:1, under the 4.5:1 minimum. A light
+       pink-into-lavender bubble with navy text keeps the brand colour and
+       reads at 12.8:1. */
+    .jfallback .us{background:linear-gradient(100deg,#FFD9EC,#E4D4FA);
+      color:#141C44;border-bottom-right-radius:5px;align-self:flex-end;
+      border:1px solid rgba(255,45,155,.30);font-weight:500}
+    .jfallback .stamp{font-size:.66rem;color:rgba(241,244,251,.66);text-align:center}
     .jtyping{display:flex;gap:4px;align-self:flex-start;background:var(--color-surface-2);
       border:1px solid rgba(241,244,251,.12);border-radius:16px;border-bottom-left-radius:5px;
       padding:13px 15px}
