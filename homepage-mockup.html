@@ -128,13 +128,24 @@
       .vh-actions{gap:10px}
       .vh-actions .btn{padding:12px 20px;font-size:.84rem}
     }
-    /* Only a real phone gets the stacked version, and there it goes first. */
+    /* On a phone there is no second column, so the order matters instead.
+       Stacked in source order the widget landed 860px down — 1.3 screens of
+       scrolling before anyone could touch the thing the page is selling. The
+       copy splits: headline and promise lead, she comes next, and the
+       supporting paragraph and buttons follow underneath her. */
     @media(max-width:720px){
-      .vh-grid{grid-template-columns:1fr;gap:36px}
-      .vh h1{font-size:clamp(2.2rem,8vw,3rem)}
-      .vh-copy .vh-sub{font-size:1.08rem}
-      .vh-actions .btn{padding:14px 26px;font-size:.9rem}
-      .jphone{max-width:380px;padding:12px}
+      .vh-grid{grid-template-columns:1fr;gap:0}
+      .vh-copy{display:contents}
+      .vh h1{font-size:clamp(2.1rem,7.6vw,2.9rem);order:1;margin-bottom:16px}
+      .vh-copy .vh-promise{order:2;margin-bottom:26px}
+      .vh-live{order:3;margin-bottom:28px}
+      .vh-copy .vh-sub{order:4;font-size:1.06rem;margin-bottom:22px}
+      .vh-copy .vh-actions{order:5}
+      .vh-copy .vh-micro{order:6}
+      .jphone{max-width:360px;padding:11px}
+      .jphone-in{height:520px}
+      .jstage{height:calc(520px - 60px)}
+      .vh-try{margin-top:12px}
     }
 
     .vh-live{display:flex;flex-direction:column;align-items:center}
