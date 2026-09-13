@@ -164,7 +164,13 @@
 
     .fine{max-width:720px;margin:0 auto;text-align:center;color:var(--color-muted);font-size:.95rem;line-height:1.7;opacity:.85}
     [hidden]{display:none!important}
+
+    /* ?embed=1: shown inside the client portal (agent-router portal.html),
+       which already has its own chrome. */
+    .embed .site-header,.embed .site-footer,.embed .skip-link{display:none!important}
+    .embed .prog{top:0}
   </style>
+  <script>if(/[?&]embed=1\b/.test(location.search))document.documentElement.classList.add('embed');</script>
 </head>
 <body>
 
@@ -792,6 +798,17 @@
   var CORE_FORM=15, TEST_MIN=20;
 
   var params=new URLSearchParams(location.search);
+  // Inside the client portal: report height (so the portal scrolls, not a box)
+  // and tell it when the form is sent, which ticks its checklist step.
+  var PORTAL='https://agent-router-theta.vercel.app';
+  var embedded=params.get('embed')==='1' && window.parent!==window;
+  function tellPortal(msg){ if(embedded){ try{ window.parent.postMessage(msg,PORTAL); }catch(e){} } }
+  if(embedded){
+    var lastH=0;
+    var sendH=function(){ var h=Math.ceil(document.body.getBoundingClientRect().height); if(Math.abs(h-lastH)>8){ lastH=h; tellPortal({type:'irm-start-height',height:h}); } };
+    if(window.ResizeObserver){ new ResizeObserver(sendH).observe(document.body); }
+    window.addEventListener('load',sendH); setInterval(sendH,1500);
+  }
   var chips=[].slice.call(document.querySelectorAll('#chips input'));
   var form=document.getElementById('startForm');
   var bizFromLink=(params.get('biz')||'').trim().slice(0,80);
@@ -968,11 +985,13 @@
       var json=await res.json();
       if(!res.ok||!json.ok) throw new Error(json.error||'Request failed');
       if(typeof window.irmTrack==='function'){ window.irmTrack('generate_lead',{form_location:'client_onboarding'}); }
+      tellPortal({type:'irm-start-submitted'});
       var list=document.getElementById('doneList'); list.textContent='';
       sel.forEach(function(k){ var li=document.createElement('li'); var b=document.createElement('b'); b.textContent=AGENTS[k].name+': '; li.appendChild(b); li.appendChild(document.createTextNode(AGENTS[k].jobText)); list.appendChild(li); });
       var li=document.createElement('li'); var b=document.createElement('b'); b.textContent='Test day: '; li.appendChild(b); li.appendChild(document.createTextNode('We send you a private test version. Try to break it, then give us your yes.')); list.appendChild(li);
       form.hidden=true; document.getElementById('prog').hidden=true;
       var done=document.getElementById('done'); done.style.display='block'; done.focus();
+      if(embedded){ done.scrollIntoView({block:'start'}); }
       try{ localStorage.removeItem(KEY); }catch(e){}
     }catch(err){
       note.className='note err';
