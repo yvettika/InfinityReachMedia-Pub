@@ -17,15 +17,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
+<link rel="stylesheet" href="css/tokens.css" />
+  <style>
 :root{
-  --ink:#16203A;
-  --paper:#F7F4EF;
+  --ink:var(--brand-navy);
+  --paper:var(--brand-paper);
   --pink:#E91E8C;
   --purple:#7B2FBE;
-  --gold:#F0B429;
-  --muted:#F7F4EF;
-  --line:rgba(247,244,239,.14);
+  --gold:var(--brand-pink-lt);
+  --muted:var(--brand-paper);
+  --line:rgba(241,244,251,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -35,14 +36,14 @@ h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2rem,5vw
 nav{position:sticky;top:0;z-index:50;background:rgba(22,32,58,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.15rem;color:var(--paper);text-decoration:none}
-.logo em{color:var(--pink);font-style:normal}
+.logo em{color:var(--brand-logo);font-style:normal}
 .logo .mark{width:30px;height:30px;object-fit:contain;display:block}
 nav a.back{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--gold);text-decoration:none}
 .page{padding:70px 0 90px;position:relative;overflow:hidden}
 .page::before{content:"";position:absolute;top:-200px;right:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.35),transparent 65%);pointer-events:none}
 .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;position:relative;z-index:1;align-items:start}
 .side p.sub{margin:22px 0 30px;color:var(--muted)}
-.expect{border:1px solid var(--line);border-radius:18px;padding:28px;background:rgba(247,244,239,.03)}
+.expect{border:1px solid var(--line);border-radius:18px;padding:28px;background:rgba(241,244,251,.03)}
 .expect h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);margin-bottom:18px}
 .expect ul{list-style:none}
 .expect li{padding-left:28px;position:relative;margin-bottom:14px;font-size:.97rem;color:var(--muted)}

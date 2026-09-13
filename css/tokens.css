@@ -1,0 +1,47 @@
+/* ===================================================================
+   tokens.css — the one place brand colours are defined.
+
+   Every page's own :root aliases these instead of hardcoding hexes, so a
+   brand change is a one-file edit. Before this existed the same colours
+   were written out in twenty separate :root blocks, which is how the word
+   "Reach" in the logo ended up three different colours.
+
+   Contrast notes are load-bearing, not decoration — check them before
+   changing a value:
+     --brand-cta       white text on this fill clears 4.5:1. --brand-pink does not.
+     --brand-pink-lt   for pink TEXT on the navy ground (6.6:1).
+     --brand-blue-dk   for blue text on paper grounds; --brand-blue fails there.
+   =================================================================== */
+
+:root {
+  /* Grounds */
+  --brand-navy:       #161F4A;   /* page ground on dark pages */
+  --brand-navy-2:     #1E2A5E;   /* raised surface / alt sections */
+  --brand-navy-3:     #2B3A78;   /* higher surface, incoming chat bubbles */
+  --brand-navy-deep:  #131B42;   /* insets, phone screens */
+  --brand-navy-bar:   #0E1538;   /* sticky header scrim */
+  --brand-paper:      #F1F4FB;   /* text on dark, ground on light pages */
+  --brand-paper-2:    #F6F8FC;   /* ground on the light landing pages */
+
+  /* Blue — structure: links, borders, focus rings */
+  --brand-blue:       #4C7BFF;   /* on dark grounds */
+  --brand-blue-dk:    #2B5BD7;   /* on paper grounds */
+  --brand-blue-lt:    #7FA6FF;   /* headline gradients on dark */
+
+  /* Purple — the bridge in every gradient */
+  --brand-purple:     #8B45D6;
+  --brand-purple-lt:  #C39BE8;
+
+  /* Pink — the action colour */
+  --brand-cta:        #D10D6E;   /* BUTTON FILLS ONLY. White text clears 4.5:1 here. */
+  --brand-pink:       #FF2D9B;   /* glows, badges, live dots. Not for white text on top. */
+  --brand-pink-lt:    #FF7AC0;   /* eyebrows, labels, tier names on navy */
+  --brand-logo:       #FF9AD0;   /* the word "Reach". Same on every page, do not vary. */
+
+  /* Text */
+  --brand-muted-dark: #565C6B;   /* body text on light pages */
+
+  /* Lines */
+  --brand-line-dark:  rgba(241, 244, 251, 0.14);  /* on navy */
+  --brand-line-light: rgba(16, 27, 61, 0.14);     /* on paper */
+}

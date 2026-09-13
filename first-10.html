@@ -17,8 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#16203A;--paper:#F7F4EF;--pink:#E91E8C;--purple:#7B2FBE;--gold:#F0B429;--muted:#F7F4EF;--line:rgba(247,244,239,.14)}
+<link rel="stylesheet" href="css/tokens.css" />
+  <style>
+:root{--ink:var(--brand-navy);--paper:var(--brand-paper);--pink:#E91E8C;--purple:#7B2FBE;--gold:var(--brand-pink-lt);--muted:var(--brand-paper);--line:rgba(241,244,251,.14)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -34,18 +35,18 @@ h1 .shine,h2 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-w
 nav{position:sticky;top:0;z-index:50;background:rgba(22,32,58,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1040px}
 .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--paper);text-decoration:none}
-.logo em{color:var(--pink);font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
+.logo em{color:var(--brand-logo);font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
 nav a.bk{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
 .hero{padding:70px 0 10px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;top:-240px;left:50%;transform:translateX(-50%);width:660px;height:660px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.34),transparent 65%);pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
 .hero p.sub{margin:22px auto 0;max-width:620px;color:var(--muted);font-size:1.15rem}
 .badge-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 0}
-.badge{border:1px solid rgba(240,180,41,.35);border-radius:999px;padding:8px 17px;background:rgba(240,180,41,.07);font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px}
+.badge{border:1px solid rgba(76,123,255,.35);border-radius:999px;padding:8px 17px;background:rgba(76,123,255,.07);font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px}
 .badge b{color:var(--gold)}
 section{padding:56px 0}
-.card{border:1px solid var(--line);border-radius:22px;padding:34px clamp(22px,4vw,40px);background:rgba(247,244,239,.03)}
-.card.gold{border-color:rgba(240,180,41,.4);background:rgba(240,180,41,.06)}
+.card{border:1px solid var(--line);border-radius:22px;padding:34px clamp(22px,4vw,40px);background:rgba(241,244,251,.03)}
+.card.gold{border-color:rgba(76,123,255,.4);background:rgba(76,123,255,.06)}
 h2.center{text-align:center;margin-bottom:12px}
 p.lede{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 32px}
 ul.checks{list-style:none}
@@ -189,7 +190,7 @@ footer a{color:var(--gold)}
         <div class="m"><div class="big">30</div><div class="lbl">Days to do it</div></div>
       </div>
       <p style="color:var(--muted);margin-top:24px">Here's the test we hold ourselves to: <b style="color:var(--paper)">the first booking should cover what this costs.</b> If your average customer is worth <b style="color:var(--paper)">$250</b>, ten appointments is <b style="color:var(--paper)">$2,500</b>. If you're a home-service business at <b style="color:var(--paper)">$750</b> a job, it's <b style="color:var(--paper)">$7,500</b>. Either way you're well ahead before we're finished.</p>
-      <p style="color:var(--muted);margin-top:14px">We'll give you the exact number on the call — after we've looked at your list together and told you honestly whether ten is realistic from it. And whatever you invest is <b style="color:var(--paper)">credited toward your setup</b> if you decide to keep us on afterward.</p>
+      <p style="color:var(--muted);margin-top:14px">We'll give you the exact number on the call — after we've looked at your list together and told you honestly whether ten is realistic from it. And whatever you invest is <b style="color:var(--paper)">credited toward your build fee</b> if you decide to keep us on afterward.</p>
       <p class="note" style="margin-top:20px;text-align:left">Those are illustrations using round numbers, not projections of your results. What you actually earn depends on your list, your prices, and your close rate — which is exactly why we'd rather show you than promise you.</p>
     </div>
   </div>
@@ -259,7 +260,12 @@ footer a{color:var(--gold)}
 
     <details>
       <summary>What happens after the 30 days?</summary>
-      <p>Entirely your call. Plenty of businesses run The First 10 and stop there — you keep the appointments and the revenue, no strings. If you'd rather keep it running and close the other leaks too, what you invested is credited toward your setup and we talk about the ongoing partnership. There's no automatic enrollment and no contract.</p>
+      <p>Entirely your call. Plenty of businesses run The First 10 and stop there — you keep the appointments and the revenue, no strings. If you'd rather keep it running and close the other leaks too, what you invested is credited toward your build fee and we talk about the ongoing partnership. There's no automatic enrollment and no contract. We'll give you the ongoing numbers on the call, once we know which leaks you actually need plugged.</p>
+    </details>
+
+    <details>
+      <summary>How is this different from the Dead List Miner on your pricing page?</summary>
+      <p>It's the same agent, working the same list. The First 10 is one concentrated 30-day sweep of a list nobody has touched in years, which is where the easy wins are. The ongoing Dead List Miner keeps mining a thinner seam every month after that — people who lapsed recently rather than years ago — which is why its written guarantee is ten in ninety days rather than ten in thirty. You're not buying two sets of ten. You're buying the sprint, and then deciding whether you want the machine that keeps it running.</p>
     </details>
 
     <details>

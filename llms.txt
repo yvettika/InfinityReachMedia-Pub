@@ -18,7 +18,7 @@ Each leak maps to a specific agent. Clients can run one agent or the whole suite
 - **Jessica, AI Sales Rep** — texts, calls and DMs; answers leads and books appointments. Reachable by text at (714) 924-3024.
 - **Speed to Lead Agent** — replies to every form, DM and missed call within 60 seconds.
 - **AI Receptionist** — answers calls 24/7, qualifies the caller, books the job.
-- **Database Reactivation Agent** — win-back campaigns to a list the client already owns.
+- **Dead List Miner** — win-back campaigns to a list the client already owns.
 - **Show-Rate Agent** — reminders and one-tap reschedule so booked appointments are held.
 - **Review Machine** — requests reviews from happy customers, drafts replies to the rest.
 - **Content Engine** — turns one photo or voice note into a month of posts and emails.
