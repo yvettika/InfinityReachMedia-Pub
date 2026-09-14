@@ -9,24 +9,27 @@
    Contrast notes are load-bearing, not decoration — check them before
    changing a value:
      --brand-cta       white text on this fill clears 4.5:1. --brand-pink does not.
-     --brand-pink-lt   for pink TEXT on the navy ground (6.6:1).
-     --brand-blue-dk   for blue text on paper grounds; --brand-blue fails there.
+     --brand-pink-lt   for pink TEXT on the navy ground (5.7:1).
+     --brand-blue      for blue TEXT on navy (5.7:1). Do not darken it.
+     --brand-blue-mid  fills and borders only — 3.6:1, fails as text.
+     --brand-blue-dk   for blue text on paper grounds; the lighter blues fail there.
    =================================================================== */
 
 :root {
   /* Grounds */
-  --brand-navy:       #161F4A;   /* page ground on dark pages */
-  --brand-navy-2:     #1E2A5E;   /* raised surface / alt sections */
-  --brand-navy-3:     #2B3A78;   /* higher surface, incoming chat bubbles */
-  --brand-navy-deep:  #131B42;   /* insets, phone screens */
-  --brand-navy-bar:   #0E1538;   /* sticky header scrim */
+  --brand-navy:       #1D2A5E;   /* page ground on dark pages */
+  --brand-navy-2:     #243470;   /* raised surface / alt sections */
+  --brand-navy-3:     #33428A;   /* higher surface, incoming chat bubbles */
+  --brand-navy-deep:  #182248;   /* insets, phone screens */
+  --brand-navy-bar:   #131B45;   /* sticky header scrim */
   --brand-paper:      #F1F4FB;   /* text on dark, ground on light pages */
   --brand-paper-2:    #F6F8FC;   /* ground on the light landing pages */
 
   /* Blue — structure: links, borders, focus rings */
-  --brand-blue:       #4C7BFF;   /* on dark grounds */
+  --brand-blue:       #7FA6FF;   /* text/links on dark grounds — 5.7:1 on --brand-navy */
   --brand-blue-dk:    #2B5BD7;   /* on paper grounds */
-  --brand-blue-lt:    #7FA6FF;   /* headline gradients on dark */
+  --brand-blue-lt:    #9FBEFF;   /* headline gradients on dark */
+  --brand-blue-mid:   #4C7BFF;   /* fills and borders only — too dark for text */
 
   /* Purple — the bridge in every gradient */
   --brand-purple:     #8B45D6;
