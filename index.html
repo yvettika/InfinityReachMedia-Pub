@@ -162,7 +162,7 @@
        iframe lays itself out before anyone opens it and the swap is instant. */
     .vh-live{position:relative}
     .jview{width:100%}
-    .vh-live .jface{width:100%;max-width:400px}
+    .vh-live .jcall{width:100%;max-width:400px}
     #jhero[data-view="face"] .jview-chat,#jhero[data-view="chat"] .jview-face{
       position:absolute;left:0;right:0;top:0;visibility:hidden;pointer-events:none}
     .jchat-open{margin-top:16px;width:100%;max-width:400px;text-align:center;
@@ -288,45 +288,63 @@
     .jgrid-solo h2{max-width:none}
     .jgrid-solo .jlead,.jgrid-solo .jmicro{margin-left:auto;margin-right:auto}
     .jgrid-solo .jchips,.jgrid-solo .jactions{justify-content:center}
-    .jface{position:relative;max-width:420px;margin:0 auto}
-    .jface video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;
-      background:#111;box-shadow:0 30px 70px rgba(22,31,74,.22),0 0 0 1px rgba(22,31,74,.08)}
-    /* Her lip-synced greeting sits on top of the smiling loop, invisible until
-       she's tapped. The name tag and play button stay above both. */
-    .jtalk{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;
-      border-radius:22px;opacity:0;pointer-events:none;transition:opacity .35s ease;background:transparent}
-    .jface.is-talking .jtalk{opacity:1}
-    @media(prefers-reduced-motion:reduce){.jtalk{transition:none}}
-    .jtag{z-index:3;position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;
-      font-family:var(--font-display);font-size:.72rem;font-weight:700;color:#fff;
-      background:rgba(12,19,55,.78);backdrop-filter:blur(6px)}
-
-    /* Tap her picture to hear her. A recorded greeting in her phone voice
-       (ElevenLabs "Emma", the same voice as (714) 924-3024). Never autoplays:
-       sound starts only on a tap, and the transcript opens with it so anyone
-       who can't listen gets the same words. The live, talk-back version
-       (Vapi web calls) replaces this later. */
-    .jhear{position:absolute;inset:0;z-index:2;border:0;padding:0;margin:0;background:none;
-      border-radius:22px;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent}
-    .jhear:focus-visible{outline:3px solid var(--color-accent-2);outline-offset:4px}
-    .jhear-pill{position:absolute;right:14px;top:14px;display:inline-flex;align-items:center;gap:9px;
-      padding:7px 15px 7px 7px;border-radius:999px;background:#fff;color:var(--color-text);
-      font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.01em;
-      box-shadow:0 8px 24px rgba(22,31,74,.22);transition:transform .15s ease}
-    .jhear:hover .jhear-pill{transform:translateY(-1px)}
-    .jhear-ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;
-      background:linear-gradient(120deg,var(--color-cta),var(--color-purple))}
-    .jhear-ic svg{width:12px;height:12px;display:block}
-    .jhear-bars{display:none;gap:2px;align-items:center;height:14px}
-    .jhear-bars i{display:block;width:3px;height:5px;border-radius:2px;background:#fff;
-      animation:jbar .8s ease-in-out infinite}
-    .jhear-bars i:nth-child(2){animation-delay:.15s}.jhear-bars i:nth-child(3){animation-delay:.3s}
-    @keyframes jbar{0%,100%{height:4px}50%{height:14px}}
-    .jface.is-playing .jhear-bars{display:inline-flex}
-    .jface.is-playing .jhear-ic svg{display:none}
-    .jface.is-playing video{box-shadow:0 0 0 4px var(--color-magenta),0 0 0 11px rgba(255,45,155,.18),
-      0 30px 70px rgba(22,31,74,.22)}
-    @media(prefers-reduced-motion:reduce){.jhear-bars i{animation:none;height:10px}}
+    /* ---------- Jessica's greeting, styled as a live call ----------
+       Her face sits small, in a circle, inside a call screen: timer, pulsing
+       ring, captions in time with her voice, a sound wave, a call button.
+       Framed like this the eye reads "phone call" and follows the captions,
+       instead of studying her mouth in a big close-up. The clip itself is the
+       Creatify Aurora lip sync (media/jessica-talking.mp4); if it can't load,
+       the same greeting plays as audio and the captions and wave still run.
+       Nothing plays until the call button is tapped. */
+    .jcall{position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:400px;margin:0 auto;
+      border-radius:30px;background:#161F4A;color:#fff;text-align:center;padding:22px 20px 20px;
+      display:flex;flex-direction:column;align-items:center;
+      box-shadow:0 0 0 1px rgba(22,31,74,.10),0 30px 70px rgba(22,31,74,.28)}
+    .jcall-bg{position:absolute;z-index:-2;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);
+      object-fit:cover;filter:blur(28px) saturate(1.3) brightness(.75);transform:scale(1.15)}
+    .jcall-tint{position:absolute;z-index:-1;inset:0;
+      background:radial-gradient(120% 60% at 50% 38%,rgba(209,13,110,.28),transparent 60%),
+        linear-gradient(180deg,rgba(22,31,74,.72) 0%,rgba(22,31,74,.55) 42%,rgba(19,27,66,.9) 100%)}
+    .jcall-status{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-weight:700;
+      font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.86);
+      font-variant-numeric:tabular-nums;min-height:18px}
+    .jcall-status svg{width:13px;height:13px;flex:none}
+    .jcall-status .live{width:7px;height:7px;border-radius:50%;background:#22C55E;display:none}
+    .jcall[data-state="playing"] .jcall-status .live{display:inline-block;animation:jpulse 1.8s ease-in-out infinite}
+    .jcall-name{display:block;font-family:var(--font-display);font-weight:800;font-size:1.4rem;line-height:1.2;margin-top:6px}
+    .jcall-role{display:block;font-size:.82rem;color:rgba(255,255,255,.8);margin-top:2px}
+    .jcall-stage{position:relative;width:54%;aspect-ratio:1/1;margin:24px auto 18px}
+    .jcall-ring{position:absolute;inset:-9px;border-radius:50%;border:2px solid rgba(255,122,192,.55);
+      animation:jring 2.8s ease-out infinite;pointer-events:none}
+    .jcall-ring.r2{animation-delay:1.4s}
+    .jcall[data-state="playing"] .jcall-ring{animation-duration:1.5s;border-color:rgba(255,122,192,.85)}
+    .jcall[data-state="playing"] .jcall-ring.r2{animation-delay:.75s}
+    @keyframes jring{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.28);opacity:0}}
+    .jcall-avatar{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#131B42;
+      box-shadow:0 0 0 4px #FF2D9B,0 0 0 9px rgba(255,45,155,.22),0 18px 40px rgba(0,0,0,.35)}
+    .jcall-avatar video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      transform:scale(1.06);transform-origin:50% 45%}
+    .jtalk{opacity:0;transition:opacity .35s ease}
+    .jcall.is-talking .jtalk{opacity:1}
+    .jcall-dot{position:absolute;right:9%;bottom:9%;width:16px;height:16px;border-radius:50%;
+      background:#22C55E;border:3px solid #161F4A}
+    .jcall-caption{min-height:3.1em;max-width:30ch;margin:0 auto;font-size:1.02rem;line-height:1.45;
+      font-weight:600;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center}
+    .jcall-wave{display:flex;align-items:center;justify-content:center;gap:3px;height:38px;width:100%;margin:10px 0 14px}
+    .jcall-wave i{display:block;width:3px;height:38px;border-radius:3px;background:rgba(255,255,255,.88);
+      transform:scaleY(.1);transition:transform .08s linear}
+    .jcall-btn{width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;
+      color:#fff;background:linear-gradient(120deg,var(--color-cta),var(--color-purple));
+      box-shadow:0 10px 26px rgba(209,13,110,.45);transition:transform .15s ease,background .2s ease}
+    .jcall-btn:hover{transform:translateY(-2px)}
+    .jcall-btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
+    .jcall-btn svg{width:26px;height:26px;transition:transform .25s ease}
+    .jcall[data-state="playing"] .jcall-btn{background:#D92D20;box-shadow:0 10px 26px rgba(217,45,32,.45)}
+    .jcall[data-state="playing"] .jcall-btn svg{transform:rotate(135deg)}
+    .jcall-btn-label{display:block;margin-top:8px;font-family:var(--font-display);font-weight:700;font-size:.8rem;
+      letter-spacing:.04em;color:rgba(255,255,255,.9)}
+    @media(prefers-reduced-motion:reduce){.jcall-ring{animation:none;opacity:.5}.jtalk,.jcall-wave i{transition:none}}
+    @media(max-width:720px){.jcall{padding:18px 16px 18px}.jcall-stage{width:52%;margin:18px auto 14px}}
     .jscript{max-width:420px;margin:10px auto 0;text-align:center;font-size:.9rem;color:var(--color-muted)}
     .jscript summary{cursor:pointer;display:inline-block;padding:8px 4px;font-weight:600;
       color:var(--color-accent);text-decoration:underline;text-underline-offset:3px}
@@ -394,23 +412,30 @@
         <div class="vh-live" id="jhero" data-view="face">
           <span class="vh-badge"><i></i> She's answering right now</span>
           <div class="jview jview-face" id="jview-face">
-            <div class="jface">
-              <video autoplay muted loop playsinline preload="metadata" poster="/media/jessica-poster.jpg">
-                <source src="/media/jessica-loop.mp4" type="video/mp4">
-              </video>
-              <span class="jtag">Jessica &middot; (714) 924-3024</span>
-              <button type="button" class="jhear" aria-pressed="false" aria-describedby="jscript">
-                <span class="jhear-pill">
-                  <span class="jhear-ic" aria-hidden="true">
-                    <svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z" fill="currentColor"/></svg>
-                    <span class="jhear-bars"><i></i><i></i><i></i></span>
-                  </span>
-                  <span class="jhear-txt">Hear her voice</span><span class="sr-only"> (plays audio)</span>
-                </span>
-              </button>
-              <video class="jtalk" playsinline preload="none" poster="/media/jessica-talking-poster.jpg" aria-hidden="true" tabindex="-1">
-                <source src="/media/jessica-talking.mp4" type="video/mp4">
-              </video>
+            <div class="jcall" data-state="idle">
+              <img class="jcall-bg" src="/media/jessica-poster.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <div class="jcall-tint" aria-hidden="true"></div>
+              <div aria-hidden="true">
+                <span class="jcall-status"><i class="live"></i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="jcall-time">Tap to call</span></span>
+                <b class="jcall-name">Jessica</b>
+                <span class="jcall-role">AI sales rep &middot; (714) 924-3024</span>
+              </div>
+              <div class="jcall-stage">
+                <span class="jcall-ring" aria-hidden="true"></span><span class="jcall-ring r2" aria-hidden="true"></span>
+                <div class="jcall-avatar">
+                  <video autoplay muted loop playsinline preload="metadata" poster="/media/jessica-poster.jpg" aria-label="Jessica, Infinity Reach Media's AI sales rep">
+                    <source src="/media/jessica-loop.mp4" type="video/mp4">
+                  </video>
+                  <video class="jtalk" playsinline preload="none" poster="/media/jessica-talking-poster.jpg" aria-hidden="true" tabindex="-1">
+                    <source src="/media/jessica-talking.mp4" type="video/mp4">
+                  </video>
+                </div>
+                <i class="jcall-dot" aria-hidden="true"></i>
+              </div>
+              <p class="jcall-caption" aria-hidden="true">She's online. Tap to hear her.</p>
+              <div class="jcall-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <button type="button" class="jcall-btn" aria-label="Hear Jessica's greeting (plays audio)" aria-describedby="jscript"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button>
+              <span class="jcall-btn-label" aria-hidden="true">Hear Jessica</span>
               <audio id="jhello" preload="none" src="/media/jessica-hello.mp3"></audio>
             </div>
           </div>
@@ -708,51 +733,77 @@
 
   <script src="js/main.js"></script>
   <script>
-  /* Tap-to-hear greeting on Jessica's picture (styles: .jhear in the head).
-     If the page has a lip-synced clip (<video class="jtalk">), she talks on
-     camera: the clip fades in over the smiling loop with its own sound, then
-     fades back out when she finishes. Without it, or if the clip fails to
-     load, the same greeting plays as audio only. */
+  /* Jessica's greeting as a call (styles: .jcall in the head). The call button
+     plays her lip-synced clip (falls back to the audio file if the clip can't
+     load); captions and the sound wave follow the media's clock, from cues and
+     a loudness envelope measured off the recording (20 samples a second).
+     Hanging up, or opening the chat, ends the call. */
   (function () {
-    var face = document.querySelector('.jface');
-    var btn = face && face.querySelector('.jhear');
+    var call = document.querySelector('.jcall');
+    if (!call) return;
+    var btn = call.querySelector('.jcall-btn');
+    var btnLabel = call.querySelector('.jcall-btn-label');
+    var timeEl = call.querySelector('.jcall-time');
+    var caption = call.querySelector('.jcall-caption');
+    var bars = [].slice.call(call.querySelectorAll('.jcall-wave i'));
+    var talk = call.querySelector('.jtalk');
     var audio = document.getElementById('jhello');
-    var talk = face && face.querySelector('.jtalk');
-    if (!btn || !(audio || talk)) return;
     var media = talk || audio;
-    var label = btn.querySelector('.jhear-txt');
-    var script = document.getElementById('jscript');
-    function show(state) {
+    var CUES = [[0.0, "Hi! I'm Jessica,"], [1.55, "the AI sales rep at Infinity Reach Media."], [4.33, "When someone texts, calls, or messages your business,"], [7.69, "I answer in seconds."], [9.17, "Day, night, even Sunday."], [11.91, "I answer their questions,"], [12.79, "and I book the call."], [14.59, "Then a real person on your team"], [16.19, "takes it from there."], [17.63, "Want to try me?"], [18.95, "Type me a message at the top of this page."], [20.65, "Or text me at (714) 924-3024."]];
+    var ENV = "0379965310000026786842244431000012555887776126665266413555561788676663225544532100001110177248888436742220222023688765231038987772665756635535552110111111117754334453452333322100000000037777520000000687611000011756847877554100000000000000002788744696436423666330026676384155469764420000000000003279888406754998257634788954464423552331677776420000000000011016742487775310000000000003376478884364542533514433154454322100000387344323554227778877118987630000000000005898776204288765310029997521000000000001139999887424386248843110000000";
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var raf = 0;
+    function mmss(t) { t = Math.max(0, Math.floor(t)); return (t / 60 | 0) + ':' + ('0' + t % 60).slice(-2); }
+    function env(i) { return i < 0 || i >= ENV.length ? 0 : ENV.charCodeAt(i) - 48; }
+    function setState(state) {
+      call.setAttribute('data-state', state);
       var playing = state === 'playing';
-      face.classList.toggle('is-playing', playing);
-      face.classList.toggle('is-talking', !!talk && media === talk && state !== 'ended' && state !== 'idle');
-      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
-      label.textContent = playing ? 'Pause' : state === 'paused' ? 'Resume' : state === 'ended' ? 'Hear her again' : 'Hear her voice';
+      call.classList.toggle('is-talking', playing && media === talk);
+      btn.setAttribute('aria-label', playing ? "End Jessica's greeting" : "Hear Jessica's greeting (plays audio)");
+      btnLabel.textContent = playing ? 'End' : state === 'ended' ? 'Hear her again' : 'Hear Jessica';
+      if (!playing) {
+        cancelAnimationFrame(raf);
+        bars.forEach(function (b) { b.style.transform = 'scaleY(.1)'; });
+        timeEl.textContent = state === 'ended' ? 'Call ended' : 'Tap to call';
+        caption.textContent = state === 'ended' ? 'Now try her yourself. Chat with her below.' : "She's online. Tap to hear her.";
+      }
     }
+    function tick() {
+      var t = media.currentTime;
+      timeEl.textContent = mmss(t);
+      var line = '';
+      for (var i = 0; i < CUES.length && CUES[i][0] <= t; i++) line = CUES[i][1];
+      if (caption.textContent !== line) caption.textContent = line;
+      var k = Math.floor(t * 20), c = (bars.length - 1) / 2;
+      bars.forEach(function (b, j) {
+        var d = Math.abs(j - c);
+        var v = still ? 0.3 : (env(k - Math.round(d / 2)) / 9) * (1 - d / (c + 3)) + ((j * 7 + k) % 5) * 0.012;
+        b.style.transform = 'scaleY(' + Math.max(0.1, Math.min(1, v)).toFixed(2) + ')';
+      });
+      raf = requestAnimationFrame(tick);
+    }
+    function stop(el) { el.pause(); try { el.currentTime = 0; } catch (e) {} }
     function bind(el) {
-      el.addEventListener('playing', function () { if (el === media) show('playing'); });
-      el.addEventListener('pause', function () { if (el === media && !el.ended) show('paused'); });
-      el.addEventListener('ended', function () { if (el === media) show('ended'); });
+      el.addEventListener('playing', function () { if (el === media) { setState('playing'); cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); } });
+      el.addEventListener('ended', function () { if (el === media) setState('ended'); });
+      // Any other pause (hang up, chat opened) ends the call rather than parking it mid-sentence.
+      el.addEventListener('pause', function () { if (el === media && !el.ended) { try { el.currentTime = 0; } catch (e) {} setState('ended'); } });
     }
     if (talk) {
       bind(talk);
-      // A clip that can't load falls back to the audio greeting, mid-tap if need be.
       talk.addEventListener('error', function () {
-        var wasWaiting = face.classList.contains('is-talking');
-        media = audio; talk = null; face.classList.remove('is-talking');
-        if (wasWaiting && audio) audio.play().catch(function () { show('idle'); });
+        var wasCalling = call.getAttribute('data-state') === 'playing' || call.classList.contains('is-talking');
+        var dead = talk; media = audio; talk = null; call.classList.remove('is-talking');
+        try { dead.pause(); } catch (e) {}
+        if (wasCalling && audio) audio.play().catch(function () { setState('idle'); });
       }, true);
     }
     if (audio) bind(audio);
     btn.addEventListener('click', function () {
-      if (media.paused) {
-        if (script) script.open = true;
-        if (media === talk) face.classList.add('is-talking');
-        var p = media.play();
-        if (p && p.catch) p.catch(function () { show('idle'); });
-      } else {
-        media.pause();
-      }
+      if (call.getAttribute('data-state') === 'playing') { stop(media); return; }
+      if (media === talk) call.classList.add('is-talking');
+      var p = media.play();
+      if (p && p.catch) p.catch(function () { setState('idle'); });
     });
   })();
 
