@@ -480,7 +480,7 @@ p.founder-line, .two-col p.founder-line {
 }
 .quote p { margin-bottom: 20px; }
 .quote .who { display: flex; align-items: center; gap: 12px; }
-.quote .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--color-surface-2);
+.quote .avatar { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: var(--color-surface-2);
   display: grid; place-items: center; font-weight: 700; color: var(--color-accent-2); }
 .quote .who .name { font-weight: 600; font-size: 0.95rem; }
 .quote .who .role { color: var(--color-muted); font-size: 0.88rem; }
