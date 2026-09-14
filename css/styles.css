@@ -552,9 +552,16 @@ p.founder-line, .two-col p.founder-line {
 .page-hero p { color: var(--color-muted); max-width: 56ch; margin: 0 auto; font-size: 1.1rem; }
 
 /* ---------- Responsive ---------- */
+/* Desktop section rhythm (84px top and bottom) stacked into ~170px of blank
+   space between sections on a phone. */
+@media (max-width: 700px) {
+  .section { padding: 56px 0; }
+  .section-head { margin-bottom: 36px; }
+}
 @media (max-width: 880px) {
   .nav-links, .nav-cta .btn-ghost { display: none; }
-  .nav-toggle { display: block; }
+  /* 44px tap target — the bare glyph measured 23x30 */
+  .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin-right: -8px; }
   .nav-cta .btn-primary { padding: 10px 18px; font-size: 0.8rem; white-space: nowrap; flex-shrink: 0; }
   .brand { font-size: 0.95rem; gap: 8px; flex-shrink: 0; white-space: nowrap; }
   .brand .mark { width: 30px; height: 30px; }
@@ -574,7 +581,14 @@ p.founder-line, .two-col p.founder-line {
   .nav { gap: 8px; }
   .brand { font-size: 0.88rem; gap: 6px; }
   .brand .mark { width: 26px; height: 26px; }
-  .nav-cta .btn-primary { padding: 8px 14px; font-size: 0.75rem; }
-  .footer-grid { grid-template-columns: 1fr; }
+  .nav-cta .btn-primary { padding: 11px 14px; font-size: 0.75rem; }
+  /* Links in two columns: one column made the footer two and a half screens long */
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; }
+  /* about, Company | Industries, then the long lists full width: Free Tools
+     (eight links, set in two columns) and Get in Touch, whose email address
+     would otherwise force its column wide and crush the one beside it. */
+  .footer-about, .footer-grid > div:nth-child(4), .footer-grid > div:nth-child(5) { grid-column: 1 / -1; }
+  .footer-grid > div:nth-child(4) ul { columns: 2; column-gap: 18px; }
+  .footer-grid > div:nth-child(4) li { break-inside: avoid; }
   .footer-bottom { justify-content: center; text-align: center; }
 }

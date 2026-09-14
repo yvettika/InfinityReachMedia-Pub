@@ -49,5 +49,23 @@ nav .navburger:focus-visible { outline: 3px solid var(--brand-purple-dk, #6B2FC0
      own `nav .wrap{height:68px}`, which loads after this file. */
   body nav .nav-in, body nav > .wrap, body nav .navwrap { height: auto; min-height: 64px; }
   nav .navlinks a { display: block; padding: 10px 2px; font-size: 15px; }
-  nav .navburger { display: block; }
+  /* 44px tap target; the glyph alone was 37x32. */
+  body nav .navburger { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+  /* The CTA sits after the burger in the markup, so it wrapped onto a second
+     row and made the sticky bar 80–100px tall. Put it back beside the logo. */
+  body nav .nav-cta, body nav a.book, body nav a.bk, body nav a.back { order: 1; margin-left: auto; white-space: nowrap; }
+  body nav .navburger { order: 2; margin-left: 0; }
+  body nav .navlinks { order: 3; }
+}
+
+/* Phones: the homepage's logo size, so the mark reads the same on every page,
+   and enough room for logo, CTA and burger on one row. */
+@media (max-width: 480px) {
+  body nav .nav-in, body nav > .wrap, body nav .navwrap { gap: 6px; padding-left: 16px; padding-right: 16px; }
+  body nav .logo { font-size: 0.88rem; gap: 6px; white-space: nowrap; }
+  body nav .logo .mark { width: 26px; height: 26px; }
+  body nav .nav-cta { font-size: 0.75rem; letter-spacing: 0.04em; padding: 11px 12px; }
+  body nav a.book, body nav a.bk, body nav a.back { font-size: 0.8rem; min-height: 44px; display: inline-flex; align-items: center; padding: 0 6px; letter-spacing: 0.02em; }
+  body nav .navburger { margin-right: -8px; }
+  .nav-cta-lead { display: none; }
 }

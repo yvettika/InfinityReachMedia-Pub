@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="/css/nav.css" />
   <style>
 :root{
   --ink:var(--brand-ink);
@@ -95,7 +96,7 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
 .card{border:1px solid var(--line);border-radius:20px;padding:36px 30px;display:flex;flex-direction:column;background:var(--brand-lavender);transition:transform .2s ease,border-color .2s ease}
 .card:hover{transform:translateY(-4px);border-color:rgba(76,123,255,.5)}
-.card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
+.card .tag{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:6px 14px;border-radius:99px;align-self:flex-start;margin-bottom:22px}
 .card.c1 .tag{background:rgba(233,30,140,.16);color:var(--pink)}
 .card.c2 .tag{background:rgba(76,123,255,.14);color:var(--gold)}
 .card.c3 .tag{background:#E6EDFB;color:var(--brand-blue-dk)}
@@ -123,7 +124,7 @@ input[type=range]:focus-visible{outline:3px solid var(--gold);outline-offset:4px
 .track .lede{max-width:640px;color:var(--muted);margin-top:18px}
 .track-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:46px}
 .track-item{border:1px solid var(--line);border-radius:16px;padding:20px;background:linear-gradient(160deg,rgba(35,73,184,.07),#FFFFFF 60%)}
-.track-item .step-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;color:var(--gold)}
+.track-item .step-n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;color:var(--gold)}
 .track-item .stage{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin:6px 0 10px}
 .track-item .metric{font-size:.92rem;color:var(--muted);line-height:1.5}
 .track-note{margin-top:34px;padding:22px 26px;border-left:3px solid var(--gold);background:var(--brand-lavender)}
