@@ -59,7 +59,7 @@
   .btn-dark{background:var(--ink);color:#fff}
   .btn-dark:hover{transform:translateY(-2px)}
 
-  nav{position:sticky;top:0;z-index:50;background:rgba(22,31,74,.10);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
   .logo{font-family:'Playfair Display',serif;font-weight:800;color:var(--ink);font-size:1.15rem;text-decoration:none}
   .logo em{color:var(--brand-logo);font-style:normal}
@@ -133,7 +133,7 @@
   .bubble{border-radius:14px;padding:12px 14px;margin-bottom:10px;max-width:88%}
   .them{background:rgba(255,255,255,.1)}
   .us{background:#E4D4FA;color:var(--ink);margin-left:auto;font-weight:500}
-  .time{font-size:.66rem;color:rgba(255,255,255,.45);text-align:center;margin:8px 0}
+  .time{font-size:.66rem;color:rgba(255,255,255,.66);text-align:center;margin:8px 0}
 
   .case{background:var(--brand-lavender);color:var(--ink)}
   .case .eyebrow{color:var(--gold)}
@@ -141,8 +141,9 @@
   .quote{background:#FFFFFF;border:1px solid rgba(43,91,215,.25);border-radius:18px;padding:28px 26px}
   .quote p{color:var(--muted);font-size:.96rem;margin-bottom:16px}
   .quote .who{display:flex;align-items:center;gap:12px}
-  .quote .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(120deg,var(--cta),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;flex:none}
+  .quote .av{width:40px;height:40px;border-radius:50%;background:linear-gradient(120deg,var(--cta),var(--accent));display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;flex:none;color:#fff}
   .quote .who b{display:block;font-size:.92rem}
+  .quote .who span.av{color:#fff} /* beats .quote .who span, which sets the name line to body colour */
   .quote .who span{font-size:.8rem;color:var(--muted)}
 
   .score{background:var(--brand-band)}

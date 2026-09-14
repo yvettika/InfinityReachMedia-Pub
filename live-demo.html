@@ -63,8 +63,8 @@ nav a.book{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;le
 
 /* hero */
 .hero{padding:96px 0 64px;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;top:-220px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.4),transparent 65%);pointer-events:none}
-.hero::after{content:"";position:absolute;bottom:-260px;left:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,30,140,.22),transparent 65%);pointer-events:none}
+.hero::before{content:"";position:absolute;inset:0;background:var(--brand-wash);pointer-events:none}
+.hero::after{content:none}
 .hero .wrap{position:relative;z-index:1;max-width:880px;text-align:center}
 .hero p.sub{margin:26px auto 38px;max-width:620px;font-size:1.15rem;color:var(--muted)}
 .hero h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -152,7 +152,7 @@ details p{margin-top:14px;color:var(--muted);font-size:.97rem}
 
 /* cta */
 .cta{padding:110px 0;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line)}
-.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,47,190,.28),transparent 70%);pointer-events:none}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(139,69,214,.14),transparent 70%);pointer-events:none}
 .cta .wrap{position:relative;z-index:1}
 .cta p{max-width:520px;margin:20px auto 36px;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:.85rem;color:var(--muted)}
@@ -191,7 +191,7 @@ footer a{color:var(--gold);text-decoration:none}
 .navburger{display:none;background:none;border:0;color:inherit;font-size:1.5rem;line-height:1;cursor:pointer;padding:4px 8px}
 @media(max-width:980px){
   .navburger{display:block}
-  nav .wrap{position:relative;flex-wrap:wrap}
+  nav .wrap{position:relative;flex-wrap:wrap;height:auto;min-height:68px}
   nav .navlinks{display:none;flex-direction:column;align-items:flex-start;gap:2px;width:100%;order:3;padding:10px 0 4px}
   nav .navlinks.open{display:flex}
   nav .navlinks li{width:100%}

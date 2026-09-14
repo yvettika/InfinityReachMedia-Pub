@@ -43,6 +43,11 @@ nav .navburger:focus-visible { outline: 3px solid var(--brand-purple-dk, #6B2FC0
     gap: 2px; width: 100%; order: 3; padding: 8px 0 4px; margin: 0;
   }
   nav .navlinks.open { display: flex; }
+  /* Several wrappers pin the bar to a fixed height (66–68px). Opened, the menu
+     spilled out of the bar with no background and printed over the hero —
+     let the bar grow to hold it instead. The body prefix outranks the pages'
+     own `nav .wrap{height:68px}`, which loads after this file. */
+  body nav .nav-in, body nav > .wrap, body nav .navwrap { height: auto; min-height: 64px; }
   nav .navlinks a { display: block; padding: 10px 2px; font-size: 15px; }
   nav .navburger { display: block; }
 }
