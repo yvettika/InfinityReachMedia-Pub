@@ -251,6 +251,38 @@
       font-family:var(--font-display);font-size:.72rem;font-weight:700;color:#fff;
       background:rgba(12,19,55,.78);backdrop-filter:blur(6px)}
 
+    /* Tap her picture to hear her. A recorded greeting in her phone voice
+       (ElevenLabs "Emma", the same voice as (714) 924-3024). Never autoplays:
+       sound starts only on a tap, and the transcript opens with it so anyone
+       who can't listen gets the same words. The live, talk-back version
+       (Vapi web calls) replaces this later. */
+    .jhear{position:absolute;inset:0;z-index:2;border:0;padding:0;margin:0;background:none;
+      border-radius:22px;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent}
+    .jhear:focus-visible{outline:3px solid var(--color-accent-2);outline-offset:4px}
+    .jhear-pill{position:absolute;right:14px;top:14px;display:inline-flex;align-items:center;gap:9px;
+      padding:7px 15px 7px 7px;border-radius:999px;background:#fff;color:var(--color-text);
+      font-family:var(--font-display);font-size:.8rem;font-weight:700;letter-spacing:.01em;
+      box-shadow:0 8px 24px rgba(22,31,74,.22);transition:transform .15s ease}
+    .jhear:hover .jhear-pill{transform:translateY(-1px)}
+    .jhear-ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;
+      background:linear-gradient(120deg,var(--color-cta),var(--color-purple))}
+    .jhear-ic svg{width:12px;height:12px;display:block}
+    .jhear-bars{display:none;gap:2px;align-items:center;height:14px}
+    .jhear-bars i{display:block;width:3px;height:5px;border-radius:2px;background:#fff;
+      animation:jbar .8s ease-in-out infinite}
+    .jhear-bars i:nth-child(2){animation-delay:.15s}.jhear-bars i:nth-child(3){animation-delay:.3s}
+    @keyframes jbar{0%,100%{height:4px}50%{height:14px}}
+    .jface.is-playing .jhear-bars{display:inline-flex}
+    .jface.is-playing .jhear-ic svg{display:none}
+    .jface.is-playing video{box-shadow:0 0 0 4px var(--color-magenta),0 0 0 11px rgba(255,45,155,.18),
+      0 30px 70px rgba(22,31,74,.22)}
+    @media(prefers-reduced-motion:reduce){.jhear-bars i{animation:none;height:10px}}
+    .jscript{max-width:420px;margin:10px auto 0;text-align:center;font-size:.9rem;color:var(--color-muted)}
+    .jscript summary{cursor:pointer;display:inline-block;padding:8px 4px;font-weight:600;
+      color:var(--color-accent);text-decoration:underline;text-underline-offset:3px}
+    .jscript p{text-align:left;margin:8px 0 0;padding:14px 16px;border-radius:14px;
+      background:#fff;border:1px solid var(--color-border);line-height:1.6}
+
     .jproof{display:flex;justify-content:center;gap:14px 32px;flex-wrap:wrap;margin-top:50px;
       padding-top:28px;border-top:1px solid var(--color-border);text-align:center}
     .jproof span{font-size:.88rem;color:var(--color-muted)}
@@ -433,7 +465,21 @@
               <source src="/media/jessica-loop.mp4" type="video/mp4">
             </video>
             <span class="jtag">Jessica &middot; (714) 924-3024</span>
+            <button type="button" class="jhear" aria-pressed="false" aria-describedby="jscript">
+              <span class="jhear-pill">
+                <span class="jhear-ic" aria-hidden="true">
+                  <svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z" fill="currentColor"/></svg>
+                  <span class="jhear-bars"><i></i><i></i><i></i></span>
+                </span>
+                <span class="jhear-txt">Hear her voice</span><span class="sr-only"> (plays audio)</span>
+              </span>
+            </button>
+            <audio id="jhello" preload="none" src="/media/jessica-hello.mp3"></audio>
           </div>
+          <details class="jscript" id="jscript">
+            <summary>Read what she says</summary>
+            <p>"Hi! I'm Jessica, the AI sales rep at Infinity Reach Media. When someone texts, calls, or messages your business, I answer in seconds. Day, night, even Sunday. I answer their questions, and I book the call. Then a real person on your team takes it from there. Want to try me? Type me a message at the top of this page. Or text me at (714) 924-3024."</p>
+          </details>
           <p class="jcap">She's live at the top of this page. Scroll up and try to stump her.</p>
         </div>
       </div>
@@ -599,5 +645,34 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  /* Tap-to-hear greeting on Jessica's picture (styles: .jhear in the head). */
+  (function () {
+    var face = document.querySelector('.jface');
+    var btn = face && face.querySelector('.jhear');
+    var audio = document.getElementById('jhello');
+    if (!btn || !audio) return;
+    var label = btn.querySelector('.jhear-txt');
+    var script = document.getElementById('jscript');
+    function show(state) {
+      var playing = state === 'playing';
+      face.classList.toggle('is-playing', playing);
+      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      label.textContent = playing ? 'Pause' : state === 'paused' ? 'Resume' : state === 'ended' ? 'Hear her again' : 'Hear her voice';
+    }
+    btn.addEventListener('click', function () {
+      if (audio.paused) {
+        if (script) script.open = true;
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () { show('idle'); });
+      } else {
+        audio.pause();
+      }
+    });
+    audio.addEventListener('playing', function () { show('playing'); });
+    audio.addEventListener('pause', function () { if (!audio.ended) show('paused'); });
+    audio.addEventListener('ended', function () { show('ended'); });
+  })();
+  </script>
 </body>
 </html>
