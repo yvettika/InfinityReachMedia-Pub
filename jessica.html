@@ -33,15 +33,15 @@
 <link rel="stylesheet" href="css/tokens.css" />
   <style>
   :root{
-    --ink:#101B3D;
-    --paper:var(--brand-paper-2);
-    --accent:#7B2FBE;
-    --accent-lt:var(--brand-purple-lt);
+    --ink:var(--brand-ink);
+    --paper:var(--brand-white);
+    --accent:var(--brand-purple-dk);
+    --accent-lt:var(--brand-purple-dk);
     --cta:var(--brand-cta);
     --gold:var(--brand-blue-dk);
     --blue:var(--brand-blue-dk);
     --muted:var(--brand-muted-dark);
-    --line:rgba(16,27,61,.14);
+    --line:var(--brand-line-light);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -54,47 +54,47 @@
   .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
   .btn-pink{background:var(--cta);color:#fff;box-shadow:0 10px 24px rgba(233,30,140,.32)}
   .btn-pink:hover{transform:translateY(-2px)}
-  .btn-ghost{border:2px solid rgba(255,255,255,.4);color:#fff}
+  .btn-ghost{border:2px solid rgba(35,73,184,.38);color:var(--ink);background:#fff}
   .btn-dark{background:var(--ink);color:#fff}
   .btn-dark:hover{transform:translateY(-2px)}
 
-  nav{position:sticky;top:0;z-index:50;background:rgba(16,27,61,.92);backdrop-filter:blur(8px)}
+  nav{position:sticky;top:0;z-index:50;background:rgba(22,31,74,.10);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1100px;margin:0 auto}
-  .logo{font-family:'Playfair Display',serif;font-weight:800;color:#fff;font-size:1.15rem;text-decoration:none}
+  .logo{font-family:'Playfair Display',serif;font-weight:800;color:var(--ink);font-size:1.15rem;text-decoration:none}
   .logo em{color:var(--brand-logo);font-style:normal}
   .navlinks{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
-  .navlinks a{color:rgba(255,255,255,.72);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .15s}
-  .navlinks a:hover{color:#fff}
+  .navlinks a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .15s}
+  .navlinks a:hover{color:var(--ink)}
   @media(max-width:980px){.navlinks{display:none}}
-  .nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;text-decoration:none;border:1.5px solid var(--gold);border-radius:999px;padding:9px 18px}
-  .nav-cta:hover{background:var(--gold);color:var(--ink)}
+  .nav-cta{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1.5px solid var(--gold);border-radius:999px;padding:9px 18px}
+  .nav-cta:hover{background:var(--gold);color:#fff}
 
-  .hero{background:var(--ink);color:#fff;padding:88px 0 72px;position:relative;overflow:hidden}
+  .hero{background:var(--brand-wash);color:var(--ink);padding:88px 0 72px;position:relative;overflow:hidden}
   .hero::after{content:"";position:absolute;right:-180px;top:-120px;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle, rgba(123,47,190,.35), transparent 65%)}
+    background:radial-gradient(circle, rgba(139,69,214,.18), transparent 65%)}
   .hero .eyebrow{color:var(--accent-lt)}
   .hero h1{font-size:clamp(2.3rem,5.4vw,3.9rem);margin:18px 0 20px;max-width:17ch}
   .hero h1 span{color:var(--accent-lt);font-style:italic}
-  .hero p.lead{font-size:1.13rem;color:rgba(255,255,255,.78);max-width:56ch;margin-bottom:34px}
+  .hero p.lead{font-size:1.13rem;color:var(--muted);max-width:56ch;margin-bottom:34px}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;position:relative;z-index:1}
   .hero-media{position:relative;justify-self:end;width:100%;max-width:440px}
   .hero-media video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;background:#111;
-    box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08)}
+    box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px rgba(22,31,74,0.12)}
   .hero-tag{position:absolute;left:16px;bottom:16px;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.03em;
     background:rgba(16,27,61,.72);color:#fff;backdrop-filter:blur(6px)}
-  .sms-disclosure{font-size:12px;line-height:1.5;color:rgba(255,255,255,.62);max-width:640px;margin:14px 0 0}.sms-disclosure a{color:rgba(255,255,255,.8);text-decoration:underline}
+  .sms-disclosure{font-size:12px;line-height:1.5;color:var(--muted);max-width:640px;margin:14px 0 0}.sms-disclosure a{color:var(--muted);text-decoration:underline}
   .hero-ctas .num{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold);letter-spacing:.04em}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14);margin-top:64px;border-radius:14px;overflow:hidden}
-  .stat{background:rgba(255,255,255,.05);padding:20px 16px;text-align:center}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(22,31,74,.10);margin-top:64px;border-radius:14px;overflow:hidden}
+  .stat{background:#FFFFFF;padding:20px 16px;text-align:center}
   .stat b{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--accent-lt)}
-  .stat span{font-size:.78rem;color:rgba(255,255,255,.65)}
+  .stat span{font-size:.78rem;color:var(--muted)}
 
-  .leak{background:linear-gradient(125deg,#27379B,#7B2FBE);color:#fff;padding:64px 0;text-align:center}
-  .leak .eyebrow{color:rgba(255,255,255,.85)}
+  .leak{background:var(--brand-band);color:var(--ink);padding:64px 0;text-align:center}
+  .leak .eyebrow{color:var(--muted)}
   .leak-num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.6rem,7vw,4.6rem);font-variant-numeric:tabular-nums;margin:10px 0 6px}
-  .leak p{max-width:60ch;margin:0 auto 26px;color:rgba(255,255,255,.9)}
-  .leak small{display:block;margin-top:14px;font-size:.75rem;color:rgba(255,255,255,.85)}
+  .leak p{max-width:60ch;margin:0 auto 26px;color:var(--muted)}
+  .leak small{display:block;margin-top:14px;font-size:.75rem;color:var(--muted)}
 
   section.block{padding:88px 0}
   .center{text-align:center}
@@ -109,7 +109,7 @@
   .card p{color:var(--muted);font-size:.95rem}
   .card .pain{font-weight:700;color:var(--ink);margin-bottom:8px;font-size:.95rem}
 
-  .math{background:var(--ink);color:#fff}
+  .math{background:var(--brand-lavender);color:var(--ink)}
 
   .demo-band{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .demo-in{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
@@ -121,24 +121,24 @@
   .phone.live iframe{display:block;width:100%;height:100%;border:0;background:var(--ink)}
   .bubble{border-radius:14px;padding:12px 14px;margin-bottom:10px;max-width:88%}
   .them{background:rgba(255,255,255,.1)}
-  .us{background:var(--accent-lt);color:var(--ink);margin-left:auto;font-weight:500}
+  .us{background:#E4D4FA;color:var(--ink);margin-left:auto;font-weight:500}
   .time{font-size:.66rem;color:rgba(255,255,255,.45);text-align:center;margin:8px 0}
 
   .channels{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
   .chip{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;background:#fff}
 
-  .case{background:linear-gradient(120deg,#0F1638,#1B1A4E);color:#fff}
+  .case{background:var(--brand-lavender);color:var(--ink)}
   .case .eyebrow{color:var(--gold)}
-  .case .sub{color:rgba(255,255,255,.78)}
+  .case .sub{color:var(--muted)}
   .quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
-  .quote{background:rgba(255,255,255,.05);border:1px solid rgba(43,91,215,.25);border-radius:18px;padding:28px 26px;text-align:left}
-  .quote p{color:rgba(255,255,255,.86);font-size:.96rem;margin-bottom:16px}
+  .quote{background:#FFFFFF;border:1px solid rgba(43,91,215,.25);border-radius:18px;padding:28px 26px;text-align:left}
+  .quote p{color:var(--muted);font-size:.96rem;margin-bottom:16px}
   .quote .who b{display:block;font-size:.92rem}
-  .quote .who span{font-size:.8rem;color:rgba(255,255,255,.85)}
+  .quote .who span{font-size:.8rem;color:var(--muted)}
 
-  .score{background:linear-gradient(120deg,#131318,#2b1040)}
-  .score,.score .sub{color:#fff}
-  .score .sub{color:rgba(255,255,255,.75)}
+  .score{background:var(--brand-band)}
+  .score,.score .sub{color:var(--ink)}
+  .score .sub{color:var(--muted)}
   .score .eyebrow{color:var(--gold)}
 
   .wrong{background:#fff;border-top:1px solid var(--line)}
@@ -152,7 +152,7 @@
   details[open] summary::after{content:"–"}
   details p{margin-top:12px;color:var(--muted);font-size:.95rem}
 
-  footer{background:var(--ink);color:rgba(255,255,255,.85);padding:36px 0;font-size:.85rem;text-align:center}
+  footer{background:var(--brand-lavender);color:var(--muted);padding:36px 0;font-size:.85rem;text-align:center}
   footer .logo{font-size:1rem}
 
   @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .btn:hover{transform:none} }
@@ -426,7 +426,7 @@
 <section class="block math center" style="padding-top:72px;padding-bottom:72px">
   <div class="wrap">
     <h2>Someone's texting your business right now. Who's answering?</h2>
-    <p class="sub" style="color:rgba(255,255,255,.75);margin-bottom:32px">Text Jessica and see for yourself. Then book a call and we'll show you what she'd do with your inquiries, on your number.</p>
+    <p class="sub" style="color:var(--muted);margin-bottom:32px">Text Jessica and see for yourself. Then book a call and we'll show you what she'd do with your inquiries, on your number.</p>
     <a class="btn btn-pink" href="sms:+17149243024?body=Hi%20Jessica">Text (714) 924-3024</a>
     <a class="btn btn-ghost" href="https://calendly.com/yvettekahn/30min" style="margin-left:10px">Book a Free Call</a>
     <p style="margin-top:18px;font-size:.9rem"><a href="/jessica-onboarding" style="color:var(--cta);font-weight:700">See the seven-day onboarding →</a></p>

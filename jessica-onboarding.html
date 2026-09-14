@@ -28,7 +28,7 @@
     .rail{position:relative;max-width:820px;margin:0 auto;padding-left:78px}
     @media(max-width:680px){.rail{padding-left:54px}}
     .rail::before{content:"";position:absolute;left:27px;top:12px;bottom:12px;width:2px;
-      background:linear-gradient(180deg,var(--color-accent),var(--color-purple),rgba(241,244,251,.12))}
+      background:linear-gradient(180deg,var(--color-accent),var(--color-purple),rgba(22,31,74,.10))}
     @media(max-width:680px){.rail::before{left:17px}}
 
     .day{position:relative;padding-bottom:44px}
@@ -36,14 +36,14 @@
     .day .pin{position:absolute;left:-78px;top:0;width:56px;height:56px;border-radius:50%;
       display:grid;place-items:center;text-align:center;line-height:1.05;
       font-family:var(--font-display);font-weight:800;font-size:.66rem;letter-spacing:.06em;
-      text-transform:uppercase;color:#fff;background:var(--color-surface-2);
+      text-transform:uppercase;color:var(--color-text);background:var(--color-surface-2);
       border:2px solid var(--color-border)}
     @media(max-width:680px){
       .day .pin{left:-54px;width:36px;height:36px;font-size:.56rem;border-width:1.5px}
     }
     /* The days we actually build on get the live gradient; the client's own
        days are outlined, so you can see at a glance who is working. */
-    .day.ours .pin{background:linear-gradient(140deg,var(--color-accent),var(--color-purple));
+    .day.ours .pin{color:#fff;background:linear-gradient(140deg,var(--color-accent),var(--color-purple));
       border-color:transparent}
     .day.yours .pin{background:rgba(233,30,140,.10);border-color:var(--color-accent-text);
       color:var(--color-accent-text)}
@@ -52,7 +52,7 @@
     .day .who{font-family:var(--font-display);font-weight:700;font-size:.68rem;
       letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-text)}
     .day.ours .who{color:var(--color-accent-2)}
-    .day p{color:var(--color-muted);opacity:.88;margin-bottom:10px}
+    .day p{color:var(--color-muted);margin-bottom:10px}
     .day ul{list-style:none;padding:0;margin:12px 0 0}
     .day li{position:relative;padding-left:22px;margin-bottom:8px;color:var(--color-muted);
       opacity:.88;font-size:.96rem}
@@ -67,7 +67,7 @@
     /* Intake checklist */
     .intake{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:900px;margin:0 auto}
     @media(max-width:760px){.intake{grid-template-columns:1fr}}
-    .item{background:rgba(241,244,251,.03);border:1px solid var(--color-border);
+    .item{background:#FFFFFF;border:1px solid var(--color-border);
       border-radius:14px;padding:22px 22px 20px}
     .item h4{font-family:var(--font-display);font-weight:700;font-size:.92rem;
       letter-spacing:.02em;margin-bottom:7px;color:var(--color-text)}

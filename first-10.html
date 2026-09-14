@@ -20,10 +20,10 @@
 <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="/css/nav.css" />
   <style>
-:root{--ink:var(--brand-navy);--paper:var(--brand-paper);--pink:#E91E8C;--purple:#7B2FBE;--gold:var(--brand-pink-lt);--muted:var(--brand-paper);--line:rgba(241,244,251,.14)}
+:root{--ink:var(--brand-ink);--paper:var(--brand-white);--pink:var(--brand-cta);--purple:var(--brand-purple);--gold:var(--brand-purple-dk);--muted:var(--brand-muted-dark);--line:var(--brand-line-light)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--paper);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:820px;margin:0 auto;padding:0 22px}
 .eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800;line-height:1.1}
@@ -33,27 +33,27 @@ h1 .shine,h2 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-w
 .btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:16px 34px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35);transition:transform .18s}
 .btn:hover{transform:translateY(-2px)}
 .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-nav{position:sticky;top:0;z-index:50;background:rgba(22,32,58,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1040px}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--paper);text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--ink);text-decoration:none}
 .logo em{color:var(--brand-logo);font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
 nav a.bk{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
 .hero{padding:70px 0 10px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;top:-240px;left:50%;transform:translateX(-50%);width:660px;height:660px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,190,.34),transparent 65%);pointer-events:none}
+.hero::before{content:"";position:absolute;top:-240px;left:50%;transform:translateX(-50%);width:660px;height:660px;border-radius:50%;background:radial-gradient(circle,rgba(139,69,214,.20),transparent 65%);pointer-events:none}
 .hero .wrap{position:relative;z-index:1}
 .hero p.sub{margin:22px auto 0;max-width:620px;color:var(--muted);font-size:1.15rem}
 .badge-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 0}
 .badge{border:1px solid rgba(76,123,255,.35);border-radius:999px;padding:8px 17px;background:rgba(76,123,255,.07);font-family:'Montserrat',sans-serif;font-weight:700;font-size:12.5px}
 .badge b{color:var(--gold)}
 section{padding:56px 0}
-.card{border:1px solid var(--line);border-radius:22px;padding:34px clamp(22px,4vw,40px);background:rgba(241,244,251,.03)}
+.card{border:1px solid var(--line);border-radius:22px;padding:34px clamp(22px,4vw,40px);background:var(--brand-lavender)}
 .card.gold{border-color:rgba(76,123,255,.4);background:rgba(76,123,255,.06)}
 h2.center{text-align:center;margin-bottom:12px}
 p.lede{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 32px}
 ul.checks{list-style:none}
 ul.checks li{position:relative;padding-left:30px;margin-bottom:15px;color:var(--muted)}
 ul.checks li::before{content:"✦";position:absolute;left:0;top:2px;color:var(--gold)}
-ul.checks li b{color:var(--paper);font-weight:700}
+ul.checks li b{color:var(--ink);font-weight:700}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .step{text-align:center}
 .step .n{font-family:'Playfair Display',serif;font-weight:800;font-size:2.1rem;background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -68,11 +68,11 @@ ul.checks li b{color:var(--paper);font-weight:700}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 @media(max-width:760px){.two{grid-template-columns:1fr}}
 .fit h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
-.fit.yes h3{color:#7ee2ab}.fit.no h3{color:#ff9b9b}
+.fit.yes h3{color:#0E7A47}.fit.no h3{color:#B42318}
 .fit ul{list-style:none}
 .fit li{position:relative;padding-left:26px;margin-bottom:11px;color:var(--muted);font-size:.96rem}
-.fit.yes li::before{content:"✓";position:absolute;left:0;color:#7ee2ab}
-.fit.no li::before{content:"✕";position:absolute;left:0;color:#ff9b9b}
+.fit.yes li::before{content:"✓";position:absolute;left:0;color:#0E7A47}
+.fit.no li::before{content:"✕";position:absolute;left:0;color:#B42318}
 .cta-box{text-align:center;padding:40px 26px;border-radius:20px;background:linear-gradient(160deg,rgba(233,30,140,.15),rgba(123,47,190,.10))}
 .cta-box h2{margin-bottom:12px}
 .cta-box p{color:var(--muted);max-width:520px;margin:0 auto 24px}
@@ -148,7 +148,7 @@ footer a{color:var(--gold)}
       <h2 style="margin-bottom:14px">You are sitting on money you already paid for.</h2>
       <p style="color:var(--muted);margin-bottom:16px">Every business we look at has the same asset gathering dust: a list of past customers and old quotes. People who called, who bought, who liked the work — and then just drifted. Nobody followed up, because following up is the thing that never makes it to the top of the day.</p>
       <p style="color:var(--muted);margin-bottom:16px">Meanwhile you're being sold more leads. New leads cost money and start from zero trust. The people on your list already cleared both bars. They're the cheapest revenue available to you, and almost nobody works them.</p>
-      <p style="color:var(--paper);font-weight:700">The First 10 is us proving that, on your actual list, in thirty days — before you ever commit to anything ongoing.</p>
+      <p style="color:var(--ink);font-weight:700">The First 10 is us proving that, on your actual list, in thirty days — before you ever commit to anything ongoing.</p>
     </div>
   </div>
 </section>
@@ -185,7 +185,7 @@ footer a{color:var(--gold)}
       <h2 style="margin-bottom:16px">The guarantee</h2>
       <p style="font-size:1.15rem;margin-bottom:16px"><b>Ten booked appointments in thirty days — or we keep running your campaign free until you get them.</b></p>
       <p style="color:var(--muted);margin-bottom:18px">Not a refund you have to chase. We simply don't stop working. The only way this ends without ten appointments on your calendar is if you tell us to stop.</p>
-      <p style="color:var(--muted);font-size:.94rem"><b style="color:var(--paper)">What we need from you for that to hold:</b> a list of at least 300 contacts with valid phone numbers, approval on pending messages within 24 hours, and real availability kept open on your calendar. If we're waiting on you, the clock pauses — we don't run it while you're busy, and we don't hold you to a deadline we can't control.</p>
+      <p style="color:var(--muted);font-size:.94rem"><b style="color:var(--ink)">What we need from you for that to hold:</b> a list of at least 300 contacts with valid phone numbers, approval on pending messages within 24 hours, and real availability kept open on your calendar. If we're waiting on you, the clock pauses — we don't run it while you're busy, and we don't hold you to a deadline we can't control.</p>
     </div>
   </div>
 </section>
@@ -199,8 +199,8 @@ footer a{color:var(--gold)}
         <div class="m"><div class="big">10</div><div class="lbl">Appointments we put on your calendar</div></div>
         <div class="m"><div class="big">30</div><div class="lbl">Days to do it</div></div>
       </div>
-      <p style="color:var(--muted);margin-top:24px">Here's the test we hold ourselves to: <b style="color:var(--paper)">the first booking should cover what this costs.</b> If your average customer is worth <b style="color:var(--paper)">$250</b>, ten appointments is <b style="color:var(--paper)">$2,500</b>. If you're a home-service business at <b style="color:var(--paper)">$750</b> a job, it's <b style="color:var(--paper)">$7,500</b>. Either way you're well ahead before we're finished.</p>
-      <p style="color:var(--muted);margin-top:14px">We'll give you the exact number on the call — after we've looked at your list together and told you honestly whether ten is realistic from it. And whatever you invest is <b style="color:var(--paper)">credited toward your build fee</b> if you decide to keep us on afterward.</p>
+      <p style="color:var(--muted);margin-top:24px">Here's the test we hold ourselves to: <b style="color:var(--ink)">the first booking should cover what this costs.</b> If your average customer is worth <b style="color:var(--ink)">$250</b>, ten appointments is <b style="color:var(--ink)">$2,500</b>. If you're a home-service business at <b style="color:var(--ink)">$750</b> a job, it's <b style="color:var(--ink)">$7,500</b>. Either way you're well ahead before we're finished.</p>
+      <p style="color:var(--muted);margin-top:14px">We'll give you the exact number on the call — after we've looked at your list together and told you honestly whether ten is realistic from it. And whatever you invest is <b style="color:var(--ink)">credited toward your build fee</b> if you decide to keep us on afterward.</p>
       <p class="note" style="margin-top:20px;text-align:left">Those are illustrations using round numbers, not projections of your results. What you actually earn depends on your list, your prices, and your close rate — which is exactly why we'd rather show you than promise you.</p>
     </div>
   </div>

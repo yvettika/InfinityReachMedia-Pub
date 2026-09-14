@@ -23,26 +23,26 @@
     .intake-wrap{max-width:780px;margin:0 auto}
 
     /* Sticky progress. A 25-minute form with no sense of progress gets abandoned. */
-    .prog{position:sticky;top:72px;z-index:40;background:rgba(12,19,55,.92);
+    .prog{position:sticky;top:72px;z-index:40;background:rgba(255,255,255,.92);
       backdrop-filter:blur(10px);border-bottom:1px solid var(--color-border);
       padding:12px 0}
     .prog .container{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
     .prog .bar{flex:1;min-width:160px;height:6px;border-radius:999px;
-      background:rgba(241,244,251,.12);overflow:hidden}
+      background:rgba(22,31,74,.07);overflow:hidden}
     .prog .fill{height:100%;width:0;border-radius:999px;
       background:linear-gradient(90deg,var(--color-accent),var(--color-purple));
       transition:width .3s ease}
     .prog .txt{font-family:var(--font-display);font-weight:700;font-size:.74rem;
       letter-spacing:.1em;text-transform:uppercase;color:var(--color-accent-2);
       font-variant-numeric:tabular-nums;white-space:nowrap}
-    .prog .saved{font-size:.76rem;color:rgba(241,244,251,.55);white-space:nowrap}
+    .prog .saved{font-size:.76rem;color:var(--brand-soft);white-space:nowrap}
 
     fieldset{border:1px solid var(--color-border);border-radius:18px;padding:28px 26px;
-      margin-bottom:20px;background:rgba(241,244,251,.03)}
+      margin-bottom:20px;background:#FFFFFF}
     @media(max-width:560px){fieldset{padding:22px 18px}}
     legend{font-family:var(--font-serif);font-weight:800;font-size:1.3rem;padding:0 12px;
       color:var(--color-text)}
-    fieldset > .why{color:var(--color-muted);opacity:.82;font-size:.94rem;margin-bottom:20px;
+    fieldset > .why{color:var(--color-muted);font-size:.94rem;margin-bottom:20px;
       max-width:60ch}
     fieldset .step{font-family:var(--font-display);font-weight:800;font-size:.66rem;
       letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent-2);
@@ -53,17 +53,17 @@
     .f label{display:block;font-family:var(--font-display);font-weight:700;font-size:.76rem;
       letter-spacing:.09em;text-transform:uppercase;color:var(--color-text);margin-bottom:7px}
     .f .hint{display:block;font-family:var(--font-sans);font-weight:400;font-size:.86rem;
-      letter-spacing:0;text-transform:none;color:var(--color-muted);opacity:.75;
+      letter-spacing:0;text-transform:none;color:var(--color-muted);
       margin-top:3px}
     .f input[type=text],.f input[type=email],.f input[type=tel],.f input[type=url],
     .f textarea,.f select{
       width:100%;font-family:var(--font-sans);font-size:1rem;color:var(--color-text);
-      background:rgba(12,19,55,.55);border:1px solid var(--color-border);border-radius:11px;
+      background:#FFFFFF;border:1px solid var(--color-field);border-radius:11px;
       padding:13px 14px;line-height:1.5}
     .f textarea{min-height:110px;resize:vertical}
     .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--color-accent);
       outline:2px solid rgba(76,123,255,.35);outline-offset:1px}
-    .f input::placeholder,.f textarea::placeholder{color:rgba(241,244,251,.34)}
+    .f input::placeholder,.f textarea::placeholder{color:var(--brand-soft)}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     @media(max-width:560px){.two{grid-template-columns:1fr}}
 
@@ -91,7 +91,7 @@
 
     .submit-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
     .note{font-size:.9rem;margin-top:14px;min-height:1.2em}
-    .note.err{color:#ff8a8a}
+    .note.err{color:#C62828}
     .note.ok{color:var(--color-accent-2)}
     .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
@@ -100,7 +100,7 @@
     .done h2{font-size:1.9rem;margin-bottom:12px}
     .done p{color:var(--color-muted);max-width:52ch;margin:0 auto 22px}
 
-    .clear{background:none;border:0;color:rgba(241,244,251,.5);font-size:.84rem;
+    .clear{background:none;border:0;color:var(--brand-soft);font-size:.84rem;
       text-decoration:underline;cursor:pointer;padding:0}
     .clear:hover{color:var(--color-accent-text)}
   </style>
