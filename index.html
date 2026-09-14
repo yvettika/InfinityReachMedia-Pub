@@ -148,11 +148,12 @@
     .vh-live{display:flex;flex-direction:column;align-items:center}
     .vh-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);
       font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-      color:#FFB3DC;border:1px solid rgba(255,45,155,.55);border-radius:999px;
-      padding:7px 15px 7px 12px;margin-bottom:14px;background:rgba(255,45,155,.14)}
+      color:var(--color-accent-text);border:1px solid rgba(209,13,110,.32);border-radius:999px;
+      padding:7px 15px 7px 12px;margin-bottom:14px;background:#FFFFFF;
+      box-shadow:0 4px 14px rgba(209,13,110,.10)}
     .vh-badge i{width:8px;height:8px;border-radius:50%;background:var(--color-magenta);
       animation:jpulse 1.8s ease-in-out infinite}
-    .vh-try{text-align:center;font-size:.86rem;color:rgba(241,244,251,.72);
+    .vh-try{text-align:center;font-size:.86rem;color:var(--color-muted);
       margin-top:14px;max-width:34ch}
 
     .vh-proof-row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
@@ -161,51 +162,54 @@
       margin-top:40px}}
     @media(max-width:460px){.vh-proof-row{grid-template-columns:1fr;gap:16px}}
     .pf b{display:block;font-family:var(--font-serif);font-weight:800;font-size:1.35rem;
-      line-height:1.1;color:var(--color-accent-2);margin-bottom:4px}
-    .pf span{display:block;color:var(--color-muted);opacity:.82;font-size:.9rem;line-height:1.45}
+      line-height:1.1;color:var(--color-accent-text);margin-bottom:4px}
+    .pf span{display:block;color:var(--color-muted);font-size:.9rem;line-height:1.45}
 
     /* Jessica's avatar, shared by the hero widget and the section below. */
     
 
     .jband{position:relative;overflow:hidden;padding:92px 0 96px;
-      background:linear-gradient(168deg,#241A5E 0%,#1B2557 55%,#23306B 100%);
+      background:linear-gradient(165deg,#F3EDFF 0%,#EDF1FF 55%,#FFEFF7 100%);
       border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
     .jband::before{content:"";position:absolute;inset:-28% -10% auto -18%;height:740px;
       background:
-        radial-gradient(660px 350px at 18% 6%, rgba(139,69,214,.50), transparent 68%),
-        radial-gradient(560px 320px at 88% 32%, rgba(255,45,155,.30), transparent 70%);
+        radial-gradient(660px 350px at 18% 6%, rgba(139,69,214,.16), transparent 68%),
+        radial-gradient(560px 320px at 88% 32%, rgba(255,45,155,.12), transparent 70%);
       pointer-events:none}
     .jband .container{position:relative}
     .jgrid{display:grid;grid-template-columns:1fr minmax(320px,400px);gap:60px;align-items:center}
     @media(max-width:980px){.jgrid{grid-template-columns:1fr;gap:42px}}
     .jband h2{font-size:clamp(2.1rem,4.4vw,3.2rem);letter-spacing:-.025em;
       line-height:1.05;margin:0 0 20px;max-width:15ch}
-    .jband h2 .grad{background:linear-gradient(120deg,#FF9AD0,var(--color-magenta));
+    .jband h2 .grad{background:linear-gradient(110deg,#8B45D6,#D10D6E);
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .jlead{font-size:1.1rem;line-height:1.65;color:var(--color-muted);opacity:.9;
+    .jlead{font-size:1.1rem;line-height:1.65;color:var(--color-muted);
       max-width:46ch;margin:0 0 15px}
-    .jmicro{font-size:.9rem;color:rgba(241,244,251,.7);margin:16px 0 0;max-width:44ch}
+    .jmicro{font-size:.9rem;color:var(--color-muted);margin:16px 0 0;max-width:44ch}
 
     .jlive{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);
       font-weight:700;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-      color:#FFB3DC;border:1px solid rgba(255,45,155,.55);border-radius:999px;
-      padding:7px 15px 7px 12px;margin-bottom:18px;background:rgba(255,45,155,.14)}
+      color:var(--color-accent-text);border:1px solid rgba(209,13,110,.32);border-radius:999px;
+      padding:7px 15px 7px 12px;margin-bottom:18px;background:#FFFFFF}
         @keyframes jpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,45,155,.6)}
       50%{opacity:.55;box-shadow:0 0 0 7px rgba(255,45,155,0)}}
 
     .jchips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 24px}
     .jchip{font-family:var(--font-display);font-weight:700;font-size:.66rem;
       letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--color-border);
-      border-radius:999px;padding:7px 13px;color:rgba(241,244,251,.82);
-      background:rgba(241,244,251,.06)}
+      border-radius:999px;padding:7px 13px;color:var(--color-text);
+      background:#FFFFFF}
     .jactions{display:flex;gap:12px;flex-wrap:wrap}
 
     .jphone{position:relative;margin:0 auto;width:100%;max-width:380px;border-radius:40px;
-      padding:12px;background:linear-gradient(180deg,rgba(241,244,251,.18),rgba(241,244,251,.06));
-      box-shadow:0 40px 90px rgba(6,10,30,.55),0 0 0 1px rgba(241,244,251,.09) inset}
-    .jphone-in{border-radius:30px;overflow:hidden;background:#131B42;height:580px}
+      padding:12px;background:linear-gradient(180deg,#2E3876,#161F4A);
+      box-shadow:0 0 0 8px rgba(139,69,214,.08),0 40px 80px rgba(22,31,74,.28)}
+    /* The live widget inside renders dark, so the phone stays a dark device on
+       the light page. Its text colours are pinned here rather than inherited
+       from the (now navy) body. */
+    .jphone-in{border-radius:30px;overflow:hidden;background:#131B42;height:580px;color:#F1F4FB}
     .jphone-bar{display:flex;align-items:center;gap:10px;padding:14px 18px 12px;
-      background:rgba(12,19,55,.92);border-bottom:1px solid var(--color-border)}
+      background:rgba(12,19,55,.92);border-bottom:1px solid rgba(241,244,251,.14)}
     .javatar{width:34px;height:34px;min-width:34px;border-radius:50%;flex:0 0 34px;
       font-family:var(--font-display);font-weight:800;font-size:.85rem;color:#fff;
       text-align:center;line-height:34px;
@@ -220,7 +224,7 @@
     .jfallback{position:absolute;inset:0;z-index:1;padding:18px 16px;display:flex;
       flex-direction:column;gap:9px;overflow:hidden;background:#131B42}
     .jfallback .m{max-width:82%;padding:11px 15px;border-radius:16px;font-size:.92rem;line-height:1.5}
-    .jfallback .them{background:var(--color-surface-2);border:1px solid rgba(241,244,251,.12);
+    .jfallback .them{background:#2B3A78;border:1px solid rgba(241,244,251,.12);
       border-bottom-left-radius:5px;align-self:flex-start}
     /* White on hot pink measured 3.44:1, under the 4.5:1 minimum. A light
        pink-into-lavender bubble with navy text keeps the brand colour and
@@ -229,7 +233,7 @@
       color:#141C44;border-bottom-right-radius:5px;align-self:flex-end;
       border:1px solid rgba(255,45,155,.30);font-weight:500}
     .jfallback .stamp{font-size:.66rem;color:rgba(241,244,251,.66);text-align:center}
-    .jtyping{display:flex;gap:4px;align-self:flex-start;background:var(--color-surface-2);
+    .jtyping{display:flex;gap:4px;align-self:flex-start;background:#2B3A78;
       border:1px solid rgba(241,244,251,.12);border-radius:16px;border-bottom-left-radius:5px;
       padding:13px 15px}
     .jtyping i{width:6px;height:6px;border-radius:50%;background:rgba(241,244,251,.65);
@@ -238,17 +242,17 @@
     @keyframes jtype{0%,60%,100%{opacity:.3;transform:translateY(0)}
       30%{opacity:1;transform:translateY(-3px)}}
     @media(prefers-reduced-motion:reduce){.jlive i,.jtyping i{animation:none}}
-    .jcap{text-align:center;font-size:.85rem;color:rgba(241,244,251,.72);margin-top:16px}
+    .jcap{text-align:center;font-size:.85rem;color:var(--color-muted);margin-top:16px}
     .jface{position:relative;max-width:420px;margin:0 auto}
     .jface video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;
-      background:#111;box-shadow:0 30px 70px rgba(6,10,30,.5),0 0 0 1px rgba(241,244,251,.09)}
+      background:#111;box-shadow:0 30px 70px rgba(22,31,74,.22),0 0 0 1px rgba(22,31,74,.08)}
     .jtag{position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;
       font-family:var(--font-display);font-size:.72rem;font-weight:700;color:#fff;
       background:rgba(12,19,55,.78);backdrop-filter:blur(6px)}
 
     .jproof{display:flex;justify-content:center;gap:14px 32px;flex-wrap:wrap;margin-top:50px;
       padding-top:28px;border-top:1px solid var(--color-border);text-align:center}
-    .jproof span{font-size:.88rem;color:rgba(241,244,251,.84)}
+    .jproof span{font-size:.88rem;color:var(--color-muted)}
     .jproof b{color:var(--color-text)}
   </style>
 </head>
@@ -510,7 +514,7 @@
         <h2>Real People. Real Names. Real Faces.</h2>
         <p>Not a wall of logos I bought. These are clients who agreed to put their name and face on it.</p>
       </div>
-      <div class="grid-t">
+      <div class="grid-3 grid-quotes">
         <div class="quote">
           <p>"Tech is not my strong suit, and I'm so grateful I said yes to Yvette and the done-for-you program. I'm so excited to reach more people, generate more leads, and scale my business. Her customer service is top-notch — she goes above and beyond, an amazing cheerleader and believer in what I'm up to."</p>
           <div class="who"><div class="avatar">EL</div><div><div class="name">Emily Haruko Leebs</div><div class="role">Transformational Life Guide & Business Coach</div></div></div>

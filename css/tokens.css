@@ -6,42 +6,68 @@
    were written out in twenty separate :root blocks, which is how the word
    "Reach" in the logo ended up three different colours.
 
+   The site is LIGHT (Sept 2026): white and lavender grounds, navy ink, a
+   purple/blue/pink wash behind heroes. The navy tokens remain for the few
+   things that are deliberately dark — phone mockups around the live chat
+   widget, which renders dark, and video caption pills.
+
    Contrast notes are load-bearing, not decoration — check them before
-   changing a value:
-     --brand-cta       white text on this fill clears 4.5:1. --brand-pink does not.
-     --brand-pink-lt   for pink TEXT on the navy ground (6.6:1).
-     --brand-blue-dk   for blue text on paper grounds; --brand-blue fails there.
+   changing a value. Ratios are against white; the lavender ground costs
+   about 8%.
+     --brand-cta       white text on this fill clears 5.3:1. --brand-pink does not.
+     --brand-pink-dk   for pink TEXT on light grounds (6.4:1).
+     --brand-blue-dk   for blue text on light grounds (7.7:1); --brand-blue fails there.
+     --brand-purple-dk for purple text on light grounds (7.5:1).
    =================================================================== */
 
 :root {
   /* Grounds */
-  --brand-navy:       #161F4A;   /* page ground on dark pages */
-  --brand-navy-2:     #1E2A5E;   /* raised surface / alt sections */
-  --brand-navy-3:     #2B3A78;   /* higher surface, incoming chat bubbles */
-  --brand-navy-deep:  #131B42;   /* insets, phone screens */
-  --brand-navy-bar:   #0E1538;   /* sticky header scrim */
-  --brand-paper:      #F1F4FB;   /* text on dark, ground on light pages */
-  --brand-paper-2:    #F6F8FC;   /* ground on the light landing pages */
+  --brand-white:      #FFFFFF;   /* page ground, cards */
+  --brand-lavender:   #F6F5FF;   /* alternate sections, footers */
+  --brand-lavender-2: #ECEAFB;   /* icon tiles, avatars, chips */
+  --brand-paper-2:    #F6F8FC;   /* legacy light ground on the landing pages */
+
+  /* Ink */
+  --brand-ink:        #161F4A;   /* headings and strong text, 15.8:1 */
+  --brand-muted-dark: #3A4268;   /* body copy, 9.7:1 — dark on purpose, never grey */
+  --brand-soft:       #5A6285;   /* timestamps and captions only, 6.0:1 */
+
+  /* Hero wash — Viktor-style bleed of the three brand hues over white */
+  --brand-wash:
+    radial-gradient(900px 520px at 6% -6%, rgba(139, 69, 214, 0.28), transparent 64%),
+    radial-gradient(860px 520px at 98% 2%, rgba(76, 123, 255, 0.30), transparent 66%),
+    radial-gradient(760px 420px at 58% 104%, rgba(255, 45, 155, 0.15), transparent 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F5F0FF 42%, #E8EDFF 100%);
+  /* Softer band gradient for callouts and colour moments further down a page */
+  --brand-band: linear-gradient(120deg, #F1EAFF 0%, #EAF0FF 60%, #FDEDF6 100%);
+
+  /* Dark — only for devices and overlays that sit ON the light page */
+  --brand-navy:       #161F4A;
+  --brand-navy-2:     #1E2A5E;
+  --brand-navy-3:     #2B3A78;   /* incoming chat bubbles inside a dark phone */
+  --brand-navy-deep:  #131B42;   /* phone screens */
+  --brand-paper:      #F1F4FB;   /* text inside those dark devices */
 
   /* Blue — structure: links, borders, focus rings */
-  --brand-blue:       #4C7BFF;   /* on dark grounds */
-  --brand-blue-dk:    #2B5BD7;   /* on paper grounds */
-  --brand-blue-lt:    #7FA6FF;   /* headline gradients on dark */
+  --brand-blue:       #4C7BFF;   /* glows and gradients only */
+  --brand-blue-dk:    #2349B8;   /* blue text and outlines on light grounds */
 
   /* Purple — the bridge in every gradient */
   --brand-purple:     #8B45D6;
-  --brand-purple-lt:  #C39BE8;
+  --brand-purple-dk:  #6B2FC0;   /* eyebrows, labels, tier names */
+  --brand-purple-lt:  #C39BE8;   /* tints and borders only, never text */
 
   /* Pink — the action colour */
-  --brand-cta:        #D10D6E;   /* BUTTON FILLS ONLY. White text clears 4.5:1 here. */
-  --brand-pink:       #FF2D9B;   /* glows, badges, live dots. Not for white text on top. */
-  --brand-pink-lt:    #FF7AC0;   /* eyebrows, labels, tier names on navy */
-  --brand-logo:       #FF9AD0;   /* the word "Reach". Same on every page, do not vary. */
+  --brand-cta:        #D10D6E;   /* BUTTON FILLS. White text clears 5.3:1 here. */
+  --brand-pink:       #FF2D9B;   /* glows, live dots. Never text. */
+  --brand-pink-dk:    #B80F62;   /* pink text on light grounds */
+  --brand-pink-lt:    #FFD9EC;   /* pink tints and chat bubbles */
+  --brand-logo:       #D10D6E;   /* the word "Reach". Same on every page, do not vary. */
 
-  /* Text */
-  --brand-muted-dark: #565C6B;   /* body text on light pages */
+  /* Forms */
+  --brand-field:      #858CA8;   /* input outlines, 3.3:1 — the non-text minimum */
 
   /* Lines */
-  --brand-line-dark:  rgba(241, 244, 251, 0.14);  /* on navy */
-  --brand-line-light: rgba(16, 27, 61, 0.14);     /* on paper */
+  --brand-line-light: rgba(22, 31, 74, 0.12);
+  --brand-line-dark:  rgba(241, 244, 251, 0.14);  /* inside dark devices */
 }

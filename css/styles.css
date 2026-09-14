@@ -4,19 +4,22 @@
    =================================================================== */
 
 :root {
-  /* Brand palette — matched to the agentic-flows / book / thanks pages */
-  --color-bg: var(--brand-navy);          /* dark navy */
-  --color-surface: var(--brand-navy-2);     /* card / section surface */
-  --color-surface-2: var(--brand-navy-3);   /* lighter surface */
-  --color-text: var(--brand-paper);        /* paper */
-  --color-muted: var(--brand-paper);
-  --color-accent: var(--brand-blue);      /* blue — structure: links, borders, focus rings */
-  --color-accent-2: var(--brand-pink-lt);    /* pink — eyebrows, labels, tier names */
-  --color-purple: var(--brand-purple);      /* purple — the bridge in every gradient */
-  --color-magenta: var(--brand-pink);     /* pink — glows, badges, accents on dark ground */
-  --color-cta: var(--brand-cta);         /* pink, deepened so white text clears 4.5:1 on button fills */
-  --color-accent-text: var(--brand-logo); /* magenta for TEXT on navy — #E91E8C only clears 3.9:1 here */
-  --color-border: rgba(241, 244, 251, 0.14);
+  /* Light ground. Every text colour below is measured against white and the
+     lavender alt ground (#F6F5FF) — keep them above 4.5:1 if you change one. */
+  --color-bg: var(--brand-white);          /* page ground */
+  --color-surface: var(--brand-lavender);  /* alt sections, footer — a lavender-tinted white */
+  --color-surface-2: var(--brand-lavender-2); /* icon tiles, avatars */
+  --color-text: var(--brand-ink);          /* navy ink, 15.8:1 */
+  --color-muted: var(--brand-muted-dark);  /* body copy, 9.7:1 — dark on purpose, not grey */
+  --color-accent: var(--brand-blue-dk);    /* blue — links, focus, structure, 7.7:1 */
+  --color-accent-2: var(--brand-purple-dk); /* purple — eyebrows, labels, tier names, 7.5:1 */
+  --color-purple: var(--brand-purple);     /* the bridge in every gradient */
+  --color-magenta: var(--brand-pink);      /* glows and live dots only, never text */
+  --color-cta: var(--brand-cta);           /* #D10D6E — white text on it clears 5.3:1 */
+  --color-accent-text: var(--brand-pink-dk); /* pink for TEXT on white, 6.4:1 */
+  --color-border: var(--brand-line-light);
+  --color-line: var(--brand-line-light);
+  --color-field: var(--brand-field);       /* form field outlines — 3.3:1, the non-text minimum */
 
   /* Typography */
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -26,7 +29,7 @@
   /* Layout */
   --maxw: 1140px;
   --radius: 16px;
-  --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  --shadow: 0 20px 50px rgba(22, 31, 74, 0.12);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,8 +80,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(209, 13, 110, 0.42); }
 .btn-ghost {
-  background: transparent;
-  border-color: var(--color-border);
+  background: #FFFFFF;
+  border-color: rgba(35, 73, 184, 0.38);
   color: var(--color-text);
 }
 .btn-ghost:hover { border-color: var(--color-accent-text); color: var(--color-accent-text); }
@@ -88,7 +91,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(12,19,55, 0.86);
+  background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -115,8 +118,8 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 .hero::before {
   content: ""; position: absolute; inset: 0;
   background:
-    radial-gradient(600px 300px at 50% -10%, rgba(123, 47, 190, 0.35), transparent 70%),
-    radial-gradient(500px 250px at 80% 20%, rgba(255, 45, 155, 0.20), transparent 70%);
+    radial-gradient(600px 300px at 50% -10%, rgba(139, 69, 214, 0.16), transparent 70%),
+    radial-gradient(500px 250px at 80% 20%, rgba(76, 123, 255, 0.14), transparent 70%);
   pointer-events: none;
 }
 .hero .container { position: relative; }
@@ -131,7 +134,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
   font-weight: 800; max-width: 940px; margin: 0 auto 24px;
 }
 .hero h1 .grad {
-  background: linear-gradient(120deg, #7FA6FF, var(--color-accent-2));
+  background: linear-gradient(110deg, #2349B8, #8B45D6 55%, #D10D6E);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 /* The Fabinal-style promise line: quantified outcome + timeframe + the
@@ -161,9 +164,9 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 800; line-height: 1.08
 }
 
 /* Per-field errors: named, tied to the input by aria-describedby, and announced. */
-.field-error { color: #ff8a8a; font-size: 0.88rem; margin-top: 6px; }
-[aria-invalid="true"] { border-color: #ff8a8a !important; }
-.form-note-error { color: #ff8a8a; font-weight: 600; }
+.field-error { color: #C62828; font-size: 0.88rem; margin-top: 6px; }
+[aria-invalid="true"] { border-color: #C62828 !important; }
+.form-note-error { color: #C62828; font-weight: 600; }
 
 /* Visible keyboard focus. Without this a keyboard-only user cannot see where
    they are on the page at all. */
@@ -196,12 +199,15 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
    the navy palette. Kept separate from .hero, which 17 other pages use. */
 
 
-.vh{position:relative;overflow:hidden;padding:80px 0 0}
-/* the glow that makes navy feel like depth rather than a flat black box */
-.vh::before{content:"";position:absolute;inset:-10% -20% auto -20%;height:720px;
+.vh{position:relative;overflow:hidden;padding:80px 0 0;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F5F0FF 42%,#E8EDFF 100%)}
+/* Viktor's wash, in brand hues: purple bleeding in top-left, blue top-right,
+   a breath of pink low down. Soft enough that navy text sits on it at 13:1+. */
+.vh::before{content:"";position:absolute;inset:0;
   background:
-    radial-gradient(760px 380px at 22% 8%, rgba(139,69,214,.46), transparent 66%),
-    radial-gradient(620px 340px at 82% 26%, rgba(255,45,155,.26), transparent 68%);
+    radial-gradient(900px 520px at 6% -6%, rgba(139,69,214,.28), transparent 64%),
+    radial-gradient(860px 520px at 98% 2%, rgba(76,123,255,.30), transparent 66%),
+    radial-gradient(760px 420px at 58% 104%, rgba(255,45,155,.15), transparent 70%);
   pointer-events:none}
 .vh .container{position:relative}
 
@@ -212,7 +218,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 
 .vh h1{font-size:clamp(3rem,7.2vw,5.6rem);line-height:.98;letter-spacing:-.035em;
   font-weight:800;margin:0 0 0;max-width:13ch}
-.vh h1 .grad{background:linear-gradient(120deg,#7FA6FF,var(--color-accent-2));
+.vh h1 .grad{background:linear-gradient(110deg,#2349B8,#8B45D6 55%,#D10D6E);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 .vh-right{padding-top:14px}
@@ -220,7 +226,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .vh-promise{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;
   color:var(--color-accent-2);letter-spacing:.01em;margin:0 0 22px}
 .vh-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
-.vh-micro{font-size:.9rem;color:rgba(241,244,251,.72);margin:0}
+.vh-micro{font-size:.9rem;color:var(--color-muted);margin:0}
 
 /* Floating preview card — Viktor puts the product on screen immediately instead
    of describing it. Hers is the agent actually answering. */
@@ -229,43 +235,43 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
    sticky menu bar. More air above it, and a little breathing room in the hero
    itself so the card doesn't feel stacked on the copy. */
 @media(max-width:900px){.vh-stage{margin-top:112px}.vh{padding-top:96px}}
-.vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(241,244,251,.16);
-  border-radius:22px 22px 0 0;background:linear-gradient(180deg,#131B42,#101838);
-  box-shadow:0 -2px 0 rgba(241,244,251,.06),0 40px 90px rgba(0,0,0,.55);
+.vh-card{max-width:940px;margin:0 auto;border:1px solid rgba(139,69,214,.22);
+  border-radius:22px 22px 0 0;background:#FFFFFF;
+  box-shadow:0 0 0 8px rgba(139,69,214,.07),0 40px 90px rgba(22,31,74,.16);
   padding:18px 18px 0;overflow:hidden}
 .vh-bar{display:flex;align-items:center;gap:8px;padding:2px 6px 14px}
-.vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(241,244,251,.22)}
+.vh-dot{width:11px;height:11px;border-radius:50%;background:rgba(22,31,74,.16)}
 .vh-bar b{margin-left:8px;font-family:'Montserrat',sans-serif;font-size:.72rem;
-  letter-spacing:.12em;text-transform:uppercase;color:rgba(241,244,251,.55);font-weight:700}
-.vh-thread{background:#161F4A;border-radius:14px 14px 0 0;padding:22px 22px 30px;
+  letter-spacing:.12em;text-transform:uppercase;color:#5A6285;font-weight:700}
+.vh-thread{background:#F6F5FF;border-radius:14px 14px 0 0;padding:22px 22px 30px;
   display:grid;gap:12px}
 .vh-msg{max-width:74%;padding:12px 16px;border-radius:16px;font-size:.97rem;line-height:1.5}
-.vh-them{background:var(--color-surface-2);border:1px solid rgba(241,244,251,.10);
+.vh-them{background:#FFFFFF;border:1px solid var(--color-border);
   border-bottom-left-radius:5px}
 /* White on the blue/purple gradient measured 3.76:1, under the 4.5:1 minimum.
    Light bubble, navy text, same brand colours — now 12.8:1. */
 .vh-us{margin-left:auto;background:linear-gradient(100deg,#FFD9EC,#E4D4FA);
   color:#141C44;font-weight:500;border:1px solid rgba(255,45,155,.30);
   border-bottom-right-radius:5px}
-.vh-time{font-size:.72rem;color:rgba(241,244,251,.66);margin-top:-6px}
+.vh-time{font-size:.72rem;color:#5A6285;margin-top:-6px}
 .vh-time.r{text-align:right}
 
 /* Trust strip. Viktor runs a rating + client logos here; these are the equivalent
    facts Infinity Reach Media can actually stand behind. */
-.vh-trust{border-top:1px solid rgba(241,244,251,.12);margin-top:0;
-  background:rgba(12,19,55,.6);padding:26px 0}
+.vh-trust{border-top:1px solid var(--color-border);margin-top:0;
+  background:rgba(255,255,255,.72);padding:26px 0;position:relative}
 .vh-trust .container{display:flex;align-items:center;justify-content:center;
   gap:12px 26px;flex-wrap:wrap;text-align:center}
-.vh-trust span{font-size:.88rem;color:rgba(241,244,251,.8);white-space:nowrap}
+.vh-trust span{font-size:.88rem;color:var(--color-muted);white-space:nowrap}
 .vh-trust b{color:var(--color-text);font-weight:700}
-.vh-trust .sep{width:1px;height:22px;background:rgba(241,244,251,.16)}
+.vh-trust .sep{width:1px;height:22px;background:var(--color-border)}
 @media(max-width:700px){.vh-trust .sep{display:none}}
 
 /* Short-form guarantee band. The long version with hover popovers was cut from
    the homepage; this states the three promises and sends people to the Terms for
    the conditions, so there is one source of truth for the wording. */
-.gtee-band{border:1px solid rgba(76,123,255,.35);border-radius:20px;
-  background:rgba(76,123,255,.05);padding:30px 28px}
+.gtee-band{border:1px solid rgba(35,73,184,.18);border-radius:20px;
+  background:#FFFFFF;padding:30px 28px;box-shadow:0 12px 36px rgba(22,31,74,.07)}
 .gtee-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 @media(max-width:820px){.gtee-row{grid-template-columns:1fr;gap:18px}}
 .gtee{text-align:center}
@@ -306,13 +312,13 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .section-head p { color: var(--color-muted); }
 .section-alt { background: var(--color-surface); }
 /* Cards need a touch more lift now that the ground itself is lighter. */
-.card { box-shadow: 0 10px 30px rgba(6, 10, 30, 0.28); }
+.card { box-shadow: 0 1px 2px rgba(22, 31, 74, 0.05), 0 12px 32px rgba(22, 31, 74, 0.07); }
 
 /* ---------- Stats ---------- */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .stat { text-align: center; }
 .stat .num { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;
-  background: linear-gradient(120deg, #7FA6FF, var(--color-accent-2));
+  background: linear-gradient(110deg, #2349B8, #8B45D6 55%, #D10D6E);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .stat .label { color: var(--color-muted); font-size: 0.95rem; }
 
@@ -320,8 +326,8 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* Separate from .stats — these carry a full sentence, so the headline size is
    tuned for phrases, not the 2-3 character figures .stat .num was built for. */
 .guarantees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-  border: 1px solid rgba(76,123,255,.32); border-radius: 20px; padding: 30px 28px;
-  background: rgba(76,123,255,.05); }
+  border: 1px solid rgba(35,73,184,.18); border-radius: 20px; padding: 30px 28px;
+  background: #FFFFFF; box-shadow: 0 12px 36px rgba(22,31,74,.07); }
 /* Column layout so the three "conditions" triggers line up along the bottom
    even though the promises above them run different lengths. */
 .guarantee { text-align: center; display: flex; flex-direction: column; }
@@ -335,14 +341,14 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .g-trigger { background: none; border: 0; padding: 0; cursor: help;
   font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.12em;
   text-transform: uppercase; font-weight: 700; color: var(--color-accent-2);
-  border-bottom: 1px dashed rgba(76,123,255,.55); }
+  border-bottom: 1px dashed rgba(35,73,184,.55); }
 .g-trigger::after { content: " ⌄"; letter-spacing: 0; }
 .g-trigger:hover, .g-trigger:focus-visible { color: var(--color-text); border-bottom-color: var(--color-text); }
 .g-pop {
   position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px);
   width: max(260px, 100%); max-width: 320px; z-index: 20;
-  background: var(--color-surface-2); color: var(--color-muted);
-  border: 1px solid rgba(76,123,255,.38); border-radius: 14px;
+  background: #FFFFFF; color: var(--color-muted);
+  border: 1px solid rgba(35,73,184,.28); border-radius: 14px;
   padding: 14px 16px; text-align: left; font-size: 0.88rem; line-height: 1.6;
   box-shadow: var(--shadow);
   opacity: 0; visibility: hidden; pointer-events: none;
@@ -350,7 +356,7 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 }
 /* The arrow. Sits on the popover, points down at the trigger. */
 .g-pop::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-  border: 8px solid transparent; border-top-color: var(--color-surface-2); }
+  border: 8px solid transparent; border-top-color: #FFFFFF; }
 .g-detail:hover .g-pop, .g-detail:focus-within .g-pop {
   opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
 }
@@ -382,8 +388,10 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 /* ---------- Pricing ---------- */
 .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
 .price-card { border: 1px solid var(--color-line); border-radius: 20px; padding: 30px 26px;
-  background: rgba(241,244,251,.03); display: flex; flex-direction: column; }
-.price-card.featured { border-color: rgba(255,95,175,.45); background: linear-gradient(160deg, rgba(233,30,140,.09), rgba(76,123,255,.10)); }
+  background: #FFFFFF; display: flex; flex-direction: column;
+  box-shadow: 0 1px 2px rgba(22,31,74,.05), 0 12px 32px rgba(22,31,74,.07); }
+.price-card.featured { border-color: rgba(209,13,110,.38); background: linear-gradient(160deg, #FFF1F8, #F1EEFF 55%, #EEF2FF);
+  box-shadow: 0 0 0 6px rgba(209,13,110,.06), 0 18px 44px rgba(139,69,214,.14); }
 .price-card .tier { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--color-accent-2); }
 .price-card .amount { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 2.4rem;
@@ -399,12 +407,17 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .grid-t { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 @media (max-width: 760px) { .grid-t { grid-template-columns: 1fr; } }
+/* Homepage testimonials: three quotes, one row. Drops straight to one column
+   below 1000px — at two columns the third card sat on its own. */
+.grid-quotes { gap: 22px; }
+.grid-quotes .quote { padding: 28px 26px; }
+@media (max-width: 1000px) { .grid-quotes { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; } }
 .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
 .card {
-  background: var(--color-surface); border: 1px solid var(--color-border);
+  background: #FFFFFF; border: 1px solid var(--color-border);
   border-radius: var(--radius); padding: 30px; transition: transform 0.18s ease, border-color 0.18s ease;
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(255, 95, 175, 0.45); }
+.card:hover { transform: translateY(-4px); border-color: rgba(209, 13, 110, 0.35); }
 .card .icon {
   width: 50px; height: 50px; border-radius: 12px; display: grid; place-items: center;
   background: var(--color-surface-2); font-size: 1.5rem; margin-bottom: 18px;
@@ -424,8 +437,7 @@ a.card { display: block; }
    padding-top carries the 14px breathing room, since margin-top:auto resolves
    to 0 on the tallest card and would otherwise crowd the paragraph. */
 /* Quotes in a 3-up grid: same problem as the cards — different quote lengths
-   left the attributions at different heights. Scoped to .grid-3 so the
-   homepage's 2-column .grid-t quotes are untouched. */
+   left the attributions at different heights. Scoped to .grid-3. */
 .grid-3 .quote { display: flex; flex-direction: column; }
 .grid-3 .quote .who { margin-top: auto; padding-top: 18px; }
 .grid-3 a.card { display: flex; flex-direction: column; }
@@ -462,7 +474,8 @@ p.founder-line, .two-col p.founder-line {
 
 /* ---------- Testimonials ---------- */
 .quote {
-  background: var(--color-surface); border: 1px solid var(--color-border);
+  background: #FFFFFF; border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px rgba(22,31,74,.05), 0 12px 32px rgba(22,31,74,.07);
   border-radius: var(--radius); padding: 30px;
 }
 .quote p { margin-bottom: 20px; }
@@ -488,7 +501,7 @@ p.founder-line, .two-col p.founder-line {
 
 /* ---------- CTA band ---------- */
 .cta-band {
-  background: linear-gradient(120deg, rgba(123,47,190,0.18), rgba(76,123,255,0.14));
+  background: linear-gradient(120deg, #F1EAFF, #EAF0FF 60%, #FDEDF6);
   border: 1px solid var(--color-border); border-radius: 24px; padding: 56px; text-align: center;
 }
 .cta-band h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 14px; }
@@ -499,13 +512,13 @@ p.founder-line, .two-col p.founder-line {
 .form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .field label { display: block; font-size: 0.88rem; color: var(--color-muted); margin-bottom: 6px; }
 .field input, .field textarea, .field select {
-  width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--color-border);
-  background: var(--color-surface); color: var(--color-text); font-family: inherit; font-size: 0.95rem;
+  width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--color-field);
+  background: #FFFFFF; color: var(--color-text); font-family: inherit; font-size: 0.95rem;
 }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--color-accent); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .contact-info .item { display: flex; gap: 14px; margin-bottom: 22px; }
-.contact-info .item .ic { width: 42px; height: 42px; border-radius: 11px; background: var(--color-surface);
+.contact-info .item .ic { width: 42px; height: 42px; border-radius: 11px; background: var(--color-surface-2);
   border: 1px solid var(--color-border); display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; }
 .contact-info .item .label { font-size: 0.8rem; color: var(--color-muted); }
 .contact-info .item .val { font-weight: 600; }
@@ -526,14 +539,14 @@ p.founder-line, .two-col p.founder-line {
 .socials { display: flex; gap: 12px; margin-top: 18px; }
 .socials a { width: 38px; height: 38px; border-radius: 10px; background: var(--color-surface-2);
   display: grid; place-items: center; color: var(--color-muted); transition: color 0.15s, background 0.15s; }
-.socials a:hover { color: var(--color-text); background: var(--color-accent); }
+.socials a:hover { color: #FFFFFF; background: var(--color-accent); }
 .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 24px; display: flex;
   justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-muted); font-size: 0.88rem; }
 
 /* ---------- Page hero (interior pages) ---------- */
 .page-hero { padding: 80px 0 40px; text-align: center; position: relative; }
 .page-hero::before { content: ""; position: absolute; inset: 0;
-  background: radial-gradient(500px 250px at 50% -20%, rgba(123,47,190,0.3), transparent 70%); pointer-events: none; }
+  background: radial-gradient(500px 250px at 50% -20%, rgba(139,69,214,0.14), transparent 70%); pointer-events: none; }
 .page-hero .container { position: relative; }
 .page-hero h1 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.02em; margin-bottom: 14px; }
 .page-hero p { color: var(--color-muted); max-width: 56ch; margin: 0 auto; font-size: 1.1rem; }
