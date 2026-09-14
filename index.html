@@ -128,17 +128,18 @@
     /* On a phone there is no second column, so the order matters instead.
        Stacked in source order the widget landed 860px down — 1.3 screens of
        scrolling before anyone could touch the thing the page is selling. The
-       copy splits: headline and promise lead, she comes next, and the
-       supporting paragraph and buttons follow underneath her. */
+       copy splits: headline and promise lead, then the buttons, so Book My
+       Free Call is on the first screen (it used to sit under her, a full
+       screen down), then she comes, then the supporting paragraph. */
     @media(max-width:720px){
       .vh-grid{grid-template-columns:1fr;gap:0}
       .vh-copy{display:contents}
       .vh h1{font-size:clamp(2.1rem,7.6vw,2.9rem);order:1;margin-bottom:16px}
-      .vh-copy .vh-promise{order:2;margin-bottom:26px}
-      .vh-live{order:3;margin-bottom:28px}
-      .vh-copy .vh-sub{order:4;font-size:1.06rem;margin-bottom:22px}
-      .vh-copy .vh-actions{order:5}
-      .vh-copy .vh-micro{order:6}
+      .vh-copy .vh-promise{order:2;margin-bottom:22px}
+      .vh-copy .vh-actions{order:3;margin-bottom:14px}
+      .vh-copy .vh-micro{order:4;margin-bottom:30px}
+      .vh-live{order:5;margin-bottom:28px}
+      .vh-copy .vh-sub{order:6;font-size:1.06rem;margin-bottom:0}
       .jphone{max-width:360px;padding:11px}
       .jphone-in{height:520px}
       .jstage{height:calc(520px - 60px)}
