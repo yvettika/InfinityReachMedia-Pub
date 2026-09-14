@@ -526,7 +526,7 @@ p.founder-line, .two-col p.founder-line {
 .socials { display: flex; gap: 12px; margin-top: 18px; }
 .socials a { width: 38px; height: 38px; border-radius: 10px; background: var(--color-surface-2);
   display: grid; place-items: center; color: var(--color-muted); transition: color 0.15s, background 0.15s; }
-.socials a:hover { color: var(--color-text); background: var(--color-accent); }
+.socials a:hover { color: var(--color-text); background: var(--brand-blue-dk); }
 .footer-bottom { border-top: 1px solid var(--color-border); padding-top: 24px; display: flex;
   justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-muted); font-size: 0.88rem; }
 
