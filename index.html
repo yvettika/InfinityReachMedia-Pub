@@ -291,7 +291,13 @@
     .jface{position:relative;max-width:420px;margin:0 auto}
     .jface video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;
       background:#111;box-shadow:0 30px 70px rgba(22,31,74,.22),0 0 0 1px rgba(22,31,74,.08)}
-    .jtag{position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;
+    /* Her lip-synced greeting sits on top of the smiling loop, invisible until
+       she's tapped. The name tag and play button stay above both. */
+    .jtalk{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;
+      border-radius:22px;opacity:0;pointer-events:none;transition:opacity .35s ease;background:transparent}
+    .jface.is-talking .jtalk{opacity:1}
+    @media(prefers-reduced-motion:reduce){.jtalk{transition:none}}
+    .jtag{z-index:3;position:absolute;left:16px;bottom:16px;padding:8px 13px;border-radius:999px;
       font-family:var(--font-display);font-size:.72rem;font-weight:700;color:#fff;
       background:rgba(12,19,55,.78);backdrop-filter:blur(6px)}
 
@@ -402,6 +408,9 @@
                   <span class="jhear-txt">Hear her voice</span><span class="sr-only"> (plays audio)</span>
                 </span>
               </button>
+              <video class="jtalk" playsinline preload="none" poster="/media/jessica-talking-poster.jpg" aria-hidden="true" tabindex="-1">
+                <source src="/media/jessica-talking.mp4" type="video/mp4">
+              </video>
               <audio id="jhello" preload="none" src="/media/jessica-hello.mp3"></audio>
             </div>
           </div>
@@ -699,32 +708,52 @@
 
   <script src="js/main.js"></script>
   <script>
-  /* Tap-to-hear greeting on Jessica's picture (styles: .jhear in the head). */
+  /* Tap-to-hear greeting on Jessica's picture (styles: .jhear in the head).
+     If the page has a lip-synced clip (<video class="jtalk">), she talks on
+     camera: the clip fades in over the smiling loop with its own sound, then
+     fades back out when she finishes. Without it, or if the clip fails to
+     load, the same greeting plays as audio only. */
   (function () {
     var face = document.querySelector('.jface');
     var btn = face && face.querySelector('.jhear');
     var audio = document.getElementById('jhello');
-    if (!btn || !audio) return;
+    var talk = face && face.querySelector('.jtalk');
+    if (!btn || !(audio || talk)) return;
+    var media = talk || audio;
     var label = btn.querySelector('.jhear-txt');
     var script = document.getElementById('jscript');
     function show(state) {
       var playing = state === 'playing';
       face.classList.toggle('is-playing', playing);
+      face.classList.toggle('is-talking', !!talk && media === talk && state !== 'ended' && state !== 'idle');
       btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
       label.textContent = playing ? 'Pause' : state === 'paused' ? 'Resume' : state === 'ended' ? 'Hear her again' : 'Hear her voice';
     }
+    function bind(el) {
+      el.addEventListener('playing', function () { if (el === media) show('playing'); });
+      el.addEventListener('pause', function () { if (el === media && !el.ended) show('paused'); });
+      el.addEventListener('ended', function () { if (el === media) show('ended'); });
+    }
+    if (talk) {
+      bind(talk);
+      // A clip that can't load falls back to the audio greeting, mid-tap if need be.
+      talk.addEventListener('error', function () {
+        var wasWaiting = face.classList.contains('is-talking');
+        media = audio; talk = null; face.classList.remove('is-talking');
+        if (wasWaiting && audio) audio.play().catch(function () { show('idle'); });
+      }, true);
+    }
+    if (audio) bind(audio);
     btn.addEventListener('click', function () {
-      if (audio.paused) {
+      if (media.paused) {
         if (script) script.open = true;
-        var p = audio.play();
+        if (media === talk) face.classList.add('is-talking');
+        var p = media.play();
         if (p && p.catch) p.catch(function () { show('idle'); });
       } else {
-        audio.pause();
+        media.pause();
       }
     });
-    audio.addEventListener('playing', function () { show('playing'); });
-    audio.addEventListener('pause', function () { if (!audio.ended) show('paused'); });
-    audio.addEventListener('ended', function () { show('ended'); });
   })();
 
   /* Hero: her picture first, then "Chat with her now" swaps in the live chat
@@ -746,7 +775,7 @@
       faceView.inert = chat;
       back.hidden = !chat;
       if (hint) hint.textContent = hint.getAttribute(chat ? 'data-chat' : 'data-face');
-      if (chat && audio && !audio.paused) audio.pause();
+      if (chat) hero.querySelectorAll('audio, video.jtalk').forEach(function (m) { if (!m.paused) m.pause(); });
       (chat ? chatView : open).focus();
     }
     open.addEventListener('click', function () { setView('chat'); });
