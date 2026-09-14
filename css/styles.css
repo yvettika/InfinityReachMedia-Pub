@@ -258,8 +258,8 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
 
 /* Trust strip. Viktor runs a rating + client logos here; these are the equivalent
    facts Infinity Reach Media can actually stand behind. */
-.vh-trust{border-top:1px solid var(--color-border);margin-top:0;
-  background:rgba(255,255,255,.72);padding:26px 0;position:relative}
+.vh-trust{border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);
+  margin-top:0;background:#FFFFFF;padding:26px 0;position:relative}
 .vh-trust .container{display:flex;align-items:center;justify-content:center;
   gap:12px 26px;flex-wrap:wrap;text-align:center}
 .vh-trust span{font-size:.88rem;color:var(--color-muted);white-space:nowrap}
@@ -558,7 +558,10 @@ p.founder-line, .two-col p.founder-line {
   .section { padding: 56px 0; }
   .section-head { margin-bottom: 36px; }
 }
-@media (max-width: 880px) {
+/* The full menu needs ~935px. Between 880 and 935 it used to push Book a Call
+   off the right edge, so the page scrolled sideways on tablets and narrow
+   laptop windows. It collapses behind the burger from 960px down. */
+@media (max-width: 960px) {
   .nav-links, .nav-cta .btn-ghost { display: none; }
   /* 44px tap target — the bare glyph measured 23x30 */
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin-right: -8px; }
@@ -569,6 +572,8 @@ p.founder-line, .two-col p.founder-line {
     display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0;
     background: var(--color-bg); border-bottom: 1px solid var(--color-border); padding: 20px 24px; gap: 18px;
   }
+}
+@media (max-width: 880px) {
   .stats { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
   .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
