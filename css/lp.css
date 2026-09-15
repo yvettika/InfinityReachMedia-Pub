@@ -49,3 +49,8 @@ sup.cite{font-size:.62em;vertical-align:super;font-weight:700}
   .lp-sticky.on{display:flex}
   body.has-sticky{padding-bottom:74px}
 }
+
+/* Chrome on Android draws a "cast to TV" square over muted autoplay videos until they play;
+   it covered Jessica's face on the call card (9/14). The disableremoteplayback attribute is
+   the real fix; this hides the overlay on Chrome versions that ignore it. */
+video::-internal-media-controls-overlay-cast-button { display: none; }

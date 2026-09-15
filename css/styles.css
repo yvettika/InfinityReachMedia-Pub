@@ -597,3 +597,8 @@ p.founder-line, .two-col p.founder-line {
   .footer-grid > div:nth-child(4) li { break-inside: avoid; }
   .footer-bottom { justify-content: center; text-align: center; }
 }
+
+/* Chrome on Android draws a "cast to TV" square over muted autoplay videos until they play;
+   it covered Jessica's face on the call card (9/14). The disableremoteplayback attribute is
+   the real fix; this hides the overlay on Chrome versions that ignore it. */
+video::-internal-media-controls-overlay-cast-button { display: none; }
