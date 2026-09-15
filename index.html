@@ -136,15 +136,18 @@
       .vh-copy{display:contents}
       .vh h1{font-size:clamp(2.1rem,7.6vw,2.9rem);order:1;margin-bottom:16px}
       .vh-copy .vh-promise{order:2;margin-bottom:22px}
-      .vh-copy .vh-actions{order:3;margin-bottom:14px}
-      .vh-copy .vh-micro{order:4;margin-bottom:30px}
-      .vh-live{order:5;margin-bottom:28px}
+      .vh-copy .vh-actions{order:3;margin-bottom:22px;flex-wrap:nowrap;gap:8px}
+      .vh-copy .vh-actions .btn{flex:1 1 auto;text-align:center;padding:12px 14px;font-size:.82rem;white-space:nowrap}
+      .vh-live{order:4;margin-bottom:18px}
+      .vh-copy .vh-micro{order:5;margin-bottom:26px}
       .vh-copy .vh-sub{order:6;font-size:1.06rem;margin-bottom:0}
       .jphone{max-width:360px;padding:11px}
       .jphone-in{height:520px}
       .jstage{height:calc(520px - 60px)}
       .vh-try{margin-top:12px}
     }
+    /* Very narrow phones can't hold both buttons on one row. */
+    @media(max-width:359px){.vh-copy .vh-actions{flex-wrap:wrap}}
 
     .vh-live{display:flex;flex-direction:column;align-items:center}
     .vh-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);
@@ -339,6 +342,7 @@
     .jcall-wave{display:flex;align-items:center;justify-content:center;gap:3px;height:38px;width:100%;margin:10px 0 14px}
     .jcall-wave i{display:block;width:3px;height:38px;border-radius:3px;background:rgba(255,255,255,.88);
       transform:scaleY(.1);transition:transform .08s linear}
+    .jcall-actions{display:flex;flex-direction:column;align-items:center}
     .jcall-btn{width:64px;height:64px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;
       color:#fff;background:linear-gradient(120deg,var(--color-cta),var(--color-purple));
       box-shadow:0 10px 26px rgba(209,13,110,.45);transition:transform .15s ease,background .2s ease}
@@ -350,7 +354,28 @@
     .jcall-btn-label{display:block;margin-top:8px;font-family:var(--font-display);font-weight:700;font-size:.8rem;
       letter-spacing:.04em;color:rgba(255,255,255,.9)}
     @media(prefers-reduced-motion:reduce){.jcall-ring{animation:none;opacity:.5}.jtalk,.jcall-wave i{transition:none}}
-    @media(max-width:720px){.jcall{padding:18px 16px 18px}.jcall-stage{width:52%;margin:18px auto 14px}}
+    /* Phones: a compact call card, so the call button lands on the first
+       screen. Avatar left with name and timer beside it, captions across,
+       sound wave and call button on the bottom row. */
+    @media(max-width:720px){
+      .jcall{display:grid;grid-template-columns:96px 1fr;grid-template-areas:"stage head" "cap cap" "wave act";
+        column-gap:22px;row-gap:8px;align-items:center;text-align:left;padding:16px 16px 14px;border-radius:24px}
+      .jcall-head{grid-area:head}
+      .jcall-name{font-size:1.25rem;margin-top:3px}
+      .jcall-role{font-size:.78rem}
+      .jcall-stage{grid-area:stage;width:96px;margin:6px 0 4px 6px}
+      .jcall-ring{inset:-6px}
+      .jcall-avatar{box-shadow:0 0 0 3px #FF2D9B,0 0 0 7px rgba(255,45,155,.22),0 10px 24px rgba(0,0,0,.35)}
+      .jcall-dot{width:13px;height:13px;border-width:2px;right:4%;bottom:4%}
+      .jcall-caption{grid-area:cap;justify-content:flex-start;text-align:left;max-width:none;min-height:2.9em;font-size:.95rem;margin:4px 0 0}
+      .jcall-wave{grid-area:wave;justify-content:flex-start;height:28px;margin:0;gap:3px}
+      .jcall-wave i{height:28px}
+      .jcall-actions{grid-area:act;flex-direction:row;gap:10px}
+      .jcall-btn{width:52px;height:52px}
+      .jcall-btn svg{width:22px;height:22px}
+      .jcall-btn-label{margin:0;font-size:.75rem;order:-1}
+      #jhero .vh-badge{display:none}
+    }
     .jscript{max-width:420px;margin:10px auto 0;text-align:center;font-size:.9rem;color:var(--color-muted)}
     .jscript summary{cursor:pointer;display:inline-block;padding:8px 4px;font-weight:600;
       color:var(--color-accent);text-decoration:underline;text-underline-offset:3px}
@@ -421,7 +446,7 @@
             <div class="jcall" data-state="idle">
               <img class="jcall-bg" src="/media/jessica-poster.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div class="jcall-tint" aria-hidden="true"></div>
-              <div aria-hidden="true">
+              <div class="jcall-head" aria-hidden="true">
                 <span class="jcall-status"><i class="live"></i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="jcall-time">Tap to call</span></span>
                 <b class="jcall-name">Jessica</b>
                 <span class="jcall-role">AI sales rep &middot; (714) 924-3024</span>
@@ -440,8 +465,10 @@
               </div>
               <p class="jcall-caption" aria-hidden="true">She's online. Tap to hear her.</p>
               <div class="jcall-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <button type="button" class="jcall-btn" aria-label="Hear Jessica's greeting (plays audio)" aria-describedby="jscript"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button>
-              <span class="jcall-btn-label" aria-hidden="true">Hear Jessica</span>
+              <div class="jcall-actions">
+                <button type="button" class="jcall-btn" aria-label="Hear Jessica's greeting (plays audio)" aria-describedby="jscript"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button>
+                <span class="jcall-btn-label" aria-hidden="true">Hear Jessica</span>
+              </div>
               <audio id="jhello" preload="none" src="/media/jessica-hello.mp3"></audio>
             </div>
           </div>
@@ -475,7 +502,7 @@
           <button type="button" class="jchat-back" aria-controls="jview-face" hidden>&larr; Back to Jessica</button>
           <details class="jscript" id="jscript">
             <summary>Read what she says</summary>
-            <p>"Hi! I'm Jessica, the AI sales rep at Infinity Reach Media. When someone texts, calls, or messages your business, I answer in seconds. Day, night, even Sunday. I answer their questions, and I book the call. Then a real person on your team takes it from there. Want to try me? Type me a message at the top of this page. Or text me at (714) 924-3024."</p>
+            <p>"Hi! I'm Jessica, the AI sales rep at Infinity Reach Media. When someone texts, calls, or messages your business, I answer in seconds. Day, night, even Sunday. I answer their questions, and I book the call. Then a real person on your team takes it from there. Want to try me? Chat with me using the button below. Or text me at (714) 924-3024."</p>
           </details>
           <p class="vh-try" data-face="Hear her first. Then see how she handles a real lead." data-chat="Type like a lead would. Push on price, say you need to think about it, ask if she's a bot.">Hear her first. Then see how she handles a real lead.</p>
         </div>
@@ -681,9 +708,10 @@
   <section class="section" style="padding-top:0">
     <div class="container">
       <p class="byline">
-        <b>Hi — I'm Yvette Kahn</b>, founder of Infinity Reach Media in Orange County.
-        Twenty years writing marketing copy, no computer science degree. I build these
-        agents myself, and you work with me — not an account rep.
+        <b>I'm Yvette Kahn</b>, founder of Infinity Reach Media in Orange County.
+        Twenty years writing marketing copy, and no computer science degree.
+        My team and I build every agent ourselves. You won't get handed to an
+        account rep. You get us, start to finish.
         <a href="/about">More about how we work →</a>
       </p>
     </div>
@@ -755,8 +783,8 @@
     var talk = call.querySelector('.jtalk');
     var audio = document.getElementById('jhello');
     var media = talk || audio;
-    var CUES = [[0.0, "Hi! I'm Jessica,"], [1.55, "the AI sales rep at Infinity Reach Media."], [4.33, "When someone texts, calls, or messages your business,"], [7.69, "I answer in seconds."], [9.17, "Day, night, even Sunday."], [11.91, "I answer their questions,"], [12.79, "and I book the call."], [14.59, "Then a real person on your team"], [16.19, "takes it from there."], [17.63, "Want to try me?"], [18.95, "Type me a message at the top of this page."], [20.65, "Or text me at (714) 924-3024."]];
-    var ENV = "0379965310000026786842244431000012555887776126665266413555561788676663225544532100001110177248888436742220222023688765231038987772665756635535552110111111117754334453452333322100000000037777520000000687611000011756847877554100000000000000002788744696436423666330026676384155469764420000000000003279888406754998257634788954464423552331677776420000000000011016742487775310000000000003376478884364542533514433154454322100000387344323554227778877118987630000000000005898776204288765310029997521000000000001139999887424386248843110000000";
+    var CUES = [[0.0, "Hi! I'm Jessica,"], [1.55, "the AI sales rep at Infinity Reach Media."], [4.33, "When someone texts, calls, or messages your business,"], [7.69, "I answer in seconds."], [9.17, "Day, night, even Sunday."], [11.91, "I answer their questions,"], [12.79, "and I book the call."], [14.57, "Then a real person on your team"], [16.19, "takes it from there."], [17.63, "Want to try me?"], [18.83, "Chat with me using the button below."], [20.81, "Or text me at (714) 924-3024."]];
+    var ENV = "03799663100000268868422444310000125568887762276652664136555617887767632255445321000011101772589984367422202220237987752310389878726757567355355521101111111177653344634523333221000000000387785200000006876110000117579478775541000000000000000027887446964374236663300267763841555698644200000000000032799984067549983576348889544655235523316778864200000000000110167524887753100000000000239767377796577658557667766551000000004964852698412958887358887630000000000056667620001416531455555100000000278878776664200000032785117666551000000";
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var raf = 0;
     function mmss(t) { t = Math.max(0, Math.floor(t)); return (t / 60 | 0) + ':' + ('0' + t % 60).slice(-2); }
