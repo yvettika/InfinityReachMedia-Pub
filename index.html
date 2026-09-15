@@ -58,6 +58,19 @@
       ],
       "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" },
       "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+1-714-924-3024",
+        "email": "info@infinityreachmedia.com",
+        "availableLanguage": "en"
+      },
       "knowsAbout": [
         "AI agents for small business",
         "AI receptionist",
@@ -80,6 +93,50 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Engine", "description": "Turns one photo or voice note into a month of posts and emails." } }
         ]
       }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://infinityreachmedia.com/#faq",
+      "isPartOf": {
+        "@id": "https://infinityreachmedia.com/#website"
+      },
+      "publisher": {
+        "@id": "https://infinityreachmedia.com/#business"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What industries do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any business that runs on appointments, inquiries, or repeat customers — the four leaks show up the same way whether the inquiry arrives as a phone call, a form, or a DM. We have dedicated pages for coaches & consultants, HVAC & home services, salons & med spas, insurance brokers, and every other local business. If an unanswered lead costs you money, the agents fit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer one-off projects or ongoing partnerships?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both — and the easiest way to start is The First 10: we work your existing customer list and put ten booked appointments on your calendar in 30 days. Agents run month to month after that, no contracts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How quickly will I see results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your agents are built, tested, and live within 7 days of onboarding — that's guaranteed in writing, or your setup fee is refunded. Reactivation campaigns typically start booking appointments in the first weeks, and our written guarantee backs 10 booked appointments within 90 days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we get started?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Book a free consultation. We'll learn about your business, identify opportunities, and propose a custom strategy."
+          }
+        }
+      ]
     }
   ]
 }
@@ -345,6 +402,17 @@
       letter-spacing:.04em;color:rgba(255,255,255,.9)}
     @media(prefers-reduced-motion:reduce){.jcall-ring{animation:none;opacity:.5}.jtalk,.jcall-wave i{transition:none}}
     @media(max-width:720px){.jcall{padding:18px 16px 18px}.jcall-stage{width:52%;margin:18px auto 14px}}
+    .hfaq .container{max-width:720px}
+    .hfaq h2{text-align:center;margin-bottom:18px}
+    .hfaq-item{border-top:1px solid var(--color-border,rgba(0,0,0,.1))}
+    .hfaq-item:last-of-type{border-bottom:1px solid var(--color-border,rgba(0,0,0,.1))}
+    .hfaq-item summary{cursor:pointer;padding:14px 4px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+    .hfaq-item summary::-webkit-details-marker{display:none}
+    .hfaq-item summary::after{content:"+";flex:none;font-size:1.3rem;line-height:1;color:var(--color-accent-2)}
+    .hfaq-item[open] summary::after{content:"\2212"}
+    .hfaq-item p{margin:0;padding:0 4px 16px;color:var(--color-muted);line-height:1.6}
+    .hfaq-more{text-align:center;margin:18px 0 0}
+    .hfaq-more a{color:var(--color-accent-2);font-weight:700}
     .jscript{max-width:420px;margin:10px auto 0;text-align:center;font-size:.9rem;color:var(--color-muted)}
     .jscript summary{cursor:pointer;display:inline-block;padding:8px 4px;font-weight:600;
       color:var(--color-accent);text-decoration:underline;text-underline-offset:3px}
@@ -695,12 +763,31 @@
     </div>
   </section>
 
-  <!-- FAQ pointer. Boris: "People stop scrolling after one third of your
-       homepage. They will not come to the FAQ at all." Full set lives on /faq,
-       where it also carries FAQPage schema the homepage never had. -->
-  <section class="section" style="padding-top:0">
-    <div class="container" style="text-align:center">
-      <p style="margin:0"><a href="/faq" style="color:var(--color-accent-2);font-weight:700">Read the common questions →</a></p>
+  <!-- Common questions. Boris: "People stop scrolling after one third of your
+       homepage. They will not come to the FAQ at all." So this stays compact:
+       four answers, collapsed, matched by the FAQPage node in the head schema
+       (AI assistants and search read the markup only when the answers are
+       visible on the page). The full set still lives on /faq. -->
+  <section class="section hfaq" style="padding-top:0" aria-labelledby="hfaq-title">
+    <div class="container">
+      <h2 id="hfaq-title">Common questions</h2>
+        <details class="hfaq-item">
+          <summary>What industries do you work with?</summary>
+          <p>Any business that runs on appointments, inquiries, or repeat customers — the four leaks show up the same way whether the inquiry arrives as a phone call, a form, or a DM. We have dedicated pages for coaches &amp; consultants, HVAC &amp; home services, salons &amp; med spas, insurance brokers, and every other local business. If an unanswered lead costs you money, the agents fit.</p>
+        </details>
+        <details class="hfaq-item">
+          <summary>Do you offer one-off projects or ongoing partnerships?</summary>
+          <p>Both — and the easiest way to start is The First 10: we work your existing customer list and put ten booked appointments on your calendar in 30 days. Agents run month to month after that, no contracts.</p>
+        </details>
+        <details class="hfaq-item">
+          <summary>How quickly will I see results?</summary>
+          <p>Your agents are built, tested, and live within 7 days of onboarding — that's guaranteed in writing, or your setup fee is refunded. Reactivation campaigns typically start booking appointments in the first weeks, and our written guarantee backs 10 booked appointments within 90 days.</p>
+        </details>
+        <details class="hfaq-item">
+          <summary>How do we get started?</summary>
+          <p>Book a free consultation. We'll learn about your business, identify opportunities, and propose a custom strategy.</p>
+        </details>
+      <p class="hfaq-more"><a href="/faq">Read all the common questions →</a></p>
     </div>
   </section>
 

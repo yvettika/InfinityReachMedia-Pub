@@ -102,17 +102,99 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": "https://infinityreachmedia.com/reviews#page",
-  "name": "Client Reviews",
-  "description": "Video and written testimonials from coaches, consultants, brokers and local business owners who work with Infinity Reach Media.",
-  "url": "https://infinityreachmedia.com/reviews",
-  "isPartOf": {
-    "@id": "https://infinityreachmedia.com/#website"
-  },
-  "publisher": {
-    "@id": "https://infinityreachmedia.com/#business"
-  }
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://infinityreachmedia.com/reviews#page",
+      "name": "Client Reviews",
+      "description": "Video and written testimonials from coaches, consultants, brokers and local business owners who work with Infinity Reach Media.",
+      "url": "https://infinityreachmedia.com/reviews",
+      "isPartOf": {
+        "@id": "https://infinityreachmedia.com/#website"
+      },
+      "publisher": {
+        "@id": "https://infinityreachmedia.com/#business"
+      },
+      "about": {
+        "@id": "https://infinityreachmedia.com/#business"
+      }
+    },
+    {
+      "@type": [
+        "ProfessionalService",
+        "Organization"
+      ],
+      "@id": "https://infinityreachmedia.com/#business",
+      "name": "Infinity Reach Media",
+      "url": "https://infinityreachmedia.com/",
+      "review": [
+        {
+          "@type": "Review",
+          "itemReviewed": {
+            "@id": "https://infinityreachmedia.com/#business"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Claire Adamou",
+            "jobTitle": "Transformational Coach, author of \"Life After Divorce\""
+          },
+          "reviewBody": "Working with Infinity Reach Media has been an absolute dream. I'm not the most tech-savvy person, and I hit roadblocks many, many times working on my funnel myself, but working with Yvette and her team made it so easy. I'd highly recommend anybody looking for a funnel to work with Yvette. Guaranteed amazing service and a great result.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://infinityreachmedia.com/#business"
+          }
+        },
+        {
+          "@type": "Review",
+          "itemReviewed": {
+            "@id": "https://infinityreachmedia.com/#business"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Emily Haruko Leebs",
+            "jobTitle": "Transformational Life Guide & Business Coach"
+          },
+          "reviewBody": "Tech is not my strong suit, and I'm so grateful I said yes to Yvette and the done-for-you program. Her customer service is top-notch, an amazing cheerleader and believer in what I'm up to.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://infinityreachmedia.com/#business"
+          }
+        },
+        {
+          "@type": "Review",
+          "itemReviewed": {
+            "@id": "https://infinityreachmedia.com/#business"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Cathy S.",
+            "jobTitle": "Insurance Broker & Consultant"
+          },
+          "reviewBody": "Yvette and her team designed and delivered my entire lead-generation funnel. They turned it over in five to seven days, really quick. I am so, so happy.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://infinityreachmedia.com/#business"
+          }
+        },
+        {
+          "@type": "Review",
+          "itemReviewed": {
+            "@id": "https://infinityreachmedia.com/#business"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Christian B.",
+            "jobTitle": "Insurance Broker"
+          },
+          "reviewBody": "My social media engagement has really taken off. It's an innovative funnel process for generating engagement and converting it into leads.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://infinityreachmedia.com/#business"
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
