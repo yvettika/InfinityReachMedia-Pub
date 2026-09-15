@@ -179,6 +179,12 @@
        coaching: "Type like a lead would." Desktop and tablet only — on a phone
        the copy sits above the chat, so a swap would happen off screen and jump
        the page; phones keep the tips as the caption under the chat instead. */
+    /* The copy is centred against the whole right column, which carries the
+       badge above the call card and the chat button, transcript link and hint
+       below it. That extra weight underneath pulled the headline ~60px lower
+       than the card. Lift it so the copy sits level with the card itself.
+       Face view only: in chat view the column is just the phone, already level. */
+    @media(min-width:721px){.vh:not([data-view="chat"]) .vh-copy{position:relative;top:-60px}}
     .vh-chat-head,.vh-chat-sub{display:none}
     .vh .vh-chat-head{font-family:var(--font-serif);font-weight:800;line-height:.98;
       letter-spacing:-.035em;font-size:clamp(2.3rem,4.4vw,3.7rem);max-width:15ch;margin:0 0 22px}
