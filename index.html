@@ -462,7 +462,7 @@
                     <source src="/media/jessica-loop.mp4" type="video/mp4">
                   </video>
                   <video class="jtalk" playsinline preload="none" poster="/media/jessica-talking-poster.jpg" aria-hidden="true" tabindex="-1" disableremoteplayback disablepictureinpicture>
-                    <source src="/media/jessica-talking.mp4?v=4" type="video/mp4">
+                    <source src="/media/jessica-talking.mp4?v=5" type="video/mp4">
                   </video>
                 </div>
                 <i class="jcall-dot" aria-hidden="true"></i>
@@ -473,7 +473,7 @@
                 <button type="button" class="jcall-btn" aria-label="Hear Jessica's greeting (plays audio)" aria-describedby="jscript"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button>
                 <span class="jcall-btn-label" aria-hidden="true">Hear Jessica</span>
               </div>
-              <audio id="jhello" preload="none" src="/media/jessica-hello.mp3?v=4"></audio>
+              <audio id="jhello" preload="none" src="/media/jessica-hello.mp3?v=5"></audio>
             </div>
           </div>
           <div class="jview jview-chat" id="jview-chat" tabindex="-1" aria-label="Live chat with Jessica" inert>
@@ -788,7 +788,7 @@
     var audio = document.getElementById('jhello');
     var media = talk || audio;
     var CUES = [[0.0, "Hi! I'm Jessica,"], [1.55, "the AI sales rep at Infinity Reach Media."], [4.33, "When someone texts, calls, or messages your business,"], [7.69, "I answer in seconds."], [9.17, "Day, night, even Sunday."], [11.91, "I answer their questions,"], [12.79, "and I book the call."], [14.57, "Then a real person on your team"], [16.19, "takes it from there."], [17.63, "Want to try me?"], [18.83, "Chat with me using the button below."], [20.81, "Or text me at (714) 924-3024."]];
-    var ENV = "037996631000002688684224443100001255688877622766526641365556178877676322554453210000111017725899843674222022202379877523103898787267575673553555211011111111776533446345233332210000000003877852000000068761100001175794787755410000000000000000278874469643742366633002677638415556986442000000000000327999840675499835763488895446552355233167788642000000000001101675248877531000000000002397673777965776585576677665510000000049648526984257887378764000000004666500145631555520000005777776641000034841666541000";
+    var ENV = "036985531000002567574224443100111254577666522655525541355445166766565322543343210001111016624677633564222022202367665523103787666256465563453544212111111111665433445335233332210000000003666652100000056651100001165573666654410000000000000000267664457533632355533002566537314545765432000000000000326777631564488724653467774435442345233156666542100001111001101564236666431000000000002386563666755665464565565554410000000038547425874227477662567665300045555520001325531444444101466666665553100032565115555442";
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var raf = 0;
     function mmss(t) { t = Math.max(0, Math.floor(t)); return (t / 60 | 0) + ':' + ('0' + t % 60).slice(-2); }
