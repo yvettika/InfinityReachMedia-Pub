@@ -49,6 +49,13 @@
       err.style.display = 'none';
 
       var vertical = document.body.getAttribute('data-vertical') || 'general';
+
+      // js/ref.js owns partner attribution. It goes in the message, not in
+      // `source` — source is what lead reporting groups on, and a per-partner
+      // bucket there would fragment it. Calendly's utm_campaign is the system
+      // of record for payouts; this line just flags form-only leads.
+      var ref = (typeof window.irmRef === 'function') ? window.irmRef() : '';
+
       var btn = form.querySelector('button[type=submit]');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
@@ -60,7 +67,8 @@
           email: email,
           phone: phone,
           source: SOURCE_LABEL[vertical] || 'Landing Page',
-          message: 'Requested the 60-second agent walkthrough. Business: ' + (biz || 'n/a') + '. SMS consent: ' + (consent && consent.checked ? 'yes' : 'no') + '.',
+          message: (ref ? 'REFERRED BY: ' + ref + '. ' : '') +
+                   'Requested the 60-second agent walkthrough. Business: ' + (biz || 'n/a') + '. SMS consent: ' + (consent && consent.checked ? 'yes' : 'no') + '.',
           company_website: ''
         })
       }).catch(function () { /* never block the confirmation on a network hiccup */ })
