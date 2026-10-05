@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Partner One Pager | Infinity Reach Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  /* Brand values mirror css/tokens.css. Inlined so the page renders the
+     same whether it is opened from the site or printed to PDF on its own. */
+  :root{
+    --ink:#161F4A; --body:#3A4268; --soft:#5A6285;
+    --lav:#F6F5FF; --lav2:#ECEAFB; --line:rgba(22,31,74,.12);
+    --purple-dk:#6B2FC0; --blue-dk:#2349B8; --cta:#D10D6E; --pink-dk:#B80F62; --pink-lt:#FFD9EC;
+    --wash:
+      radial-gradient(520px 300px at 4% -10%, rgba(139,69,214,.26), transparent 64%),
+      radial-gradient(520px 300px at 100% 0%, rgba(76,123,255,.26), transparent 66%),
+      radial-gradient(460px 260px at 60% 110%, rgba(255,45,155,.14), transparent 70%),
+      linear-gradient(180deg,#FFFFFF 0%,#F5F0FF 50%,#E8EDFF 100%);
+    --band:linear-gradient(120deg,#F1EAFF 0%,#EAF0FF 60%,#FDEDF6 100%);
+  }
+  @page{size:Letter;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#E9E8F3}
+  body{font-family:"DM Sans",system-ui,sans-serif;color:var(--body);font-size:10.5pt;line-height:1.42;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet{width:8.5in;height:11in;margin:24px auto;background:#fff;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 10px 40px rgba(22,31,74,.15)}
+  @media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none}}
+
+  .eyebrow{font-family:Montserrat,sans-serif;font-weight:800;font-size:7.5pt;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--purple-dk)}
+  h2{font-family:Montserrat,sans-serif;font-weight:800;font-size:8pt;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--purple-dk);margin-bottom:8px}
+  b,strong{color:var(--ink)}
+
+  /* Header + hero */
+  .hero{background:var(--wash);padding:22px 40px 18px}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:Montserrat,sans-serif;font-weight:800;
+    font-size:13pt;color:var(--ink)}
+  .brand img{width:30px;height:30px}
+  .brand em{font-style:normal;color:var(--cta)}
+  .prepared{text-align:right;font-size:8.5pt;color:var(--soft);line-height:1.35}
+  .prepared b{display:block;font-size:9pt}
+  h1{font-family:"Playfair Display",Georgia,serif;font-weight:800;color:var(--ink);
+    font-size:21pt;line-height:1.12;margin:6px 0 8px;max-width:7in}
+  h1 span{color:var(--cta)}
+  .lede{font-size:10.5pt;max-width:7in}
+
+  .main{padding:14px 40px 14px;flex:1;display:flex;flex-direction:column;gap:13px}
+
+  /* How it plugs into Brad's 30 day plan */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .step{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff}
+  .step .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+    background:var(--cta);color:#fff;font-family:Montserrat,sans-serif;font-weight:800;font-size:8pt;margin-bottom:6px}
+  .step .who{font-family:Montserrat,sans-serif;font-weight:700;font-size:7pt;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--blue-dk);margin-left:6px}
+  .step p{font-size:9.5pt}
+
+  .two{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+
+  /* The four leaks */
+  .leaks{display:grid;gap:6px}
+  .leak{display:grid;grid-template-columns:.95in 1fr;gap:10px;align-items:start;
+    background:var(--lav);border-radius:10px;padding:8px 11px}
+  .leak .tag{font-family:Montserrat,sans-serif;font-weight:800;font-size:7.5pt;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--pink-dk);padding-top:1px}
+  .leak p{font-size:9.3pt}
+
+  /* Referral triggers */
+  ul.signs{list-style:none;display:grid;gap:6px}
+  ul.signs li{position:relative;padding-left:18px;font-size:9.5pt}
+  ul.signs li::before{content:"";position:absolute;left:0;top:5px;width:9px;height:9px;border-radius:50%;
+    background:linear-gradient(135deg,var(--cta),#8B45D6)}
+  .fit{margin-top:12px;font-size:9.3pt}
+  .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+  .chip{background:var(--lav2);color:var(--ink);border-radius:999px;padding:3px 9px;font-size:8.3pt;font-weight:500}
+
+  /* Guarantees */
+  .band{background:var(--band);border-radius:14px;padding:13px 16px}
+  .guar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .guar .big{font-family:"Playfair Display",Georgia,serif;font-weight:800;font-size:15pt;color:var(--ink);line-height:1.1}
+  .guar p{font-size:8.9pt;margin-top:3px}
+  .trust{font-size:8.6pt;color:var(--soft);margin-top:9px}
+
+  /* Footer */
+  .foot{margin-top:auto;background:var(--ink);color:#F1F4FB;padding:15px 40px 16px;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center}
+  .foot h3{font-family:Montserrat,sans-serif;font-weight:800;font-size:8pt;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--pink-lt);margin-bottom:5px}
+  .foot p{font-size:9.2pt;line-height:1.45}
+  .foot b{color:#fff}
+  .foot a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,217,236,.5)}
+  .contact{font-size:9.2pt;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="hero">
+    <div class="top">
+      <div class="brand"><img src="logo-mark.png" alt="Infinity Reach Media logo"> Infinity&nbsp;<em>Reach</em>&nbsp;Media</div>
+      <div class="prepared"><b>Partner one pager</b>Prepared for Brad Coverdale<br>Calendar to Cash concierge bench</div>
+    </div>
+    <div class="eyebrow">Done for you AI employees</div>
+    <h1>You find their best client.<br><span>We make sure every lead like them gets answered in 60 seconds.</span></h1>
+    <p class="lede">Infinity Reach Media builds AI employees that answer new leads, qualify them, follow up, and win back past customers. The owner stops chasing and starts working on the business instead of in it.</p>
+  </header>
+
+  <main class="main">
+
+    <section>
+      <h2>Where we fit in your 30 day plan</h2>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><span class="who">Brad</span>
+          <p><b>Calendar to Cash</b> shows the owner who their best client is and the path to ten more.</p></div>
+        <div class="step"><span class="n">2</span><span class="who">Yvette</span>
+          <p><b>We plug the leaks on that path</b> with AI employees for instant replies, qualifying, follow up and reactivation.</p></div>
+        <div class="step"><span class="n">3</span><span class="who">Together</span>
+          <p><b>One shared plan, a warm handoff.</b> If anything needs adjusting, you and I talk first so the client never feels stuck.</p></div>
+      </div>
+    </section>
+
+    <div class="two">
+      <section>
+        <h2>The four leaks we plug</h2>
+        <div class="leaks">
+          <div class="leak"><span class="tag">Slow reply</span>
+            <p><b>Jessica, AI Sales Rep.</b> Replies to forms, DMs and texts in under 60 seconds, qualifies like a human would, then hands a warm lead to the owner.</p></div>
+          <div class="leak"><span class="tag">Missed call</span>
+            <p><b>AI Receptionist.</b> Answers 24/7, qualifies the caller and books the appointment.</p></div>
+          <div class="leak"><span class="tag">Forgotten list</span>
+            <p><b>Dead List Miner.</b> Reactivates old leads and past customers, and keeps the conversation going until they book a call.</p></div>
+          <div class="leak"><span class="tag">No show</span>
+            <p><b>Show Rate AI Employee.</b> Reminders and one tap rescheduling so booked calls actually happen.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>When to send someone my way</h2>
+        <ul class="signs">
+          <li>Their ad, form or DM leads wait hours for a reply</li>
+          <li>They say “I’m not great at sales” or hate follow up</li>
+          <li>They’re sitting on a list of past leads nobody has touched in months</li>
+          <li>They’re buried in the inbox and missing the emails that pay</li>
+          <li>Calendar to Cash shows them doing low value follow up a system could handle</li>
+        </ul>
+        <div class="fit"><b>Best fit clients</b>
+          <div class="chips">
+            <span class="chip">Agency owners</span><span class="chip">Coaches and consultants</span>
+            <span class="chip">HVAC, roofing and home services</span><span class="chip">Salons and med spas</span>
+            <span class="chip">Insurance agents</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="band">
+      <h2>Guarantees written into our terms</h2>
+      <div class="guar">
+        <div><div class="big">Live in 7 days</div><p>from the onboarding call, or the setup fee is refunded in full.</p></div>
+        <div><div class="big">60 second replies</div><p>on average each month, or that month is credited.</p></div>
+        <div><div class="big">10 booked appointments</div><p>from their existing list in 90 days, or campaigns keep running free.</p></div>
+      </div>
+      <p class="trust">Built on our own code, not a resold kit. Client data stays in the client’s accounts. Approval mode is on from day one. Capped at twelve clients at a time.</p>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div>
+      <h3>How to refer</h3>
+      <p>Send a quick intro on BLN or by email and copy me in. Or share your link and every booking is tracked back to you:<br>
+      <a href="https://infinityreachmedia.com/book?ref=brad">infinityreachmedia.com/book?ref=brad</a></p>
+    </div>
+    <div class="contact">
+      <b>Yvette Kahn</b>, Founder<br>
+      <a href="mailto:info@infinityreachmedia.com">info@infinityreachmedia.com</a><br>
+      Call or text 714.257.5479<br>
+      Text Jessica live: 714.924.3024
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
