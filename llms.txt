@@ -46,6 +46,17 @@ Each guarantee has stated conditions, published alongside it.
 - AI Employees disclose that they are an AI assistant.
 - The client list is capped at twelve so the people who scope a build are the people who build and support it.
 
+## Reading this site as Markdown
+
+Every public page is available as clean Markdown, with no navigation, scripts or styles, and all links absolute.
+
+- Add `.md` to any page URL: https://infinityreachmedia.com/about.md, https://infinityreachmedia.com/faq.md, https://infinityreachmedia.com/index.md for the homepage.
+- Or request the normal URL with the header `Accept: text/markdown`.
+- Every page in one file: https://infinityreachmedia.com/llms-full.txt
+- Each HTML page carries a `Link: <...md>; rel="alternate"; type="text/markdown"` header pointing at its Markdown version.
+
+Crawler access is spelled out in https://infinityreachmedia.com/robots.txt. GPTBot, OAI-SearchBot, ChatGPT-User, PerplexityBot, ClaudeBot, Claude-User, Claude-SearchBot, Google-Extended, Bingbot, Applebot, CCBot and meta-externalagent are all explicitly allowed.
+
 ## Key pages
 
 - [Home](https://infinityreachmedia.com/): the four leaks, the guarantees, and the three ways to start.
