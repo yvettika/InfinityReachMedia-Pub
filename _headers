@@ -1,0 +1,6 @@
+# Netlify response headers
+
+# Members only downloads (Skool community gifts). Shared by direct link, so
+# keep them out of search results. Not listed in sitemap.xml or llms.txt.
+/members/*
+  X-Robots-Tag: noindex, nofollow
