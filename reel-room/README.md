@@ -3,7 +3,7 @@
 > This is Yvette's own copy of [Reel Room](https://github.com/drleadflow/reel-room) (MIT licensed, version 0.2.0, upstream commit `cf20631`), set up for Infinity Reach Media.
 >
 > What's different from the original:
-> - Brand comes preloaded: Yvette Kahn, @boss.bae.yvette, the site's pink accent (`#D10D6E`) with blush tint (`#FFD9EC`), navy ink (`#161F4A`), cool paper background (`#F1F4FB`), and the site's fonts (Montserrat for big titles, DM Sans for body, Playfair Display for serif moments, Caveat for handwriting). `./reel setup` starts from these, so you can just press Enter.
+> - Brand comes preloaded: Yvette Kahn, @buildwithyvette, the site's pink accent (`#D10D6E`) with blush tint (`#FFD9EC`), navy ink (`#161F4A`), cool paper background (`#F1F4FB`), and the site's fonts (Montserrat for big titles, DM Sans for body, Playfair Display for serif moments, Caveat for handwriting). `./reel setup` starts from these, so you can just press Enter.
 > - `./reel setup` keeps your paper, ink and extra fonts when you re-run it instead of resetting them to the stock cream and black.
 > - It lives in the `reel-room/` folder of the website repo. The site's `_redirects` returns a 404 for this folder, so none of it shows up on infinityreachmedia.com.
 >
