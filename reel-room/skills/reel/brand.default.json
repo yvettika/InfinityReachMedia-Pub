@@ -1,0 +1,22 @@
+{
+  "name": "Yvette Kahn",
+  "handle": "boss.bae.yvette",
+  "colors": {
+    "bg": "#F1F4FB",
+    "ink": "#161F4A",
+    "accent": "#D10D6E",
+    "accent2": "#FFD9EC",
+    "highlight": "#FAE67A",
+    "alert": "#C8323F"
+  },
+  "fonts": {
+    "display": "Montserrat",
+    "body": "DM Sans",
+    "hand": "Caveat",
+    "serif": "Playfair Display"
+  },
+  "cta": null,
+  "logo": null,
+  "projectsDir": "~/ReelRoom",
+  "clipsDir": "~/Downloads"
+}

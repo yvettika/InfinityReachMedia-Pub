@@ -4,3 +4,7 @@
 # keep them out of search results. Not listed in sitemap.xml or llms.txt.
 /members/*
   X-Robots-Tag: noindex, nofollow
+
+# Reel Room toolkit files are not website pages (see _redirects).
+/reel-room/*
+  X-Robots-Tag: noindex, nofollow

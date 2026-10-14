@@ -14,3 +14,9 @@
 # link for the YouTube description and DMs. 302 on purpose: if the page moves
 # onto this domain later, the redirect can change without browsers caching it.
 /blueprint    https://follow-up-gap-blueprint.vercel.app   302
+
+# Reel Room (the /reel video editing toolkit in reel-room/) lives in this repo
+# but is not part of the website. Netlify publishes the repo root, so return a
+# 404 for anything under it instead of serving the scripts and preview GIFs.
+/reel-room     /404   404!
+/reel-room/*   /404   404!
