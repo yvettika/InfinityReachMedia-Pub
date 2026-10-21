@@ -23,11 +23,11 @@
 
   var AGENTS = [
     { id: 'speed', label: 'Axel, Speed to Lead', desc: 'answers new leads in seconds' },
-    { id: 'recep', label: 'AI Receptionist', desc: 'books calls it answers' },
+    { id: 'recep', label: 'Jessica, Phones', desc: 'books calls it answers' },
     { id: 'show', label: 'Rosie, Show-Rate', desc: 'defends booked appointments' },
     { id: 'nurture', label: 'Nurture', desc: 'follows up after silence' },
-    { id: 'react', label: 'Reactivation', desc: 'wins back past customers' },
-    { id: 'review', label: 'Review Machine', desc: 'turns jobs into reviews' },
+    { id: 'react', label: 'Remy, Reactivation', desc: 'wins back past customers' },
+    { id: 'review', label: 'Max, Reviews', desc: 'turns jobs into reviews' },
   ];
 
   // One staged day, compressed. Each beat: which agent fires, what the ticker
