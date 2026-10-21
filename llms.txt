@@ -18,15 +18,15 @@ Each leak maps to a specific AI employee. Clients can run one AI employee or the
 Marketed as AI employees; the industry term for the same thing is "AI agents".
 
 - **Jessica, AI Sales Rep** — texts, calls and DMs; answers leads and books appointments. Reachable by text at (714) 924-3024.
-- **Speed to Lead AI Employee** — replies to every form, DM and missed call within 60 seconds.
-- **AI Receptionist** — answers calls 24/7, qualifies the caller, books the job.
-- **Dead List Miner** — win-back campaigns to a list the client already owns.
-- **Show-Rate AI Employee** — reminders and one-tap reschedule so booked appointments are held.
-- **Review Machine** — requests reviews from happy customers, drafts replies to the rest.
-- **Content Engine** — turns one photo or voice note into a month of posts and emails.
-- **Customer Acquisition AI Employee** — ad research, campaign kits and tracked referrals.
-- **Slack Jarvis Command Center** — run and query the whole fleet from Slack.
-- **Lead Generation AI Employee** — outbound prospecting (in build).
+- **Axel, Speed to Lead AI Employee** — replies to every form, DM and missed call within 60 seconds.
+- **Jessica, AI Receptionist** — answers calls 24/7, qualifies the caller, books the job.
+- **Remy, Dead List Miner** — win-back campaigns to a list the client already owns.
+- **Rosie, Show-Rate AI Employee** — reminders and one-tap reschedule so booked appointments are held.
+- **Max, Review Machine** — requests reviews from happy customers, drafts replies to the rest.
+- **Piper, Content Engine** — turns one photo or voice note into a month of posts and emails.
+- **Archer, Customer Acquisition AI Employee** — ad research, campaign kits and tracked referrals.
+- **Atlas, Slack Command Center** — run and query the whole fleet from Slack.
+- **Scout, Lead Generation AI Employee** — outbound prospecting (in build).
 
 ## Written guarantees
 
