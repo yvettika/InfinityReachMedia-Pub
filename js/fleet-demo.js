@@ -22,9 +22,9 @@
   'use strict';
 
   var AGENTS = [
-    { id: 'speed', label: 'Speed to Lead', desc: 'answers new leads in seconds' },
+    { id: 'speed', label: 'Axel, Speed to Lead', desc: 'answers new leads in seconds' },
     { id: 'recep', label: 'AI Receptionist', desc: 'books calls it answers' },
-    { id: 'show', label: 'Show-Rate', desc: 'defends booked appointments' },
+    { id: 'show', label: 'Rosie, Show-Rate', desc: 'defends booked appointments' },
     { id: 'nurture', label: 'Nurture', desc: 'follows up after silence' },
     { id: 'react', label: 'Reactivation', desc: 'wins back past customers' },
     { id: 'review', label: 'Review Machine', desc: 'turns jobs into reviews' },
@@ -182,7 +182,7 @@
       // Static composed frame: warm two nodes so it reads as alive, no motion.
       nodes[0].heat = 0.6; nodes[4].heat = 0.4;
       running = true; draw(0); running = false;
-      ticker.innerHTML = '<b>Speed to Lead</b> — answered a new lead 41 seconds after it arrived';
+      ticker.innerHTML = '<b>Axel, Speed to Lead</b> — answered a new lead 41 seconds after it arrived';
       return;
     }
     // Animate only while on screen — this page has videos and blooms already;
