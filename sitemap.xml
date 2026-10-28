@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://infinityreachmedia.com/</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://infinityreachmedia.com/agentic-flows</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -67,7 +67,7 @@
   </url>
   <url>
     <loc>https://infinityreachmedia.com/hvac</loc>
-    <lastmod>2026-07-24</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
@@ -82,12 +82,12 @@
   </url>
   <url>
     <loc>https://infinityreachmedia.com/services</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://infinityreachmedia.com/about</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -124,5 +124,50 @@
     <loc>https://infinityreachmedia.com/accessibility</loc>
     <lastmod>2026-09-11</lastmod>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/yvette-kahn</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/home-services</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/roofing</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/plumbing</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/construction</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/too-many-leads</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/lead-follow-up</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/old-leads</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://infinityreachmedia.com/after-hours-calls</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>0.8</priority>
   </url>
 </urlset>

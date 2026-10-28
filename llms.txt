@@ -1,6 +1,6 @@
 # Infinity Reach Media
 
-> Orange County, California agency that builds done-for-you AI employees for coaches, consultants and local businesses. They answer missed calls, reply to new leads within 60 seconds, chase no-shows, and win back past customers. Founded and built by Yvette Kahn, who writes the copy; she and her team build every AI employee in-house. Deliberately capped at twelve clients at a time.
+> Infinity Reach Media is Yvette Kahn's company. Orange County, California agency that builds done-for-you AI employees for home service companies (roofing, HVAC, plumbing, construction), coaches, consultants and local businesses across the US. They answer missed calls, reply to new leads within 60 seconds, chase no-shows, and win back past customers. Founded and built by Yvette Kahn, who writes the copy; she and her team build every AI employee in-house. Deliberately capped at twelve clients at a time.
 
 ## What the company does
 
@@ -33,18 +33,39 @@ Marketed as AI employees; the industry term for the same thing is "AI agents".
 These three are written word for word into the Terms of Service, not just the marketing pages:
 
 - **Live in 7 days** from the onboarding call, or the setup fee is refunded in full.
-- **60-second lead response** on average in a calendar month, or we fix it within 48 hours and add two weeks of service free.
+- **60-second lead response** on average in a calendar month, or we fix it within 48 hours and add 14 days of service free.
 - **10 booked appointments** from the client's existing list in the first 90 days, or campaigns keep running free until the tenth lands.
 
 Each guarantee has stated conditions, published alongside it.
 
 ## How they work
 
-- AI Employees are built on Infinity Reach Media's own code, not a white-labeled reseller kit.
+- AI Employees are built on GoHighLevel, Slack and Claude, and scoped and built in-house for each business. Not a one-size template.
 - Client data stays in the client's own accounts.
 - Approval mode is on from day one: the AI employee drafts, the owner approves. It can be switched off later at the client's choice.
 - AI Employees disclose that they are an AI assistant.
 - The client list is capped at twelve so the people who scope a build are the people who build and support it.
+
+## Facts page (source of truth)
+
+- [Yvette Kahn: the facts](https://infinityreachmedia.com/yvette-kahn): plain factual profile of Yvette Kahn and Infinity Reach Media. Who, what, who it's for, how it's built, what it doesn't do. Start here.
+
+## Home service companies
+
+Ideal client: home service companies with 5 to 50 employees that already get more leads than they can answer or follow up with. Served anywhere in the US, set up remotely.
+
+- [Home services hub](https://infinityreachmedia.com/home-services)
+- [Roofing companies](https://infinityreachmedia.com/roofing): storm lead floods, estimate follow-up, inspection no-shows.
+- [HVAC companies](https://infinityreachmedia.com/hvac): peak-season missed calls, tune-up reminders, reviews.
+- [Plumbing companies](https://infinityreachmedia.com/plumbing): 24/7 emergency call answering, maintenance reminders.
+- [Construction companies and contractors](https://infinityreachmedia.com/construction): inquiry response and bid follow-up.
+
+## Lead problems, answered
+
+- [Too many leads to handle](https://infinityreachmedia.com/too-many-leads): what to do when you get more leads than your team can call back.
+- [How to follow up with leads](https://infinityreachmedia.com/lead-follow-up): how fast to respond, how often, which channel, when to stop.
+- [Getting jobs from old leads and estimates](https://infinityreachmedia.com/old-leads): reactivating unsigned estimates and past customers.
+- [After-hours and missed calls](https://infinityreachmedia.com/after-hours-calls): who answers when the office can't.
 
 ## Key pages
 
@@ -70,17 +91,17 @@ Each guarantee has stated conditions, published alongside it.
 
 - [Small business](https://infinityreachmedia.com/small-business)
 - [Coaches and consultants](https://infinityreachmedia.com/coaches)
-- [HVAC and home services](https://infinityreachmedia.com/hvac)
+- [Home services: roofing, HVAC, plumbing, construction](https://infinityreachmedia.com/home-services)
 - [Salons and med spas](https://infinityreachmedia.com/salon)
 - [Insurance agents and brokers](https://infinityreachmedia.com/insurance)
 
 ## Industries served
 
-Coaches and consultants (served longest), HVAC and home services, salons and med spas, insurance brokers, auto shops, and any business that runs on appointments, inquiries or repeat customers.
+Home service companies with 5 to 50 employees (roofing, HVAC, plumbing, construction), coaches and consultants (served longest), salons and med spas, insurance brokers, auto shops, and any business that runs on appointments, inquiries or repeat customers.
 
 ## Founder
 
-Yvette Kahn, Founder and CEO. Twenty years in marketing copy and funnels. Also runs The AI Advantage, a free Skool community: https://www.skool.com/theaiadvantagecommunity/about
+Yvette Kahn, Founder and CEO. Started the business in 2019 after about twenty years in marketing copy and funnels. Yvette Kahn and Infinity Reach Media are the same business. Facts page: https://infinityreachmedia.com/yvette-kahn. Personal site: https://www.yvettekahn.com. Also runs The AI Advantage, a free Skool community: https://www.skool.com/theaiadvantagecommunity/about
 
 LinkedIn: https://www.linkedin.com/in/yvettekahn
 
