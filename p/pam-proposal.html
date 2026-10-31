@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Private partnership proposal, shared by link.">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<title>Pam Perumal Partnership Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+/* Layout: Infinity Reach Media's light brand (white and lavender grounds, navy ink, purple/blue/pink wash, pink action color). A single reading column of short numbered sections, with the trade itself shown as a balanced pair up top. One deliberate light look, colors set explicitly. */
+:root{
+  --white:#FFFFFF; --lav:#F6F5FF; --lav-2:#ECEAFB;
+  --ink:#161F4A; --muted:#3A4268; --soft:#5A6285;
+  --blue-dk:#2349B8; --purple:#8B45D6; --purple-dk:#6B2FC0; --purple-lt:#C39BE8;
+  --cta:#D10D6E; --pink:#FF2D9B; --pink-dk:#B80F62; --pink-lt:#FFD9EC;
+  --line:rgba(22,31,74,.12);
+  --wash:
+    radial-gradient(900px 520px at 6% -6%, rgba(139,69,214,.28), transparent 64%),
+    radial-gradient(860px 520px at 98% 2%, rgba(76,123,255,.30), transparent 66%),
+    radial-gradient(760px 420px at 58% 104%, rgba(255,45,155,.15), transparent 70%),
+    linear-gradient(180deg,#FFFFFF 0%,#F5F0FF 42%,#E8EDFF 100%);
+  --band:linear-gradient(120deg,#F1EAFF 0%,#EAF0FF 60%,#FDEDF6 100%);
+  --serif:"Playfair Display", Georgia, serif;
+  --display:"Montserrat", "Segoe UI", system-ui, sans-serif;
+  --body:"DM Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+.gut{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:980px;margin:0 auto}
+h1,h2,h3{margin:0;color:var(--ink);text-wrap:balance}
+h1,h2{font-family:var(--serif);font-weight:800;line-height:1.12}
+h3{font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.35}
+p{margin:0}
+a{color:var(--blue-dk)}
+.label{font-family:var(--display);font-weight:800;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple-dk)}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1rem;color:var(--ink);text-decoration:none;white-space:nowrap}
+.logo img{width:34px;height:34px}
+.logo em{font-style:normal;color:var(--cta)}
+.top nav{display:flex;gap:18px;font-family:var(--display);font-weight:600;font-size:.82rem}
+.top nav a{color:var(--muted);text-decoration:none}
+.top nav a:hover{color:var(--ink)}
+@media (max-width:820px){.top nav{display:none}}
+
+/* hero */
+.hero{background:var(--wash);padding-block:72px 64px}
+.hero h1{font-size:clamp(2.3rem,5.6vw,3.7rem);margin:14px 0 18px;max-width:16em}
+.hero h1 i{color:var(--cta)}
+.hero .lede{font-size:1.15rem;color:var(--muted);max-width:40em}
+.meta{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:22px;font-family:var(--display);font-weight:600;font-size:.82rem;color:var(--soft)}
+.meta b{color:var(--ink)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:15px 24px}
+.btn-cta{background:var(--cta);color:#fff;box-shadow:0 12px 30px rgba(209,13,110,.25)}
+.btn-cta:hover{background:var(--pink-dk)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--purple-dk);outline-offset:3px}
+
+/* the trade */
+.trade{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);align-items:stretch;margin-top:48px}
+@media (max-width:760px){.trade{grid-template-columns:1fr}}
+.side{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 26px 22px;box-shadow:0 18px 44px rgba(22,31,74,.07);display:flex;flex-direction:column;gap:12px;min-width:0}
+.side .who{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.side .val{font-family:var(--serif);font-weight:800;font-size:2.2rem;line-height:1}
+.side ul{margin:0;padding-left:18px;color:var(--muted);font-size:.96rem;display:grid;gap:4px}
+.side.you{border-color:var(--purple-lt)}
+.eq{display:grid;place-items:center;font-family:var(--serif);font-weight:800;font-size:2.4rem;color:var(--purple)}
+@media (max-width:760px){.eq{padding-block:6px;font-size:2rem}}
+.tradenote{text-align:center;margin-top:18px;font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--soft)}
+
+/* sections */
+section.s{padding-block:72px;border-top:1px solid var(--line)}
+section.s.lav{background:var(--lav)}
+.sh{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 16px;margin-bottom:30px}
+.sh .n{font-family:var(--serif);font-weight:800;font-size:2rem;line-height:1;color:var(--purple-lt)}
+.sh h2{font-size:clamp(1.7rem,3.6vw,2.3rem)}
+.sh p{grid-column:2;color:var(--muted);max-width:42em}
+@media (max-width:560px){.sh{grid-template-columns:1fr}.sh p{grid-column:1}}
+
+blockquote{margin:0;background:var(--band);border-radius:22px;padding:30px 32px;font-family:var(--serif);font-style:italic;font-weight:700;font-size:clamp(1.2rem,2.6vw,1.5rem);line-height:1.45}
+blockquote footer{font-family:var(--display);font-style:normal;font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-dk);margin-top:14px}
+.goal{margin-top:20px;color:var(--muted);max-width:44em}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:f}
+@media (max-width:860px){.flow{grid-template-columns:1fr}}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.step::before{counter-increment:f;content:counter(f);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--lav-2);color:var(--purple-dk);font-family:var(--display);font-weight:800;font-size:.8rem}
+.step p{font-size:.9rem;color:var(--muted);line-height:1.5}
+.step.win{background:linear-gradient(160deg,rgba(255,45,155,.12),rgba(139,69,214,.10));border-color:var(--cta)}
+.step.win::before{background:var(--cta);color:#fff}
+.step:not(:last-child)::after{content:"";position:absolute;right:-12px;top:30px;width:12px;height:2px;background:var(--purple-lt)}
+@media (max-width:860px){.step:not(:last-child)::after{right:auto;left:31px;top:auto;bottom:-12px;width:2px;height:12px}}
+.small{font-size:.88rem;color:var(--soft);margin-top:16px;max-width:52em}
+
+/* build list */
+.build{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 24px;padding:20px 26px;border-bottom:1px solid var(--line)}
+.item p{grid-column:1;color:var(--muted);font-size:.95rem}
+.item .price{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--display);font-weight:800;font-size:1.05rem}
+.item .tag{display:inline-block;margin-left:8px;font-family:var(--display);font-weight:700;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cta);background:var(--pink-lt);border-radius:999px;padding:3px 9px;vertical-align:2px}
+.item a{font-weight:700}
+.total{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 26px;background:var(--band)}
+.total b{font-family:var(--display);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
+.total span{font-family:var(--serif);font-weight:800;font-size:1.8rem}
+@media (max-width:560px){.item{grid-template-columns:1fr}.item .price{grid-row:auto;grid-column:1}}
+
+/* pam's side */
+.ptable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.tablebox{overflow-x:auto;border-radius:22px}
+.ptable th,.ptable td{text-align:left;padding:16px 22px;border-bottom:1px solid var(--line);vertical-align:top}
+.ptable th{font-family:var(--display);font-weight:700;font-size:.82rem;color:var(--ink);width:34%}
+.ptable td{color:var(--soft)}
+.pill{display:inline-block;font-family:var(--display);font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-dk);background:var(--lav-2);border-radius:999px;padding:4px 10px}
+.ptable tr:last-child th,.ptable tr:last-child td{border-bottom:0;background:var(--band);color:var(--ink);font-weight:800}
+
+/* timeline */
+.weeks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.weeks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.weeks{grid-template-columns:1fr}}
+.week{background:#fff;border:1px solid var(--line);border-top:4px solid var(--purple-lt);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.week:last-child{border-top-color:var(--cta)}
+.week p{color:var(--muted);font-size:.93rem}
+
+/* terms */
+.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.terms{grid-template-columns:1fr}}
+.term{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.term p{color:var(--muted);font-size:.95rem;margin-top:4px}
+
+/* bonus */
+.bonus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.bonus{grid-template-columns:1fr}}
+.b{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line)}
+.b .ic{width:44px;height:44px;border-radius:12px;background:var(--lav-2);display:grid;place-items:center}
+.b .ic svg{width:22px;height:22px}
+.b p{color:var(--muted);font-size:.95rem;margin-top:2px}
+
+/* next steps */
+.next{background:var(--band);border-radius:26px;padding:34px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px}
+@media (max-width:780px){.next{grid-template-columns:1fr;padding:26px 22px}}
+.next ol{margin:16px 0 0;padding-left:22px;display:grid;gap:10px}
+.next ol li::marker{font-family:var(--display);font-weight:800;color:var(--cta)}
+.qs{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px}
+.qs li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:.95rem;color:var(--muted)}
+.qs li::before{content:"";width:16px;height:16px;margin-top:5px;border:2px solid var(--purple-lt);border-radius:5px}
+.sig{display:flex;align-items:center;gap:16px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.sig img{width:48px;height:48px}
+.sig b{display:block;font-family:var(--serif);font-size:1.2rem}
+.sig span{display:block;color:var(--soft);font-size:.92rem;user-select:all}
+
+footer.f{background:var(--lav);border-top:1px solid var(--line);padding-block:26px;font-size:.85rem;color:var(--soft)}
+footer.f .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+</style>
+</head>
+<body>
+
+<header class="top gut">
+  <div class="wrap">
+    <a class="logo" href="https://infinityreachmedia.com" target="_blank" rel="noopener"><img src="/images/logo-mark.png" alt="">Infinity <em>Reach</em> Media</a>
+    <nav aria-label="Sections">
+      <a href="#build">The build</a><a href="#pam">Your side</a><a href="#timeline">Timeline</a><a href="#terms">Terms</a><a href="#next">Next steps</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero gut">
+    <div class="wrap">
+      <p class="label">Partnership proposal · prepared for Pam Perumal</p>
+      <h1>Your 4 Day Challenge, <i>filling itself.</i></h1>
+      <p class="lede">A straight trade. I build the website and AI employees that turn your new subscribers into challenge sign ups. You take me through your coaching program. Equal value on both sides, no cash changing hands.</p>
+      <div class="meta"><span>Prepared by <b>Yvette Kahn</b></span><span>Date <b>October 31, 2026</b></span><span>Valid for <b>30 days</b></span></div>
+      <div class="ctas">
+        <a class="btn btn-cta" href="/p/pam-challenge" target="_blank" rel="noopener">See your landing page preview</a>
+        <a class="btn btn-ghost" href="#next">Jump to next steps</a>
+      </div>
+
+      <div class="trade" aria-label="The trade">
+        <div class="side">
+          <div class="who"><span class="label">Infinity Reach builds</span><span class="val num">$7,000</span></div>
+          <ul>
+            <li>Challenge website with its own AI agent</li>
+            <li>Three AI employees: welcome, show up, closer</li>
+            <li>CRM, tracking and launch support</li>
+          </ul>
+        </div>
+        <div class="eq" aria-hidden="true">=</div>
+        <div class="side you">
+          <div class="who"><span class="label">Pam provides</span><span class="val num">$7,000</span></div>
+          <ul>
+            <li>Pam's coaching program for Yvette</li>
+            <li>At its regular price</li>
+            <li>Details confirmed together (section 4)</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tradenote">Ready to launch in 4 weeks · you own everything that's built</p>
+    </div>
+  </section>
+
+  <section class="s gut">
+    <div class="wrap">
+      <div class="sh"><span class="n">1</span><h2>What you asked for</h2></div>
+      <blockquote>“I'd like to have the AI Employee(s) set up to send automatic response to new subscribers and initiate chat that bring sign ups for my free 4 days challenge.”<footer>Pam Perumal</footer></blockquote>
+      <p class="goal">In plain terms: every new subscriber hears from you within a minute, gets into a real conversation, and ends up registered for your challenge. You never type a message. Then the system keeps people showing up all four days and invites the right ones to work with you.</p>
+    </div>
+  </section>
+
+  <section class="s lav gut">
+    <div class="wrap">
+      <div class="sh"><span class="n">2</span><h2>How it works</h2><p>Every way someone finds you leads to the same place: a booked call on your calendar.</p></div>
+      <div class="flow">
+        <div class="step"><h3>Someone raises a hand</h3><p>Comments, replies to a story, DMs “CHALLENGE”, joins your list or visits the site.</p></div>
+        <div class="step"><h3>Welcome AI replies</h3><p>Within a minute, in your voice. Starts a friendly chat and saves their seat.</p></div>
+        <div class="step"><h3>They're registered</h3><p>Added to your CRM and tagged for the next challenge.</p></div>
+        <div class="step"><h3>Show up AI keeps them going</h3><p>Day 1 to Day 4 links, reminders by email and text, replays for missed days.</p></div>
+        <div class="step win"><h3>Closer AI books the call</h3><p>Invites your most engaged people to a 1:1 and books it on your calendar.</p></div>
+      </div>
+      <p class="small">Good to know: Instagram doesn't let any tool message someone just because they followed you. So the welcome starts when a person comments, replies to a story, DMs a keyword or joins your list. Those are also the people most likely to sign up.</p>
+    </div>
+  </section>
+
+  <section class="s gut" id="build">
+    <div class="wrap">
+      <div class="sh"><span class="n">3</span><h2>What I'll build for you</h2><p>My usual rate for a build like this is $7,500. I'm meeting you at $7,000 so the trade is even.</p></div>
+      <div class="build">
+        <div class="item"><h3>Challenge website with a built in AI agent <span class="tag">Preview ready</span></h3><p>A bold one page site for your challenge, built for phones, in your branding. The agent answers questions and saves seats right in the chat. Includes thank you and replay pages. <a href="/p/pam-challenge" target="_blank" rel="noopener">See the preview</a></p><span class="price num">$2,500</span></div>
+        <div class="item"><h3>Welcome AI employee</h3><p>Replies to every new subscriber within a minute. Watches Instagram comments and DMs for your keyword, greets new email subscribers and signs them up in the conversation.</p><span class="price num">$1,500</span></div>
+        <div class="item"><h3>Show up AI employee</h3><p>Confirms each sign up, sends the Day 1 to Day 4 links and reminders by email and text, nudges anyone who misses a day and sends the replay.</p><span class="price num">$1,250</span></div>
+        <div class="item"><h3>Closer AI employee</h3><p>After Day 4, invites your most engaged people to a call or your offer. Handles “let me think about it” kindly and books right onto your calendar.</p><span class="price num">$1,000</span></div>
+        <div class="item"><h3>Back end and tracking</h3><p>Your CRM pipeline from subscribed to enrolled, tags, forms, calendar hookup and a simple dashboard of sign ups and show up rate. Tested end to end.</p><span class="price num">$500</span></div>
+        <div class="item"><h3>Launch support</h3><p>I watch every conversation during your first live challenge and fine tune the agents, plus 30 days of fixes after.</p><span class="price num">$250</span></div>
+        <div class="total"><b>Total value</b><span class="num">$7,000</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s lav gut" id="pam">
+    <div class="wrap">
+      <div class="sh"><span class="n">4</span><h2>What you provide</h2><p>Your coaching program for me, at its regular price. Let's fill in the details together so both sides are written down the same way.</p></div>
+      <div class="tablebox">
+        <table class="ptable">
+          <tr><th>Program name</th><td><span class="pill">To confirm</span></td></tr>
+          <tr><th>Format</th><td><span class="pill">To confirm</span> number of sessions, length, 1:1 or group</td></tr>
+          <tr><th>Program length</th><td><span class="pill">To confirm</span> weeks or months</td></tr>
+          <tr><th>What's included</th><td><span class="pill">To confirm</span> workbooks, support between sessions, recordings</td></tr>
+          <tr><th>Total value</th><td class="num">$7,000</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="s gut" id="timeline">
+    <div class="wrap">
+      <div class="sh"><span class="n">5</span><h2>Timeline</h2><p>Four weeks from kickoff to your first challenge running on autopilot. Your sessions with me start the same week.</p></div>
+      <div class="weeks">
+        <div class="week"><span class="label">Week 1</span><h3>Kickoff</h3><p>You share challenge dates, your brand look, photos and a few real DMs so the agents sound like you.</p></div>
+        <div class="week"><span class="label">Week 2</span><h3>Website</h3><p>Your landing page and its AI agent go live for you to review and tweak.</p></div>
+        <div class="week"><span class="label">Week 3</span><h3>AI employees</h3><p>Welcome, show up and closer agents are built and tested with a pretend sign up.</p></div>
+        <div class="week"><span class="label">Week 4</span><h3>Launch</h3><p>You promote the challenge. I watch every conversation that first week and tune as we go.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s lav gut" id="terms">
+    <div class="wrap">
+      <div class="sh"><span class="n">6</span><h2>Simple terms</h2><p>Fair both ways, and nobody owes cash if life gets in the way.</p></div>
+      <div class="terms">
+        <div class="term"><h3>Even value</h3><p>$7,000 of build for $7,000 of coaching. No invoices for the work on either side.</p></div>
+        <div class="term"><h3>Software costs</h3><p>You pay your monthly tools directly in your name: CRM and automation platform, text and email fees, AI usage and domain. I'll share an estimate before we start.</p></div>
+        <div class="term"><h3>You own it</h3><p>Your website, accounts, contact list and content are yours. I keep my own templates and methods.</p></div>
+        <div class="term"><h3>Side by side</h3><p>We both start the same week and move forward together.</p></div>
+        <div class="term"><h3>If either of us pauses</h3><p>The other pauses too. We each keep what's already been delivered and no one owes money.</p></div>
+        <div class="term"><h3>New ideas later</h3><p>A second funnel or a new offer is priced separately, or added to the trade with matching coaching time.</p></div>
+      </div>
+      <p class="small">In the US a barter counts as income at fair value, so we'll each record $7,000. Worth a quick word with your accountant.</p>
+    </div>
+  </section>
+
+  <section class="s gut">
+    <div class="wrap">
+      <div class="sh"><span class="n">7</span><h2>Extra wins for both of us</h2></div>
+      <div class="bonus">
+        <div class="b"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4zM17 11l4-3v8l-4-3" fill="none" stroke="#6B2FC0" stroke-width="1.8" stroke-linejoin="round"/></svg></span><div><h3>Testimonials both ways</h3><p>I record a video about your coaching. You record one about the challenge build.</p></div></div>
+        <div class="b"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H3" fill="none" stroke="#6B2FC0" stroke-width="1.8" stroke-linecap="round"/></svg></span><div><h3>A shared case study</h3><p>I share your challenge results (sign ups, show up rate, calls booked), with your okay on anything personal.</p></div></div>
+        <div class="b"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12h8m-3-3 3 3-3 3M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0" fill="none" stroke="#6B2FC0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Referrals</h3><p>We both know a lot of coaches in the 7FCEO room. Either of us earns 10% of the first payment from any client we send the other.</p></div></div>
+        <div class="b"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5" fill="none" stroke="#6B2FC0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h3>Keep it running</h3><p>After launch support ends, you can choose to have me manage the agents each month. Optional, priced then.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s gut" id="next">
+    <div class="wrap">
+      <div class="next">
+        <div>
+          <p class="label">Next steps</p>
+          <h2 style="font-size:clamp(1.7rem,3.6vw,2.3rem);margin-top:8px">Three steps to get started</h2>
+          <ol>
+            <li>Look over this proposal and your landing page preview.</li>
+            <li>Fill in your program details from section 4.</li>
+            <li>Book a 30 minute kickoff call and we start the same week.</li>
+          </ol>
+        </div>
+        <div>
+          <p class="label">Let's settle on our call</p>
+          <ul class="qs">
+            <li>When does your next challenge run, and how often?</li>
+            <li>Where do subscribers come from today: Instagram, email, or both?</li>
+            <li>Which email tool do you use now?</li>
+            <li>What does the challenge lead into, and what does it cost?</li>
+            <li>Do you have a domain and brand colors, or should I create them?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sig">
+        <img src="/images/logo-mark.png" alt="">
+        <div><b>Yvette Kahn</b><span>Founder, Infinity Reach Media</span><span>yvette@infinityreachmedia.com · (714) 257-5479</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="f gut">
+  <div class="wrap"><span>© 2026 Infinity Reach Media · Orange County, CA</span><span>Prepared privately for Pam Perumal</span></div>
+</footer>
+</body>
+</html>
