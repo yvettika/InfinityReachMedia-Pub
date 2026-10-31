@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Preview of the free 4 Day Breakthrough Challenge page for Pam Perumal.">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<title>4 Day Breakthrough Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: a dark plum "before dawn" hero with the four days drawn as a sunrise on the horizon, then light blush sections that read top to bottom. One deliberate look, so colors are set explicitly for both host themes. */
+:root{
+  --plum:#2B1338; --plum-2:#43205A; --plum-3:#5B2E73;
+  --dawn:#FF7A59; --gold:#F7B548; --gold-dk:#B9741A;
+  --blush:#FFF5F0; --rose:#FCE6DD; --card:#FFFFFF;
+  --ink:#2B1338; --muted:#5F4A66; --line:rgba(43,19,56,.14);
+  --on-dark:#FBEFEA; --on-dark-soft:#D9C3D6;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--blush);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
+.gut{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+
+/* preview ribbon */
+.ribbon{background:var(--gold);color:var(--plum);font-size:.82rem;font-weight:600;text-align:center;padding-block:8px}
+
+/* nav */
+.nav{background:var(--plum);color:var(--on-dark)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px}
+.brand{display:flex;flex-direction:column;line-height:1.15}
+.brand b{font-family:var(--display);font-weight:400;font-size:1.3rem}
+.brand span{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark-soft)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 1rem/1 var(--body);border:0;border-radius:999px;padding:16px 26px;cursor:pointer;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease}
+.btn:focus-visible{outline:3px solid var(--dawn);outline-offset:3px}
+.btn-gold{background:var(--gold);color:var(--plum);box-shadow:0 10px 30px rgba(247,181,72,.28)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 14px 34px rgba(247,181,72,.38)}
+.btn-plum{background:var(--plum);color:#fff}
+.btn-plum:hover{background:var(--plum-2)}
+.btn-sm{padding:11px 18px;font-size:.9rem}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--plum);color:var(--on-dark);padding-block:56px 0}
+.hero::before{content:"";position:absolute;left:50%;bottom:-420px;width:1200px;height:760px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(closest-side, rgba(247,181,72,.55), rgba(255,122,89,.35) 45%, rgba(91,46,115,.0) 78%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:start}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:36px}}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{font-size:clamp(2.6rem,6.4vw,4.6rem);margin:14px 0 18px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.lede{font-size:1.15rem;color:var(--on-dark-soft);max-width:34em}
+.facts{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 26px}
+.fact{font-size:.85rem;font-weight:600;border:1px solid rgba(251,239,234,.25);border-radius:999px;padding:7px 14px}
+
+/* signup form */
+.signup{background:rgba(255,255,255,.06);border:1px solid rgba(251,239,234,.18);border-radius:22px;padding:20px;max-width:560px}
+.signup .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.signup .row{grid-template-columns:1fr}}
+.field label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.field input{width:100%;font:500 1rem var(--body);border-radius:12px;padding:14px;border:1px solid rgba(251,239,234,.35);background:rgba(255,255,255,.95);color:var(--ink)}
+.field input:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.signup .btn{width:100%;margin-top:12px}
+.fine{font-size:.78rem;color:var(--on-dark-soft);margin-top:10px}
+.err{color:#FFD2C4;font-size:.85rem;margin-top:8px;min-height:1.2em}
+.done{text-align:left}
+.done b{display:block;font-family:var(--display);font-weight:400;font-size:1.6rem;color:var(--gold);margin-bottom:6px}
+
+/* horizon with four days */
+.horizon{position:relative;margin-top:56px;padding-bottom:40px}
+.horizon ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;position:relative}
+.horizon ol::before{content:"";position:absolute;left:4%;right:4%;top:15px;height:2px;background:linear-gradient(90deg,rgba(247,181,72,.25),var(--gold),var(--dawn))}
+.horizon li{position:relative;text-align:center;font-size:.85rem;color:var(--on-dark-soft)}
+.horizon .dot{display:block;width:32px;height:32px;margin:0 auto 10px;border-radius:50%;background:var(--plum);border:2px solid var(--gold);color:var(--gold);font-weight:800;line-height:28px;position:relative;z-index:1}
+.horizon li:last-child .dot{background:var(--gold);color:var(--plum)}
+.horizon b{display:block;color:var(--on-dark);font-weight:700;font-size:.95rem}
+
+/* chat agent card */
+.agent{background:var(--card);color:var(--ink);border-radius:24px;box-shadow:0 30px 70px rgba(10,2,18,.45);overflow:hidden;display:flex;flex-direction:column;height:560px;max-height:80vh;min-width:0}
+.agent-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--rose);border-bottom:1px solid var(--line)}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--dawn),var(--gold));color:var(--plum);display:grid;place-items:center;font-family:var(--display);font-size:1.05rem;flex:0 0 42px}
+.agent-head b{display:block;font-size:.98rem}
+.agent-head span{font-size:.8rem;color:var(--muted)}
+.live{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2FA36B;margin-right:6px;vertical-align:1px}
+.log{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#FFFBF9}
+.msg{max-width:86%;padding:11px 14px;border-radius:18px;font-size:.95rem;line-height:1.45;white-space:pre-line;overflow-wrap:anywhere}
+.msg.bot{background:var(--rose);border-bottom-left-radius:6px;align-self:flex-start}
+.msg.me{background:var(--plum);color:#fff;border-bottom-right-radius:6px;align-self:flex-end}
+.msg.ok{background:#E9F6EE;border:1px solid #B7E0C6}
+.typing{align-self:flex-start;background:var(--rose);border-radius:18px;padding:12px 14px;display:flex;gap:4px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);opacity:.5;animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{50%{opacity:1}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;background:#FFFBF9}
+.chip{font:600 .82rem var(--body);border:1px solid var(--plum-3);color:var(--plum);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer}
+.chip:hover{background:var(--rose)}
+.chip:focus-visible{outline:2px solid var(--dawn);outline-offset:2px}
+.compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff}
+.compose input{flex:1;min-width:0;font:500 .95rem var(--body);border:1px solid var(--line);border-radius:999px;padding:12px 16px;color:var(--ink);background:#fff}
+.compose input:focus-visible{outline:2px solid var(--dawn);outline-offset:1px}
+.compose button{border:0;border-radius:999px;background:var(--plum);color:#fff;font:700 .9rem var(--body);padding:0 18px;cursor:pointer}
+.agent-note{font-size:.75rem;color:var(--muted);text-align:center;padding:0 12px 10px;background:#fff}
+
+/* sections */
+section{padding-block:80px}
+.alt{background:var(--rose)}
+.sec-head{max-width:720px;margin-bottom:40px}
+.sec-head .eyebrow{color:var(--gold-dk)}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3rem);margin-top:10px}
+.sec-head p{color:var(--muted);margin-top:14px;font-size:1.08rem}
+
+.fit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:800px){.fit{grid-template-columns:1fr}}
+.fit div{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+.fit svg{width:28px;height:28px;margin-bottom:12px}
+.fit p{font-size:1.05rem}
+
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.days{grid-template-columns:1fr}}
+.day{background:var(--card);border-radius:22px;padding:24px;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.day .n{font-size:.75rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk)}
+.day h3{font-size:1.5rem}
+.day p{color:var(--muted);font-size:.98rem}
+.day.final{background:var(--plum);color:var(--on-dark);border-color:var(--plum)}
+.day.final .n{color:var(--gold)}
+.day.final p{color:var(--on-dark-soft)}
+
+.gets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 40px;max-width:900px;list-style:none;padding:0;margin:0}
+@media (max-width:700px){.gets{grid-template-columns:1fr}}
+.gets li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:1.05rem}
+.gets li::before{content:"";width:22px;height:22px;margin-top:3px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%232B1338' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/15px no-repeat}
+
+.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
+@media (max-width:800px){.about{grid-template-columns:1fr}}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:28px;background:radial-gradient(120% 80% at 50% 100%, var(--gold), var(--dawn) 40%, var(--plum-3) 75%, var(--plum));display:grid;place-items:center;color:var(--on-dark);font-family:var(--display);font-size:5rem}
+.portrait small{display:block;font-family:var(--body);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;text-align:center;opacity:.8;margin-top:6px}
+.about h2{font-size:clamp(2rem,4vw,2.8rem)}
+.about p{color:var(--muted);margin-top:16px;font-size:1.08rem}
+
+.faq{max-width:780px;display:grid;gap:12px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+.faq summary{cursor:pointer;font-weight:700;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;font-size:1.4rem;line-height:1;color:var(--gold-dk)}
+.faq details[open] summary::after{content:"\2212"}
+.faq summary:focus-visible{outline:2px solid var(--dawn);outline-offset:4px;border-radius:4px}
+.faq p{color:var(--muted);margin-top:10px}
+
+.final{background:var(--plum);color:var(--on-dark);text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;left:50%;top:-300px;width:900px;height:520px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side, rgba(255,122,89,.35), transparent 75%)}
+.final .wrap{position:relative;max-width:640px}
+.final h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.final p{color:var(--on-dark-soft);margin:16px auto 28px}
+.final .signup{margin:0 auto;text-align:left}
+
+footer{background:#1E0D28;color:var(--on-dark-soft);font-size:.85rem;padding-block:28px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer a{color:var(--on-dark)}
+
+/* floating chat button for small screens, after the hero card scrolls away */
+.fab{position:fixed;right:calc(16px + env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:30;display:none}
+.fab.show{display:inline-flex}
+</style>
+</head>
+<body>
+
+<div class="ribbon gut">Preview for Pam · built by Infinity Reach Media · sign ups here aren't sent anywhere yet</div>
+
+<header class="nav gut">
+  <div class="wrap">
+    <div class="brand"><b>Pam Perumal</b><span>Breakthrough Specialist</span></div>
+    <a class="btn btn-gold btn-sm" href="#join">Save my free seat</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero gut" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Free live challenge with Pam</p>
+        <h1 id="h1">The 4 Day <em>Breakthrough</em> Challenge</h1>
+        <p class="lede">Four days to find what's really been holding you back, and take your first real step past it. No fluff, no pressure, just clarity you can use.</p>
+        <div class="facts">
+          <span class="fact">100% free</span>
+          <span class="fact">4 short daily sessions</span>
+          <span class="fact">Replays if you miss a day</span>
+        </div>
+        <form class="signup" id="join" novalidate>
+          <div class="hero-form">
+            <div class="row">
+              <div class="field"><label for="fn1">First name</label><input id="fn1" name="first" autocomplete="given-name" placeholder="Your first name"></div>
+              <div class="field"><label for="em1">Email</label><input id="em1" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+            </div>
+            <button class="btn btn-gold" type="submit">Save my free seat</button>
+            <p class="err" aria-live="polite"></p>
+            <p class="fine">You'll get your Day 1 link and daily reminders by email. Unsubscribe anytime.</p>
+          </div>
+        </form>
+      </div>
+
+      <aside class="agent" id="agent" aria-label="Chat with Pam's assistant">
+        <div class="agent-head">
+          <div class="avatar" aria-hidden="true">P</div>
+          <div><b>Pam's assistant</b><span><i class="live" aria-hidden="true"></i>AI assistant · replies right away</span></div>
+        </div>
+        <div class="log" id="log" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+        <form class="compose" id="compose">
+          <label for="say" class="sr" style="position:absolute;left:-9999px">Message</label>
+          <input id="say" autocomplete="off" placeholder="Ask anything or type your name">
+          <button type="submit">Send</button>
+        </form>
+        <p class="agent-note">I'm an AI. A real person, Pam, runs the challenge.</p>
+      </aside>
+    </div>
+
+    <div class="wrap horizon" aria-label="The four days">
+      <ol>
+        <li><span class="dot">1</span><b>Notice it</b>Name the pattern</li>
+        <li><span class="dot">2</span><b>Trace it</b>Find where it started</li>
+        <li><span class="dot">3</span><b>Rewrite it</b>Change the story</li>
+        <li><span class="dot">4</span><b>Break through</b>Take the first step</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="gut">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Is this for you?</p>
+        <h2>You're not stuck because you're not trying.</h2>
+        <p>Most people who join have already worked hard. Something keeps pulling them back anyway. This challenge is about finding that something.</p>
+      </div>
+      <div class="fit">
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7 20V9m5 11V4m5 16v-7" fill="none" stroke="#B9741A" stroke-width="2" stroke-linecap="round"/></svg><p>You keep hitting the same wall, no matter how hard you push.</p></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5m7 7L18 18M18 6l-2.5 2.5m-7 7L6 18" fill="none" stroke="#B9741A" stroke-width="2" stroke-linecap="round"/></svg><p>You know what you want, but you can't seem to stay on track for it.</p></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-6 6 6-6 6" fill="none" stroke="#B9741A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><p>You're ready for a clear next step, not another pep talk.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt gut" id="days">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What happens each day</p>
+        <h2>Four days. One real shift.</h2>
+        <p>Each day builds on the last. Show up live or catch the replay, whatever fits your life.</p>
+      </div>
+      <div class="days">
+        <article class="day"><span class="n">Day 1</span><h3>Notice it</h3><p>Name the pattern that keeps showing up in your work, your relationships or your goals.</p></article>
+        <article class="day"><span class="n">Day 2</span><h3>Trace it</h3><p>Find where it started and the story you've been telling yourself about it ever since.</p></article>
+        <article class="day"><span class="n">Day 3</span><h3>Rewrite it</h3><p>Swap the old story for one that actually moves you forward.</p></article>
+        <article class="day final"><span class="n">Day 4</span><h3>Break through</h3><p>Take your first real step and leave with a plan for what comes next.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="gut">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What you get</p>
+        <h2>Everything you need to follow through.</h2>
+      </div>
+      <ul class="gets">
+        <li>Four short live sessions with Pam</li>
+        <li>A simple reflection prompt each day</li>
+        <li>Replays, so missing a day doesn't mean missing out</li>
+        <li>Reminders by email and text so you never lose the link</li>
+        <li>Answers any time from Pam's assistant</li>
+        <li>An invitation to a 1:1 breakthrough call when the challenge ends</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="alt gut">
+    <div class="wrap about">
+      <div class="portrait" aria-hidden="true"><div>PP<small>Photo of Pam</small></div></div>
+      <div>
+        <p class="eyebrow" style="color:var(--gold-dk)">Your guide</p>
+        <h2>Meet Pam Perumal</h2>
+        <p>Pam is a Breakthrough Specialist and the coach behind Parames Coaching. Her work is about one thing: helping people see what's been quietly holding them back, and move past it for good.</p>
+        <p>In this challenge she'll walk you through the same process she uses with her private clients, one day at a time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gut">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Questions</p>
+        <h2>Good to know</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Is it really free?</summary><p>Yes. There's nothing to pay and no card to enter. Just your name and email so we can send you the links.</p></details>
+        <details><summary>What if I miss a day?</summary><p>Every session has a replay. You'll get it by email the same day, so you can catch up whenever works for you.</p></details>
+        <details><summary>How much time does it take?</summary><p>Each day is short and built for busy people. Exact times are in your welcome email.</p></details>
+        <details><summary>Who answers in the chat?</summary><p>Pam's AI assistant. It can answer questions and save your seat any time of day, and it will always tell you it's an AI. Pam herself runs every session.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final gut">
+    <div class="wrap">
+      <h2>Your breakthrough starts with one yes.</h2>
+      <p>Save your free seat now. Day 1 lands in your inbox.</p>
+      <form class="signup" id="join2" novalidate>
+        <div class="row">
+          <div class="field"><label for="fn2">First name</label><input id="fn2" name="first" autocomplete="given-name" placeholder="Your first name"></div>
+          <div class="field"><label for="em2">Email</label><input id="em2" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div>
+        </div>
+        <button class="btn btn-gold" type="submit">Save my free seat</button>
+        <p class="err" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="gut">
+  <div class="wrap">
+    <span>© 2026 Parames Coaching</span>
+    <span>Website and AI assistant by <a href="https://infinityreachmedia.com" target="_blank" rel="noopener">Infinity Reach Media</a></span>
+  </div>
+</footer>
+
+<button class="btn btn-plum fab" id="fab" type="button">Chat with Pam's assistant</button>
+
+<script>
+(function(){
+  var log=document.getElementById('log'), chips=document.getElementById('chips'), say=document.getElementById('say');
+  var st={step:'idle', name:'', email:'', registered:false};
+  var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function add(text, who, cls){
+    var d=document.createElement('div'); d.className='msg '+(who||'bot')+(cls?' '+cls:''); d.textContent=text;
+    log.appendChild(d); log.scrollTop=log.scrollHeight; return d;
+  }
+  function setChips(list){
+    chips.textContent='';
+    (list||[]).forEach(function(t){ var b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=t;
+      b.addEventListener('click',function(){ handle(t); }); chips.appendChild(b); });
+  }
+  function bot(text, list, cls){
+    var t=document.createElement('div'); t.className='typing'; t.innerHTML='<i></i><i></i><i></i>';
+    log.appendChild(t); log.scrollTop=log.scrollHeight; setChips([]);
+    setTimeout(function(){ t.remove(); add(text,'bot',cls); setChips(list); }, 650);
+  }
+  var MAIN=['Save my seat','What happens each day?','Is it really free?','What if I miss a day?'];
+  var AFTER=['What happens each day?','What if I miss a day?','Who is Pam?'];
+
+  function register(name,email,fromForm){
+    st.name=name; st.email=email; st.registered=true; st.step='done';
+    if(fromForm){ add('Hi '+name+', you just saved your seat on the page. Want to know what to expect on Day 1?','bot','ok'); setChips(AFTER); }
+  }
+
+  function answer(q){
+    var s=q.toLowerCase();
+    if(/free|cost|price|pay|charge|money/.test(s)) return 'Yes, completely free. No card, no catch. Just your name and email so I can send you the links.';
+    if(/miss|replay|recording|can.?t make|busy|late/.test(s)) return 'No problem at all. Every day has a replay and I\'ll send it to you the same day, so you can catch up when it suits you.';
+    if(/each day|what happens|schedule|agenda|days|cover|learn/.test(s)) return 'Here\'s the path:\nDay 1, Notice it: name the pattern.\nDay 2, Trace it: find where it started.\nDay 3, Rewrite it: change the story.\nDay 4, Break through: take your first real step.';
+    if(/how long|time|minutes|hour|when/.test(s)) return 'Each day is short and built for busy people. Your exact times come in the welcome email as soon as you\'re registered.';
+    if(/who is pam|about pam|pam\b|coach|who runs/.test(s)) return 'Pam Perumal is a Breakthrough Specialist and the coach behind Parames Coaching. She runs every session of the challenge herself.';
+    if(/\bai\b|bot|robot|human|real person|are you/.test(s)) return 'I\'m an AI assistant for Pam. I can answer questions and save your seat any time. Pam is the real person running the challenge.';
+    if(/after|then what|next|work with|1:1|one on one|call/.test(s)) return 'On Day 4 everyone gets an invitation to a 1:1 breakthrough call with Pam, if you want to keep going. Totally optional.';
+    return null;
+  }
+
+  function handle(text){
+    text=String(text||'').trim(); if(!text) return;
+    add(text,'me');
+    var s=text.toLowerCase();
+
+    if(st.step==='name'){
+      if(answer(text) && text.split(' ').length>2){ bot(answer(text)+'\n\nAnd what\'s your first name, so I can save your seat?'); return; }
+      var name=text.replace(/^(i'?m|my name is|it'?s|this is)\s+/i,'').split(/\s+/)[0];
+      name=name.charAt(0).toUpperCase()+name.slice(1);
+      st.name=name; st.step='email';
+      bot('Lovely to meet you, '+name+'! What\'s the best email for your Day 1 link and reminders?'); return;
+    }
+    if(st.step==='email'){
+      var m=text.match(/[^\s@]+@[^\s@]+\.[^\s@]{2,}/);
+      if(!m){ bot('Hmm, that doesn\'t look like an email address. Could you type it again? Something like name@example.com'); return; }
+      register(st.name, m[0], false);
+      bot('You\'re in, '+st.name+'! 🎉 Your seat is saved.\nWatch '+m[0]+' for your welcome email with the Day 1 link. I\'ll also send a reminder before each day so you don\'t miss a thing.', AFTER, 'ok');
+      return;
+    }
+    if(/save|seat|sign ?up|join|register|count me in|^yes|^yep|^sure|i'?m in|let'?s do/.test(s)){
+      if(st.registered){ bot('You\'re already registered, '+st.name+'. Your Day 1 link is on its way to '+st.email+'.', AFTER); return; }
+      st.step='name'; bot('Amazing, let\'s save your seat. What\'s your first name?'); return;
+    }
+    var a=answer(text);
+    if(a){ bot(a+(st.registered?'':'\n\nWant me to save your free seat?'), st.registered?AFTER:['Save my seat','What happens each day?','Who is Pam?']); return; }
+    bot('Great question. I\'ll make sure Pam sees it. In the meantime, want me to save your free seat so you don\'t miss Day 1?', st.registered?AFTER:['Save my seat','Is it really free?']);
+  }
+
+  document.getElementById('compose').addEventListener('submit',function(e){ e.preventDefault(); var v=say.value; say.value=''; handle(v); });
+
+  // opening message
+  setTimeout(function(){ bot('Hi! I\'m Pam\'s assistant, and yes, I\'m an AI. 👋\nWant me to save you a free seat in the 4 Day Breakthrough Challenge? I can also answer any questions first.', MAIN); }, 400);
+
+  // signup forms
+  function wire(id){
+    var f=document.getElementById(id); if(!f) return;
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var fn=f.querySelector('input[name=first]'), em=f.querySelector('input[name=email]'), err=f.querySelector('.err');
+      var name=fn.value.trim(), email=em.value.trim();
+      if(!name){ err.textContent='Please add your first name.'; fn.focus(); return; }
+      if(!EMAIL.test(email)){ err.textContent='Please check your email address.'; em.focus(); return; }
+      err.textContent='';
+      var nice=name.charAt(0).toUpperCase()+name.slice(1);
+      var done=document.createElement('div'); done.className='done';
+      var b=document.createElement('b'); b.textContent='You\'re in, '+nice+'!';
+      var p=document.createElement('p'); p.textContent='Your seat is saved. Watch '+email+' for your Day 1 link. (Preview only: nothing was actually sent.)';
+      done.appendChild(b); done.appendChild(p);
+      f.textContent=''; f.appendChild(done);
+      if(!st.registered) register(nice,email,true);
+    });
+  }
+  wire('join'); wire('join2');
+
+  // floating chat button once the hero chat is off screen
+  var fab=document.getElementById('fab'), agent=document.getElementById('agent');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ fab.classList.toggle('show', !es[0].isIntersecting); }).observe(agent);
+  }
+  fab.addEventListener('click',function(){ agent.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){ say.focus({preventScroll:true}); },500); });
+})();
+</script>
+</body>
+</html>
