@@ -84,6 +84,7 @@ Ideal client: home service companies with 5 to 50 employees that already get mor
 - [Client reviews](https://infinityreachmedia.com/reviews): named client testimonials, including video.
 - [How onboarding works](https://infinityreachmedia.com/jessica-onboarding): the 7-day path from signed to live.
 - [Missed Call Calculator](https://infinityreachmedia.com/missed-calls): what unanswered calls cost per month.
+- [Speed to Lead Build Playbook](https://infinityreachmedia.com/speed-to-lead-playbook): how to build an AI agent that answers every new lead in under 60 seconds and books the appointment.
 - [Dead List Miner Playbook](https://infinityreachmedia.com/reactivation-playbook): how to win back past customers from a list you already own.
 - [Accessibility Statement](https://infinityreachmedia.com/accessibility): WCAG 2.1 AA commitment, known limitations, and how to report a barrier.
 
