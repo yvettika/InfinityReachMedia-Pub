@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/images/logo-mark.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Speed to Lead Build Playbook | Build an AI Agent That Answers Every Lead in 60 Seconds | Infinity Reach Media</title>
+<meta name="description" content="A free, step by step playbook for building your own Speed to Lead agent: catch every form, missed call and DM, send the first reply in under 60 seconds, run a three touch follow up, and book the appointment. Prompts, message copy and a go live checklist included.">
+<link rel="canonical" href="https://infinityreachmedia.com/speed-to-lead-playbook">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#161F4A">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Infinity Reach Media">
+<meta property="og:title" content="The Speed to Lead Build Playbook: answer every lead in 60 seconds">
+<meta property="og:description" content="Build your own AI agent that replies to every form, missed call and DM in under a minute, follows up three times, and books the call. Prompts, copy and checklist included.">
+<meta property="og:url" content="https://infinityreachmedia.com/speed-to-lead-playbook">
+<meta property="og:image" content="https://infinityreachmedia.com/images/marketing-team.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=DM+Sans:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <style>
+:root{--ink:var(--brand-ink);--paper:var(--brand-white);--pink:var(--brand-cta);--purple:var(--brand-purple);--gold:var(--brand-purple-dk);--muted:var(--brand-muted-dark);--line:var(--brand-line-light);--panel:var(--brand-lavender)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+.eyebrow{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800;line-height:1.1}
+h1{font-size:clamp(2rem,5.2vw,3.1rem)}
+h1 .shine{background:linear-gradient(95deg,var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-bottom:14px}
+h3{font-size:1.15rem}
+p{max-width:64ch}
+a{color:var(--gold)}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;padding:15px 32px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(100deg,var(--pink),var(--purple));color:#fff;box-shadow:0 10px 34px rgba(233,30,140,.35);transition:transform .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);box-shadow:none}
+.btn.ghost:hover{border-color:var(--muted)}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;max-width:1040px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--ink);text-decoration:none}
+.logo em{color:var(--brand-logo);font-style:normal}.logo .mark{width:30px;height:30px;object-fit:contain}
+nav a.bk{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
+
+.hero{padding:56px 0 10px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:var(--brand-wash);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{margin:16px 0 18px}
+.hero p.sub{margin:0 auto;max-width:580px;color:var(--muted);font-size:1.1rem}
+.hero .cta-row{margin-top:24px}
+.stat-strip{margin:28px auto 0;max-width:600px;border:1px solid rgba(76,123,255,.35);border-radius:16px;padding:16px 20px;background:rgba(76,123,255,.07);font-size:.98rem;text-align:left}
+.stat-strip b{color:var(--gold)}
+
+.toc{margin-top:22px;border:1px solid var(--line);border-radius:16px;padding:18px 22px;background:#fff}
+.toc ol{margin-top:8px;gap:6px}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+section{padding:44px 0}
+section.tight{padding:30px 0}
+.lede{color:var(--muted);font-size:1.05rem}
+ul,ol{padding-left:20px;display:grid;gap:10px;max-width:64ch;margin-top:14px}
+li::marker{color:var(--gold)}
+.check{list-style:none;padding-left:0}
+.check li{display:grid;grid-template-columns:22px 1fr;gap:8px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.check li::before{content:"□";color:var(--gold);font-size:1.15rem;line-height:1.5}
+
+.ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:26px}
+.ledger div{background:#FFFFFF;padding:16px 18px}
+.ledger dt{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ledger dd{font-family:'Playfair Display',serif;font-weight:800;font-size:1.8rem;line-height:1.2;margin-top:4px;font-variant-numeric:tabular-nums;color:var(--gold)}
+
+.step-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.step-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:linear-gradient(100deg,var(--pink),var(--purple));padding:5px 12px;border-radius:999px}
+.time{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.msg{display:grid;grid-template-columns:92px 1fr;gap:0 22px;border-top:1px solid var(--line);padding:26px 0 4px}
+.stamp{display:flex;flex-direction:column;gap:4px}
+.day{font-family:'Playfair Display',serif;font-weight:800;font-size:1.35rem;color:var(--gold);font-variant-numeric:tabular-nums}
+.channel{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.msg-body{min-width:0;display:grid;gap:14px}
+.job{color:var(--muted);font-size:.97rem}
+.copy{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--pink);border-radius:0 16px 16px 0;padding:20px 22px;display:grid;gap:12px;overflow-x:auto}
+.copy p{max-width:60ch}
+.var{color:var(--gold);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.92em}
+.note{font-size:.92rem;color:var(--muted);border-left:2px solid var(--line);padding-left:14px}
+.note b{color:var(--ink)}
+
+.prompt{position:relative;margin-top:18px;background:#161F4A;color:#EEF0FA;border-radius:16px;padding:44px 20px 20px;overflow-x:auto}
+.prompt pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.prompt .label{position:absolute;top:14px;left:20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#B9BFE0}
+.prompt button{position:absolute;top:10px;right:12px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;cursor:pointer}
+.prompt button:hover{background:rgba(255,255,255,.2)}
+.prompt button:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+
+.callout{margin-top:26px;padding:24px;border-radius:18px;background:linear-gradient(160deg,rgba(233,30,140,.14),rgba(123,47,190,.10));display:grid;gap:8px}
+.callout .eyebrow{color:var(--gold)}
+
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;margin-top:20px}
+table{border-collapse:collapse;width:100%;font-size:.94rem;min-width:30rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--brand-lavender)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ink);font-weight:700}
+td.blank{min-width:12rem;color:var(--muted);font-style:italic}
+.ok{color:#0E7A47;font-weight:700}
+.stop{color:#B42318;font-weight:700}
+
+.cta-box{margin-top:10px;padding:36px 28px;border-radius:22px;background:linear-gradient(160deg,rgba(233,30,140,.16),rgba(123,47,190,.12));border:1px solid var(--line);text-align:center;display:grid;justify-items:center;gap:16px}
+.cta-box p{color:var(--muted);max-width:52ch;margin:0 auto}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-fine{font-size:12.5px;color:var(--muted);max-width:46ch}
+
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;font-size:.85rem;color:var(--muted)}
+footer a{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:560px){
+  .msg{grid-template-columns:1fr;gap:10px}
+  .stamp{flex-direction:row;align-items:baseline;gap:10px}
+}
+</style>
+<script src="/js/analytics.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "@id": "https://infinityreachmedia.com/speed-to-lead-playbook#page",
+  "name": "The Speed to Lead Build Playbook",
+  "description": "How to build your own AI agent that answers every new lead in under 60 seconds, follows up three times, and books the appointment.",
+  "url": "https://infinityreachmedia.com/speed-to-lead-playbook",
+  "isPartOf": {
+    "@id": "https://infinityreachmedia.com/#website"
+  },
+  "publisher": {
+    "@id": "https://infinityreachmedia.com/#business"
+  },
+  "author": {
+    "@id": "https://infinityreachmedia.com/yvette-kahn#person"
+  },
+  "headline": "The Speed to Lead Build Playbook: Build an AI Agent That Answers Every Lead in 60 Seconds"
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="/"><img class="mark" src="/images/logo-mark.png" alt="Infinity Reach Media logo"> Infinity <em>Reach</em> Media</a>
+    <ul class="navlinks" id="sitemenu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/home-services">Home Services</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/agentic-flows">AI Employees</a></li>
+      <li><a href="/jessica">Meet Jessica</a></li>
+      <li><a href="/coaches">For Coaches</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="navburger" aria-label="Menu" aria-expanded="false" aria-controls="sitemenu">☰</button>
+    <a class="bk" href="https://calendly.com/yvettekahn/30min">Book a Call →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Revenue Leak №2 · The Slow Lead</span>
+    <h1>The Speed to Lead <span class="shine">Build Playbook</span></h1>
+    <p class="sub">Everything you need to build your own AI agent that answers every form, missed call and DM in under 60 seconds, follows up so nobody slips through, and books the appointment while you're busy doing the actual work.</p>
+    <div class="stat-strip">Here's the honest truth about leads: the person who fills out your form is never more ready to buy than the minute they hit send. Then they keep shopping. The business that answers <b>first</b> usually gets the conversation, and the conversation is what gets the job. This playbook is how you make sure that's you, even at 2am.</div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>What you're building</h2>
+    <p class="lede">Not a chatbot that sits on your website waiting for someone to type. A Speed to Lead agent wakes up the second a lead comes in from anywhere, knows your business well enough to answer like you would, and keeps going until the lead is booked, handed to you, or says no thanks.</p>
+    <dl class="ledger">
+      <div><dt>First reply</dt><dd>&lt; 60 sec</dd></div>
+      <div><dt>Follow ups</dt><dd>3</dd></div>
+      <div><dt>Sequence</dt><dd>3 days</dd></div>
+      <div><dt>Build time</dt><dd>1 weekend</dd></div>
+    </dl>
+    <p class="note" style="margin-top:20px">Every working agent has <b>five parts</b>: a <b>trigger</b> that wakes it up, a <b>brain</b> loaded with your business, <b>tools</b> it can actually use (text, email, your calendar), <b>memory</b> of what already happened with this lead, and <b>guardrails</b> it can never cross. Skip one and you're back to a chatbot. The steps below build all five, in order.</p>
+    <nav class="toc" aria-label="Playbook steps">
+      <span class="eyebrow">The build, start to finish</span>
+      <ol>
+        <li><a href="#build-sheet">Fill in your Build Sheet</a></li>
+        <li><a href="#step-1">Find every door your leads walk through</a></li>
+        <li><a href="#step-2">Give the agent a brain</a></li>
+        <li><a href="#step-3">Wire up the trigger</a></li>
+        <li><a href="#step-4">Write the first reply</a></li>
+        <li><a href="#step-5">Build the three touch follow up</a></li>
+        <li><a href="#step-6">Teach it to qualify and book</a></li>
+        <li><a href="#step-7">Lock in the guardrails</a></li>
+        <li><a href="#step-8">Try to break it</a></li>
+        <li><a href="#step-9">Go live in approval mode</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="tight" id="build-sheet">
+  <div class="wrap">
+    <h2>Before you start: your Build Sheet</h2>
+    <p class="lede">Fill this in once. Every prompt in this playbook uses these answers, so you never have to explain your business twice. Grab a notepad or a doc and write yours out now.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Field</th><th scope="col">Your answer</th></tr></thead>
+        <tbody>
+          <tr><td>Business name</td><td class="blank">e.g. Coastal Roofing Co.</td></tr>
+          <tr><td>What you sell</td><td class="blank">Your services, and a price range for each if you share one</td></tr>
+          <tr><td>Who you serve and where</td><td class="blank">Your ideal customer and your service area</td></tr>
+          <tr><td>Hours</td><td class="blank">When a human is available to take a handoff</td></tr>
+          <tr><td>What makes a lead a good fit</td><td class="blank">The two or three things you need to know before you'd book them</td></tr>
+          <tr><td>Booking link</td><td class="blank">Your calendar link, or how appointments get set</td></tr>
+          <tr><td>Who gets the handoff</td><td class="blank">Name and cell number for hot leads and anything the agent can't answer</td></tr>
+          <tr><td>Average customer value</td><td class="blank">What one booked customer is worth to you</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <div class="eyebrow">Quick math before you build</div>
+      <p>Take your average customer value and multiply it by the number of leads you think went cold last month because nobody got back to them in time. That's roughly what this one agent is worth to you every month. It's an estimate using your own number, and most owners don't love what it says.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-1">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 1</span><span class="time">20 minutes</span></div>
+    <h2>Find every door your leads walk through</h2>
+    <p class="lede">Most owners think leads come in one way. Then they actually look and find five. Your agent can only answer the doors it's connected to, so list every single one and be honest about how long people wait at each.</p>
+    <ul class="check">
+      <li><span><strong>Website forms.</strong> Contact form, quote form, booking form, pop ups. Every one of them.</span></li>
+      <li><span><strong>Missed calls.</strong> The calls that go to voicemail while you're on a job, on another call, or asleep.</span></li>
+      <li><span><strong>Texts to your business number.</strong> Especially the ones that land after hours.</span></li>
+      <li><span><strong>Social DMs.</strong> Instagram, Facebook Messenger, and comments asking "how much?"</span></li>
+      <li><span><strong>Lead platforms.</strong> Google Business Profile messages, Local Services Ads, Angi, Thumbtack, Yelp, and similar sites.</span></li>
+      <li><span><strong>Ad lead forms.</strong> Facebook and Instagram lead ads that drop into a spreadsheet nobody checks.</span></li>
+    </ul>
+    <p class="note" style="margin-top:18px"><b>Start with one door.</b> Pick the one where leads wait the longest or where you spend the most money to get them. Get that one working beautifully, then add the next. Trying to connect all six on day one is how builds stall.</p>
+  </div>
+</section>
+
+<section class="tight" id="step-2">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 2</span><span class="time">45 minutes</span></div>
+    <h2>Give the agent a brain</h2>
+    <p class="lede">Here's the thing nobody tells you: bad AI replies are almost never an AI problem. They're a briefing problem. If a smart new hire couldn't answer your leads with only what you gave them, neither can the agent. So before you connect anything, you build the brief.</p>
+    <ol>
+      <li>Open Claude (or the AI tool you plan to use) and start a <strong>Project</strong> named after your business, so it remembers instead of starting from scratch every time.</li>
+      <li>Upload anything real you already have: your services and prices, your FAQ, your hours, screenshots of texts you've sent customers that went well.</li>
+      <li>Run the prompt below. It interviews you and writes the brief for you.</li>
+      <li>Save what comes back as a file called <strong>Lead Brief</strong>. This becomes the agent's brain.</li>
+    </ol>
+    <div class="prompt">
+      <span class="label">Prompt 1 · Build the brain</span>
+      <button type="button" data-copy>Copy</button>
+<pre>You are helping me build an AI agent that answers my new leads within 60 seconds.
+
+MY BUSINESS
+Name: [business name]
+What I sell: [what you sell]
+Who I serve and where: [who and where]
+Hours a human is available: [hours]
+What makes a lead a good fit: [your qualifiers]
+Booking link: [booking link]
+
+YOUR JOB
+Interview me. Ask ONE question at a time and wait for my answer before the next.
+Ask about: each service and what it costs, how I want to sound to customers,
+the ten questions new leads ask me most, the five objections I hear most and how
+I answer them, what counts as an emergency or a hot lead that I need to hear about
+right away, and anything I never want said to a customer.
+
+When you have enough, write a document called LEAD BRIEF with these sections:
+Who we are, What we sell and what it costs, How we sound, Who is a good fit,
+Common questions and answers, Objections and answers, When to hand off to a human,
+What we never say.
+
+Write it so a brand new employee could read it once and handle a new lead correctly.
+Do not invent anything. If something is missing, ask me instead of guessing.</pre>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-3">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 3</span><span class="time">1 to 3 hours</span></div>
+    <h2>Wire up the trigger</h2>
+    <p class="lede">The trigger is what turns a lead into an instant reply instead of a notification you'll see in an hour. You want every door from Step 1 to drop the lead's name, contact info and message into one place, and fire the agent the moment it lands.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Door</th><th scope="col">How to catch it</th></tr></thead>
+        <tbody>
+          <tr><td>Website form</td><td>Send form submissions to a webhook in your automation tool or CRM (Zapier, Make, n8n, or a GoHighLevel workflow all do this). Most form builders have a webhook or native integration setting.</td></tr>
+          <tr><td>Missed call</td><td>Use your phone system's missed call event to trigger a text back. Most business phone platforms and CRMs have a "missed call text back" option built in.</td></tr>
+          <tr><td>Business texts</td><td>Route inbound texts on your business number into the same workflow so the agent sees the message and can reply in the thread.</td></tr>
+          <tr><td>Instagram and Facebook DMs</td><td>Connect your Meta inbox to your CRM or a DM tool so new conversations trigger the agent.</td></tr>
+          <tr><td>Lead platforms and ad forms</td><td>Use the platform's native integration if there is one. If not, the new lead email can be parsed by your automation tool and turned into a trigger.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:18px"><b>Memory lives here too.</b> Every lead should land as a contact record with a conversation history. That's how the agent knows it already said hello, what the lead asked, and whether they booked. Without it, the agent repeats itself and the lead notices.</p>
+    <div class="callout">
+      <div class="eyebrow">Before you send a single text</div>
+      <p>In the US, texting customers from a business number generally requires registering your brand and messaging use case with the carriers (called A2P 10DLC registration), and approval can take days or weeks. Start it now, before the build is done, so you're not stuck waiting at the finish line. Only text people who reached out to you or gave you permission to text them.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-4">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 4</span><span class="time">30 minutes</span></div>
+    <h2>Write the first reply</h2>
+    <p class="lede">This is the message that wins or loses the lead. Short, warm, clearly from your business, and ending in one easy question. It should feel like you personally saw their message and grabbed your phone.</p>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">0:30</div><div class="channel">Form lead · SMS</div></div>
+      <div class="msg-body">
+        <h3>The instant hello</h3>
+        <p class="job">Confirms you got it, uses what they told you, and asks the one question you need to move forward.</p>
+        <div class="copy">
+          <p>Hi <span class="var">{{first_name}}</span>, it's <span class="var">{{agent_name}}</span> with <span class="var">{{business}}</span>. Just got your request about <span class="var">{{what_they_asked_about}}</span>. Quick question so I can get you the right info: <span class="var">{{one_qualifying_question}}</span>?</p>
+        </div>
+        <p class="note"><b>Why it works:</b> it proves a real reply happened, not an autoresponder. Referencing what they asked about is what makes it feel human.</p>
+      </div>
+    </article>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">0:45</div><div class="channel">Missed call · SMS</div></div>
+      <div class="msg-body">
+        <h3>The missed call text back</h3>
+        <p class="job">Catches the caller before they dial the next business on the list.</p>
+        <div class="copy">
+          <p>Hi, this is <span class="var">{{business}}</span>. Sorry we missed your call! We're with a customer right now. What can we help you with? I can get you answers or a time on the calendar right here by text.</p>
+        </div>
+        <p class="note"><b>Tip:</b> if it's an emergency type business, add one line telling them what to text so the agent knows to alert you right away.</p>
+      </div>
+    </article>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">0:20</div><div class="channel">DM</div></div>
+      <div class="msg-body">
+        <h3>The DM reply</h3>
+        <p class="job">Matches the casual tone of social, answers what they asked, and moves toward a booking.</p>
+        <div class="copy">
+          <p>Hey <span class="var">{{first_name}}</span>! Thanks for reaching out. <span class="var">{{short_answer_to_their_question}}</span>. Want me to grab you a time to talk it through? I have <span class="var">{{time_option_1}}</span> or <span class="var">{{time_option_2}}</span>.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="tight" id="step-5">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 5</span><span class="time">30 minutes</span></div>
+    <h2>Build the three touch follow up</h2>
+    <p class="lede">Plenty of leads won't answer the first message. Not because they aren't interested, but because life got in the way. This is where most businesses quit and where most of the money actually is. Every touch stops the moment the lead replies, books, or opts out.</p>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">Hour 2</div><div class="channel">SMS</div></div>
+      <div class="msg-body">
+        <h3>Touch 1: the easy nudge</h3>
+        <div class="copy">
+          <p>Hi <span class="var">{{first_name}}</span>, just making sure my text came through. Happy to help with <span class="var">{{what_they_asked_about}}</span> whenever you're ready. Would <span class="var">{{time_option_1}}</span> or <span class="var">{{time_option_2}}</span> work for a quick call?</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">Day 1</div><div class="channel">Email or SMS</div></div>
+      <div class="msg-body">
+        <h3>Touch 2: the helpful one</h3>
+        <p class="job">Give them something useful, not another "just checking in." One answer to a question your leads always ask.</p>
+        <div class="copy">
+          <p><span class="var">{{first_name}}</span>, one thing people usually ask us about <span class="var">{{service}}</span>: <span class="var">{{common_question_and_short_answer}}</span>. If you want to talk through your situation, here's my calendar: <span class="var">{{booking_link}}</span></p>
+        </div>
+      </div>
+    </article>
+
+    <article class="msg">
+      <div class="stamp"><div class="day">Day 3</div><div class="channel">SMS</div></div>
+      <div class="msg-body">
+        <h3>Touch 3: permission to say no</h3>
+        <p class="job">The last touch, and often one of the strongest. Giving people an easy exit makes replying feel safe.</p>
+        <div class="copy">
+          <p>Hi <span class="var">{{first_name}}</span>, I don't want to keep bugging you. Should I close out your request, or is this still something you want help with? Either answer is totally fine.</p>
+        </div>
+        <p class="note"><b>Honor the answer.</b> If they say close it out, close it out and thank them. That's a future customer, not a lost one.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="tight" id="step-6">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 6</span><span class="time">45 minutes</span></div>
+    <h2>Teach it to qualify and book</h2>
+    <p class="lede">Answering fast is half the job. The other half is getting from "hi" to "booked" without it feeling like an interrogation. One question per message, and always close on two specific times instead of "want to book?"</p>
+    <ol>
+      <li><strong>Interested and a good fit.</strong> Offer two specific times or send the booking link with one line: "Grab whatever time works best here."</li>
+      <li><strong>Has a question.</strong> Answer it in one short message using only the Lead Brief, then offer two times.</li>
+      <li><strong>Price shopper.</strong> Share a range only if it's in the brief. Otherwise explain what the price depends on and offer a quick call to get an exact number.</li>
+      <li><strong>Hot or urgent.</strong> Alert the human from your Build Sheet right away by text, and tell the lead someone will call them within a set time you can actually keep.</li>
+      <li><strong>Not a fit.</strong> Say so kindly and point them somewhere helpful if you can.</li>
+      <li><strong>Not now or stop.</strong> Opt them out immediately and permanently. One polite confirmation, then silence.</li>
+    </ol>
+    <div class="prompt">
+      <span class="label">Prompt 2 · Write the agent's instructions</span>
+      <button type="button" data-copy>Copy</button>
+<pre>Write the complete operating instructions for my Speed to Lead AI agent.
+Use my LEAD BRIEF for every fact. Never invent a fact that is not in it.
+
+Business: [business name]
+Booking link: [booking link]
+Handoff person and number: [name and cell]
+
+Structure the instructions in exactly five parts:
+
+1. ROLE. Who the agent is, what its name is, and who it works for.
+2. CONTEXT. What it knows, where that knowledge comes from, and which channels
+   leads arrive on (forms, missed calls, texts, DMs).
+3. TASK. Step by step: reply to every new lead within 60 seconds, ask one
+   qualifying question at a time, answer questions from the brief, and book.
+   Include exactly what to do for each reply type: interested, question, price
+   shopper, urgent, not a fit, and opt out.
+4. FORMAT. Under 40 words per message, one question per message, in my voice.
+   Every booking ask offers two specific times, never "want to book?"
+5. CONSTRAINTS. Hard rules it can never break:
+   Never quote a price that is not in the brief
+   Never say something is booked unless it was actually booked
+   Always say it is an AI assistant if asked directly
+   Honor any opt out immediately and permanently
+   Never text outside 8am to 9pm in the lead's time zone
+   Hand off to a human instead of guessing
+
+Then write: the first reply for a form lead, a missed call, and a DM, the three
+follow up touches (hour 2, day 1, day 3), and replies to the objections in my brief.</pre>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-7">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 7</span><span class="time">15 minutes</span></div>
+    <h2>Lock in the guardrails</h2>
+    <p class="lede">An agent that answers fast but says the wrong thing is worse than no agent at all. These rules go in writing, inside the instructions, before anything goes live.</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Rule</th><th scope="col">Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td>Never invent a price</td><td>A made up number becomes a promise the lead will hold you to.</td></tr>
+          <tr><td>Never fake a booking</td><td>If the calendar didn't confirm it, the agent can't say it's booked.</td></tr>
+          <tr><td>Admit it's AI when asked</td><td>Honesty keeps trust. Most people don't mind, as long as it's helpful.</td></tr>
+          <tr><td>Honor STOP instantly</td><td>Opt outs are permanent, every channel, no exceptions.</td></tr>
+          <tr><td>Respect quiet hours</td><td>Replying to a lead who just reached out is welcome. Follow ups at midnight are not.</td></tr>
+          <tr><td>Hand off, don't guess</td><td>Anything not in the brief goes to a human. "Let me check and get right back to you" beats a wrong answer every time.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-8">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 8</span><span class="time">30 minutes</span></div>
+    <h2>Try to break it</h2>
+    <p class="lede">Don't test it like the person who built it. Test it like your toughest lead on their worst day. Run all six of these before it talks to a single real person.</p>
+    <div class="prompt">
+      <span class="label">Prompt 3 · The stress test</span>
+      <button type="button" data-copy>Copy</button>
+<pre>You are now playing new leads so I can stress test my Speed to Lead agent
+before it goes live. Business: [business name]. What I sell: [what you sell].
+
+Play these six people, one at a time. Stay in character until I say next.
+1. The impatient one. Already called twice and nobody picked up.
+2. The price shopper. Won't answer anything until they get a number.
+3. The one word lead. Sends "hey" and nothing else.
+4. The wrong number. Has no idea who we are.
+5. The opt out. Tells us to stop texting them.
+6. The stump. Asks something my Lead Brief does not cover.
+
+After all six, grade my agent honestly out of 10 on: reply speed and tone,
+qualifying without interrogating, closing on two specific times, handing off
+when it should, and refusing to invent facts. Then tell me the one rule I should
+add to fix the worst failure. Be harsh. I'd rather find it here than with a real lead.</pre>
+    </div>
+    <div class="callout">
+      <div class="eyebrow">The test that tells you everything</div>
+      <p>Watch number six. If the agent makes up an answer instead of saying it will check and get back to them, your brief isn't loaded properly. Fix that before anything else, because an agent that invents answers in testing will invent them to a paying customer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="step-9">
+  <div class="wrap">
+    <div class="step-head"><span class="step-num">Step 9</span><span class="time">1 week of watching</span></div>
+    <h2>Go live in approval mode</h2>
+    <p class="lede">Live doesn't mean unsupervised. For the first week, the instant reply goes out on its own, but you read every conversation and approve anything beyond the first message. When it's earned your trust, you loosen the leash. When something goes wrong, fix the rule, not just the message, so it stays fixed.</p>
+    <ul class="check">
+      <li><span>My Lead Brief is loaded and the agent hands off instead of guessing</span></li>
+      <li><span>It cannot quote a price that isn't in the brief</span></li>
+      <li><span>It cannot say something is booked unless the calendar confirmed it</span></li>
+      <li><span>STOP and "not interested" opt people out permanently on every channel</span></li>
+      <li><span>Texting registration is approved and quiet hours are set</span></li>
+      <li><span>Hot leads alert a real person by text within a minute</span></li>
+      <li><span>I tested all six stress test leads and it passed</span></li>
+      <li><span>I'm reading every conversation for the first week</span></li>
+    </ul>
+    <div class="callout">
+      <div class="eyebrow">Track two numbers</div>
+      <p><strong>Time to first reply</strong> and <strong>leads booked</strong>. Not opens, not clicks. If the first number is under 60 seconds and the second number is going up, it's working. If replies are fast but bookings aren't moving, the problem is the booking ask in Step 6, so fix that first.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>The part nobody warns you about</h2>
+    <p class="lede">Building it is the fun weekend. Keeping it running is the real job: texting registration renewals, a form that quietly stops sending to the webhook, a calendar that double books, a lead platform that changes its integration, a brief that goes stale when your prices change. When any of those break, the agent goes quiet and nobody notices until the leads have already gone somewhere else.</p>
+    <p class="lede" style="margin-top:14px">If you love building, you now have everything you need. If you'd rather have it answering your leads next week without the learning curve, that's exactly what we do.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-box">
+      <span class="eyebrow">Want help building it?</span>
+      <h2>Book a free 30 minute call</h2>
+      <p>Bring your Build Sheet, or bring nothing at all. We'll look at where your leads actually come in, tell you straight how fast you're answering today, and map out your Speed to Lead agent together. Whether you build it yourself or have ours live in seven days, you'll leave with a plan.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://calendly.com/yvettekahn/30min">Book my free call →</a>
+        <a class="btn ghost" href="/live-demo">Try a live AI employee first</a>
+      </div>
+      <p class="cta-fine">Free, 30 minutes, no pitch deck. You keep the playbook either way.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 Infinity Reach Media · Orange County, CA · <a href="https://calendly.com/yvettekahn/30min">Book a call</a> · <a href="/agentic-flows">See the AI employees</a> · <a href="/scorecard">Take the scorecard</a></div></footer>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('[data-copy]');
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.parentNode.querySelector('pre');
+      if (!pre) return;
+      var text = pre.innerText;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+        } else { fallback(text); done(); }
+      } catch (e) { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+  }
+})();
+</script>
+<script src="/js/nav.js" defer></script>
+<script src="/js/ref.js" defer></script>
+</body>
+</html>
