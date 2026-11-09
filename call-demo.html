@@ -69,6 +69,7 @@
   <p class="eyebrow">Live call demo</p>
   <h1>Watch her call a lead back in seconds.</h1>
   <p class="lead">Type in the phone you have with you. It gets the same text and call a real lead gets.</p>
+  <p class="note" id="presenter-note" hidden></p>
 
   <form class="card" id="demo" novalidate>
     <fieldset>
@@ -134,6 +135,19 @@
 <script>
 (function () {
   var API = 'https://agent-router-theta.vercel.app/api/closer?mode=demo';
+  // A presenter's own link (call-demo#lucia) books Sophia's demo appointments
+  // on that presenter's calendar instead of ours.
+  var PRESENTERS = { lucia: 'Lucia' };
+  var presenter = (location.hash || '').replace('#', '').toLowerCase();
+  if (!PRESENTERS[presenter]) presenter = '';
+  if (presenter) {
+    var who = PRESENTERS[presenter];
+    var noteEl = document.getElementById('presenter-note');
+    noteEl.textContent = who + "'s demo: when Sophia books, it goes on " + who + "'s Sophia Demo calendar.";
+    noteEl.hidden = false;
+    var jess = document.getElementById('p-jessica');
+    if (jess) { jess.disabled = true; jess.parentNode.removeChild(jess.nextElementSibling); jess.parentNode.removeChild(jess); }
+  }
   var form = document.getElementById('demo');
   var btn = document.getElementById('go');
   var status = document.getElementById('status');
@@ -166,7 +180,7 @@
       var res = await fetch(API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin: pin.value.trim(), persona: picked('persona'), mode: picked('mode'), language: picked('language'), name: name, phone: phone, consent: true })
+        body: JSON.stringify({ pin: pin.value.trim(), persona: picked('persona'), presenter: presenter || undefined, mode: picked('mode'), language: picked('language'), name: name, phone: phone, consent: true })
       });
       var out = await res.json().catch(function () { return {}; });
       if (out.ok) {
